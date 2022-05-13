@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from "vue";
+  import { ref } from 'vue'
 
-const count = ref(0);
+  const count = ref(0)
 </script>
 
 <template>
@@ -10,9 +10,9 @@ const count = ref(0);
 </template>
 
 <style scoped>
-#app {
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  #app {
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+  }
 </style>
