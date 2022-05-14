@@ -21,6 +21,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 0,
     'no-case-declarations': 0,
     '@typescript-eslint/no-explicit-any': 0,
-    'vue/no-multiple-template-root': 0
+    'vue/no-multiple-template-root': 0,
+    'no-useless-escape': 0
   }
 }
