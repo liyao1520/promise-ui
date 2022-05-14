@@ -5,6 +5,6 @@ export { Button };
 
 export default {
   install(app: App) {
-    app.component("p-button", Button);
+    app.component("PButton", Button);
   },
 };
