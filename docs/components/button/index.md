@@ -4,9 +4,7 @@
 
 ```vue
 <template>
-  <div class="card-wrap">
-    <div class="card">123</div>
-  </div>
+  <PButton>123</PButton>
 </template>
 ```
 
