@@ -1,10 +1,10 @@
-import { coreClassName } from './utils'
+import { coreRealName } from './utils'
 
 export default function genStyleTemplate(name) {
   return `\
 @import "../../styles-var";;
 
-.${coreClassName(name)} {
+.#{$prefix}-${coreRealName(name)} {
   /* your style */
 }`
 }

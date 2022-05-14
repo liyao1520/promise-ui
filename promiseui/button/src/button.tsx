@@ -9,7 +9,7 @@ export default defineComponent({
   emits: [],
   setup(props: ButtonProps, { slots }) {
     return () => {
-      return <button class="p-button">{slots.default && slots.default()}</button>
+      return <div class="pui-button">{slots.default && slots.default()}</div>
     }
   }
 })

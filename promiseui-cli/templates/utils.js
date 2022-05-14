@@ -15,7 +15,7 @@ export function coreRealName(name) {
 }
 
 export function coreClassName(name) {
-  return `p-${name}`
+  return `pui-${name}`
 }
 export function coreName(name) {
   return name.replace(/^(.)/, (match, $1) => {

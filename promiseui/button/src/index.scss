@@ -1,6 +1,6 @@
 @import "../../styles-var";;
 
-.p-button {
+.#{$prefix}-button {
   /* your style */
-  color: $brand;
+  color: red;
 }
