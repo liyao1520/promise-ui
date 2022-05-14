@@ -6,7 +6,7 @@ import genCoreTemplate from '../templates/component'
 import genStyleTemplate from '../templates/scss'
 import genTypesTemplate from '../templates/types'
 import genIndexTemplate from '../templates'
-import genTestTemplate from '../templates/test'
+import genTestTemplate from '../templates/component-test'
 const writeFileOptions = { encoding: 'utf-8' }
 export default async function generatorComponent(info) {
   const { name } = info
