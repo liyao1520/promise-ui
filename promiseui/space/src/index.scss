@@ -1,0 +1,8 @@
+@import "../../styles-var";;
+
+.#{$prefix}-space {
+  /* your style */
+  >* {
+    margin: 0 8px 8px 0;
+  }
+}

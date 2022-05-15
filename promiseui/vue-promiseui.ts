@@ -1,9 +1,10 @@
 import type { App } from 'vue'
 import ButtonInstall, { Button } from './button'
+import SpaceInstall, { Space } from './space'
 
-const installs = [ButtonInstall]
+const installs = [ButtonInstall, SpaceInstall]
 
-export { Button }
+export { Button, Space }
 
 export default {
   version: '0.0.1',
