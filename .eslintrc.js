@@ -23,6 +23,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 0,
     'vue/no-multiple-template-root': 0,
     'no-useless-escape': 0,
-    '@typescript-eslint/no-empty-function': 0
+    '@typescript-eslint/no-empty-function': 0,
+    'vue/multi-word-component-names': 0
   }
 }

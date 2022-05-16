@@ -115,4 +115,18 @@
   &--dashed {
     border-style: dashed;
   }
+  &__loading {
+    animation: loading  1s infinite linear;
+  }
+  &--isloading{
+    cursor: wait !important;
+  }
+  @keyframes loading {
+    0%{
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 }

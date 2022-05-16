@@ -1,5 +1,4 @@
 import Theme from '../theme-default'
-
 // 主题样式
 import 'vitepress-theme-demoblock/theme/styles/index.css'
 

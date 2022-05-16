@@ -1,0 +1,12 @@
+@import "../../styles-var";;
+
+.#{$prefix}-icon {
+  /* your style */
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  vertical-align: -0.125em;
+  line-height: 1;
+  display: inline-block;
+}

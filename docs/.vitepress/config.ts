@@ -40,7 +40,7 @@ const config: UserConfig = {
   description: '一个vue3组件库',
   markdown: {
     config: (md) => {
-      md.use(demoBlockPlugin)
+      md.use(demoBlockPlugin, {})
     }
   }
 }

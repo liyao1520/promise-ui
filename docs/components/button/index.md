@@ -95,3 +95,68 @@
 ```
 
 :::
+
+#### Icon
+
+:::demo 可以传 icon
+
+```vue
+<template>
+  <PSpace>
+    <PButton>
+      <PIcon> <AirplaneSharp /> </PIcon>
+      飞机
+    </PButton>
+    <PButton fillMode="outline">
+      Hello
+      <PIcon> <AccessibilitySharp /> </PIcon>
+    </PButton>
+    <PButton type="danger">
+      <PIcon> <Ban /> </PIcon>
+      禁止
+    </PButton>
+  </PSpace>
+</template>
+```
+
+:::
+
+#### 加载 loading 状态
+
+:::demo 控制 loading 效果
+
+```vue
+<template>
+  <PSpace>
+    <PButton size="lg" :loading="isLoading" @click="handleClick">
+      <template #icon>
+        <pIcon>
+          <AirplaneSharp />
+        </pIcon>
+      </template>
+      点我
+    </PButton>
+    <PButton size="lg" :loading="isLoading" @click="handleClick"> 点我 </PButton>
+  </PSpace>
+</template>
+<script lang="ts">
+  import { ref } from 'vue'
+  export default {
+    setup() {
+      const isLoading = ref(false)
+      const handleClick = () => {
+        isLoading.value = true
+        setTimeout(() => {
+          isLoading.value = false
+        }, 3000)
+      }
+      return {
+        handleClick,
+        isLoading
+      }
+    }
+  }
+</script>
+```
+
+:::

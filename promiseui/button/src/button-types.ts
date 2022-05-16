@@ -12,10 +12,6 @@ export const buttonProps = {
     type: String as PropType<IButtonSize>,
     default: 'md'
   },
-  icon: {
-    type: String,
-    default: ''
-  },
   loading: {
     type: Boolean,
     default: false
@@ -25,7 +21,8 @@ export const buttonProps = {
     default: false
   },
   fillMode: {
-    type: String as PropType<IFillMode>
+    type: String as PropType<IFillMode>,
+    default: ''
   }
 } as const
 
