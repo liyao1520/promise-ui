@@ -10,13 +10,14 @@ export default defineComponent({
   emits: ['click'],
 
   setup(props: ButtonProps, { slots, emit }) {
-    const { type, icon, loading, disabled, size } = toRefs(props)
+    const { type, icon, loading, disabled, size, fillMode } = toRefs(props)
 
     const ns = useNamespace('button')
     const classes = computed(() => ({
       [ns.b()]: true,
       [ns.m(type.value)]: true,
-      [ns.m(size.value)]: true
+      [ns.m(size.value)]: true,
+      [ns.m(fillMode.value)]: true
     }))
 
     const onClick = (e: MouseEvent) => {

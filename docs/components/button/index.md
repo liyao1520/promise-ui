@@ -19,6 +19,45 @@
 
 :::
 
+#### 不同填充
+
+:::demo 设置属性`fillMode`
+
+```vue
+<template>
+  <PSpace>
+    <PButton type="primary">Primary</PButton>
+    <PButton type="danger">Danger</PButton>
+    <PButton type="info">Info</PButton>
+    <PButton type="warning">Warning</PButton>
+    <PButton type="success">Success</PButton>
+  </PSpace>
+  <PSpace>
+    <PButton type="primary" fillMode="outline">Primary</PButton>
+    <PButton type="danger" fillMode="outline">Danger</PButton>
+    <PButton type="info" fillMode="outline">Info</PButton>
+    <PButton type="warning" fillMode="outline">Warning</PButton>
+    <PButton type="success" fillMode="outline">Success</PButton>
+  </PSpace>
+  <PSpace>
+    <PButton type="primary" fillMode="dashed">Primary</PButton>
+    <PButton type="danger" fillMode="dashed">Danger</PButton>
+    <PButton type="info" fillMode="dashed">Info</PButton>
+    <PButton type="warning" fillMode="dashed">Warning</PButton>
+    <PButton type="success" fillMode="dashed">Success</PButton>
+  </PSpace>
+  <PSpace>
+    <PButton type="primary" fillMode="none">Primary</PButton>
+    <PButton type="danger" fillMode="none">Danger</PButton>
+    <PButton type="info" fillMode="none">Info</PButton>
+    <PButton type="warning" fillMode="none">Warning</PButton>
+    <PButton type="success" fillMode="none">Success</PButton>
+  </PSpace>
+</template>
+```
+
+:::
+
 #### 不同尺寸
 
 :::demo 设置属性`size`,可控制按钮大小 `lg` `md` `sm` `xs`
