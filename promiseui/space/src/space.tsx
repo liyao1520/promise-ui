@@ -1,4 +1,4 @@
-import { defineComponent, withCtx } from 'vue'
+import { defineComponent } from 'vue'
 import { spaceProps, SpaceProps } from './space-types'
 
 import './index.scss'

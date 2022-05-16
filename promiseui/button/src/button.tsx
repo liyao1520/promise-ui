@@ -10,7 +10,8 @@ export default defineComponent({
   emits: ['click'],
 
   setup(props: ButtonProps, { slots, emit }) {
-    const { type, icon, loading, disabled, size, fillMode } = toRefs(props)
+    //icon, loading
+    const { type, disabled, size, fillMode } = toRefs(props)
 
     const ns = useNamespace('button')
     const classes = computed(() => ({
