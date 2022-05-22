@@ -12,7 +12,8 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "skipLibCheck": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "allowJs": true 
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/main.js",
     "promiseui/**/*.ts", "promiseui/**/*.d.ts", "promiseui/**/*.tsx", "promiseui/**/*.vue", "promiseui/main.js"],

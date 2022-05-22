@@ -113,6 +113,10 @@
     border: 1px solid #f2f2f3;
     padding: 5px;
     min-height: 200px;
+    transition: 0.3s;
+  }
+  .demo:hover {
+    box-shadow: 0 0 15px 4px rgb(0, 0, 0, 0.04);
   }
   @media (max-width: 720px) {
     .demo {

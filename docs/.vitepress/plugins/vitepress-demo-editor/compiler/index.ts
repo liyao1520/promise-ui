@@ -153,7 +153,6 @@ export default class Compiler {
     app.config.errorHandler = ${`__onError${this._id}`}
     app.mount('${this.selector}')
     `)
-    console.log(main)
 
     // 插入script
     if (this.scriptEl) {

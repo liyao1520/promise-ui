@@ -1,6 +1,6 @@
 import { defineComponent } from 'vue'
 import { iconProps, IconProps } from './icon-types'
-
+import { Icon } from '@vicons/utils'
 import './index.scss'
 
 export default defineComponent({
@@ -10,9 +10,9 @@ export default defineComponent({
   setup(props: IconProps, ctx) {
     return () => {
       return (
-        <i {...props} class="pui-icon">
+        <Icon {...props} class="pui-icon">
           {ctx.slots.default?.()}
-        </i>
+        </Icon>
       )
     }
   }

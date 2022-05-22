@@ -11,21 +11,10 @@
     <PButton size="lg" :loading="isLoading" @click="handleClick"> 点我 </PButton>
   </PSpace>
 </template>
-<script lang="ts">
+<script setup>
   import { ref } from 'vue'
-  export default {
-    setup() {
-      const isLoading = ref(false)
-      const handleClick = () => {
-        isLoading.value = true
-        // setTimeout(() => {
-        //   isLoading.value = false
-        // }, 3000)
-      }
-      return {
-        handleClick,
-        isLoading
-      }
-    }
+  const isLoading = ref(false)
+  function handleClick() {
+    isLoading.value = true
   }
 </script>

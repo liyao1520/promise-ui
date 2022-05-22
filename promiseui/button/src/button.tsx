@@ -14,9 +14,6 @@ export default defineComponent({
     const { type, disabled, size, fillMode, loading } = toRefs(props)
     const ns = useNamespace('button')
 
-    watch(loading, () => {
-      console.log(loading.value)
-    })
     const classes = computed(() => ({
       [ns.b()]: true,
       [ns.m(type.value)]: true,

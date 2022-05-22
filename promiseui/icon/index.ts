@@ -1,7 +1,8 @@
 import type { App } from 'vue'
 import Icon from './src/icon'
+import IconConfigProvider from './src/iconConfigProvider'
 
-export { Icon }
+export { Icon, IconConfigProvider }
 export * from './src/icon-types'
 
 export default {
@@ -10,5 +11,6 @@ export default {
   status: '100%',
   install(app: App): void {
     app.component(Icon.name, Icon)
+    app.component(IconConfigProvider.name, IconConfigProvider)
   }
 }
