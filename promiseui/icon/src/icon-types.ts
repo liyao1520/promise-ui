@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import {} from '@vicons/utils'
+
 export const iconProps = {
   size: {
     //图标大小

@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+  <script>
+    const im = document.createElement('script')
+    im.type = 'importmap'
+    im.textContent = JSON.stringify({
+      imports: {
+        vue: 'https://unpkg.com/@vue/runtime-dom@3.2.31/dist/runtime-dom.esm-browser.js'
+      }
+    })
+    document.head.insertBefore(im, document.head.firstChild)
+  </script>
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
@@ -8,6 +18,8 @@
   </head>
   <body>
     <div id="app"></div>
+    <div id="demo"></div>
     <script type="module" src="/src/main.ts"></script>
+    <script></script>
   </body>
 </html>

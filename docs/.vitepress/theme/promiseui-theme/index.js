@@ -5,8 +5,7 @@ import './styles/custom-blocks.css'
 import './styles/sidebar-links.css'
 import Layout from './Layout.vue'
 import NotFound from './NotFound.vue'
-import PTheme from '../../../promiseui/theme'
-PTheme.use('light')
+
 const theme = {
   Layout,
   NotFound

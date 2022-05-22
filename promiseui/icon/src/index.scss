@@ -9,4 +9,13 @@
   vertical-align: -0.125em;
   line-height: 1;
   display: inline-block;
+  color: inherit;
+  >* {
+    width: 1em;
+    height: 1em;
+    color: inherit;
+  }
+  >svg:not([fill]) {
+    fill: currentColor;
+  }
 }

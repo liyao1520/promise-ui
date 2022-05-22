@@ -2,7 +2,9 @@
 
 #### 不同颜色
 
-:::demo 设置属性`type` , 可选 `primary` `success` `info` `wraning` `danger`
+设置属性`type` , 可选 `primary` `success` `info` `wraning` `danger`
+
+:::demo column
 
 ```vue
 <template>
@@ -130,9 +132,9 @@
   <PSpace>
     <PButton size="lg" :loading="isLoading" @click="handleClick">
       <template #icon>
-        <pIcon>
+        <PIcon>
           <AirplaneSharp />
-        </pIcon>
+        </PIcon>
       </template>
       点我
     </PButton>

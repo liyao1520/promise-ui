@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 
+test
 lib
 
 # Editor directories and files

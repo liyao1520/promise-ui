@@ -1,4 +1,4 @@
-import { computed, defineComponent, toRefs } from 'vue'
+import { computed, defineComponent, toRefs, watch } from 'vue'
 import { buttonProps, ButtonProps } from './button-types'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import Loading from './components/button-loading'
@@ -13,6 +13,10 @@ export default defineComponent({
     //icon, loading
     const { type, disabled, size, fillMode, loading } = toRefs(props)
     const ns = useNamespace('button')
+
+    watch(loading, () => {
+      console.log(loading.value)
+    })
     const classes = computed(() => ({
       [ns.b()]: true,
       [ns.m(type.value)]: true,

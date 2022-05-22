@@ -234,34 +234,6 @@ body>* ::-webkit-scrollbar-corner {
 }
 
 
-.demo-block {
-  border: solid 1px var(--devui-dividing-line, #dfe1e6)!important
-}
-
-.demo-block.hover {
-  box-shadow: none!important
-}
-
-.demo-block .source .demo-spacing>* {
-  margin: 0 8px 8px 0
-}
-
-.demo-block .source .demo-spacing>*:last-child {
-  margin-right: 0
-}
-
-.demo-block .source .demo-spacing:last-child>* {
-  margin-bottom: 0
-}
-
-.demo-block-control {
-  background-color: var(--devui-base-bg, #ffffff)!important;
-  border-top: solid 1px var(--devui-dividing-line, #dfe1e6)!important
-}
-
-.demo-block-control:hover,.demo-block-control .control-button {
-  color: var(--devui-brand, #5e7ce0)!important
-}
 .theme {
   max-width: 1440px;
   margin: 0 auto;

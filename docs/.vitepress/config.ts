@@ -1,6 +1,6 @@
+import markDownPlugin from './plugins/vitepress-demo-editor/markdownPlugin'
 import { UserConfig } from 'vitepress'
-// 这里可以使用 markdown-it 插件，vitepress-theme-demoblock就是基于此开发的
-const { demoBlockPlugin } = require('vitepress-theme-demoblock')
+
 const sidebar = {
   '/': [
     { text: '快速开始', link: '/' },
@@ -28,6 +28,7 @@ const sidebar = {
 const nav = [
   { text: 'Github', link: 'https://github.com/liyao1520/promise-ui', target: '_blank', rel: '' }
 ]
+
 const config: UserConfig = {
   themeConfig: {
     sidebar,
@@ -40,7 +41,8 @@ const config: UserConfig = {
   description: '一个vue3组件库',
   markdown: {
     config: (md) => {
-      md.use(demoBlockPlugin, {})
+      // md.use(demoBlockPlugin, {})
+      md.use(markDownPlugin, {})
     }
   }
 }

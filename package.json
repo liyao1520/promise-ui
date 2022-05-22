@@ -19,7 +19,8 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "vue": "^3.2.25"
+    "@konghayao/vue-monaco-editor": "^3.0.2",
+    "vue": "^3.2.34"
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
@@ -36,7 +37,7 @@
     "@vitejs/plugin-vue": "^2.3.3",
     "@vitejs/plugin-vue-jsx": "^1.3.10",
     "@vue/babel-plugin-jsx": "^1.1.1",
-    "@vue/test-utils": "^2.0.0-rc.21",
+    "@vue/test-utils": "2.0.0-rc.21",
     "babel-jest": "^28.1.0",
     "commander": "^9.2.0",
     "eslint": "^8.15.0",
@@ -49,6 +50,7 @@
     "jest-environment-jsdom": "^28.1.0",
     "jest-environment-node": "^28.1.0",
     "jsdom": "^19.0.0",
+    "monaco-editor": "^0.33.0",
     "prettier": "^2.6.2",
     "sass": "^1.51.0",
     "typescript": "^4.5.4",
