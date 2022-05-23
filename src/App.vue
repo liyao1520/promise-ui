@@ -1,20 +1,20 @@
 <template>
-  <PSpace>
-    <PButton size="lg" :loading="isLoading" @click="handleClick">
-      <template #icon>
-        <PIcon>
-          <AirplaneSharp />
-        </PIcon>
-      </template>
-      点我
-    </PButton>
-    <PButton size="lg" :loading="isLoading" @click="handleClick"> 点我 </PButton>
-  </PSpace>
+  <div>
+    <button @click="onClick">message</button>
+  </div>
 </template>
-<script setup>
-  import { ref } from 'vue'
-  const isLoading = ref(false)
-  function handleClick() {
-    isLoading.value = true
+
+<script setup lang="ts">
+  import { Message } from '../promiseui/vue-promiseui'
+  const onClick = () => {
+    Message({
+      message: '123'
+    }).then((_) => {
+      console.log('onclose')
+    })
+    Message.success('123456')
   }
 </script>
+<script></script>
+
+<style></style>

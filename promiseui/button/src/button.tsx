@@ -1,4 +1,4 @@
-import { computed, defineComponent, toRefs, watch } from 'vue'
+import { computed, defineComponent, toRefs } from 'vue'
 import { buttonProps, ButtonProps } from './button-types'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import Loading from './components/button-loading'

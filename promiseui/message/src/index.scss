@@ -1,0 +1,21 @@
+@import "../../styles-var";;
+
+.#{$prefix}-message {
+  /* your style */
+  position: fixed;
+  z-index: 999;
+  left: 50%;
+  transform: translate(-50%);
+  padding: 10px 20px;
+  border: 2px solid #ccc;
+}
+
+.message-fade-enter-active,.message-fade-leave-active {
+  transition: 0.3s;
+}
+
+.message-fade-enter-from,
+.message-fade-leave-to {
+  opacity: 0;
+  transform: translate(-50%, -100%);
+}
