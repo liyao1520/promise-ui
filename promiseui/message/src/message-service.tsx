@@ -33,7 +33,7 @@ function mountMessage(app: App) {
   const wraper = document.createElement('div')
   const vm = app.mount(wraper)
   setMessageTop(vm)
-  const el = document.body.appendChild(wraper.firstElementChild!) as HTMLElement
+  const el = document.body.appendChild(wraper.firstElementChild as HTMLElement) 
   // vm 添加两个属性
   inherit(vm, {
     _messageId: getMessageId(),
