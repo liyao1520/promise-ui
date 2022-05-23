@@ -45,13 +45,17 @@ function mountMessage(app: App) {
 }
 
 // 销毁时
-function destoryMessage(app: App, vm: ComponentPublicInstance, resolve: Function) {
+function destoryMessage(
+  app: App,
+  vm: ComponentPublicInstance,
+  resolve: (value: PromiseLike<undefined> | undefined) => void
+) {
   const _vm = vm as any
 
   // 卸载app
   app.unmount()
 
-  resolve() //通过.then可以处理 onclose 事件
+  resolve(undefined) //通过.then可以处理 onclose 事件
 
   messageList = messageList.filter((item) => item._messageId !== _vm._messageId)
 
