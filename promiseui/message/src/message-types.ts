@@ -12,7 +12,7 @@ export const messageProps = {
   },
   duration: {
     type: Number,
-    default: 2000,
+    default: 3000,
     required: false
   },
   offset: {

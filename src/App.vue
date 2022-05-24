@@ -1,31 +1,19 @@
 <template>
-  <div>
-    <button @click="onClick">message</button>
-  </div>
+  <PSpace>
+    <PButton @click="click1">函数式Message</PButton>
+    <PButton @click="click2">this.$message</PButton>
+  </PSpace>
 </template>
-
-<script setup lang="ts">
-  import { Message } from '../promiseui/vue-promiseui'
-  const onClick = () => {
-    Message({
-      message: 'info'
-    }).then((_) => {
-      console.log('onclose')
-    })
-    Message.error('error', {
-      duration: 1000
-    })
-    Message.success('sucess', {
-      duration: 5000
-    })
-    Message.warning('warning', {
-      duration: 10000000
-    })
-    Message.none('warning', {
-      duration: 10000000
-    })
+<script>
+  export default {
+    setup() {
+      const click1 = () => {}
+    },
+    methods: {
+      click2() {
+        console.log(this)
+        this.$message({ message: 'this.$message' })
+      }
+    }
   }
 </script>
-<script></script>
-
-<style></style>

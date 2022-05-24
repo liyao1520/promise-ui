@@ -1,5 +1,5 @@
-import { getComponents, initialVue } from '../memo'
-
+import { getComponents, initialVue, getGlobalProperties } from '../memo'
+import { handleImportMaps } from './importMaps'
 import * as compiler from 'vue/compiler-sfc'
 
 type ErrorFn = (errors: (compiler.CompilerError | SyntaxError)[]) => void
@@ -142,14 +142,15 @@ export default class Compiler {
 
   private runCode(): string {
     const components = getComponents()
-
-    window['_components'] = components
+    const globalProperties = getGlobalProperties()
+    if (!window['_components']) window['_components'] = components
+    if (!window['_globalProperties']) window['_globalProperties'] = globalProperties
     const main = handleImportMaps(`
     import { createApp,h } from 'vue'
     import App from '${this.scriptUrl}'
     const app = createApp(App);
     app._context.components= window['_components'];
-    // Object.keys(_shared_components).forEach(name => app.component(name,_shared_components[name]))
+    app.config.globalProperties = window['_globalProperties'];
     app.config.errorHandler = ${`__onError${this._id}`}
     app.mount('${this.selector}')
     `)
@@ -158,6 +159,8 @@ export default class Compiler {
     if (this.scriptEl) {
       this.scriptEl.innerHTML = main
     }
+    console.log(main)
+
     return main
   }
   private handleError(ast: compiler.SFCParseResult) {
@@ -198,11 +201,4 @@ function createObjectURL(content: any, type?: string): string {
 }
 function generateID() {
   return Math.random().toString(36).slice(2, 12)
-}
-
-function handleImportMaps(script: string): string {
-  return (script = script.replace(/import(.*?)from\s+['"]vue['"]/g, (match, p1) => {
-    p1 = p1.replace(/as/g, ':')
-    return `const ${p1} = _vue`
-  }))
 }

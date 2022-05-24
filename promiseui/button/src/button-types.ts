@@ -6,7 +6,7 @@ type IFillMode = 'outline' | 'none' | 'dashed'
 export const buttonProps = {
   type: {
     type: String as PropType<IButtonType>,
-    default: 'primary'
+    default: 'default'
   },
   size: {
     type: String as PropType<IButtonSize>,

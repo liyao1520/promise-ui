@@ -1,7 +1,8 @@
-@import "../../styles-var";;
+@import '../../styles-var';
 
 .#{$prefix}-button {
-  /*yourstyle*/color: $light-text;
+  /*yourstyle*/
+  color: $light-text;
   outline: none;
   border: none;
   background-color: transparent;
@@ -9,13 +10,15 @@
   border-radius: $border-radius;
   border: 1px solid transparent;
   transition: 0.25s;
+
   &:disabled {
-    &:hover{
+    &:hover {
       cursor: not-allowed;
     }
     opacity: 0.5;
   }
-  &:hover,&:focus {
+  &:hover,
+  &:focus {
     opacity: 0.9;
     cursor: pointer;
   }
@@ -24,7 +27,6 @@
     font-size: $font-size-sm;
     padding: 0 4px;
     height: 24px;
-    
   }
   &--sm {
     font-size: $font-size-sm;
@@ -34,7 +36,7 @@
   &--md {
     font-size: $font-size-md;
     padding: 0 16px;
-    height:28px;
+    height: 28px;
   }
   &--lg {
     font-size: $font-size-lg;
@@ -47,7 +49,16 @@
     &:active {
       background-color: $success-active;
     }
-
+  }
+  &--default {
+    color: $text;
+    border-color: $border-color;
+    &:hover,
+    &:active,
+    &:focus {
+      color: $brand;
+      border-color: $brand;
+    }
   }
   &--primary {
     background-color: $brand;
@@ -79,14 +90,20 @@
       background-color: $danger-active;
     }
   }
-  &--success, &--primary, &--info, &--warning, &--danger {
+  &--success,
+  &--primary,
+  &--info,
+  &--warning,
+  &--danger {
     &:disabled {
       opacity: 0.5;
     }
   }
-  &--outline,&--dashed,  &--none {
+  &--outline,
+  &--dashed,
+  &--none {
     background-color: #fff;
-    &.#{$prefix}-button{
+    &.#{$prefix}-button {
       &:active {
         color: #fff;
       }
@@ -107,7 +124,7 @@
       }
     }
   }
-  
+
   &--none {
     background-color: #fff;
     border-color: transparent;
@@ -116,13 +133,13 @@
     border-style: dashed;
   }
   &__loading {
-    animation: loading  1s infinite linear;
+    animation: loading 1s infinite linear;
   }
-  &--isloading{
+  &--isloading {
     cursor: wait !important;
   }
   @keyframes loading {
-    0%{
+    0% {
       transform: rotate(0);
     }
     100% {

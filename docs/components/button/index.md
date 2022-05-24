@@ -1,10 +1,10 @@
 # Button 按钮
 
-#### 不同颜色
+### 不同颜色
 
 设置属性`type` , 可选 `primary` `success` `info` `wraning` `danger`
 
-:::demo column
+:::demo
 
 ```vue
 <template>
@@ -21,9 +21,11 @@
 
 :::
 
-#### 不同填充
+### 不同填充
 
-:::demo 设置属性`fillMode`
+设置属性`fillMode`
+
+:::demo
 
 ```vue
 <template>
@@ -60,26 +62,30 @@
 
 :::
 
-#### 不同尺寸
+### 不同尺寸
 
-:::demo 设置属性`size`,可控制按钮大小 `lg` `md` `sm` `xs`
+设置属性`size`,可控制按钮大小 `lg` `md` `sm` `xs`
+
+:::demo
 
 ```vue
 <template>
   <PSpace>
-    <PButton size="xs">Mini</PButton>
-    <PButton size="sm">Small</PButton>
-    <PButton size="md">Medium</PButton>
-    <PButton size="lg">Large</PButton>
+    <PButton size="xs" type="primary">Mini</PButton>
+    <PButton size="sm" type="primary">Small</PButton>
+    <PButton size="md" type="primary">Medium</PButton>
+    <PButton size="lg" type="primary">Large</PButton>
   </PSpace>
 </template>
 ```
 
 :::
 
-#### 禁用状态
+### 禁用状态
 
-:::demo 设置属性`disabled`, 是否禁用按钮
+设置属性`disabled`, 是否禁用按钮
+
+:::demo
 
 ```vue
 <template>
@@ -98,9 +104,11 @@
 
 :::
 
-#### Icon
+### Icon
 
-:::demo 可以传 icon
+可以传 `icon`
+
+:::demo
 
 ```vue
 <template>
@@ -123,9 +131,11 @@
 
 :::
 
-#### 加载 loading 状态
+### 加载 loading 状态
 
-:::demo 控制 loading 效果
+控制 `loading` 效果
+
+:::demo
 
 ```vue
 <template>
@@ -141,12 +151,14 @@
     <PButton size="lg" :loading="isLoading" @click="handleClick"> 点我 </PButton>
   </PSpace>
 </template>
-<script lang="ts">
+<script>
   import { ref } from 'vue'
+  import { Message } from 'promiseui'
   export default {
     setup() {
       const isLoading = ref(false)
       const handleClick = () => {
+        Message.success('click !')
         isLoading.value = true
         setTimeout(() => {
           isLoading.value = false

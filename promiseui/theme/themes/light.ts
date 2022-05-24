@@ -1,6 +1,7 @@
 export default {
   'base-bg': '#ffffff', //背景
   'bg-hover': 'rgba(46,50,56,0.05)',
+  'border-color': 'rgb(224, 224, 230)',
   line: '#aea6ad', //边框
   shadow: 'rgba(37, 43, 58, 0.2)',
   brand: '#5e7ce0',
@@ -34,7 +35,7 @@ export default {
   'font-title-weight': 'bold',
   'font-content-weight': 'normal',
   'line-height-base': '1.5',
-  'border-radius': '2px',
+  'border-radius': '4px',
   'border-radius-feedback': '4px',
   'border-radius-card': '6px'
 }
