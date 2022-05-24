@@ -33,7 +33,7 @@ function mountMessage(app: App) {
   const wraper = document.createElement('div')
   const vm = app.mount(wraper)
   setMessageTop(vm)
-  const el = document.body.appendChild(wraper.firstElementChild as HTMLElement) 
+  const el = document.body.appendChild(wraper.firstElementChild as HTMLElement)
   // vm 添加两个属性
   inherit(vm, {
     _messageId: getMessageId(),
@@ -56,17 +56,17 @@ function destoryMessage(
   app.unmount()
 
   resolve(undefined) //通过.then可以处理 onclose 事件
+  const index = messageList.findIndex((item) => item._messageId === _vm._messageId)
 
-  messageList = messageList.filter((item) => item._messageId !== _vm._messageId)
-
+  messageList.splice(index, 1)
   // 需要去掉的高度
   const removedHeight = _vm._offsetHeight + MARGIN
   // 重新计算Top
-  resetMessageListTop(removedHeight)
+  resetMessageListTop(removedHeight, index)
 }
 
-function resetMessageListTop(removedHeight: number) {
-  for (const vm of messageList) {
+function resetMessageListTop(removedHeight: number, startIndex: number) {
+  for (const vm of messageList.slice(startIndex)) {
     vm.setTop(-removedHeight)
   }
 }

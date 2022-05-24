@@ -6,7 +6,7 @@ export const messageProps = {
     required: true
   },
   type: {
-    type: String as PropType<'success' | 'warning' | 'info' | 'error'>,
+    type: String as PropType<IMEssageType>,
     default: 'info',
     required: false
   },
@@ -20,11 +20,6 @@ export const messageProps = {
     default: 60,
     required: false
   },
-  center: {
-    type: Boolean,
-    default: false,
-    required: false
-  },
   showClose: {
     type: Boolean,
     default: false,
@@ -34,15 +29,12 @@ export const messageProps = {
     type: String,
     default: '',
     required: false
-  },
-  icon: {
-    type: [String, Object] as PropType<string | Component>,
-    required: false
   }
 } as const
 
 export type MessageProps = ExtractPropTypes<typeof messageProps>
-export const messageTypes = ['success', 'info', 'warning', 'error'] as const
+export type IMEssageType = 'success' | 'warning' | 'info' | 'error' | 'none'
+export const messageTypes = ['success', 'info', 'warning', 'error', 'none'] as const
 export type IMessageConfig = Partial<MessageProps>
 type IMessageStaticFn = (
   message: string,
@@ -54,6 +46,7 @@ export interface MessageFn {
   info?: IMessageStaticFn
   warning?: IMessageStaticFn
   error?: IMessageStaticFn
+  none?: IMessageStaticFn
 }
 export interface IMessage {
   (config: Partial<MessageProps>): Promise<undefined>
@@ -61,4 +54,5 @@ export interface IMessage {
   info: IMessageStaticFn
   warning: IMessageStaticFn
   error: IMessageStaticFn
+  none: IMessageStaticFn
 }

@@ -8,11 +8,22 @@
   import { Message } from '../promiseui/vue-promiseui'
   const onClick = () => {
     Message({
-      message: '123'
+      message: 'info'
     }).then((_) => {
       console.log('onclose')
     })
-    Message.success('123456')
+    Message.error('error', {
+      duration: 1000
+    })
+    Message.success('sucess', {
+      duration: 5000
+    })
+    Message.warning('warning', {
+      duration: 10000000
+    })
+    Message.none('warning', {
+      duration: 10000000
+    })
   }
 </script>
 <script></script>

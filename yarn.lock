@@ -1571,21 +1571,6 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@konghayao/vue-monaco-editor@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.npmmirror.com/@konghayao/vue-monaco-editor/-/vue-monaco-editor-3.0.2.tgz#b26c33098dd8467a5647a1cadc43bfeb0e86609a"
-  integrity sha512-qdS3DuEOiEB2RkpJSlxqnmXJNWJGqwmTR7LpDx/tlUu7qdOGKMtXyI7w4bKu+xFoOe7b+T63CpjM8P8mm1XF2A==
-  dependencies:
-    "@monaco-editor/loader" "^1.2.0"
-    monaco-themes "^0.4.0"
-
-"@monaco-editor/loader@^1.2.0":
-  version "1.3.2"
-  resolved "https://registry.npmmirror.com/@monaco-editor/loader/-/loader-1.3.2.tgz#04effbb87052d19cd7d3c9d81c0635490f9bb6d8"
-  integrity sha512-BTDbpHl3e47r3AAtpfVFTlAi7WXv4UQ/xZmz8atKl4q7epQV5e7+JbigFDViWF71VBi4IIBdcWP57Hj+OWuc9g==
-  dependencies:
-    state-local "^1.0.6"
-
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.npmmirror.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
@@ -3303,11 +3288,6 @@ fast-levenshtein@^2.0.6, fast-levenshtein@~2.0.6:
   resolved "https://registry.npmmirror.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==
 
-fast-plist@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.npmmirror.com/fast-plist/-/fast-plist-0.1.2.tgz#a45aff345196006d406ca6cdcd05f69051ef35b8"
-  integrity sha512-2HxzrqJhmMoxVzARjYFvkzkL2dCBB8sogU5sD8gqcZWv5UCivK9/cXM9KIPDRwU+eD3mbRDN/GhW8bO/4dtMfg==
-
 fastq@^1.6.0:
   version "1.13.0"
   resolved "https://registry.npmmirror.com/fastq/-/fastq-1.13.0.tgz#616760f88a7526bdfc596b7cab8c18938c36b98c"
@@ -4588,13 +4568,6 @@ monaco-editor@^0.33.0:
   resolved "https://registry.npmmirror.com/monaco-editor/-/monaco-editor-0.33.0.tgz#842e244f3750a2482f8a29c676b5684e75ff34af"
   integrity sha512-VcRWPSLIUEgQJQIE0pVT8FcGBIgFoxz7jtqctE+IiCxWugD0DwgyQBcZBhdSrdMC84eumoqMZsGl2GTreOzwqw==
 
-monaco-themes@^0.4.0:
-  version "0.4.2"
-  resolved "https://registry.npmmirror.com/monaco-themes/-/monaco-themes-0.4.2.tgz#6939339cb2f0bfb743f6e454de4136971834f16a"
-  integrity sha512-T3kp6SC5MPJvwYGXZENCd0UOIKVgUVV5SjsiXLBhgEZBnScY+6gEbwNRK1oYmfwbf+dGVqF1bSLN5YcrFu3HmA==
-  dependencies:
-    fast-plist "^0.1.2"
-
 mrmime@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmmirror.com/mrmime/-/mrmime-1.0.0.tgz#14d387f0585a5233d291baba339b063752a2398b"
@@ -5332,11 +5305,6 @@ stack-utils@^2.0.3:
   integrity sha512-xrQcmYhOsn/1kX+Vraq+7j4oE2j/6BFscZ0etmYg81xuM8Gq0022Pxb8+IqgOFUIaxHs0KaSb7T1+OegiNrNFA==
   dependencies:
     escape-string-regexp "^2.0.0"
-
-state-local@^1.0.6:
-  version "1.0.7"
-  resolved "https://registry.npmmirror.com/state-local/-/state-local-1.0.7.tgz#da50211d07f05748d53009bee46307a37db386d5"
-  integrity sha512-HTEHMNieakEnoe33shBYcZ7NX83ACUjCu8c40iOGEZsngj9zRnkqS9j1pqQPXwobB0ZcVTk27REb7COQ0UR59w==
 
 string-length@^4.0.1:
   version "4.0.2"

@@ -11,8 +11,7 @@ module.exports = {
       }
     ]
   },
-  testPathIgnorePatterns: ['/node_modules/'],
-  testMatch: ['promiseui/**/*.spec.(ts|tsx)'],
+
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
     '\\.(css|less|scss|sass)$': '<rootDir>/__mocks__/style-mock.ts',

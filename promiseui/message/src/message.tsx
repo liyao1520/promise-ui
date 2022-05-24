@@ -1,7 +1,12 @@
-import { defineComponent, onMounted, ref, toRefs, Transition, defineExpose } from 'vue'
+import { defineComponent, onMounted, ref, toRefs, Transition } from 'vue'
 import { messageProps, MessageProps } from './message-types'
-
 import './index.scss'
+import { useNamespace } from '../../shared/hooks/use-namespace'
+import useIcon from './hooks/use-icon'
+import { Icon } from '../../icon'
+import { CloseSharp } from '@vicons/ionicons5'
+
+const ns = useNamespace('message')
 
 export default defineComponent({
   name: 'PMessage',
@@ -10,16 +15,43 @@ export default defineComponent({
   setup(props: MessageProps) {
     const { duration } = toRefs(props)
     const isShow = ref(true)
-
+    const IconContent = useIcon(props.type)
     // 出现到页面上后,再倒计时关闭Message
     onMounted(() => {
       setTimeout(() => {
         isShow.value = false
       }, duration.value)
     })
-    return {
-      isShow
+    const closeClick = () => {
+      isShow.value = false
     }
+    return {
+      isShow,
+      IconContent,
+      closeClick
+    }
+  },
+  render() {
+    const { isShow, $emit, top, type, IconContent, closeClick, showClose, customClass } = this
+    return (
+      <Transition name="message-fade" onAfterLeave={(_) => $emit('destory')} appear>
+        {isShow && (
+          <div class={[ns.b(), customClass]} style={{ top: top + 'px' }}>
+            {IconContent && (
+              <Icon class={ns.m(type)}>
+                <IconContent />
+              </Icon>
+            )}
+            <span class={ns.e('content')}>{this.message}</span>
+            {showClose && (
+              <Icon class={ns.e('close')} onClick={closeClick}>
+                <CloseSharp />
+              </Icon>
+            )}
+          </div>
+        )}
+      </Transition>
+    )
   },
   data() {
     return {
@@ -34,19 +66,6 @@ export default defineComponent({
         this.top = top
       }
     }
-  },
-  render() {
-    const { isShow, $emit, top } = this
-
-    return (
-      <Transition name="message-fade" onAfterLeave={(_) => $emit('destory')} appear>
-        {isShow && (
-          <div class="pui-message" style={{ top: top + 'px' }}>
-            {this.message}
-          </div>
-        )}
-      </Transition>
-    )
   },
   expose: ['setTop', 'getHeight']
 })

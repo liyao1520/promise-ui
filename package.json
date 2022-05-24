@@ -13,13 +13,12 @@
     "cli:dev": "esbuild --bundle ./promiseui-cli/index.js --format=cjs --platform=node --outdir=./lib --watch",
     "cli:build": "esbuild --bundle ./promiseui-cli/index.js --format=cjs --platform=node --outdir=./lib",
     "cli": "node ./lib/index.js create",
-    "test": "jest",
+    "test": "jest promiseui",
     "lint": "eslint . --ext .ts,.tsx,.js,.vue --fix",
     "prettier": "prettier --write",
     "prepare": "husky install"
   },
   "dependencies": {
-    "@konghayao/vue-monaco-editor": "^3.0.2",
     "vue": "^3.2.34"
   },
   "devDependencies": {
