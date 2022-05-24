@@ -31,6 +31,20 @@ export default defineComponent({
       closeClick
     }
   },
+  data() {
+    return {
+      top: this.$props.offset
+    }
+  },
+  methods: {
+    setTop(top: number) {
+      if (top < 0) {
+        this.top = this.top + top
+      } else {
+        this.top = top
+      }
+    }
+  },
   render() {
     const { isShow, $emit, top, type, IconContent, closeClick, showClose, customClass } = this
     return (
@@ -52,20 +66,6 @@ export default defineComponent({
         )}
       </Transition>
     )
-  },
-  data() {
-    return {
-      top: this.$props.offset
-    }
-  },
-  methods: {
-    setTop(top: number) {
-      if (top < 0) {
-        this.top = this.top + top
-      } else {
-        this.top = top
-      }
-    }
   },
   expose: ['setTop', 'getHeight']
 })

@@ -22,6 +22,7 @@ export default function (type: IMEssageType) {
       break
     case 'none':
       Icon = ''
+      break
     default:
       Icon = ''
   }

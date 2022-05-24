@@ -4,7 +4,7 @@ import { MessageFn, messageTypes, IMessage } from './message-types'
 import MessageComponent from './message'
 const MARGIN = 15 // message 之前的距离
 const TOP = 60 // message 距离顶部px
-let messageList: any[] = []
+const messageList: any[] = []
 let messageId = 0
 
 const Message: MessageFn = (config) => {
