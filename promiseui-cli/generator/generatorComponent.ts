@@ -8,7 +8,10 @@ import genTypesTemplate from '../templates/types'
 import genIndexTemplate from '../templates'
 import genTestTemplate from '../templates/component-test'
 import { coreName } from '../templates/utils'
-const writeFileOptions = { encoding: 'utf-8' }
+interface IWriteFileOptions {
+  encoding: 'utf-8'
+}
+const writeFileOptions: IWriteFileOptions = { encoding: 'utf-8' }
 export default async function generatorComponent(info) {
   const { name, category, title } = info
   const rootDir = process.cwd()

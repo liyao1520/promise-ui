@@ -7,7 +7,11 @@ const CREATE_TYPES = ['component', 'lib-entry']
 // 文档分类
 const DOCS_CATEGORIES = ['通用', '导航', '反馈', '数据录入', '数据展示', '布局']
 
-export async function onCreate(cmd = {}) {
+interface ICMD {
+  type?: string
+}
+
+export async function onCreate(cmd: ICMD = {}): Promise<void> {
   let { type } = cmd
 
   // 如果没有在命令参数里带入 type 那么就询问一次
@@ -49,7 +53,7 @@ export async function onCreate(cmd = {}) {
             name: 'name',
             type: 'input',
             message: '（必填）请输入组件 name ，将用作目录及文件名：',
-            validate: (value) => {
+            validate: (value: string) => {
               if (value.trim() === '') {
                 return '组件 name 是必填项！'
               }
@@ -60,7 +64,7 @@ export async function onCreate(cmd = {}) {
             name: 'title',
             type: 'input',
             message: '（必填）请输入组件中文名称，将用作文档列表显示：',
-            validate: (value) => {
+            validate: (value: string) => {
               if (value.trim() === '') {
                 return '组件名称是必填项！'
               }
@@ -84,15 +88,14 @@ export async function onCreate(cmd = {}) {
       default:
         break
     }
-  } catch (e) {
+  } catch (e: any) {
     console.log(red('✖') + e.toString())
     process.exit(1)
   }
 }
 
-function createComponent(info) {
+function createComponent(info: { name: string; title: string; category: string }) {
   // 输出收集到的组件信息
-  console.log(info)
   generatorComponent(info)
 }
 

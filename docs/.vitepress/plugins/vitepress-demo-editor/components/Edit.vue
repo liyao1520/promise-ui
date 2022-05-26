@@ -9,7 +9,7 @@
     },
     theme: {
       type: String,
-      default: 'iPlastic'
+      default: 'vs'
     },
     language: {
       type: String,

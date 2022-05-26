@@ -13,9 +13,12 @@
     "lib": ["esnext", "dom"],
     "skipLibCheck": true,
     "baseUrl": ".",
-    "allowJs": true 
+    "allowJs": true ,
+
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/main.js",
-    "promiseui/**/*.ts", "promiseui/**/*.d.ts", "promiseui/**/*.tsx", "promiseui/**/*.vue", "promiseui/main.js"],
+    "promiseui/**/*.ts", "promiseui/**/*.d.ts", "promiseui/**/*.tsx", "promiseui/**/*.vue", 
+  "promiseui-cli/**/*.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

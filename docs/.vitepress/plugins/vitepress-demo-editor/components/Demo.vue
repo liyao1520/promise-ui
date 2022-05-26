@@ -52,7 +52,6 @@
 </template>
 <script setup lang="ts">
   import { ref, defineProps, onMounted, nextTick } from 'vue'
-  import { templateWrap } from '../compiler/templateWrap'
   import Edit from './Edit.vue'
 
   const props = withDefaults(
@@ -89,7 +88,7 @@
       // 错误处理
       errors.value = errs
     })
-    compiler.compileCode(templateWrap(props.initialValue))
+    compiler.compileCode(props.initialValue)
     autoHeight()
     let obsever = new MutationObserver(autoHeight)
     if (viewRef.value) obsever.observe(viewRef.value, { childList: true })
@@ -97,9 +96,6 @@
 
   const handleChange = (content: string) => {
     if (!compiler) return
-    // 需要加一个根,不然多根报错,不知道为什么,vue3不是支持多跟吗?
-    content = templateWrap(content)
-    console.log(content)
 
     compiler.compileCode(content)
   }
@@ -159,6 +155,9 @@
     position: relative;
     flex: 4;
     min-height: 100px;
+    padding: 5px;
+    display: flex;
+    border-right: 1px dashed rgb(240, 235, 235);
   }
   .view {
     width: 100%;

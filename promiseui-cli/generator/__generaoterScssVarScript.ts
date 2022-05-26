@@ -24,7 +24,7 @@ const theme = {
 
 // $line : var(--line,"#aea6ad");
 let str = ''
-for (let [key, value] of Object.entries(theme)) {
+for (const [key, value] of Object.entries(theme)) {
   str += `$${key} : var(--promiseui-${key},${value});\n`
 }
 console.log(str)
