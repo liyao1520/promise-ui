@@ -10,7 +10,7 @@
   border-radius: $border-radius;
   border: 1px solid transparent;
   transition: 0.25s;
-
+  user-select: none;
   &:disabled {
     &:hover {
       cursor: not-allowed;
@@ -104,9 +104,6 @@
   &--none {
     background-color: #fff;
     &.#{$prefix}-button {
-      &:active {
-        color: #fff;
-      }
       &--success {
         color: $success;
       }
@@ -145,5 +142,8 @@
     100% {
       transform: rotate(360deg);
     }
+  }
+  &--mousedown {
+    transform: translateY(5%);
   }
 }

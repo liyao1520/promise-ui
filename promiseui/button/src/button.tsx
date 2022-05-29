@@ -4,6 +4,7 @@ import { useNamespace } from '../../shared/hooks/use-namespace'
 import Loading from './components/button-loading'
 import './index.scss'
 import { Icon } from '../../icon'
+import useEvent from './hooks/use-event'
 
 export default defineComponent({
   name: 'PButton',
@@ -13,21 +14,15 @@ export default defineComponent({
     //icon, loading
     const { type, disabled, size, fillMode, loading } = toRefs(props)
     const ns = useNamespace('button')
-
+    const { onClick, onMousedown, onMouseup, isMouseDown } = useEvent(props, emit)
     const classes = computed(() => ({
       [ns.b()]: true,
       [ns.m(type.value)]: true,
       [ns.m(size.value)]: true,
       [ns.m(fillMode.value)]: true,
-      [ns.m('isloading')]: loading.value
+      [ns.m('isloading')]: loading.value,
+      [ns.m('mousedown')]: isMouseDown.value
     }))
-
-    const onClick = (e: MouseEvent) => {
-      if (loading.value) {
-        return
-      }
-      emit('click', e)
-    }
 
     const loadingRender = () => {
       return loading.value ? (
@@ -39,7 +34,13 @@ export default defineComponent({
 
     return () => {
       return (
-        <button class={classes.value} onClick={onClick} disabled={disabled.value}>
+        <button
+          class={classes.value}
+          onClick={onClick}
+          onMousedown={onMousedown}
+          onMouseup={onMouseup}
+          disabled={disabled.value}
+        >
           {loadingRender() || (slots.icon && slots.icon())}
           {slots.default && slots.default()}
         </button>
