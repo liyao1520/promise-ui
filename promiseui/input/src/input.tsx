@@ -10,8 +10,8 @@ import { nativeClick } from '../../shared/utils'
 
 export default defineComponent({
   name: 'PInput',
-  props: inputProps,
   inheritAttrs: false,
+  props: inputProps,
   emits: ['update:modelValue', 'input', 'blur', 'focus'],
   setup(props: InputProps, ctx: SetupContext) {
     const { attrs, slots, emit } = ctx
