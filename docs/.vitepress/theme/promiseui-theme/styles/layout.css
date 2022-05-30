@@ -241,3 +241,14 @@ body>* ::-webkit-scrollbar-corner {
   max-width: 1440px;
   margin: 0 auto;
 }
+.demo h4 {
+  font-weight: 700;
+  color: #575d6c;
+  font-size: 12px;
+  margin: 15px 0;
+}
+.demo p {
+  color: #575d6c;
+  font-size: 12px;
+  margin: 10px 0;
+}

@@ -5,17 +5,20 @@ export function addImportMap(key: string, value: string) {
 }
 
 export function handleImportMaps(script: string) {
+  const _window = window as any
+
+  if (!_window.importMaps) _window.importMaps = importMaps
   script = handleDefault(script)
   script = script.replace(/import(.*?)from\s+['"](.*?)['"]/g, (match, p1, p2) => {
     const key = p2
     const value = importMaps[key]
 
     if (value) {
-      if (!window[`_${key}`]) {
-        window[`_${key}`] = value
+      if (!importMaps[`${key}`]) {
+        importMaps[`${key}`] = value
       }
 
-      return `const ${p1} = _${p2}`
+      return `const ${p1} = importMaps['${p2}']`
     } else {
       return match
     }

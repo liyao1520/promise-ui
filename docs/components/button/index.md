@@ -111,18 +111,21 @@
 :::demo
 
 ```vue
+<script setup>
+  import { AccessibilitySharp, AirplaneSharp, Ban } from '@vicons/ionicons5'
+</script>
 <template>
   <PSpace>
     <PButton>
-      <PIcon> <AirplaneSharp /> </PIcon>
+      <PIcon :component="AirplaneSharp" />
       飞机
     </PButton>
     <PButton fillMode="outline">
       Hello
-      <PIcon> <AccessibilitySharp /> </PIcon>
+      <PIcon :component="AccessibilitySharp" />
     </PButton>
     <PButton type="danger">
-      <PIcon> <Ban /> </PIcon>
+      <PIcon :component="Ban" />
       禁止
     </PButton>
   </PSpace>
@@ -142,9 +145,7 @@
   <PSpace>
     <PButton size="lg" :loading="isLoading" @click="handleClick">
       <template #icon>
-        <PIcon>
-          <AirplaneSharp />
-        </PIcon>
+        <PIcon :component="AirplaneSharp" />
       </template>
       点我
     </PButton>
@@ -154,6 +155,8 @@
 <script>
   import { ref } from 'vue'
   import { Message } from 'promiseui'
+  import { AirplaneSharp } from '@vicons/ionicons5'
+
   export default {
     setup() {
       const isLoading = ref(false)
@@ -166,7 +169,8 @@
       }
       return {
         handleClick,
-        isLoading
+        isLoading,
+        AirplaneSharp
       }
     }
   }

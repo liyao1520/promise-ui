@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { Component, ExtractPropTypes, PropType } from 'vue'
 
 export const iconProps = {
   size: {
@@ -9,7 +9,10 @@ export const iconProps = {
     //图片颜色
     type: String
   },
-  tag: { type: String } //要渲染为何种 HTML 标签
+  tag: { type: String }, //要渲染为何种 HTML 标签
+  component: {
+    type: Object as PropType<Component>
+  }
 } as const
 
 export type IconProps = ExtractPropTypes<typeof iconProps>

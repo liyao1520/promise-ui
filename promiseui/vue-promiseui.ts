@@ -3,8 +3,9 @@ import ButtonInstall, { Button } from './button'
 import SpaceInstall, { Space } from './space'
 import IconInstall, { Icon } from './icon'
 import MessageInstall, { Message } from './message'
+import InputInstall, { Input } from './input'
 
-const installs = [ButtonInstall, SpaceInstall, IconInstall, MessageInstall]
+const installs = [ButtonInstall, SpaceInstall, IconInstall, MessageInstall, InputInstall]
 
 export { Button, Space, Icon, Message }
 
