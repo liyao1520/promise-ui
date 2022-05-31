@@ -12,7 +12,11 @@ interface IWriteFileOptions {
   encoding: 'utf-8'
 }
 const writeFileOptions: IWriteFileOptions = { encoding: 'utf-8' }
-export default async function generatorComponent(info) {
+export default async function generatorComponent(info: {
+  name: string
+  category: string
+  title: string
+}) {
   const { name, category, title } = info
   const rootDir = process.cwd()
   const componentDir = resolve(rootDir, 'promiseui', name)
@@ -51,12 +55,12 @@ export default async function generatorComponent(info) {
   //  修改 sidebar.json
   const res = await fs.readFile(resolve(rootDir, 'docs/.vitepress/sidebar.json'), 'utf-8')
   const json = JSON.parse(res)
-  const sidebarItem = json['/'].find((item) => item.text === category)
+  const sidebarItem = json['/'].find((item: { text: string }) => item.text === category)
   const config = {
     text: `${coreName(name)} ${title}`,
     link: `/components/${name}/`
   }
-  sidebarItem.children = sidebarItem.children ? sidebarItem.children.push(config) : [config]
+  sidebarItem.children = sidebarItem.children ? [...sidebarItem.children, config] : [config]
   await fs.writeFile(
     resolve(rootDir, 'docs/.vitepress/sidebar.json'),
     JSON.stringify(json),
