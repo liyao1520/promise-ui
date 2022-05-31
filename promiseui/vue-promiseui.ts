@@ -4,10 +4,18 @@ import SpaceInstall, { Space } from './space'
 import IconInstall, { Icon } from './icon'
 import MessageInstall, { Message } from './message'
 import InputInstall, { Input } from './input'
+import OverlayInstall, { Overlay } from './overlay'
 
-const installs = [ButtonInstall, SpaceInstall, IconInstall, MessageInstall, InputInstall]
+const installs = [
+  ButtonInstall,
+  SpaceInstall,
+  IconInstall,
+  MessageInstall,
+  InputInstall,
+  OverlayInstall
+]
 
-export { Button, Space, Icon, Message }
+export { Button, Space, Icon, Message, Input, Overlay }
 
 export default {
   version: '0.0.1',

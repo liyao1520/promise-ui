@@ -12,7 +12,7 @@ export default defineComponent({
   emits: ['click'],
   setup(props: ButtonProps, { slots, emit }) {
     //icon, loading
-    const { type, disabled, size, fillMode, loading } = toRefs(props)
+    const { type, disabled, size, fillMode, loading, shake } = toRefs(props)
     const ns = useNamespace('button')
     const { onClick, onMousedown, onMouseup, isMouseDown } = useEvent(props, emit)
     const classes = computed(() => ({
@@ -21,7 +21,7 @@ export default defineComponent({
       [ns.m(size.value)]: true,
       [ns.m(fillMode.value)]: true,
       [ns.m('isloading')]: loading.value,
-      [ns.m('mousedown')]: isMouseDown.value
+      [ns.m('mousedown')]: isMouseDown.value && shake.value
     }))
 
     const loadingRender = () => {

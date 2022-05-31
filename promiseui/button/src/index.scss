@@ -2,6 +2,7 @@
 
 .#{$prefix}-button {
   /*yourstyle*/
+  display: inline-block;
   color: $light-text;
   outline: none;
   border: none;
@@ -53,6 +54,7 @@
   &--default {
     color: $text;
     border-color: $border-color;
+    background-color: $base-bg;
     &:hover,
     &:active,
     &:focus {

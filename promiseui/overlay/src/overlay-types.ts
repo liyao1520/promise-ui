@@ -1,4 +1,4 @@
-import type { PropType, ExtractPropTypes } from 'vue'
+import type { PropType, ExtractPropTypes, ComponentPublicInstance } from 'vue'
 type Placement =
   | 'top'
   | 'right'
@@ -12,29 +12,26 @@ type Placement =
   | 'bottom-end'
   | 'left-start'
   | 'left-end'
-type AlignType = 'start' | 'end' | 'center'
+
 export const overlayProps = {
   modelValue: {
     type: Boolean,
     default: false
   },
   origin: {
-    type: [Object, null] as PropType<HTMLElement | null>,
+    type: [Object, null] as PropType<HTMLElement | ComponentPublicInstance | null>,
     default: null
   },
   position: {
-    type: Array as PropType<Placement[]>,
+    type: String as PropType<Placement>,
     default() {
-      return ['bottom']
+      return 'bottom'
     }
   },
-  align: {
-    type: String as PropType<AlignType>,
-    default: 'center'
-  },
+
   offset: {
     type: Number,
-    default: 8
+    default: 12
   },
   showArrow: {
     type: Boolean,

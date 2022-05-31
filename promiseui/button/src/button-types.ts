@@ -23,6 +23,10 @@ export const buttonProps = {
   fillMode: {
     type: String as PropType<IFillMode>,
     default: ''
+  },
+  shake: {
+    type: Boolean,
+    default: true
   }
 } as const
 
