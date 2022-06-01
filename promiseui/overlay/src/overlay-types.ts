@@ -16,26 +16,31 @@ type Placement =
 export const overlayProps = {
   modelValue: {
     type: Boolean,
-    default: false
+    default: false,
+    required: false
   },
   origin: {
     type: [Object, null] as PropType<HTMLElement | ComponentPublicInstance | null>,
-    default: null
+    default: null,
+    required: false
   },
   position: {
     type: String as PropType<Placement>,
     default() {
       return 'bottom'
-    }
+    },
+    required: false
   },
 
   offset: {
     type: Number,
-    default: 12
+    default: 12,
+    required: false
   },
   showArrow: {
     type: Boolean,
-    default: false
+    default: false,
+    required: false
   }
 } as const
 
