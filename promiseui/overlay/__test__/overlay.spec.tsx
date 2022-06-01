@@ -20,7 +20,8 @@ describe('overlay test', () => {
 
     const wraper = mount(Overlay, {
       props: {
-        modelValue: false
+        modelValue: false,
+        origin
       } as any
     })
     expect(document.body.querySelector('.pui-overlay')).toBeFalsy()

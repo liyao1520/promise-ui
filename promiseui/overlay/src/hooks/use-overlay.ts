@@ -1,14 +1,19 @@
-import { ComponentPublicInstance, ref, Ref, toRefs, watch, watchEffect } from 'vue'
+import { ComponentPublicInstance, ref, Ref, toRefs, watchEffect } from 'vue'
 import { OverlayProps } from '../overlay-types'
+
 const useOverlay = (overlayEl: Ref<Element | null>, props: OverlayProps) => {
   const x = ref(0)
   const y = ref(0)
+  const shouldShow = ref(true)
   const { modelValue, origin, position, offset } = toRefs(props)
   const updatePosition = async () => {
     // 遮罩层modelValue 为false 则直接return
     if (!overlayEl.value) return
-    //  origin 没传 ? 直接return
-    if (!origin.value) return
+    //  origin 没传 ? 不可以显示
+    if (!origin.value) {
+      shouldShow.value = false
+      return
+    }
     // 如果传的是实例,需要得到真实的el
     let el: null | HTMLElement = null
     if ((origin.value as ComponentPublicInstance).$el) {
@@ -16,7 +21,16 @@ const useOverlay = (overlayEl: Ref<Element | null>, props: OverlayProps) => {
     } else {
       el = origin.value as HTMLElement
     }
+
     const { top, left, bottom, right, width, height } = el!.getBoundingClientRect()
+    // 原生不存在? 那就 隐藏
+
+    if (width === 0 && height === 0) {
+      shouldShow.value = false
+    } else {
+      shouldShow.value = true
+    }
+
     const clientWidth = overlayEl.value!.clientWidth
     const clientHeight = overlayEl.value!.clientHeight
     // 让 overlay 默认到中央
@@ -48,15 +62,7 @@ const useOverlay = (overlayEl: Ref<Element | null>, props: OverlayProps) => {
       leftAndRightHandle()
     }
   }
-  watch(
-    modelValue,
-    (newValue) => {
-      if (!newValue) return
-      updatePosition()
-      window.addEventListener('scroll', updatePosition)
-    },
-    { immediate: true }
-  )
+
   watchEffect((onCleanup) => {
     onCleanup(() => window.removeEventListener('scroll', updatePosition))
     if (modelValue.value) {
@@ -64,9 +70,12 @@ const useOverlay = (overlayEl: Ref<Element | null>, props: OverlayProps) => {
       window.addEventListener('scroll', updatePosition)
     }
   })
+  const isVisible = () => modelValue.value && shouldShow.value
   return {
     x,
-    y
+    y,
+    isVisible
   }
 }
+
 export default useOverlay

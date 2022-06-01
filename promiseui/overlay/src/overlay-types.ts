@@ -1,5 +1,5 @@
 import type { PropType, ExtractPropTypes, ComponentPublicInstance } from 'vue'
-type Placement =
+export type Placement =
   | 'top'
   | 'right'
   | 'bottom'

@@ -1,4 +1,13 @@
-import { computed, defineComponent, ref, StyleValue, Teleport, toRefs, Transition } from 'vue'
+import {
+  computed,
+  defineComponent,
+  ref,
+  StyleValue,
+  Teleport,
+  toRefs,
+  Transition,
+  watchEffect
+} from 'vue'
 import { overlayProps, OverlayProps } from './overlay-types'
 
 import './index.scss'
@@ -8,13 +17,13 @@ import useOverlay from './hooks/use-overlay'
 export default defineComponent({
   name: 'POverlay',
   props: overlayProps,
-  emits: [],
-  setup(props: OverlayProps, { slots }) {
-    const { modelValue, position, showArrow } = toRefs(props)
+  emits: ['update:modelValue', 'open', 'close'],
+  setup(props: OverlayProps, { slots, emit }) {
+    const { modelValue, position, showArrow, origin } = toRefs(props)
 
     const ns = useNamespace('overlay')
     const overlayEl = ref<Element | null>(null)
-    const { x, y } = useOverlay(overlayEl, props)
+    const { x, y, isVisible } = useOverlay(overlayEl, props)
     const styles = computed<StyleValue>(() => ({
       top: y.value + 'px',
       left: x.value + 'px'
@@ -23,11 +32,12 @@ export default defineComponent({
       [ns.b()]: true,
       [ns.m(position.value)]: true
     }))
+
     return () => {
       return (
         <Teleport to={'body'}>
-          <Transition>
-            {modelValue.value && (
+          <Transition onBeforeEnter={(e) => emit('open')} onAfterLeave={(e) => emit('close')}>
+            {isVisible() && (
               <div style={styles.value} class={classes.value} ref={overlayEl}>
                 {slots.default && slots.default()}
                 {showArrow.value && <span class={ns.e('arrow')}></span>}
