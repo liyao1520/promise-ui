@@ -1,5 +1,59 @@
-@import "../../styles-var";;
+@import '../../styles-var';
 
 .#{$prefix}-dropdown {
   /* your style */
+  display: inline-block;
+  position: relative;
+  &__a {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    color: $brand;
+    &--sm {
+      font-size: $font-size-sm;
+    }
+    &--md {
+      font-size: $font-size-md;
+    }
+    &--lg {
+      font-size: $font-size-lg;
+    }
+  }
+  &__button-group {
+    display: inline-flex;
+    .#{$prefix}-button:first-child {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      border-right-color: $base-bg;
+    }
+    .#{$prefix}-button:last-child {
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+  }
+}
+
+.#{$prefix}-dropdown-item {
+  &:hover {
+    background-color: #f2f5fc;
+    color: $brand;
+    cursor: pointer;
+  }
+  &--sm {
+    font-size: $font-size-sm;
+    padding: 0 10px;
+    line-height: 24px;
+  }
+  &--md {
+    font-size: $font-size-md;
+    line-height: 30px;
+    padding: 0 17px;
+  }
+  &--lg {
+    font-size: $font-size-lg;
+    line-height: 36px;
+    padding: 0 20px;
+  }
 }

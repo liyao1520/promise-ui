@@ -52,18 +52,22 @@
 <template>
   <div>
     <p-button ref="btn" class="btn" :shake="false" @click="isShow = !isShow"> click me !</p-button>
-    <p-overlay v-model="isShow" :origin="btn" position="left">left</p-overlay>
-    <p-overlay v-model="isShow" :origin="btn" position="right">right</p-overlay>
-    <p-overlay v-model="isShow" :origin="btn" position="top">top</p-overlay>
-    <p-overlay v-model="isShow" :origin="btn" position="bottom">bottom</p-overlay>
-    <p-overlay v-model="isShow" :origin="btn" position="left-start">left-start</p-overlay>
-    <p-overlay v-model="isShow" :origin="btn" position="left-end">left-end</p-overlay>
-    <p-overlay v-model="isShow" :origin="btn" position="right-start">right-start</p-overlay>
-    <p-overlay v-model="isShow" :origin="btn" position="right-end">right-end</p-overlay>
-    <p-overlay v-model="isShow" :origin="btn" position="top-start">top-start</p-overlay>
-    <p-overlay v-model="isShow" :origin="btn" position="top-end">top-end</p-overlay>
-    <p-overlay v-model="isShow" :origin="btn" position="bottom-start">bottom-start</p-overlay>
-    <p-overlay v-model="isShow" :origin="btn" position="bottom-end">bottom-end</p-overlay>
+    <p-overlay v-model="isShow" :origin="btn" position="left" showArrow>left</p-overlay>
+    <p-overlay v-model="isShow" :origin="btn" position="right" showArrow>right</p-overlay>
+    <p-overlay v-model="isShow" :origin="btn" position="top" showArrow>top</p-overlay>
+    <p-overlay v-model="isShow" :origin="btn" position="bottom" showArrow>bottom</p-overlay>
+    <p-overlay v-model="isShow" :origin="btn" position="left-start" showArrow>left-start</p-overlay>
+    <p-overlay v-model="isShow" :origin="btn" position="left-end" showArrow>left-end</p-overlay>
+    <p-overlay v-model="isShow" :origin="btn" position="right-start" showArrow
+      >right-start</p-overlay
+    >
+    <p-overlay v-model="isShow" :origin="btn" position="right-end" showArrow>right-end</p-overlay>
+    <p-overlay v-model="isShow" :origin="btn" position="top-start" showArrow>top-start</p-overlay>
+    <p-overlay v-model="isShow" :origin="btn" position="top-end" showArrow>top-end</p-overlay>
+    <p-overlay v-model="isShow" :origin="btn" position="bottom-start" showArrow
+      >bottom-start</p-overlay
+    >
+    <p-overlay v-model="isShow" :origin="btn" position="bottom-end" showArrow>bottom-end</p-overlay>
   </div>
 </template>
 
@@ -75,11 +79,17 @@
 
 <style>
   .btn {
-    display: block !important;
     width: 250px;
     height: 100px !important;
-    margin: 50px auto !important;
+
     font-size: 20px;
+  }
+  div {
+    display: flex;
+    background-color: #e9edfa;
+    height: 300px;
+    justify-content: center;
+    align-items: center;
   }
 </style>
 ```

@@ -2,6 +2,7 @@ export default {
   'base-bg': '#ffffff', //背景
   'bg-hover': 'rgba(46,50,56,0.05)',
   'border-color': 'rgb(224, 224, 230)',
+  'item-bg-hover': '#f2f5fc',
   line: '#aea6ad', //边框
   shadow: 'rgba(37, 43, 58, 0.2)',
   brand: '#5e7ce0',
@@ -32,7 +33,7 @@ export default {
   'font-size-data-overview': '24px',
   'font-size-icon': '16px',
   'font-size-sm': '12px',
-  'font-size-md': '12px',
+  'font-size-md': '13px',
   'font-size-lg': '14px',
   'font-title-weight': 'bold',
   'font-content-weight': 'normal',

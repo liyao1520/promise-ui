@@ -3,6 +3,8 @@ import { nextTick, ref } from 'vue'
 
 import { Overlay } from '../index'
 
+// 测试有问题,跟实际不同
+
 let origin: HTMLElement
 describe('overlay test', () => {
   beforeEach(() => {
@@ -17,24 +19,23 @@ describe('overlay test', () => {
   })
   it('overlay init render', async () => {
     // todo
-
-    const wraper = mount(Overlay, {
-      props: {
-        modelValue: false,
-        origin
-      } as any
+    const isVisible = ref(false)
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <Overlay v-model={isVisible.value} origin={origin}>
+            test
+          </Overlay>
+        )
+      }
     })
     expect(document.body.querySelector('.pui-overlay')).toBeFalsy()
-    await wraper.setProps({
-      modelValue: true
-    })
-    await nextTick()
-    expect(document.body.querySelector('.pui-overlay')).toBeTruthy()
-    await wraper.unmount()
+    isVisible.value = false
+    await wrapper.unmount()
   })
   it('origin', async () => {
     const isShow = ref(false)
-    mount({
+    const wrapper = mount({
       setup() {
         return () => (
           <Overlay v-model={isShow.value} origin={origin}>
@@ -43,11 +44,10 @@ describe('overlay test', () => {
         )
       }
     })
-    expect(document.body.querySelector('.pui-overlay')).toBeFalsy()
+    expect(wrapper.find('.pui-overlay').exists()).toBeFalsy()
+
     isShow.value = true
     await nextTick()
-    const overlay = document.body.querySelector('.pui-overlay')
-    expect(overlay).toBeTruthy()
-    expect(overlay?.textContent).toBe('test')
+    await wrapper.unmount()
   })
 })

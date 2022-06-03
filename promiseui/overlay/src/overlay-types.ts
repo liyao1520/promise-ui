@@ -1,4 +1,4 @@
-import type { PropType, ExtractPropTypes, ComponentPublicInstance } from 'vue'
+import type { PropType, ExtractPropTypes, ComponentPublicInstance, CSSProperties } from 'vue'
 export type Placement =
   | 'top'
   | 'right'
@@ -41,6 +41,15 @@ export const overlayProps = {
     type: Boolean,
     default: false,
     required: false
+  },
+  style: {
+    type: Object as PropType<CSSProperties>,
+    default() {
+      return {}
+    }
+  },
+  class: {
+    default: ''
   }
 } as const
 

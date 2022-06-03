@@ -1,4 +1,4 @@
-import { ComponentPublicInstance, ref, Ref, toRefs, watchEffect } from 'vue'
+import { ComponentPublicInstance, computed, ref, Ref, toRefs, watchEffect } from 'vue'
 import { OverlayProps } from '../overlay-types'
 
 const useOverlay = (overlayEl: Ref<Element | null>, props: OverlayProps) => {
@@ -70,7 +70,7 @@ const useOverlay = (overlayEl: Ref<Element | null>, props: OverlayProps) => {
       window.addEventListener('scroll', updatePosition)
     }
   })
-  const isVisible = () => modelValue.value && shouldShow.value
+  const isVisible = computed(() => modelValue.value && shouldShow.value)
   return {
     x,
     y,
