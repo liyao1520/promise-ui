@@ -36,7 +36,12 @@
 }
 
 .#{$prefix}-dropdown-item {
-  &:hover {
+  &--disabled {
+    color: $disabled-text;
+    background-color: $disabled-bg;
+    cursor: not-allowed;
+  }
+  &:hover:not(&--disabled) {
     background-color: #f2f5fc;
     color: $brand;
     cursor: pointer;

@@ -43,6 +43,10 @@ export const dropdownItemProps = {
   size: {
     type: String as PropType<'sm' | 'md' | 'lg'>,
     default: 'md'
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 }
 export interface DropDownInstacne {

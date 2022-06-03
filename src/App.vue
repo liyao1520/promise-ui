@@ -1,18 +1,13 @@
 <template>
   <div style="margin: 20px 100px">
-    <p-dropdown type="button" btnType="default" size="md" trigger="click" @click="fn">
-      123
+    <p-dropdown type="button" btn-type="default" size="md" trigger="click" @click="fn">
       <template #dropdown>
-        <p-dropdown-item>xixixi</p-dropdown-item>
-        <p-dropdown-item>xixixi</p-dropdown-item>
-        <p-dropdown-item>xixixi</p-dropdown-item>
-        <p-dropdown-item>xixixi</p-dropdown-item>
+        <p-dropdown-item disabled>11</p-dropdown-item>
+        <p-dropdown-item>11</p-dropdown-item>
+        <p-dropdown-item>11</p-dropdown-item>
+        <p-dropdown-item>11</p-dropdown-item>
       </template>
     </p-dropdown>
   </div>
 </template>
-<script setup>
-  const fn = () => {
-    console.log(1)
-  }
-</script>
+<script setup></script>

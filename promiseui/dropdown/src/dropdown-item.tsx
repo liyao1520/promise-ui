@@ -6,13 +6,18 @@ export default defineComponent({
   name: 'PDropdownItem',
   props: dropdownItemProps,
   setup(props: DropdownItemProps, { slots }) {
-    const { size: propsSize } = toRefs(props)
+    const { size: propsSize, disabled } = toRefs(props)
     const DropDown = inject(DropDownKey)
 
     const ns = useNamespace('dropdown-item')
-    const classes = computed(() => [ns.b(), ns.m(DropDown?.props.size || propsSize.value)])
+    const classes = computed(() => [
+      ns.b(),
+      ns.m(DropDown?.props.size || propsSize.value),
+      disabled.value && ns.m('disabled')
+    ])
     const onClick = () => {
       if (DropDown?.props.hideOnClick) {
+        if (disabled.value) return
         DropDown.handleClick()
       }
     }
