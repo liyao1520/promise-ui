@@ -230,6 +230,7 @@
       </template>
     </p-dropdown>
   </p-space>
+  <br />
   <p-space>
     <p-dropdown type="button" size="sm">
       下拉菜单
@@ -293,6 +294,27 @@
       </template>
     </p-dropdown>
   </p-space>
+</template>
+```
+
+:::
+
+### 按钮点击事件
+
+`Dropdown`的 `type`为`button`时的点击事件
+
+:::demo
+
+```vue
+<template>
+  <p-dropdown type="button" size="lg" @click="$message.success('@click')">
+    下拉菜单
+    <template #dropdown>
+      <p-dropdown-item> item 1 </p-dropdown-item>
+      <p-dropdown-item> item 2 </p-dropdown-item>
+      <p-dropdown-item> item 3 </p-dropdown-item>
+    </template>
+  </p-dropdown>
 </template>
 ```
 
