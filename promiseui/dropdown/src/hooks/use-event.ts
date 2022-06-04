@@ -22,7 +22,7 @@ export default function (trigger: Ref<TriggerType>, visible: Ref<boolean>) {
     timer = window.setTimeout(() => {
       if (isEnter) return
       visible.value = false
-    }, 400)
+    }, 300)
   }
   return { onClick, onMouseenter, onMouseleave }
 }

@@ -1,13 +1,28 @@
 <template>
-  <div style="margin: 20px 100px">
-    <p-dropdown type="button" btn-type="default" size="md" trigger="click" @click="fn">
+  <p-space>
+    <p-dropdown type="a" size="sm" dark trigger="click">
+      下拉菜单
       <template #dropdown>
-        <p-dropdown-item disabled>11</p-dropdown-item>
-        <p-dropdown-item>11</p-dropdown-item>
-        <p-dropdown-item>11</p-dropdown-item>
-        <p-dropdown-item>11</p-dropdown-item>
+        <p-dropdown-item> item 1 </p-dropdown-item>
+        <p-dropdown-item> item 2 </p-dropdown-item>
+        <p-dropdown-item> item 3 </p-dropdown-item>
       </template>
     </p-dropdown>
-  </div>
+    <p-dropdown type="a" size="md">
+      下拉菜单
+      <template #dropdown>
+        <p-dropdown-item> item 1 </p-dropdown-item>
+        <p-dropdown-item> item 2 </p-dropdown-item>
+        <p-dropdown-item> item 3 </p-dropdown-item>
+      </template>
+    </p-dropdown>
+    <p-dropdown type="a" size="lg">
+      下拉菜单
+      <template #dropdown>
+        <p-dropdown-item> item 1 </p-dropdown-item>
+        <p-dropdown-item> item 2 </p-dropdown-item>
+        <p-dropdown-item> item 3 </p-dropdown-item>
+      </template>
+    </p-dropdown>
+  </p-space>
 </template>
-<script setup></script>

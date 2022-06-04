@@ -10,15 +10,21 @@ export default defineComponent({
   props: overlayProps,
   emits: ['update:modelValue', 'open', 'close'],
   setup(props: OverlayProps, { slots, emit, expose }) {
-    const { position, showArrow, class: className, style } = toRefs(props)
+    const { position, showArrow, class: className, style, dark } = toRefs(props)
 
     const ns = useNamespace('overlay')
     const overlayEl = ref<Element | null>(null)
     const { x, y, isVisible } = useOverlay(overlayEl, props)
+    const darkStyle = dark.value
+      ? {
+          ['--promiseui-base-bg']: '#464d6e'
+        }
+      : {}
     const styles = computed<StyleValue>(() => ({
       top: y.value + 'px',
       left: x.value + 'px',
-      ...style.value
+      ...style.value,
+      ...darkStyle
     }))
     const classes = computed(() => ({
       [ns.b()]: true,

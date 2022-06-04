@@ -41,8 +41,9 @@
     background-color: $disabled-bg;
     cursor: not-allowed;
   }
+
   &:hover:not(&--disabled) {
-    background-color: #f2f5fc;
+    background-color: $item-bg-hover;
     color: $brand;
     cursor: pointer;
   }
@@ -60,5 +61,11 @@
     font-size: $font-size-lg;
     line-height: 36px;
     padding: 0 20px;
+  }
+  &--dark {
+    color: $overlay-text;
+    &:hover:not(&--disabled) {
+      background-color: $overlay-dart;
+    }
   }
 }

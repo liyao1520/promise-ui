@@ -13,7 +13,8 @@ export default defineComponent({
     const classes = computed(() => [
       ns.b(),
       ns.m(DropDown?.props.size || propsSize.value),
-      disabled.value && ns.m('disabled')
+      disabled.value && ns.m('disabled'),
+      DropDown?.props.dark && ns.m('dark')
     ])
     const onClick = () => {
       if (DropDown?.props.hideOnClick) {

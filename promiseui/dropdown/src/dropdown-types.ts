@@ -11,6 +11,10 @@ export const dropdownProps = {
     type: String as PropType<Placement>,
     default: 'bottom'
   },
+  dark: {
+    type: Boolean,
+    default: false
+  },
   trigger: {
     type: String as PropType<TriggerType>,
     default: 'hover'

@@ -15,7 +15,7 @@ export default defineComponent({
   props: dropdownProps,
   emits: ['click'],
   setup(props: DropdownProps, { slots, emit }) {
-    const { type, trigger, offset, position, showArrow, size, btnType } = toRefs(props)
+    const { type, trigger, offset, position, showArrow, size, btnType, dark } = toRefs(props)
     const origin = ref<any>(null)
     const visible = ref(false)
     const overlayEl = ref<any>()
@@ -86,6 +86,7 @@ export default defineComponent({
           offset={offset.value}
           position={type.value === 'button' ? 'bottom-end' : position.value}
           showArrow={showArrow.value}
+          dark={dark.value}
           style={{ padding: 0 }}
         >
           <div

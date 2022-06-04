@@ -14,6 +14,10 @@ export type Placement =
   | 'left-end'
 
 export const overlayProps = {
+  dark: {
+    type: Boolean,
+    default: false
+  },
   modelValue: {
     type: Boolean,
     default: false,
