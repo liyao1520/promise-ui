@@ -12,6 +12,9 @@ export const iconProps = {
   tag: { type: String }, //要渲染为何种 HTML 标签
   component: {
     type: Object as PropType<Component>
+  },
+  onClick: {
+    type: Function
   }
 } as const
 

@@ -3,12 +3,17 @@
 .#{$prefix}-tabs {
   box-sizing: border-box;
   margin: 14px 0;
+
   &__header {
     position: relative;
     border-bottom: 1px $line solid;
     font-size: $font-size-card-title;
     font-weight: $font-title-weight;
     color: $text;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
     &--center {
       text-align: center;
     }
@@ -32,6 +37,7 @@
   align-items: center;
   height: 40px;
   transition: 0.2s;
+
   &--active {
     color: $brand;
   }
@@ -43,7 +49,59 @@
     margin-left: 32px;
   }
 }
+.#{$prefix}-tabs__pane-add {
+  padding: 8px 12px;
+  border: 1px solid $border-color;
+  border-bottom: 1px solid $base-bg;
+  transform: translateY(5px);
+  transition: 0.2s;
+  font-weight: normal;
+  font-size: 20px;
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
 
+  margin-left: 4px;
+
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    color: $brand;
+    cursor: pointer;
+  }
+}
+.#{$prefix}-tabs--card,
+.#{$prefix}-tabs--editable-card {
+  .#{$prefix}-tab-pane {
+    padding: 8px 12px;
+    border: 1px solid $border-color;
+    border-bottom: 1px solid $base-bg;
+    transform: translateY(1px);
+    transition: 0.2s;
+    font-weight: normal;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+    margin-top: 5px;
+    &__close-icon {
+      margin-left: 10px;
+      transform: scale(1.2);
+    }
+    &--active {
+      background-color: $item-bg-hover;
+    }
+
+    &:not(:first-child) {
+      margin-left: 4px;
+    }
+  }
+  .#{$prefix}-tabs__active-bar {
+    display: none;
+  }
+  .#{$prefix}-tabs__header {
+    border-bottom: 1px solid $border-color;
+  }
+}
 .prev-transition-enter-from {
   transform: translateX(-15px);
   opacity: 0.6;

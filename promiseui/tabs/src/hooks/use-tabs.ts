@@ -2,7 +2,7 @@ import { provide, reactive, ref, SetupContext, Slot, VNode } from 'vue'
 import { TabsKey, TabsProps } from '../tabs-types'
 
 export default function (props: TabsProps, ctx: SetupContext) {
-  const { renderContent, contentVnode } = useRenderContent()
+  const { renderContent, contentVnode, removeContentBySlot } = useRenderContent(props)
   const { getPaneIndex, updateTranstionName, transitionName } = useTransitionName()
   const activeBarStyles = reactive({
     left: 'unset',
@@ -26,33 +26,46 @@ export default function (props: TabsProps, ctx: SetupContext) {
     ctx.emit('update:modelValue', name)
     updateTranstionName(paneIndex)
   }
+
+  const handleClose = (name: string | number, defaultSlot: Slot) => {
+    removeContentBySlot(defaultSlot, name)
+    ctx.emit('close', name)
+  }
   provide(TabsKey, {
     props,
     renderContent,
     updateModelValue,
     changeActiveBarPosition,
     getPaneIndex,
-    onBeforeLeaveHook
+    onBeforeLeaveHook,
+    handleClose
   })
   return { transitionName, activeBarStyles, contentVnode }
 }
 // renderContont
-const useRenderContent = () => {
+const useRenderContent = (props: TabsProps) => {
   const defaultSlotMap = new WeakMap()
   const contentVnode = ref<VNode[] | null>(null)
   const renderContent = (defaultSlot: Slot | undefined) => {
     if (!defaultSlot) return
+
     if (defaultSlotMap.has(defaultSlot)) {
-      contentVnode.value = defaultSlotMap.get(defaultSlotMap)
+      contentVnode.value = defaultSlotMap.get(defaultSlot)
       return
     }
     const vnode = defaultSlot()
     defaultSlotMap.set(defaultSlotMap, vnode)
     contentVnode.value = vnode
   }
+  const removeContentBySlot = (defaultSlot: Slot, name: string | number) => {
+    defaultSlotMap.set(defaultSlot, null)
+    // 当前选择的和删除为一个时,需要重新render 一下 content 内容, 也就清空content
+    if (name === props.modelValue) renderContent(defaultSlot)
+  }
   return {
     renderContent,
-    contentVnode
+    contentVnode,
+    removeContentBySlot
   }
 }
 // 控制 prev 和 next 动画

@@ -1,16 +1,19 @@
-import { computed, defineComponent, inject, nextTick, ref, toRefs } from 'vue'
+import { computed, defineComponent, inject, nextTick, ref, toRefs, Transition, watch } from 'vue'
 import { tabPaneProps, TabPaneProps, TabsKey } from './tabs-types'
 
 import './index.scss'
 import { useNamespace } from '../../shared/hooks/use-namespace'
+import { Icon } from '../../icon'
+import { CloseOutline } from '@vicons/ionicons5'
+import { nativeClick } from '../../shared/utils'
 
 export default defineComponent({
+  __TAB_PANE__: true,
   name: 'PTabPane',
   props: tabPaneProps,
   emits: [],
   setup(props: TabPaneProps, { slots, emit }) {
     const { disabled, label, name, lazy, closable } = toRefs(props)
-
     const ns = useNamespace('tab-pane')
     const TabsContext = inject(TabsKey)
     const TabsProps = TabsContext?.props
@@ -20,12 +23,25 @@ export default defineComponent({
       [ns.m('active')]: isActive.value
     }))
     const tabPaneEl = ref<HTMLDivElement>()
-
+    watch(
+      () => TabsProps?.modelValue,
+      (newName) => {
+        if (!name.value) return
+        if (newName === name.value) {
+          TabsContext?.renderContent(slots.default)
+        }
+      }
+    )
+    const init = () => {
+      if (TabsProps?.modelValue === name.value) {
+        TabsContext?.renderContent(slots.default)
+      }
+    }
+    init()
     const updateTabsContent = async () => {
       const allow = await TabsContext?.onBeforeLeaveHook(name.value)
       if (!allow) return
       TabsContext?.updateModelValue(name.value, currentIndex)
-      TabsContext?.renderContent(slots.default)
       if (!tabPaneEl.value) {
         await nextTick()
       }
@@ -47,13 +63,24 @@ export default defineComponent({
     const onClick = () => {
       updateTabsContent()
     }
-
-    return () => {
-      return (
-        <div class={classes.value} data-name={name.value} onClick={onClick} ref={tabPaneEl}>
-          {label.value}
-        </div>
-      )
+    const handleClose = (e: Event) => {
+      e.stopPropagation()
+      if (!closable.value) return
+      if (!TabsContext?.props.closable) return
+      TabsContext.handleClose(name.value, slots.default)
     }
+
+    return () => (
+      <div class={classes.value} data-name={name.value} onClick={onClick} ref={tabPaneEl}>
+        {label.value}
+        {TabsProps && TabsProps.type === 'editable-card' && closable.value && (
+          <Icon
+            component={CloseOutline}
+            class={ns.e('close-icon')}
+            onClick={nativeClick(handleClose)}
+          />
+        )}
+      </div>
+    )
   }
 })

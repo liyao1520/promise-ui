@@ -1,31 +1,34 @@
 <template>
   <p-space>
-    <p-tabs v-model="test" centered @change="change">
-      <p-tab-pane label="Table 1" name="one">123</p-tab-pane>
-      <p-tab-pane label="Table 2" name="two">456</p-tab-pane>
-      <p-tab-pane label="Table 3" name="three">789</p-tab-pane>
+    <p-tabs
+      v-model="current"
+      type="editable-card"
+      @change="change"
+      @close="close"
+      @addTabPane="addTabPane"
+    >
+      <p-tab-pane v-for="item in panels" :key="item" :label="'Tab' + item" :name="item">
+        {{ 'content' + item }}
+      </p-tab-pane>
     </p-tabs>
   </p-space>
 </template>
 <script setup>
   import { ref } from 'vue'
+  import { Message } from '../promiseui/message'
+  const panels = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+  const current = ref(1)
 
-  const change = (e) => {
-    console.log(e)
-  }
-  const test = ref('two')
-  const BeforeLeave = (name, oldName) => {
-    switch (name) {
-      case 'one':
-        return false
-      case 'two':
-        return true
-      case 'three':
-        return new Promise((resolve) =>
-          setTimeout(() => {
-            resolve(true)
-          }, 1000)
-        )
+  const close = (name) => {
+    const index = panels.value.findIndex((item) => name === item)
+    panels.value.splice(index, 1)
+    Message.success(`Tab${name}已删除`)
+    if (current.value === name) {
+      current.value = panels.value[index]
     }
   }
+  const addTabPane = () => {
+    panels.value.push(Date.now())
+  }
+  const change = (name) => {}
 </script>
