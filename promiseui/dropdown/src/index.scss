@@ -4,6 +4,10 @@
   /* your style */
   display: inline-block;
   position: relative;
+  &__content {
+    display: inline-block;
+    position: relative;
+  }
   &__a {
     cursor: pointer;
     display: inline-flex;

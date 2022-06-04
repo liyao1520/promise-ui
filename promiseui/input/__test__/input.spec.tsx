@@ -21,7 +21,7 @@ describe('input test', () => {
       }
     })
     expect(wrapper.classes()).toContain('pui-input--lg')
-    expect(wrapper.find('input')).toBeTruthy()
+    expect(wrapper.find('input').exists()).toBeTruthy()
   })
 
   it('v-model', async () => {

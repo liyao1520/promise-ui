@@ -67,14 +67,14 @@ export default defineComponent({
     )
     const renderSlotDefault = () => {
       return (
-        <div class={ns.b()} {...commonProps}>
+        <div class={ns.e('content')} {...commonProps}>
           {defaultSlot}
         </div>
       )
     }
 
     return () => (
-      <>
+      <div class={ns.b()}>
         {type.value === 'a'
           ? renderLink()
           : type.value === 'button'
@@ -98,7 +98,7 @@ export default defineComponent({
             {slots.dropdown && slots.dropdown()}
           </div>
         </Overlay>
-      </>
+      </div>
     )
   }
 })
