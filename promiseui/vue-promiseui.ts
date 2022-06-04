@@ -6,6 +6,7 @@ import MessageInstall, { Message } from './message'
 import InputInstall, { Input } from './input'
 import OverlayInstall, { Overlay } from './overlay'
 import DropdownInstall, { Dropdown, DropdownItem } from './dropdown'
+import TabsInstall, { Tabs, TabPane } from './tabs'
 
 const installs = [
   ButtonInstall,
@@ -14,10 +15,11 @@ const installs = [
   MessageInstall,
   InputInstall,
   OverlayInstall,
-  DropdownInstall
+  DropdownInstall,
+  TabsInstall
 ]
 
-export { Button, Space, Icon, Message, Input, Overlay, Dropdown, DropdownItem }
+export { Button, Space, Icon, Message, Input, Overlay, Dropdown, DropdownItem, Tabs, TabPane }
 
 export default {
   version: '0.0.1',

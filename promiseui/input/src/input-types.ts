@@ -1,6 +1,5 @@
 import type { PropType, ExtractPropTypes } from 'vue'
-
-type InputType = 'lg' | 'md' | 'sm'
+import { ICommonSize } from '../../types'
 
 export const inputProps = {
   modelValue: {
@@ -12,7 +11,7 @@ export const inputProps = {
     default: false
   },
   size: {
-    type: String as PropType<InputType>,
+    type: String as PropType<ICommonSize>,
     default: 'md'
   },
   clearable: {

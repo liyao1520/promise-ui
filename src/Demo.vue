@@ -1,21 +1,31 @@
 <template>
-  <div>{{ name }}</div>
+  <p-space>
+    <p-tabs v-model="test" centered @change="change" @BeforeLeave="BeforeLeave">
+      <p-tab-pane label="Table 1" name="one">123</p-tab-pane>
+      <p-tab-pane label="Table 2" name="two">456</p-tab-pane>
+      <p-tab-pane label="Table 3" name="three">789</p-tab-pane>
+    </p-tabs>
+  </p-space>
 </template>
-<script>
-  import { defineComponent, getCurrentInstance } from 'vue'
+<script setup>
+  import { ref } from 'vue'
 
-  // import { Icon } from '@vicons/utils'
-
-  export default defineComponent({
-    name: 'PIcon',
-
-    emits: [],
-    setup(props, ctx) {
-      console.log(getCurrentInstance())
-
-      return {
-        name: '123'
-      }
+  const change = (e) => {
+    console.log(e)
+  }
+  const test = ref('two')
+  const BeforeLeave = (name, oldName) => {
+    switch (name) {
+      case 'one':
+        return false
+      case 'two':
+        return true
+      case 'three':
+        return new Promise((resolve) =>
+          setTimeout(() => {
+            resolve(true)
+          }, 1000)
+        )
     }
-  })
+  }
 </script>

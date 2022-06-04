@@ -1,6 +1,7 @@
 import { Placement } from '../../overlay'
-import type { PropType, ExtractPropTypes, InjectionKey, Ref } from 'vue'
+import type { PropType, ExtractPropTypes, InjectionKey } from 'vue'
 import { IButtonType } from '../../button/src/button-types'
+import { ICommonSize } from '../../types'
 export type TriggerType = 'hover' | 'click' | 'contextmenu'
 export const dropdownProps = {
   type: {
@@ -25,7 +26,7 @@ export const dropdownProps = {
   },
   // btn size
   size: {
-    type: String as PropType<'sm' | 'md' | 'lg'>,
+    type: String as PropType<ICommonSize>,
     default: 'md'
   },
   offset: {
