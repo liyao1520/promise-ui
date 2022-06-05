@@ -1,4 +1,4 @@
-import type { PropType, ExtractPropTypes } from 'vue'
+import type { PropType, ExtractPropTypes, HTMLAttributes, StyleValue } from 'vue'
 
 export type IButtonType = 'primary' | 'success' | 'info' | 'wraning' | 'danger'
 type IButtonSize = 'lg' | 'md' | 'sm' | 'xs'
@@ -27,6 +27,12 @@ export const buttonProps = {
   shake: {
     type: Boolean,
     default: true
+  },
+  class: {
+    type: [Object, String] as PropType<any>
+  },
+  style: {
+    type: [Object, String] as PropType<StyleValue>
   }
 } as const
 

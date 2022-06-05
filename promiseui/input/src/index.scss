@@ -24,7 +24,6 @@
   }
   &--focus {
     border-color: $brand;
-    transform: translateY(-3%);
     .pui-icon.pui-icon svg {
       fill: $brand-hover;
       color: $brand-hover;

@@ -15,11 +15,14 @@ const useOverlay = (overlayEl: Ref<Element | null>, props: OverlayProps) => {
       return
     }
     // 如果传的是实例,需要得到真实的el
-    let el: null | HTMLElement = null
+    let el: any
     if ((origin.value as ComponentPublicInstance).$el) {
       el = (origin.value as ComponentPublicInstance).$el
     } else {
       el = origin.value as HTMLElement
+    }
+    while (el && !el.tagName) {
+      el = el.nextSibling
     }
 
     const { top, left, bottom, right, width, height } = el!.getBoundingClientRect()

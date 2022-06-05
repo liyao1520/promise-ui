@@ -7,6 +7,7 @@ import './index.scss'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import useEvent from './hooks/use-event'
 import { nativeClick } from '../../shared/utils'
+import Wave from '../../utils/wave'
 
 export default defineComponent({
   name: 'PInput',
@@ -58,24 +59,26 @@ export default defineComponent({
 
     return () => {
       return (
-        <div class={classes.value}>
-          {slots.prepend && <span class={ns.e('prepend')}>{slots.prepend()}</span>}
+        <Wave>
+          <div class={classes.value}>
+            {slots.prepend && <span class={ns.e('prepend')}>{slots.prepend()}</span>}
 
-          <span class={ns.e('prefix')}>{renderPrefix()}</span>
-          <input
-            type={isPasswordType.value ? 'password' : 'text'}
-            class={ns.e('inner')}
-            value={modelValue.value}
-            {...attrs}
-            disabled={disabled.value}
-            onInput={onInput}
-            onFocus={onFocus}
-            onBlur={onBlur}
-          />
+            <span class={ns.e('prefix')}>{renderPrefix()}</span>
+            <input
+              type={isPasswordType.value ? 'password' : 'text'}
+              class={ns.e('inner')}
+              value={modelValue.value}
+              {...attrs}
+              disabled={disabled.value}
+              onInput={onInput}
+              onFocus={onFocus}
+              onBlur={onBlur}
+            />
 
-          <span class={ns.e('suffix')}>{renderSuffix()}</span>
-          {slots.append && <span class={ns.e('append')}>{slots.append()}</span>}
-        </div>
+            <span class={ns.e('suffix')}>{renderSuffix()}</span>
+            {slots.append && <span class={ns.e('append')}>{slots.append()}</span>}
+          </div>
+        </Wave>
       )
     }
   }

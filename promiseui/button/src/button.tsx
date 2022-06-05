@@ -5,14 +5,25 @@ import Loading from './components/button-loading'
 import './index.scss'
 import { Icon } from '../../icon'
 import useEvent from './hooks/use-event'
+import Wave from '../../utils/wave'
 
 export default defineComponent({
   name: 'PButton',
+  inheritAttrs: false,
   props: buttonProps,
   emits: ['click'],
   setup(props: ButtonProps, { slots, emit }) {
     //icon, loading
-    const { type, disabled, size, fillMode, loading, shake } = toRefs(props)
+    const {
+      type,
+      disabled,
+      size,
+      fillMode,
+      loading,
+      shake,
+      style,
+      class: className
+    } = toRefs(props)
     const ns = useNamespace('button')
     const { onClick, onMousedown, onMouseup, isMouseDown } = useEvent(props, emit)
     const classes = computed(() => ({
@@ -34,16 +45,19 @@ export default defineComponent({
 
     return () => {
       return (
-        <button
-          class={classes.value}
-          onClick={onClick}
-          onMousedown={onMousedown}
-          onMouseup={onMouseup}
-          disabled={disabled.value}
-        >
-          {loadingRender() || (slots.icon && slots.icon())}
-          {slots.default && slots.default()}
-        </button>
+        <Wave>
+          <button
+            class={[classes.value, className?.value]}
+            style={style?.value}
+            onClick={onClick}
+            onMousedown={onMousedown}
+            onMouseup={onMouseup}
+            disabled={disabled.value}
+          >
+            {loadingRender() || (slots.icon && slots.icon())}
+            {slots.default && slots.default()}
+          </button>
+        </Wave>
       )
     }
   }

@@ -20,7 +20,7 @@ describe('input test', () => {
         return () => <Input size="lg" />
       }
     })
-    expect(wrapper.classes()).toContain('pui-input--lg')
+    expect(wrapper.find('.pui-input').classes()).toContain('pui-input--lg')
     expect(wrapper.find('input').exists()).toBeTruthy()
   })
 
@@ -51,7 +51,7 @@ describe('input test', () => {
         return () => <Input disabled />
       }
     })
-    expect(wrapper.classes()).toContain('pui-input--disabled')
+    expect(wrapper.find('.pui-input').classes()).toContain('pui-input--disabled')
     expect(wrapper.find('input').attributes('disabled')).toBe('')
     await wrapper.setProps({
       disabled: false
@@ -154,7 +154,7 @@ describe('input test', () => {
 
     expect(wrapper.classes()).not.toContain('pui-input--focus')
     await input.trigger('focus')
-    expect(wrapper.classes()).toContain('pui-input--focus')
+    expect(wrapper.find('.pui-input').classes()).toContain('pui-input--focus')
     await input.trigger('blur')
     expect(wrapper.classes()).not.toContain('pui-input--focus')
   })

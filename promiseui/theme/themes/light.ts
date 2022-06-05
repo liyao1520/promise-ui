@@ -1,4 +1,5 @@
 export default {
+  'wave-shadow-color': 'transparent',
   'base-bg': '#ffffff', //背景
   'bg-hover': 'rgba(46,50,56,0.05)',
   'border-color': 'rgb(224, 224, 230)',
