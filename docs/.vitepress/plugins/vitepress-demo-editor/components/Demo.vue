@@ -65,7 +65,7 @@
   const errors = ref<any[]>([])
   const editHeight = ref<number>(0)
   const viewRef = ref<HTMLDivElement | null>(null)
-  const editRef = ref<typeof Edit | null>(null)
+  const editRef = ref<any>(null)
   const randomId = ref('')
   const toolsShow = ref(false)
 
@@ -121,7 +121,7 @@
   }
   .edit-wrap {
     position: relative;
-    flex: 6;
+    flex: 6 0 60%;
     height: 100%;
     overflow: auto;
     border-radius: 4px;
@@ -153,7 +153,7 @@
 
   .view-wrap {
     position: relative;
-    flex: 4;
+    flex: 4 0 40%;
     min-height: 100px;
     padding: 5px;
     display: flex;
