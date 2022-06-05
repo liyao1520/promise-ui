@@ -32,23 +32,20 @@ export default defineComponent({
         }
       }
     )
-    const init = () => {
+
+    const init = async () => {
       if (TabsProps?.modelValue === name.value) {
         TabsContext?.renderContent(slots.default)
+        await nextTick()
+        if (!tabPaneEl.value) return
+        const width = tabPaneEl.value.clientWidth
+        const left = tabPaneEl.value.offsetLeft
+        TabsContext?.changeActiveBarPosition(left + 'px', width + 'px')
       }
     }
     init()
-    const updateTabsContent = async () => {
-      const allow = await TabsContext?.onBeforeLeaveHook(name.value)
-      if (!allow) return
+    const updateTabsContent = () => {
       TabsContext?.updateModelValue(name.value, currentIndex)
-      if (!tabPaneEl.value) {
-        await nextTick()
-      }
-      const width = tabPaneEl.value?.clientWidth
-      const left = tabPaneEl.value?.offsetLeft
-
-      TabsContext?.changeActiveBarPosition(left + 'px', width + 'px')
     }
     // 如果是第一个,并且modelValue 没有传值,则tabs content显示这个
     const currentIndex = TabsContext?.getPaneIndex() || 0

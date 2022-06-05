@@ -3,17 +3,20 @@
 .#{$prefix}-tabs {
   box-sizing: border-box;
   margin: 14px 0;
+  &__header-wrapper {
+    position: relative;
 
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
   &__header {
     position: relative;
-    border-bottom: 1px $line solid;
     font-size: $font-size-card-title;
     font-weight: $font-title-weight;
     color: $text;
     display: flex;
     flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
+    border-bottom: 1px $line solid;
     &--center {
       text-align: center;
     }
@@ -103,14 +106,15 @@
   }
 }
 .prev-transition-enter-from {
-  transform: translateX(-15px);
-  opacity: 0.6;
+  .#{$prefix}-tabs__content {
+    transform: translateX(-25px);
+    opacity: 0.8;
+  }
 }
 .prev-transition-enter-active,
 .prev-transition-leave-active {
-  transition: 0.1s;
+  transition: 0.2s;
   overflow: hidden;
-  max-width: 35px;
 }
 .prev-transition-leave-to {
   .#{$prefix}-tabs__content {
@@ -120,14 +124,15 @@
 }
 
 .next-transition-enter-from {
-  transform: translateX(15px);
-  opacity: 0.6;
+  .#{$prefix}-tabs__content {
+    transform: translateX(25px);
+    opacity: 0.8;
+  }
 }
 .next-transition-enter-active,
 .next-transition-leave-active {
-  transition: 0.1s;
+  transition: 0.2s;
   overflow: hidden;
-  max-width: 35px;
 }
 .next-transition-leave-to {
   .#{$prefix}-tabs__content {

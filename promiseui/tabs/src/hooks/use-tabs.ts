@@ -2,7 +2,7 @@ import { provide, reactive, ref, SetupContext, Slot, VNode } from 'vue'
 import { TabsKey, TabsProps } from '../tabs-types'
 
 export default function (props: TabsProps, ctx: SetupContext) {
-  const { renderContent, contentVnode, removeContentBySlot } = useRenderContent(props)
+  const { renderContent, contentVnode } = useRenderContent(props)
   const { getPaneIndex, updateTranstionName, transitionName } = useTransitionName()
   const activeBarStyles = reactive({
     left: 'unset',
@@ -22,25 +22,32 @@ export default function (props: TabsProps, ctx: SetupContext) {
     oldName = name
     return true
   }
-  const updateModelValue = (name: string, paneIndex: number) => {
+  const updateModelValue = async (name: string | number, paneIndex: number) => {
+    if (name === props.modelValue) return
+    const allow = await onBeforeLeaveHook(name)
+    if (!allow) return
     ctx.emit('update:modelValue', name)
     updateTranstionName(paneIndex)
   }
 
-  const handleClose = (name: string | number, defaultSlot: Slot) => {
-    removeContentBySlot(defaultSlot, name)
+  const handleClose = (name: string | number, defaultSlot: Slot | undefined) => {
     ctx.emit('close', name)
   }
   provide(TabsKey, {
     props,
     renderContent,
     updateModelValue,
-    changeActiveBarPosition,
     getPaneIndex,
     onBeforeLeaveHook,
-    handleClose
+    handleClose,
+    changeActiveBarPosition
   })
-  return { transitionName, activeBarStyles, contentVnode }
+  return {
+    transitionName,
+    activeBarStyles,
+    contentVnode,
+    changeActiveBarPosition
+  }
 }
 // renderContont
 const useRenderContent = (props: TabsProps) => {
@@ -57,15 +64,14 @@ const useRenderContent = (props: TabsProps) => {
     defaultSlotMap.set(defaultSlotMap, vnode)
     contentVnode.value = vnode
   }
-  const removeContentBySlot = (defaultSlot: Slot, name: string | number) => {
-    defaultSlotMap.set(defaultSlot, null)
-    // 当前选择的和删除为一个时,需要重新render 一下 content 内容, 也就清空content
-    if (name === props.modelValue) renderContent(defaultSlot)
-  }
+  // const removeContentBySlot = (defaultSlot: Slot, name: string | number) => {
+  //   defaultSlotMap.set(defaultSlot, null)
+  //   // 当前选择的和删除为一个时,需要重新render 一下 content 内容, 也就清空content
+  //   if (name === props.modelValue) renderContent(defaultSlot)
+  // }
   return {
     renderContent,
-    contentVnode,
-    removeContentBySlot
+    contentVnode
   }
 }
 // 控制 prev 和 next 动画

@@ -1,12 +1,6 @@
 <template>
   <p-space>
-    <p-tabs
-      v-model="current"
-      type="editable-card"
-      @change="change"
-      @close="close"
-      @addTabPane="addTabPane"
-    >
+    <p-tabs v-model="current" @change="change" @close="close" @add-tab-pane="addTabPane">
       <p-tab-pane v-for="item in panels" :key="item" :label="'Tab' + item" :name="item">
         {{ 'content' + item }}
       </p-tab-pane>

@@ -1,6 +1,17 @@
 import { ICommonSize } from './../../types'
 import type { PropType, ExtractPropTypes, InjectionKey, Slot } from 'vue'
 type TabsType = 'line' | 'card' | 'editable-card'
+
+type JustifyContent =
+  | 'flex-start'
+  | 'flex-end'
+  | 'center'
+  | 'space-between'
+  | 'space-around'
+  | 'space-evenly'
+  | 'unset'
+  | string
+
 export type OnBeforeLeaveImpl = (
   name: string | number,
   oldName: string | number | null
@@ -19,15 +30,19 @@ export const tabsProps = {
     type: String as PropType<ICommonSize>,
     default: 'md'
   },
-  centered: {
-    type: Boolean,
-    default: false
+  justifyContent: {
+    type: String as PropType<JustifyContent>,
+    default: 'unset'
   },
   tabPosition: {
     type: String as PropType<'top' | 'right' | 'bottom' | 'left'>
   },
   onBeforeLeave: {
     type: Function as PropType<OnBeforeLeaveImpl>
+  },
+  animated: {
+    type: Boolean,
+    default: false
   }
 } as const
 export const tabPaneProps = {
@@ -54,8 +69,8 @@ interface ITabsInstance {
   props: TabsProps
   renderContent: (defaultSlot: Slot | undefined) => void
   updateModelValue: (name: string | number, paneIndex: number) => void
-  changeActiveBarPosition: (left: string, width: string) => void
   getPaneIndex: () => number
+  changeActiveBarPosition: (left: string, width: string) => void
   onBeforeLeaveHook: (name: string | number) => Promise<boolean>
   handleClose: (name: string | number, defautSlot: Slot | undefined) => void
 }
