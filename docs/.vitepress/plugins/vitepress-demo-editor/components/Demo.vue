@@ -134,6 +134,7 @@
     color: #000;
     z-index: 1;
     font-size: 12px;
+    background-color: rgba(255, 255, 255, 0.6);
   }
   .reset-code {
     display: flex;
@@ -157,7 +158,7 @@
     min-height: 100px;
     padding: 5px;
     display: flex;
-    border-right: 1px dashed rgb(240, 235, 235);
+    border-right: 1px solid var(--c-divider, rgb(240, 235, 235));
   }
   .view {
     width: 100%;

@@ -15,8 +15,8 @@
   --c-text-light-2: #476582;
   --c-text-light-3: #90a4b7;
 
-  --c-brand: #7B69EE;
-  --c-brand-light: #96adfa;
+  --c-brand: var(--promiseui-brand);
+  --c-brand-light:  var(--promiseui-brand-hover);
 
   /**
    * Typography
@@ -58,12 +58,12 @@
 /** Fallback Styles */
 :root {
   --c-divider: var(--c-divider-light);
+  --c-text: var(--promiseui-text);
+  --c-text-weak:var(--promiseui-text-weak);
+  --c-text-light: var(--promiseui-light-text);
+  --c-text-lighter: var(--promiseui-light-text);
 
-  --c-text: var(--c-text-light-1);
-  --c-text-light: var(--c-text-light-2);
-  --c-text-lighter: var(--c-text-light-3);
-
-  --c-bg: var(--c-white);
+  --c-bg: var(--promiseui-base-bg);
   --c-bg-accent: var(--c-white-dark);
 
   --code-line-height: 24px;

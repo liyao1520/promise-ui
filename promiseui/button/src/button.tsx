@@ -12,7 +12,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: buttonProps,
   emits: ['click'],
-  setup(props: ButtonProps, { slots, emit }) {
+  setup(props: ButtonProps, { slots, emit, attrs }) {
     //icon, loading
     const {
       type,
@@ -53,6 +53,7 @@ export default defineComponent({
             onMousedown={onMousedown}
             onMouseup={onMouseup}
             disabled={disabled.value}
+            {...attrs}
           >
             {loadingRender() || (slots.icon && slots.icon())}
             {slots.default && slots.default()}

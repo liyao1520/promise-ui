@@ -54,7 +54,7 @@
   &--default {
     color: $text;
     border-color: $border-color;
-    background-color: $base-bg;
+    background-color: $block;
     &:hover,
     &:active,
     &:focus {
@@ -104,7 +104,7 @@
   &--outline,
   &--dashed,
   &--none {
-    background-color: #fff;
+    background-color: transparent;
     &.#{$prefix}-button {
       &--success {
         color: $success;
@@ -125,7 +125,7 @@
   }
 
   &--none {
-    background-color: #fff;
+    background-color: transparent;
     border-color: transparent;
   }
   &--dashed {

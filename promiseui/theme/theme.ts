@@ -16,7 +16,9 @@ class Theme {
   }
   use(name: string) {
     const styleStr = this.themes[name]
+
     this.styleElement.textContent = `:root{${styleStr}}`
+    document.documentElement.setAttribute('pui-theme', name)
   }
 }
 export default Theme

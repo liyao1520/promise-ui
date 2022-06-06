@@ -1,5 +1,6 @@
 export default {
   'wave-shadow-color': 'transparent',
+  block: '#ffffff',
   'base-bg': '#ffffff', //背景
   'bg-hover': 'rgba(46,50,56,0.05)',
   'border-color': 'rgb(224, 224, 230)',
@@ -11,7 +12,6 @@ export default {
   brand: '#5e7ce0',
   'brand-hover': '#7693f5',
   'brand-active': '#344899',
-  'brand-shadow': 'rgb(124, 145, 229, 0.3)',
   danger: '#f66f6a',
   'danger-active': '#b12220',
   warning: '#fac20a',

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   import { onMounted, ref, defineExpose } from 'vue'
   import iPlastic from 'monaco-themes/themes/iPlastic.json'
-
+  import iDark from '../../../../../promiseui/theme/themes/dark'
   const props = defineProps({
     initialValue: {
       type: String,
@@ -18,21 +18,21 @@
   })
   const emit = defineEmits(['change'])
   const monacoContainer = ref<HTMLDivElement | null>(null)
-  let monacoInstance: monaco.editor.IStandaloneCodeEditor
+  let monacoInstance: any
   onMounted(async () => {
     const monaco = await import('monaco-editor/esm/vs/editor/editor.api.js')
     await import('monaco-editor/esm/vs/basic-languages/javascript/javascript.contribution')
     await import('monaco-editor/esm/vs/basic-languages/html/html.contribution')
     await import('monaco-editor/esm/vs/basic-languages/css/css.contribution')
-    if (!window.monaco) {
-      window.monaco = monaco
+    if (!(window as any).monaco) {
+      ;(window as any).monaco = monaco
     }
     if (!monacoContainer.value) return
-    monaco.editor.defineTheme('iPlastic', iPlastic as any)
+    // monaco.editor.defineTheme('iPlastic', iPlastic as any)
+    // monaco.editor.defineTheme('iDark', iDark as any)
     monacoInstance = monaco.editor.create(monacoContainer.value, {
       value: props.initialValue,
       language: props.language,
-      theme: props.theme,
       automaticLayout: true,
       tabSize: 2,
       minimap: { enabled: false },

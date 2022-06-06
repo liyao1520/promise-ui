@@ -24,7 +24,7 @@
     bottom: 0;
     left: 0;
     z-index: var(--z-index-sidebar);
-    box-shadow: 1px 0 6px 2px rgb(0, 0, 0, 0.08);
+    border-right: 1px solid var(--c-divider);
     width: 16.4rem;
     background-color: var(--c-bg);
     overflow-y: auto;

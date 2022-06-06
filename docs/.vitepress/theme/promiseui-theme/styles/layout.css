@@ -243,12 +243,18 @@ body>* ::-webkit-scrollbar-corner {
 }
 .demo h4 {
   font-weight: 700;
-  color: #575d6c;
+  color: var(--c-text);
   font-size: 12px;
   margin: 15px 0;
 }
 .demo p {
-  color: #575d6c;
+  color: var(--c-text);
   font-size: 12px;
   margin: 10px 0;
+}
+[pui-theme="dark"] .demo {
+  border-color: rgba(255, 255, 255, 0.09) !important;
+}
+[pui-theme="dark"] {
+  --c-divider:rgba(255, 255, 255, 0.09)
 }

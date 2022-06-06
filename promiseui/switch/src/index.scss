@@ -1,0 +1,16 @@
+@import '../../styles-var';
+
+.#{$prefix}-switch {
+  /* your style */
+  &--md {
+    width: 22px;
+  }
+  &__button {
+  }
+  &--sm {
+  }
+  &--md {
+  }
+  &--lg {
+  }
+}

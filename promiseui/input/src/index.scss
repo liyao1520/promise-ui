@@ -53,6 +53,8 @@
     width: 100%;
     border: none;
     padding: 0 5px;
+    background-color: transparent;
+    color: $text;
   }
   &__prepend,
   &__append {

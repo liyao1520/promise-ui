@@ -8,13 +8,7 @@
   import NavBar from './components/NavBar.vue'
   import SideBar from './components/SideBar.vue'
   import Page from './components/Page.vue'
-
-  onMounted(() => {
-    // 引用themes,需要动态引入,否则打包报错
-    import('../../../../promiseui/theme').then(({ default: PTheme }) => {
-      PTheme.use('light')
-    })
-  })
+  import ToggleTheme from './components/ToggleTheme.vue'
 
   const NoopComponent = () => null
 
@@ -152,7 +146,7 @@
       </template>
     </Page>
   </div>
-
+  <ToggleTheme />
   <Debug />
 </template>
 

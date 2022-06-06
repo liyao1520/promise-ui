@@ -7,6 +7,7 @@ import InputInstall, { Input } from './input'
 import OverlayInstall, { Overlay } from './overlay'
 import DropdownInstall, { Dropdown, DropdownItem } from './dropdown'
 import TabsInstall, { Tabs, TabPane } from './tabs'
+import SwitchInstall, { Switch } from './switch'
 
 const installs = [
   ButtonInstall,
@@ -16,10 +17,23 @@ const installs = [
   InputInstall,
   OverlayInstall,
   DropdownInstall,
-  TabsInstall
+  TabsInstall,
+  SwitchInstall
 ]
 
-export { Button, Space, Icon, Message, Input, Overlay, Dropdown, DropdownItem, Tabs, TabPane }
+export {
+  Button,
+  Space,
+  Icon,
+  Message,
+  Input,
+  Overlay,
+  Dropdown,
+  DropdownItem,
+  Tabs,
+  TabPane,
+  Switch
+}
 
 export default {
   version: '0.0.1',

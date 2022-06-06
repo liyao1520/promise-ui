@@ -25,7 +25,6 @@
 </script>
 <style>
   .demo-wrapper {
-    background-color: #f8f8f8;
     padding: 10px 0;
   }
   .demo {
@@ -36,6 +35,7 @@
     height: 100px;
     margin: 20px;
     background-color: #e9edfa;
+    color: #333;
   }
 </style>
 ```

@@ -4,7 +4,7 @@ code {
   padding: 0.25rem 0.5rem;
   font-family: var(--code-font-family);
   font-size: 0.85em;
-  color: var(--c-text-light);
+  color: var(--c-text);
   background-color: var(--code-inline-bg-color);
 }
 

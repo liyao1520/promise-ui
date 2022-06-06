@@ -7,7 +7,7 @@
 .sidebar-link-item {
   display: block;
   margin: 0;
-  color: var(--c-text);
+  color: var(--c-text-weak);
 }
 
 a.sidebar-link-item:hover {

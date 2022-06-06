@@ -4,10 +4,11 @@
   /* your style */
   position: fixed;
   padding: 5px 12px;
-  background-color: $base-bg;
+  background-color: $block;
   @include font-content;
   box-shadow: 0 2px 8px 0 $shadow;
   z-index: 1000;
+  color: $text;
   .#{$prefix}-overlay__arrow {
     position: absolute;
     width: 0;
@@ -21,7 +22,7 @@
   &--top-end {
     .#{$prefix}-overlay__arrow {
       bottom: -8px - 8px;
-      border-top-color: $base-bg;
+      border-top-color: $block;
     }
   }
   &--bottom,
@@ -29,7 +30,7 @@
   &--bottom-end {
     .#{$prefix}-overlay__arrow {
       top: -8px - 8px;
-      border-bottom-color: $base-bg;
+      border-bottom-color: $block;
     }
   }
   &--left,
@@ -37,7 +38,7 @@
   &--left-end {
     .#{$prefix}-overlay__arrow {
       right: -8px - 8px;
-      border-left-color: $base-bg;
+      border-left-color: $block;
     }
   }
   &--right,
@@ -45,7 +46,7 @@
   &--right-end {
     .#{$prefix}-overlay__arrow {
       left: -8px - 8px;
-      border-right-color: $base-bg;
+      border-right-color: $block;
     }
   }
   &--left {
