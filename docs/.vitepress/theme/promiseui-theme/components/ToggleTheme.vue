@@ -59,7 +59,7 @@
   const toggleTheme = () => {
     if (!Theme) return
     theme.value = theme.value === 'dark' ? 'light' : 'dark'
-    monaco.editor.setTheme(theme.value === 'dark' ? 'vs-dark' : 'vs')
+    monaco.editor.setTheme(theme.value === 'dark' ? 'iDark' : 'vs')
   }
 </script>
 

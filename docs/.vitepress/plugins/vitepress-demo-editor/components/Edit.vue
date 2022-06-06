@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   import { onMounted, ref, defineExpose } from 'vue'
   import iPlastic from 'monaco-themes/themes/iPlastic.json'
-  import iDark from '../../../../../promiseui/theme/themes/dark'
+  import iDark from '../theme/dark.json'
   const props = defineProps({
     initialValue: {
       type: String,
@@ -29,7 +29,7 @@
     }
     if (!monacoContainer.value) return
     // monaco.editor.defineTheme('iPlastic', iPlastic as any)
-    // monaco.editor.defineTheme('iDark', iDark as any)
+    monaco.editor.defineTheme('iDark', iDark as any)
     monacoInstance = monaco.editor.create(monacoContainer.value, {
       value: props.initialValue,
       language: props.language,

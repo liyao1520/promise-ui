@@ -3,7 +3,7 @@ export default {
   block: '#606061',
   'base-bg': '#202124', //背景
   'bg-hover': '#2e2f31',
-  'border-color': 'rgb(224, 224, 230)',
+  'border-color': 'rgba(255, 255, 255, 0.24)',
   'item-bg-hover': '#383838',
   'overlay-dart': '#464d6e',
   'overlay-text': '#dfe1e6',
