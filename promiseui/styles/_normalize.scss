@@ -257,7 +257,7 @@ template {
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #0003;
+    background-color: var(--promiseui-line);
     border-radius: 10px;
     transition: all 0.2s ease-in-out;
   }

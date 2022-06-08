@@ -1,40 +1,24 @@
 <template>
-  <p-space>
-    <p-switch
-      v-model="active"
-      size="sm"
-      active-color="info"
-      activeText="成功成功成功"
-      inactiveText="失败失败失败"
-    ></p-switch>
-    <p-switch
-      v-model="active"
-      activeText="成功成功成功"
-      inactiveText="失败失败失败"
-      :loading="loading"
-      @beforeChange="onBeforeChange"
-    ></p-switch>
-    <p-switch
-      v-model="active"
-      size="lg"
-      active-color="danger"
-      activeText="成功成功成功"
-      inactiveText="失败失败失败"
-    ></p-switch>
-  </p-space>
+  <div>
+    <p-radio-group v-model="value" name="fruits" @change="onChange">
+      <p-radio-button v-for="item in fruits" :key="item.value" :value="item.value">
+        {{ item.label }}</p-radio-button
+      >
+    </p-radio-group>
+  </div>
 </template>
 
 <script setup>
   import { ref } from 'vue'
-
-  const active = ref(false)
-  const loading = ref(false)
-  const onBeforeChange = (value) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(true)
-      }, 2000)
-    })
+  import { Message } from '../promiseui/message'
+  const fruits = ref([
+    { label: 'Apple', value: 'Apple' },
+    { label: 'Pear', value: 'Pear' },
+    { label: 'Orange', value: 'Orange' }
+  ])
+  const value = ref('Apple')
+  const onChange = (value) => {
+    // Message.success(`change value: ${value}`)
   }
 </script>
 

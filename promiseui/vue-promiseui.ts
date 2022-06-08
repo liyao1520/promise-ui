@@ -8,6 +8,7 @@ import OverlayInstall, { Overlay } from './overlay'
 import DropdownInstall, { Dropdown, DropdownItem } from './dropdown'
 import TabsInstall, { Tabs, TabPane } from './tabs'
 import SwitchInstall, { Switch } from './switch'
+import RadioInstall, { Radio, RadioGroup } from './radio'
 
 const installs = [
   ButtonInstall,
@@ -18,7 +19,8 @@ const installs = [
   OverlayInstall,
   DropdownInstall,
   TabsInstall,
-  SwitchInstall
+  SwitchInstall,
+  RadioInstall
 ]
 
 export {
@@ -32,7 +34,9 @@ export {
   DropdownItem,
   Tabs,
   TabPane,
-  Switch
+  Switch,
+  Radio,
+  RadioGroup
 }
 
 export default {

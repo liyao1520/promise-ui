@@ -7,7 +7,7 @@ import './index.scss'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import useEvent from './hooks/use-event'
 import { nativeClick } from '../../shared/utils'
-import Wave from '../../utils/wave'
+import Wave from '../../shared/components/wave'
 
 export default defineComponent({
   name: 'PInput',

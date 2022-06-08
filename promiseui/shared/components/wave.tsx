@@ -1,28 +1,35 @@
 import { defineComponent, getCurrentInstance, h, onMounted, watch } from 'vue'
-import findDOMNode from './findDOMNode'
+import { findDOMNode } from '../utils'
 
 export default defineComponent({
   name: 'Wave',
   abstract: true,
   props: {
-    disabled: Boolean
+    disabled: Boolean,
+    run: Boolean
   },
-  setup(props, { slots, attrs }) {
+  setup(props, { slots, attrs, expose }) {
     const instance = getCurrentInstance()
 
+    watch(
+      () => props.run,
+      (isRun) => {
+        handleRun()
+      }
+    )
     watch(
       () => props.disabled,
       (disabled) => {
         if (!node) return
         if (disabled) {
-          node.removeEventListener('click', handleCLick)
+          node.removeEventListener('click', handleRun)
         } else {
-          node.addEventListener('click', handleCLick)
+          node.addEventListener('click', handleRun)
         }
       }
     )
     let node: HTMLElement | null = null
-    const handleCLick = () => {
+    const handleRun = () => {
       if (!node) return
       const computedStyle = getComputedStyle(node)
       const waveColor =
@@ -40,9 +47,11 @@ export default defineComponent({
     onMounted(() => {
       node = findDOMNode(instance)
       if (props.disabled) return
-      node.addEventListener('click', handleCLick)
+      node.addEventListener('click', handleRun)
     })
-
+    expose({
+      run: handleRun
+    })
     return () => slots.default && slots.default()[0]
   }
 })

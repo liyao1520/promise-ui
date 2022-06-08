@@ -5,7 +5,7 @@ import Loading from './components/button-loading'
 import './index.scss'
 import { Icon } from '../../icon'
 import useEvent from './hooks/use-event'
-import Wave from '../../utils/wave'
+import Wave from '../../shared/components/wave'
 
 export default defineComponent({
   name: 'PButton',

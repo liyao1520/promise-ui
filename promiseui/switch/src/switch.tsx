@@ -1,7 +1,7 @@
 import { computed, defineComponent, ref, watch } from 'vue'
 import { switchProps, SwitchProps } from './switch-types'
 import { useNamespace } from '../../shared/hooks/use-namespace'
-import Wave from '../../utils/wave'
+import Wave from '../../shared/components/wave'
 import { commonType } from '../../shared/common'
 import './index.scss'
 import IconLoading from './components/icon-loading'
