@@ -5,12 +5,23 @@ import {
   Ban,
   SearchSharp,
   ChatboxSharp,
-  PawSharp
+  PawSharp,
+  CheckmarkSharp,
+  CloseSharp
 } from '@vicons/ionicons5'
 // 引入scss
 import '../../../promiseui/styles/index.scss'
 
-const icons = { AirplaneSharp, AccessibilitySharp, Ban, SearchSharp, ChatboxSharp, PawSharp }
+const icons = {
+  AirplaneSharp,
+  AccessibilitySharp,
+  Ban,
+  SearchSharp,
+  ChatboxSharp,
+  PawSharp,
+  CheckmarkSharp,
+  CloseSharp
+}
 let first = true
 export function registerComponents(app) {
   addImportMap('@vicons/ionicons5', icons)

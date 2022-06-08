@@ -5,7 +5,8 @@ const Value = [Boolean, String, Number] as PropType<boolean | string | number>
 
 export const switchProps = {
   modelValue: {
-    type: Value
+    type: Value,
+    default: false
   },
   size: {
     type: String as PropType<ICommonSize>,
@@ -14,10 +15,6 @@ export const switchProps = {
   disabled: {
     type: Boolean,
     default: false
-  },
-  loading: { type: Boolean, default: false },
-  width: {
-    type: [Number, String] as PropType<string | number>
   },
   activeText: {
     type: String,
@@ -36,10 +33,11 @@ export const switchProps = {
     default: false
   },
   activeColor: {
-    type: String as PropType<ICommonColor | string>
+    type: String as PropType<ICommonColor | string>,
+    default: 'primary'
   },
-  inactiveColor: {
-    type: String as PropType<ICommonColor | string>
+  onBeforeChange: {
+    type: Function
   }
 } as const
 

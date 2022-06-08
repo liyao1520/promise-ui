@@ -11,7 +11,6 @@ const markDownPlugin = function (md: any) {
         const props = tokens[idx].info
         const hasColumn = props.includes('column')
         return `
-        ${content ? `<!--demo-origin-content:\n${content}:demo-origin-content-->` : ''}
         <demo initial-value="${md.utils.escapeHtml(content)}" direction="${
           hasColumn ? 'column' : 'row'
         }" >

@@ -9,3 +9,4 @@ const app = createApp(App)
 
 app.use(PromiseUI)
 app.mount('#app')
+import './app.css'
