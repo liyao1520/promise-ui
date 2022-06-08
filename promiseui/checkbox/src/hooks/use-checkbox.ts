@@ -1,9 +1,8 @@
-import { inject, ref, SetupContext, watch } from 'vue'
+import { inject, ref, SetupContext, watch, computed } from 'vue'
 import { checkBoxKey, CheckboxProps } from '../checkbox-types'
 
 export default function (props: CheckboxProps, ctx: SetupContext) {
   const CheckboxContext = inject(checkBoxKey, undefined)
-
   const initialChecked = () => {
     if (props.value === undefined) {
       return false
@@ -17,8 +16,8 @@ export default function (props: CheckboxProps, ctx: SetupContext) {
   const initial = initialChecked()
   const checked = ref(initial)
   const handleClick = () => {
+    if (disabled.value) return
     checked.value = !checked.value
-
     if (CheckboxContext) {
       const value = props.value
       if (!value) return // 如果没有value,不做任何反应
@@ -42,8 +41,13 @@ export default function (props: CheckboxProps, ctx: SetupContext) {
       checked.value = valueArr.includes(props.value)
     }
   )
+  const disabled = computed(() => {
+    if (props.disabled || CheckboxContext?.props.disabled) return true
+    return false
+  })
   return {
     handleClick,
-    checked
+    checked,
+    disabled
   }
 }

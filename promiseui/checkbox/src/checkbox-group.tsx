@@ -8,7 +8,6 @@ export default defineComponent({
   emits: ['update:modelValue', 'change'],
   setup(props: CheckboxGroupProps, { slots, emit }) {
     const ns = useNamespace('checkbox-group')
-
     const addValue = (value: string | boolean | number) => {
       if (!Array.isArray(props.modelValue)) return
       const newValues = [...new Set(props.modelValue.concat(value))]

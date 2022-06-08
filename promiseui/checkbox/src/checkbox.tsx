@@ -14,20 +14,17 @@ export default defineComponent({
   setup(props: CheckboxProps, ctx) {
     const ns = useNamespace('checkbox')
 
-    const { handleClick, checked } = useCheckbox(props, ctx as SetupContext)
+    const { handleClick, checked, disabled } = useCheckbox(props, ctx as SetupContext)
     const classes = computed(() => ({
       [ns.b()]: true,
       [ns.m(props.size)]: true,
-      [ns.m('checked')]: checked.value || props.indeterminate
+      [ns.m('checked')]: checked.value || props.indeterminate,
+      [ns.m('disabled')]: disabled.value
     }))
     const renderIcon = () => {
       if (props.indeterminate || checked.value) {
         return (
-          <Icon
-            component={props.indeterminate ? RemoveSharp : CheckmarkSharp}
-            color="#ffffff"
-            size={16}
-          />
+          <Icon component={props.indeterminate ? RemoveSharp : CheckmarkSharp} color="#ffffff" />
         )
       }
 

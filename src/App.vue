@@ -1,11 +1,11 @@
 <template>
   <div>
-    <p-checkbox-group v-model="checked" @change="change">
-      <p-checkbox label="123" value="a" :indeterminate="indeterminate" />
+    <p-checkbox-group v-model="checked" @change="change" disabled>
+      <p-checkbox label="123" value="a" :indeterminate="indeterminate" size="sm" />
       <p-checkbox label="123" value="b" />
-      <p-checkbox label="123" value="c" />
+      <p-checkbox label="123" value="c" size="lg" />
     </p-checkbox-group>
-    <p-checkbox label="123" v-model="checked2" @change="change" />
+    <p-checkbox v-model="checked2" label="123" @change="change" />
   </div>
 </template>
 

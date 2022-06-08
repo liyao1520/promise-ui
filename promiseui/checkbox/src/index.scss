@@ -5,6 +5,10 @@
   align-items: center;
   margin-right: 12px;
   cursor: pointer;
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
   &--checked {
     .#{$prefix}-checkbox__border {
       border-color: $brand;
@@ -40,6 +44,30 @@
     .#{$prefix}-checkbox__border {
       width: 16px;
       height: 16px;
+      font-size: $font-size-md;
+    }
+    .#{$prefix}-icon {
+      font-size: 16px;
+    }
+  }
+  &--sm {
+    .#{$prefix}-checkbox__border {
+      width: 14px;
+      height: 14px;
+      font-size: $font-size-sm;
+    }
+    .#{$prefix}-icon {
+      font-size: 14px;
+    }
+  }
+  &--lg {
+    .#{$prefix}-checkbox__border {
+      width: 18px;
+      height: 18px;
+      font-size: $font-size-lg;
+    }
+    .#{$prefix}-icon {
+      font-size: 18px;
     }
   }
 }
