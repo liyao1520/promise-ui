@@ -88,6 +88,7 @@ export default defineComponent({
           showArrow={showArrow.value}
           dark={dark.value}
           style={{ padding: 0 }}
+          flip
         >
           <div
             class={ns.e('overlay')}

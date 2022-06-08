@@ -129,3 +129,37 @@
 ```
 
 :::
+
+
+### 自动调整位置
+
+`flip` 为 `true` 则当前放置方式不能提供足够空间的时候调整弹出信息的位置, 默认`false`
+
+:::demo
+
+```vue
+<template>
+  <p-overlay v-model="isShow" :origin="btn" flip>
+    <div class="demo">
+      <h3>自动调整弹出位置</h3>
+      <ul>
+        <li v-for="i in 10">{{ 'content'+ i }}</li>
+      </ul>
+    </div>
+  </p-overlay>
+  <p-button ref="btn" class="btn" @click="isShow = !isShow"> click me ! </p-button>
+</template>
+<script setup>
+  import { ref } from 'vue'
+  const btn = ref(null)
+  const isShow = ref(false)
+</script>
+<style>
+  .demo {
+    text-align:center;
+  }
+
+</style>
+```
+
+:::

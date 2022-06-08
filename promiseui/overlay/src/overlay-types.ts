@@ -54,6 +54,10 @@ export const overlayProps = {
   },
   class: {
     default: ''
+  },
+  flip: {
+    type: Boolean,
+    default: false
   }
 } as const
 

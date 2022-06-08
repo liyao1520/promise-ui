@@ -1,11 +1,13 @@
-import { ComponentPublicInstance, computed, ref, Ref, toRefs, watchEffect } from 'vue'
+import { Placement } from './../overlay-types'
+import { ComponentPublicInstance, computed, nextTick, ref, Ref, toRefs, watchEffect } from 'vue'
 import { OverlayProps } from '../overlay-types'
 
-const useOverlay = (overlayEl: Ref<Element | null>, props: OverlayProps) => {
+const useOverlay = (overlayEl: Ref<HTMLDivElement | null>, props: OverlayProps) => {
   const x = ref(0)
   const y = ref(0)
   const shouldShow = ref(true)
-  const { modelValue, origin, position, offset } = toRefs(props)
+  const realPosition = ref(props.position)
+  const { modelValue, origin, position, offset, flip } = toRefs(props)
   const updatePosition = async () => {
     // 遮罩层modelValue 为false 则直接return
     if (!overlayEl.value) return
@@ -26,8 +28,8 @@ const useOverlay = (overlayEl: Ref<Element | null>, props: OverlayProps) => {
     }
 
     const { top, left, bottom, right, width, height } = el!.getBoundingClientRect()
-    // 原生不存在? 那就 隐藏
 
+    // 原生不存在? 那就 隐藏
     if (width === 0 && height === 0) {
       shouldShow.value = false
     } else {
@@ -41,7 +43,18 @@ const useOverlay = (overlayEl: Ref<Element | null>, props: OverlayProps) => {
     const h = (height - clientHeight) / 2
     x.value = left + w
     y.value = top + h
-    const pos = position.value
+    let pos = position.value
+
+    // 判断是否能展示全,如果不能则向反方向展示,flip
+
+    if (flip.value) {
+      const windowHeight = document.documentElement.clientHeight
+      const windowWidth = document.documentElement.clientWidth
+      if (top < clientHeight) pos = pos.replace('top', 'bottom') as Placement
+      if (windowHeight - bottom < clientHeight) pos = pos.replace('bottom', 'top') as Placement
+      if (left < clientWidth) pos = pos.replace('left', 'right') as Placement
+      if (windowWidth - right < clientWidth) pos = pos.replace('right', 'left') as Placement
+    }
 
     const leftAndRightHandle = () => {
       if (pos.includes('start')) x.value -= w
@@ -64,20 +77,26 @@ const useOverlay = (overlayEl: Ref<Element | null>, props: OverlayProps) => {
       y.value = bottom + offset.value
       leftAndRightHandle()
     }
+    realPosition.value = pos
   }
 
   watchEffect((onCleanup) => {
-    onCleanup(() => window.removeEventListener('scroll', updatePosition))
+    onCleanup(() => {
+      window.removeEventListener('scroll', updatePosition)
+      window.removeEventListener('resize', updatePosition)
+    })
     if (modelValue.value) {
       updatePosition()
       window.addEventListener('scroll', updatePosition)
+      window.addEventListener('resize', updatePosition)
     }
   })
   const isVisible = computed(() => modelValue.value && shouldShow.value)
   return {
     x,
     y,
-    isVisible
+    isVisible,
+    realPosition
   }
 }
 
