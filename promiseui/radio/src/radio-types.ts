@@ -61,12 +61,12 @@ export const radioGroupProps = {
   }
 } as const
 
-interface ProvideRadio {
+interface IRadioContext {
   props: RadioGroupProps
   updateValue: (value: ValueType) => void
 }
 
-export const RadioKey: InjectionKey<ProvideRadio> = Symbol('RadioKey')
+export const RadioKey: InjectionKey<IRadioContext> = Symbol('RadioKey')
 
 export type RadioProps = ExtractPropTypes<typeof radioProps>
 

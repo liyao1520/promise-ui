@@ -54,12 +54,12 @@ export const dropdownItemProps = {
     default: false
   }
 }
-export interface DropDownInstacne {
+export interface IDropDownContext {
   handleClick: () => void
   props: DropdownProps
 }
 
-export const DropDownKey: InjectionKey<DropDownInstacne> = Symbol('dropdown')
+export const DropDownKey: InjectionKey<IDropDownContext> = Symbol('dropdown')
 
 export type DropdownProps = ExtractPropTypes<typeof dropdownProps>
 export type DropdownItemProps = ExtractPropTypes<typeof dropdownItemProps>

@@ -1,0 +1,45 @@
+@import '../../styles-var';
+
+.#{$prefix}-checkbox {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 12px;
+  cursor: pointer;
+  &--checked {
+    .#{$prefix}-checkbox__border {
+      border-color: $brand;
+      background-color: $brand;
+      box-shadow: 0 0 1px 1px $brand-hover;
+    }
+  }
+  &__border {
+    position: relative;
+    border-radius: 2px;
+    border: 1px solid $border-color;
+    transition: border-color 0.2s;
+    .#{$prefix}-checkbox__icon {
+      position: absolute;
+      left: -1px;
+      top: -1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &:hover {
+      border-color: $brand;
+    }
+    z-index: 1;
+  }
+  &__label {
+    display: inline;
+    user-select: none;
+    padding: 0 8px;
+    color: $text-weak;
+  }
+  &--md {
+    .#{$prefix}-checkbox__border {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}

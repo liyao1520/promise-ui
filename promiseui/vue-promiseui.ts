@@ -9,6 +9,7 @@ import DropdownInstall, { Dropdown, DropdownItem } from './dropdown'
 import TabsInstall, { Tabs, TabPane } from './tabs'
 import SwitchInstall, { Switch } from './switch'
 import RadioInstall, { Radio, RadioGroup } from './radio'
+import CheckboxInstall, { Checkbox, CheckboxGroup } from './checkbox'
 
 const installs = [
   ButtonInstall,
@@ -20,7 +21,8 @@ const installs = [
   DropdownInstall,
   TabsInstall,
   SwitchInstall,
-  RadioInstall
+  RadioInstall,
+  CheckboxInstall
 ]
 
 export {
@@ -36,7 +38,9 @@ export {
   TabPane,
   Switch,
   Radio,
-  RadioGroup
+  RadioGroup,
+  Checkbox,
+  CheckboxGroup
 }
 
 export default {
