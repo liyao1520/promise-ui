@@ -1,25 +1,34 @@
 <template>
-  <div>
-    <p-checkbox-group v-model="checked" @change="change" disabled>
-      <p-checkbox label="123" value="a" :indeterminate="indeterminate" size="sm" />
-      <p-checkbox label="123" value="b" />
-      <p-checkbox label="123" value="c" size="lg" />
-    </p-checkbox-group>
-    <p-checkbox v-model="checked2" label="123" @change="change" />
-  </div>
+  <p-checkbox
+    v-model="checkAll"
+    label="Check all"
+    :indeterminate="indeterminate"
+    @change="onChange"
+  />
+  <br />
+  <br />
+  <p-checkbox-group v-model="checkedList">
+    <p-checkbox label="Apple" value="Apple" />
+    <p-checkbox label="Pear" value="Pear" />
+    <p-checkbox label="Orange" value="Orange" />
+  </p-checkbox-group>
 </template>
-
 <script setup>
-  import { ref } from 'vue'
-
-  const checked = ref(['a', 'c'])
-  const checked2 = ref(false)
-  const indeterminate = ref(true)
-
-  const change = (values) => {
-    console.log(values)
+  import { ref, watch } from 'vue'
+  const options = ['Apple', 'Pear', 'Orange']
+  const checkedList = ref(['Apple', 'Pear'])
+  const checkAll = ref(false)
+  const indeterminate = ref(false)
+  const onChange = (value) => {
+    checkedList.value = value ? options : []
+    indeterminate.value = false
   }
-  setTimeout(() => (checked.value = ['b']), 3000)
+  watch(checkedList, (values) => {
+    const len1 = values.length
+    const len2 = options.length
+    indeterminate.value = len1 !== 0 && len1 !== len2
+    checkAll.value = len1 === len2
+  })
 </script>
 
 <style></style>

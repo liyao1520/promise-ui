@@ -14,10 +14,10 @@ export default defineComponent({
   setup(props: CheckboxProps, ctx) {
     const ns = useNamespace('checkbox')
 
-    const { handleClick, checked, disabled } = useCheckbox(props, ctx as SetupContext)
+    const { handleClick, checked, disabled, size } = useCheckbox(props, ctx as SetupContext)
     const classes = computed(() => ({
       [ns.b()]: true,
-      [ns.m(props.size)]: true,
+      [ns.m(size.value)]: true,
       [ns.m('checked')]: checked.value || props.indeterminate,
       [ns.m('disabled')]: disabled.value
     }))

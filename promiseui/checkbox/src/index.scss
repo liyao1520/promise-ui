@@ -5,9 +5,22 @@
   align-items: center;
   margin-right: 12px;
   cursor: pointer;
+  &:hover {
+    .#{$prefix}-checkbox__border {
+      border-color: $brand;
+    }
+  }
   &--disabled {
     opacity: 0.5;
+    &:hover {
+      .#{$prefix}-checkbox__border {
+        border-color: $border-color;
+      }
+    }
     cursor: not-allowed;
+    .#{$prefix}-checkbox__label {
+      cursor: not-allowed;
+    }
   }
   &--checked {
     .#{$prefix}-checkbox__border {
@@ -29,9 +42,7 @@
       align-items: center;
       justify-content: center;
     }
-    &:hover {
-      border-color: $brand;
-    }
+
     z-index: 1;
   }
   &__label {
@@ -39,32 +50,33 @@
     user-select: none;
     padding: 0 8px;
     color: $text-weak;
+    cursor: pointer;
   }
   &--md {
+    font-size: $font-size-md;
     .#{$prefix}-checkbox__border {
       width: 16px;
       height: 16px;
-      font-size: $font-size-md;
     }
     .#{$prefix}-icon {
       font-size: 16px;
     }
   }
   &--sm {
+    font-size: $font-size-sm;
     .#{$prefix}-checkbox__border {
       width: 14px;
       height: 14px;
-      font-size: $font-size-sm;
     }
     .#{$prefix}-icon {
       font-size: 14px;
     }
   }
   &--lg {
+    font-size: $font-size-lg;
     .#{$prefix}-checkbox__border {
       width: 18px;
       height: 18px;
-      font-size: $font-size-lg;
     }
     .#{$prefix}-icon {
       font-size: 18px;

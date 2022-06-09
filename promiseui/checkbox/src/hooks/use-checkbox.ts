@@ -1,4 +1,5 @@
 import { inject, ref, SetupContext, watch, computed } from 'vue'
+import { check } from 'yargs'
 import { checkBoxKey, CheckboxProps } from '../checkbox-types'
 
 export default function (props: CheckboxProps, ctx: SetupContext) {
@@ -31,9 +32,9 @@ export default function (props: CheckboxProps, ctx: SetupContext) {
     () => props.modelValue,
     () => {
       checked.value = props.modelValue
-      ctx.emit('change', props.modelValue)
     }
   )
+  watch(checked, () => ctx.emit('change', checked.value))
   watch(
     () => CheckboxContext?.props.modelValue,
     (valueArr) => {
@@ -45,9 +46,13 @@ export default function (props: CheckboxProps, ctx: SetupContext) {
     if (props.disabled || CheckboxContext?.props.disabled) return true
     return false
   })
+  const size = computed(() => {
+    return CheckboxContext?.props.size || props.size
+  })
   return {
     handleClick,
     checked,
-    disabled
+    disabled,
+    size
   }
 }

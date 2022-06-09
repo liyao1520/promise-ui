@@ -38,6 +38,10 @@ export const checkboxGroupProps = {
   min: {
     type: Number,
     default: -Infinity
+  },
+  size: {
+    type: String as PropType<ICommonSize>,
+    default: 'md'
   }
 } as const
 
