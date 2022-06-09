@@ -1,9 +1,9 @@
 import { ChevronDownOutline } from '@vicons/ionicons5'
-import { defineComponent, toRefs, ref, onMounted, provide } from 'vue'
+import { defineComponent, toRefs, ref, provide } from 'vue'
 import { Button } from '../../button'
 import { Icon } from '../../icon'
 import { Overlay } from '../../overlay'
-import useClickOutside from '../../shared/hooks/use-click-outside'
+
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import { DropDownKey, dropdownProps, DropdownProps } from './dropdown-types'
 import useEvent from './hooks/use-event'
@@ -28,13 +28,7 @@ export default defineComponent({
     })
     const defaultSlot = slots.default && slots.default()
 
-    useClickOutside(
-      overlayEl,
-      (e) => {
-        visible.value = false
-      },
-      { ignore: [origin] }
-    )
+    const onOutsideClick = () => (visible.value = false)
 
     const { onClick, onMouseenter, onMouseleave } = useEvent(trigger, visible)
 
@@ -89,6 +83,7 @@ export default defineComponent({
           dark={dark.value}
           style={{ padding: 0 }}
           flip
+          onOutsideClick={onOutsideClick}
         >
           <div
             class={ns.e('overlay')}

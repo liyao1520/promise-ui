@@ -1,4 +1,4 @@
-import { ComponentPublicInstance, nextTick, Ref, unref, watch } from 'vue'
+import { ComponentPublicInstance, onUnmounted, Ref, unref, watch } from 'vue'
 interface IClickOutsideOptions {
   ignore?: Target[]
 }
@@ -51,5 +51,6 @@ const useClickOutside = (
       immediate: true
     }
   )
+  onUnmounted(() => window.removeEventListener('click', listenner))
 }
 export default useClickOutside

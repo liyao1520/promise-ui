@@ -1,20 +1,37 @@
-import { computed, defineComponent, ref, StyleValue, Teleport, toRefs, Transition } from 'vue'
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  ref,
+  StyleValue,
+  Teleport,
+  toRefs,
+  Transition
+} from 'vue'
 import { overlayProps, OverlayProps } from './overlay-types'
 
 import './index.scss'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import useOverlay from './hooks/use-overlay'
+import useClickOutside from '../../shared/hooks/use-click-outside'
 
 export default defineComponent({
   name: 'POverlay',
   props: overlayProps,
-  emits: ['update:modelValue', 'open', 'close'],
+  emits: ['update:modelValue', 'open', 'close', 'outsideClick'],
   setup(props: OverlayProps, { slots, emit, expose }) {
-    const { showArrow, class: className, style, dark } = toRefs(props)
+    const { showArrow, class: className, style, dark, origin } = toRefs(props)
 
     const ns = useNamespace('overlay')
     const overlayEl = ref<HTMLDivElement | null>(null)
     const { x, y, isVisible, realPosition } = useOverlay(overlayEl, props)
+    useClickOutside(
+      overlayEl,
+      () => {
+        emit('outsideClick')
+      },
+      { ignore: [origin] }
+    )
     const darkStyle = dark.value
       ? {
           ['--promiseui-block']: '#464d6e'

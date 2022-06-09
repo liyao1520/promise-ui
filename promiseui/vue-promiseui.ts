@@ -10,6 +10,7 @@ import TabsInstall, { Tabs, TabPane } from './tabs'
 import SwitchInstall, { Switch } from './switch'
 import RadioInstall, { Radio, RadioGroup } from './radio'
 import CheckboxInstall, { Checkbox, CheckboxGroup } from './checkbox'
+import SelectInstall, { Select } from './select'
 
 const installs = [
   ButtonInstall,
@@ -22,7 +23,8 @@ const installs = [
   TabsInstall,
   SwitchInstall,
   RadioInstall,
-  CheckboxInstall
+  CheckboxInstall,
+  SelectInstall
 ]
 
 export {
@@ -40,7 +42,8 @@ export {
   Radio,
   RadioGroup,
   Checkbox,
-  CheckboxGroup
+  CheckboxGroup,
+  Select
 }
 
 export default {

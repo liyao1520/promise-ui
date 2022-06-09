@@ -1,0 +1,13 @@
+@import '../../styles-var';
+
+.#{$prefix}-select {
+  /* your style */
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+  &__input {
+    display: flex;
+    height: 55px;
+    border: 1px solid $border-color;
+  }
+}
