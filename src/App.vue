@@ -1,7 +1,9 @@
 <template>
-  <p-select />
+  <virtualScroll></virtualScroll>
 </template>
 
-<script setup></script>
+<script setup>
+  import virtualScroll from './components/virtual-scroll'
+</script>
 
 <style></style>
