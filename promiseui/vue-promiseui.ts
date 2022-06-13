@@ -11,6 +11,7 @@ import SwitchInstall, { Switch } from './switch'
 import RadioInstall, { Radio, RadioGroup } from './radio'
 import CheckboxInstall, { Checkbox, CheckboxGroup } from './checkbox'
 import SelectInstall, { Select } from './select'
+import ScrollbarInstall, { Scrollbar } from './scrollbar'
 
 const installs = [
   ButtonInstall,
@@ -24,7 +25,8 @@ const installs = [
   SwitchInstall,
   RadioInstall,
   CheckboxInstall,
-  SelectInstall
+  SelectInstall,
+  ScrollbarInstall
 ]
 
 export {
@@ -43,7 +45,8 @@ export {
   RadioGroup,
   Checkbox,
   CheckboxGroup,
-  Select
+  Select,
+  Scrollbar
 }
 
 export default {

@@ -6,7 +6,7 @@ import { inputProps, InputProps } from './input-types'
 import './index.scss'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import useEvent from './hooks/use-event'
-import { nativeClick } from '../../shared/utils'
+import nativeClick from '../../shared/utils/nativeClick'
 import Wave from '../../shared/components/wave'
 
 export default defineComponent({

@@ -1,5 +1,5 @@
 import { App, ComponentPublicInstance, createApp } from 'vue'
-import { inherit } from '../../shared/utils'
+import inherit from '../../shared/utils/inherit'
 import { MessageFn, messageTypes, IMessage } from './message-types'
 import MessageComponent from './message'
 const MARGIN = 15 // message 之前的距离

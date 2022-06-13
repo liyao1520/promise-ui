@@ -5,7 +5,7 @@ import './index.scss'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import { Icon } from '../../icon'
 import { CloseOutline } from '@vicons/ionicons5'
-import { nativeClick } from '../../shared/utils'
+import nativeClick from '../../shared/utils/nativeClick'
 
 export default defineComponent({
   __TAB_PANE__: true,

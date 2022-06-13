@@ -1,5 +1,5 @@
 import { defineComponent, getCurrentInstance, h, onMounted, watch } from 'vue'
-import { findDOMNode } from '../utils'
+import findDOMNode from '../utils/findDOMNode'
 
 export default defineComponent({
   name: 'Wave',
