@@ -4,7 +4,7 @@ import { scrollbarProps, ScrollbarProps } from './scrollbar-types'
 import './index.scss'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import getScrollbarWidth from '../../shared/utils/getScrollbarWidth'
-import { useResizeObserver, useThrottleFn } from '@vueuse/core'
+import { useMutationObserver, useResizeObserver, useThrottleFn } from '@vueuse/core'
 import Scrollbar from './scroll-bar'
 // 实现原理:
 /**
@@ -46,6 +46,7 @@ export default defineComponent({
     }
     onMounted(handleHeightAndWidthRatio)
     useResizeObserver(viewEl, handleHeightAndWidthRatio)
+    useMutationObserver(viewEl, handleHeightAndWidthRatio, { subtree: true, childList: true })
     const onScroll = useThrottleFn((e: UIEvent) => {
       const el = viewEl.value as HTMLElement
 
@@ -65,33 +66,40 @@ export default defineComponent({
         viewEl.value.scrollLeft += offset / widthRatio.value
       }
     }
+    const isShowYBar = computed(() => heightRatio.value < 1)
+    const isShowXBar = computed(() => widthRatio.value < 1)
 
     const wrapClasses = computed(() => [ns.e('wrap'), props.wrapClass])
     const viewClasses = computed(() => [ns.e('view'), props.viewClass])
     const wrapStyles = computed(() => [
       {
         height: props.height,
+        width: props.width,
         maxHeight: props.maxHeight
       },
       props.wrapStyle
     ])
     const viewStyles = computed(() => [
       {
-        height: `calc(100% + ${scrollbarWidth}px)`,
-        width: `calc(100% + ${scrollbarWidth}px)`,
+        height: isShowXBar.value ? `calc(100% + ${scrollbarWidth}px)` : '100%',
+        width: isShowYBar.value ? `calc(100% + ${scrollbarWidth}px)` : '100%',
         maxHeight: props.maxHeight
       },
       props.viewStyle
     ])
     const contentStyles = computed(() => [
       {
-        height: `calc(100% - ${scrollbarWidth}px)`,
-        width: `calc(100% - ${scrollbarWidth}px)`
-      },
-      props.viewStyle
+        height: isShowXBar.value ? `calc(100% - ${scrollbarWidth}px)` : 'unset',
+        width: isShowYBar.value ? `calc(100% - ${scrollbarWidth}px)` : 'unset'
+      }
     ])
-    const scrollTo = () => (viewEl.value ? viewEl.value.scrollTo : () => {})
-    const scrollBy = () => (viewEl.value ? viewEl.value.scrollBy : () => {})
+    const scrollTo = (options?: ScrollToOptions | undefined) => {
+      viewEl.value && viewEl.value.scrollTo(options)
+    }
+    const scrollBy = (options?: ScrollToOptions | undefined) => {
+      viewEl.value && viewEl.value.scrollBy(options)
+    }
+
     expose({
       scrollTo,
       scrollBy
@@ -111,6 +119,8 @@ export default defineComponent({
             scrollYRatio={scrollYRatio.value}
             scrollXRatio={scrollXRatio.value}
             scrollByOffset={scrollByOffset}
+            isShowXBar={isShowXBar.value}
+            isShowYBar={isShowYBar.value}
           />
         </div>
       )

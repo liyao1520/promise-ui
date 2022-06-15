@@ -21,22 +21,26 @@ export default defineComponent({
       type: Number,
       required: true
     },
+    isShowYBar: Boolean,
+    isShowXBar: Boolean,
     scrollByOffset: Function
   },
   setup(props) {
     const ns = useNamespace('scrollbar')
-    const isShowYBar = computed(() => props.heightRatio !== 1)
-    const isShowXBar = computed(() => props.widthRatio !== 1)
+
     const isY = ref(true)
+
     const xBarStyle = computed(() => ({
-      minWidth: isShowXBar.value ? props.minSize + 'px' : 0,
-      width: isShowXBar.value ? props.widthRatio * 100 + '%' : 0,
-      left: props.scrollXRatio * 100 + '%'
+      minWidth: props.isShowXBar ? props.minSize + 'px' : 0,
+      width: props.widthRatio * 100 + '%',
+      left: props.scrollXRatio * 100 + '%',
+      display: props.isShowXBar ? 'block' : 'none'
     }))
     const yBarStyle = computed(() => ({
-      minHeight: isShowYBar.value ? props.minSize + 'px' : 0,
-      height: isShowYBar.value ? props.heightRatio * 100 + '%' : 0,
-      top: props.scrollYRatio * 100 + '%'
+      minHeight: props.isShowYBar ? props.minSize + 'px' : 0,
+      height: props.heightRatio * 100 + '%',
+      top: props.scrollYRatio * 100 + '%',
+      display: props.isShowYBar ? 'block' : 'none'
     }))
     const isMouseDown = ref(false)
 

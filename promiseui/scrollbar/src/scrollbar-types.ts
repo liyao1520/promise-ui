@@ -2,6 +2,7 @@ import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
 
 export const scrollbarProps = {
   height: String,
+  width: String,
   maxHeight: String,
   wrapStyle: {
     type: [String, Object] as PropType<string | CSSProperties>,
