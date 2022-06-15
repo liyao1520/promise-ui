@@ -1,8 +1,11 @@
+import { useNamespace } from '../../hooks/use-namespace'
+import './index.scss'
 export default () => {
+  const ns = useNamespace('loading-icon')
   return (
     <svg
       t="1654517041267"
-      class="icon"
+      class={['icon', ns.b()]}
       viewBox="0 0 1024 1024"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"

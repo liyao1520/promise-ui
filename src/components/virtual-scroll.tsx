@@ -8,7 +8,7 @@ import {
   watchEffect,
   withModifiers
 } from 'vue'
-import { boolean } from 'yargs'
+
 import './index.scss'
 export default defineComponent({
   setup(props, { expose }) {

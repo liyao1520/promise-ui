@@ -1,4 +1,4 @@
-import { computed, defineComponent, onMounted, ref } from 'vue'
+import { computed, defineComponent, onMounted, ref, withModifiers } from 'vue'
 import { scrollbarProps, ScrollbarProps } from './scrollbar-types'
 
 import './index.scss'
@@ -27,7 +27,7 @@ import Scrollbar from './scroll-bar'
 export default defineComponent({
   name: 'PScrollbar',
   props: scrollbarProps,
-  emits: ['scroll'],
+  emits: ['scroll', 'native-scroll'],
   setup(props: ScrollbarProps, { slots, expose, emit }) {
     const ns = useNamespace('scrollbar')
     const scrollbarWidth = getScrollbarWidth()
@@ -47,13 +47,20 @@ export default defineComponent({
     onMounted(handleHeightAndWidthRatio)
     useResizeObserver(viewEl, handleHeightAndWidthRatio)
     useMutationObserver(viewEl, handleHeightAndWidthRatio, { subtree: true, childList: true })
-    const onScroll = useThrottleFn((e: UIEvent) => {
-      const el = viewEl.value as HTMLElement
 
+    let prev = 0
+
+    const onScroll = (e: MouseEvent) => {
+      emit('native-scroll', e)
+      const now = Date.now()
+      if (now - prev < 16.7) return
+
+      const el = viewEl.value as HTMLElement
       scrollYRatio.value = el.scrollTop / el.scrollHeight
       scrollXRatio.value = el.scrollLeft / el.scrollWidth
       emit('scroll', e)
-    }, 16.7)
+      prev = now
+    }
     // 给 bar 提供的方法,通过计算先后两次的pageY计算得到偏移量offset,
     // offset / heightRatio 得到对应因该滚动的真实距离
     // 通过 scrollTop += offset / heightRatio 修改scrollTop值,从而触发scroll事件
@@ -102,12 +109,20 @@ export default defineComponent({
 
     expose({
       scrollTo,
-      scrollBy
+      scrollBy,
+      getEl() {
+        return viewEl.value
+      }
     })
     return () => {
       return (
         <div class={wrapClasses.value} style={wrapStyles.value}>
-          <div class={viewClasses.value} style={viewStyles.value} ref={viewEl} onScroll={onScroll}>
+          <div
+            class={viewClasses.value}
+            style={viewStyles.value}
+            ref={viewEl}
+            onScroll={withModifiers(onScroll, ['passive'])}
+          >
             <div class={ns.e('content')} style={contentStyles.value}>
               {slots.default?.()}
             </div>

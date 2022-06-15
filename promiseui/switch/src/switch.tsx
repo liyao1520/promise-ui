@@ -4,7 +4,7 @@ import { useNamespace } from '../../shared/hooks/use-namespace'
 import Wave from '../../shared/components/wave'
 import { commonType } from '../../shared/common'
 import './index.scss'
-import IconLoading from './components/icon-loading'
+import IconLoading from '../../shared/components/loading'
 
 export default defineComponent({
   name: 'PSwitch',

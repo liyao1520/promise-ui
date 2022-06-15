@@ -1,0 +1,13 @@
+@import '../../../styles/prefix';
+
+.#{$prefix}-loading-icon {
+  animation: laoding 1s infinite;
+}
+@keyframes laoding {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

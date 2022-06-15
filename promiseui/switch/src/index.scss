@@ -41,19 +41,11 @@
     position: absolute;
     z-index: 1;
     transition: 0.5s;
-    @keyframes laoding {
-      0% {
-        transform: rotate(0);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
+
     .icon {
       position: absolute;
       left: 50%;
       top: 50%;
-      animation: laoding 1s infinite;
       fill: $text;
       z-index: 2;
     }
