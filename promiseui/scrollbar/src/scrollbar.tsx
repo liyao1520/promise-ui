@@ -39,21 +39,6 @@ export default defineComponent({
     // scrollTop 占 scrollHeight 的比例
     const scrollYRatio = ref(0)
     const scrollXRatio = ref(0)
-    const wrapStyles = computed(() => [
-      {
-        height: props.height,
-        maxHeight: props.maxHeight
-      },
-      props.wrapStyle
-    ])
-    const viewStyles = computed(() => [
-      {
-        height: `calc(100% + ${scrollbarWidth}px)`,
-        width: `calc(100% + ${scrollbarWidth}px)`,
-        maxHeight: props.maxHeight
-      },
-      props.viewStyle
-    ])
     const handleHeightAndWidthRatio = () => {
       const el = viewEl.value as HTMLElement
       heightRatio.value = el.clientHeight / el.scrollHeight
@@ -83,6 +68,28 @@ export default defineComponent({
 
     const wrapClasses = computed(() => [ns.e('wrap'), props.wrapClass])
     const viewClasses = computed(() => [ns.e('view'), props.viewClass])
+    const wrapStyles = computed(() => [
+      {
+        height: props.height,
+        maxHeight: props.maxHeight
+      },
+      props.wrapStyle
+    ])
+    const viewStyles = computed(() => [
+      {
+        height: `calc(100% + ${scrollbarWidth}px)`,
+        width: `calc(100% + ${scrollbarWidth}px)`,
+        maxHeight: props.maxHeight
+      },
+      props.viewStyle
+    ])
+    const contentStyles = computed(() => [
+      {
+        height: `calc(100% - ${scrollbarWidth}px)`,
+        width: `calc(100% - ${scrollbarWidth}px)`
+      },
+      props.viewStyle
+    ])
     const scrollTo = () => (viewEl.value ? viewEl.value.scrollTo : () => {})
     const scrollBy = () => (viewEl.value ? viewEl.value.scrollBy : () => {})
     expose({
@@ -93,7 +100,9 @@ export default defineComponent({
       return (
         <div class={wrapClasses.value} style={wrapStyles.value}>
           <div class={viewClasses.value} style={viewStyles.value} ref={viewEl} onScroll={onScroll}>
-            {slots.default?.()}
+            <div class={ns.e('content')} style={contentStyles.value}>
+              {slots.default?.()}
+            </div>
           </div>
           <Scrollbar
             minSize={props.minSize}
