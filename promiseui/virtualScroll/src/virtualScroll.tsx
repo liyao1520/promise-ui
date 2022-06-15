@@ -1,5 +1,5 @@
 import { computed, CSSProperties, defineComponent, onMounted, onUnmounted, ref } from 'vue'
-import { virtualScrollProps, VirtualScrollProps } from './virtualScroll-types'
+import { RenderItemProps, virtualScrollProps, VirtualScrollProps } from './virtualScroll-types'
 
 import './index.scss'
 import { useNamespace } from '../../shared/hooks/use-namespace'
@@ -121,13 +121,27 @@ export default defineComponent({
         scrollToIndex(index, option)
       }
     })
+    const handleItemStyle = (renderItemProps: RenderItemProps<unknown>) => {
+      if (typeof props.itemStyle === 'function') {
+        return props.itemStyle(renderItemProps)
+      } else {
+        return props.itemStyle || {}
+      }
+    }
+    const handleItemClass = (renderItemProps: RenderItemProps<unknown>) => {
+      if (typeof props.itemClass === 'function') {
+        return props.itemClass(renderItemProps)
+      } else {
+        return props.itemClass
+      }
+    }
     const renderList = () => {
       return showList.value.map((row, index, rows) => {
         return (
           <li
             key={props.itemKey ? (row as any)[props.itemKey] : index}
-            style={[props.itemStyle || {}, { height: props.itemHeight + 'px' }]}
-            class={props.itemClass}
+            style={[handleItemStyle({ row, index, rows }), { height: props.itemHeight + 'px' }]}
+            class={handleItemClass({ row, index, rows })}
           >
             {slots.item?.({
               row,

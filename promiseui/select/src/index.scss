@@ -5,9 +5,30 @@
   width: 100%;
   position: relative;
   cursor: pointer;
+  color: $text;
   &__input {
     display: flex;
     height: 55px;
     border: 1px solid $border-color;
+  }
+  &__option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0 10px;
+    font-size: $font-size-lg;
+    &:hover {
+      background-color: $item-bg-hover;
+    }
+  }
+  &__option_content {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  &__option_active {
+    background-color: $item-bg-hover;
+    color: $brand;
+    font-weight: $font-title-weight;
   }
 }

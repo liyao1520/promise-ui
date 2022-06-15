@@ -1,5 +1,9 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
-import { number } from 'yargs'
+export type RenderItemProps<T> = {
+  row: T
+  rows: T[]
+  index: number
+}
 
 export const virtualScrollProps = {
   itemHeight: {
@@ -8,15 +12,21 @@ export const virtualScrollProps = {
   },
   wrapHeight: Number,
   listData: {
-    type: Array,
+    type: Array as PropType<any[]>,
     default: []
   },
   itemKey: {
     type: String
   },
-  itemClass: {},
+  itemClass: {
+    type: [Object, Array, String, Function] as PropType<
+      any | ((props: RenderItemProps<unknown>) => any)
+    >
+  },
   itemStyle: {
-    type: [String, Object] as PropType<string | CSSProperties>
+    type: [String, Object, Function] as PropType<
+      string | CSSProperties | ((props: RenderItemProps<unknown>) => string | CSSProperties)
+    >
   },
   onLoadMore: {
     type: Function
