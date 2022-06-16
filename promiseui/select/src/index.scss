@@ -2,14 +2,28 @@
 
 .#{$prefix}-select {
   /* your style */
-  width: 100%;
   position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 30px;
+  border: 1px solid $border-color;
   cursor: pointer;
   color: $text;
-  &__input {
+  padding: 0 10px;
+  font-size: $font-size-lg;
+  &__tags {
     display: flex;
-    height: 55px;
-    border: 1px solid $border-color;
+    flex-wrap: wrap;
+  }
+  &__tag {
+    margin-right: 10px;
+  }
+  &__single-value {
+    @include text-overflow;
+  }
+  &__input {
+    @include text-overflow;
   }
   &__option {
     display: flex;
@@ -20,15 +34,15 @@
     &:hover {
       background-color: $item-bg-hover;
     }
+    &--active {
+      background-color: $item-bg-hover;
+      color: $brand;
+      font-weight: $font-title-weight;
+    }
   }
   &__option_content {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-  }
-  &__option_active {
-    background-color: $item-bg-hover;
-    color: $brand;
-    font-weight: $font-title-weight;
   }
 }

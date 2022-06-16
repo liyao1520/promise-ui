@@ -1,4 +1,14 @@
-import { computed, CSSProperties, defineComponent, onMounted, onUnmounted, ref } from 'vue'
+import {
+  computed,
+  CSSProperties,
+  defineComponent,
+  KeepAlive,
+  onActivated,
+  onDeactivated,
+  onMounted,
+  onUnmounted,
+  ref
+} from 'vue'
 import { RenderItemProps, virtualScrollProps, VirtualScrollProps } from './virtualScroll-types'
 
 import './index.scss'
@@ -10,8 +20,8 @@ import { Scrollbar } from '../../scrollbar'
 export default defineComponent({
   name: 'PVirtualScroll',
   props: virtualScrollProps,
-  emits: [],
-  setup(props: VirtualScrollProps, { expose, slots }) {
+  emits: ['item-click'],
+  setup(props: VirtualScrollProps, { expose, slots, emit }) {
     const scrollContainer = ref<HTMLDivElement | null>(null)
     const scrollbar$ = ref()
     const ns = useNamespace('virtualScroll')
@@ -97,6 +107,7 @@ export default defineComponent({
       window.removeEventListener('resize', getContainSize)
       window.removeEventListener('orientationchange', getContainSize)
     })
+
     interface IScrollToIndexOption {
       behavior: 'auto' | 'smooth'
       offset: number
@@ -119,6 +130,12 @@ export default defineComponent({
         const index = props.listData.findIndex(findItemFn)
         if (index === -1) return
         scrollToIndex(index, option)
+      },
+      setScrollTop(value: number) {
+        scrollContainer.value && (scrollContainer.value.scrollTop = value)
+      },
+      getScrollTop() {
+        return scrollContainer.value?.scrollTop || 0
       }
     })
     const handleItemStyle = (renderItemProps: RenderItemProps<unknown>) => {
@@ -142,6 +159,7 @@ export default defineComponent({
             key={props.itemKey ? (row as any)[props.itemKey] : index}
             style={[handleItemStyle({ row, index, rows }), { height: props.itemHeight + 'px' }]}
             class={handleItemClass({ row, index, rows })}
+            onClick={(e) => emit('item-click', e, { row, index, rows })}
           >
             {slots.item?.({
               row,

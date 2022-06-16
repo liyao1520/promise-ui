@@ -34,7 +34,8 @@ export const virtualScrollProps = {
   loadMoreOffset: {
     type: Number,
     default: 1
-  }
+  },
+  keepAlive: Boolean
 } as const
 
 export type VirtualScrollProps = ExtractPropTypes<typeof virtualScrollProps>

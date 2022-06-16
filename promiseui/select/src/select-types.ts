@@ -6,7 +6,7 @@ export interface ISelectOption {
   class?: string
   style?: string | CSSProperties
   disabled?: boolean
-  [selectActiveKey]: boolean
+  [selectActiveKey]?: boolean
 }
 export type FieldNames = { value: string; label: string }
 
@@ -22,7 +22,7 @@ export const selectProps = {
     default: false
   },
   modelValue: {
-    type: [String, Number] as PropType<string | number>
+    type: [String, Number, Array] as PropType<string | number | string[] | number[]>
   },
   clearable: {
     type: Boolean,
@@ -34,6 +34,15 @@ export const selectProps = {
   filterable: {
     type: Boolean,
     default: false
+  },
+  maxOptionCount: {
+    type: Number,
+    default: 10
+  },
+  multiple: Boolean,
+  multipleLimit: {
+    type: Number,
+    default: Infinity
   }
 } as const
 
