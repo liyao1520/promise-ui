@@ -1,6 +1,21 @@
 <template>
   <div>
     <p-select :options="options" class="dmoe" v-model="active" multiple></p-select>
+    <p-tag>标签</p-tag>
+    <p-tag type="success">标签</p-tag>
+    <p-tag type="danger">标签</p-tag>
+    <p-tag type="warning">标签</p-tag>
+    <p-tag type="info">标签</p-tag>
+    <p-tag size="sm">标签</p-tag>
+    <p-tag size="sm" type="success">标签</p-tag>
+    <p-tag size="sm" type="danger">标签</p-tag>
+    <p-tag size="sm" type="warning">标签</p-tag>
+    <p-tag size="sm" type="info">标签</p-tag>
+    <p-tag size="lg">标签</p-tag>
+    <p-tag size="lg" type="success">标签</p-tag>
+    <p-tag size="lg" type="danger">标签</p-tag>
+    <p-tag size="lg" type="warning">标签</p-tag>
+    <p-tag size="lg" type="info">标签</p-tag>
   </div>
 </template>
 

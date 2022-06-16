@@ -13,6 +13,7 @@ import CheckboxInstall, { Checkbox, CheckboxGroup } from './checkbox'
 import SelectInstall, { Select } from './select'
 import ScrollbarInstall, { Scrollbar } from './scrollbar'
 import VirtualScrollInstall, { VirtualScroll } from './virtualScroll'
+import TagInstall, { Tag } from './tag'
 
 const installs = [
   ButtonInstall,
@@ -28,7 +29,8 @@ const installs = [
   CheckboxInstall,
   SelectInstall,
   ScrollbarInstall,
-  VirtualScrollInstall
+  VirtualScrollInstall,
+  TagInstall
 ]
 
 export {
@@ -49,7 +51,8 @@ export {
   CheckboxGroup,
   Select,
   Scrollbar,
-  VirtualScroll
+  VirtualScroll,
+  Tag
 }
 
 export default {

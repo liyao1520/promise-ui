@@ -1,5 +1,61 @@
-@import "../../styles-var";;
+@import '../../styles-var';
 
 .#{$prefix}-tag {
   /* your style */
+  display: inline-flex;
+  align-items: center;
+  @include text-overflow;
+  padding: 0 7px;
+  border: 1px solid transparent;
+  &__default {
+    color: $text;
+    border-color: $border-color;
+  }
+  &__success {
+    color: $success;
+    background-color: $success-bg;
+    border-color: $success;
+  }
+  &__info {
+    color: $info;
+    background-color: $info-bg;
+    border-color: $info;
+  }
+  &__danger {
+    color: $danger;
+    background-color: $danger-bg;
+    border-color: $danger;
+  }
+
+  &__warning {
+    color: $warning;
+    background-color: $warning-bg;
+    border-color: $warning;
+  }
+  &__md {
+    font-size: $font-size-md;
+    height: 22px;
+  }
+  &__sm {
+    font-size: $font-size-sm;
+    height: 28px;
+  }
+  &__lg {
+    font-size: $font-size-lg;
+    height: 34px;
+  }
+  .#{$prefix}-icon {
+    cursor: pointer;
+    font-size: 1.25em;
+    &:hover {
+      background-color: $bg-hover;
+    }
+  }
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    .#{$prefix}-icon {
+      cursor: not-allowed;
+    }
+  }
 }
