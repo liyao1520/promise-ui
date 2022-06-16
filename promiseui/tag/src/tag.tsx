@@ -26,7 +26,7 @@ export default defineComponent({
       return (
         <div class={classes.value}>
           {slots.default?.()}
-          <Icon component={CloseSharp} onClick={onClose} />
+          {props.closable && <Icon component={CloseSharp} onClick={onClose} />}
         </div>
       )
     }
