@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p-select :options="options" class="dmoe" v-model="active" multiple></p-select>
+    <p-select v-model="active" :options="options" class="dmoe" multiple></p-select>
     <p-tag>标签</p-tag>
     <p-tag type="success">标签</p-tag>
     <p-tag type="danger">标签</p-tag>
