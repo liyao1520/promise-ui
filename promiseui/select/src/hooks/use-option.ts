@@ -1,4 +1,3 @@
-import { log } from 'console'
 import { UseNamespace } from './../../../shared/hooks/use-namespace'
 import { ref, Ref, SetupContext, watch } from 'vue'
 import { RenderItemProps } from '../../../virtualScroll'
@@ -10,6 +9,7 @@ export default function (
   singleActiveItem: Ref<ISelectOption | undefined>,
   multipleActiveItems: Ref<ISelectOption[]>,
   optionListShow: Ref<boolean>,
+  inputValue: Ref<string>,
   ns: UseNamespace
 ) {
   const options = ref<ISelectOption[]>(props.options || [])
@@ -50,9 +50,21 @@ export default function (
     }
   }
 
+  const onClearOpiton = (e: Event) => {
+    e.stopPropagation()
+    if (props.multiple) {
+      multipleActiveItems.value.forEach((item) => (item[selectActiveKey] = false))
+      multipleActiveItems.value = []
+    } else {
+      singleActiveItem.value = undefined
+    }
+    optionListShow.value = false
+    inputValue.value = ''
+  }
   return {
     selectOptionClick,
     selectOptionClass,
-    options
+    options,
+    onClearOpiton
   }
 }

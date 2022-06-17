@@ -31,6 +31,7 @@
   font-size: $font-size-lg;
 
   &__tags {
+    flex: 1;
     display: flex;
     flex-wrap: wrap;
     align-content: space-around;
@@ -39,6 +40,7 @@
     margin: 1.5px 7px 1.5px 0;
   }
   &__single-value {
+    flex: 1;
     @include text-overflow;
   }
   &__input {
@@ -83,5 +85,22 @@
     justify-content: center;
     align-items: center;
     padding: 10px 0;
+  }
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    > * {
+      cursor: not-allowed;
+    }
+  }
+  &__clear {
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    border-radius: 50%;
+    color: $text-weak;
+    &:hover {
+      background-color: $item-bg-hover;
+    }
   }
 }

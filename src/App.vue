@@ -1,6 +1,13 @@
 <template>
   <div>
-    <p-select v-model="active" :options="options" class="dmoe" filterable></p-select>
+    <p-select
+      clearable
+      v-model="active"
+      :options="options"
+      class="dmoe"
+      multiple
+      filterable
+    ></p-select>
     <p-tag>标签</p-tag>
     <p-tag type="success">标签</p-tag>
     <p-tag type="danger">标签</p-tag>

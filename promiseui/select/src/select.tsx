@@ -1,5 +1,5 @@
-import { defineComponent, nextTick, ref, SetupContext, watch, withModifiers } from 'vue'
-import { selectProps, SelectProps, ISelectOption, selectActiveKey } from './select-types'
+import { defineComponent, nextTick, ref, SetupContext, watch, shallowRef } from 'vue'
+import { selectProps, SelectProps, ISelectOption } from './select-types'
 
 import './index.scss'
 import { Overlay } from '../../overlay'
@@ -11,6 +11,10 @@ import useMemoScrollTop from './hooks/use-memo-scrollTop'
 import { Tag } from '../../tag'
 import useInput from './hooks/use-input'
 import useDefaultValue from './hooks/use-defaultValue'
+
+import { computed } from '@vue/reactivity'
+import { Icon } from '../../icon'
+import { ChevronDownSharp, CloseCircleOutline } from '@vicons/ionicons5'
 
 const ITEM_HEIGHT = 32
 
@@ -36,23 +40,29 @@ export default defineComponent({
     const singleActiveItem = ref<ISelectOption>(defaultSingleActiveItem)
     const multipleActiveItems = ref<ISelectOption[]>(defaultMultipleActiveItems)
 
-    const { selectOptionClick, selectOptionClass, options } = useOption(
+    const { selectOptionClick, selectOptionClass, options, onClearOpiton } = useOption(
       props,
       ctx as SetupContext,
       singleActiveItem,
       multipleActiveItems,
       optionListShow,
+      inputValue,
       ns
     )
     const { onAddTag, onTagClose } = useInput(props, inputValue, multipleActiveItems, options)
     const handleSelectOptionClick = (e: Event, itemProps: RenderItemProps<ISelectOption>) => {
       selectOptionClick(e, itemProps)
+      const needScroll = inputValue.value.length !== 0
       inputValue.value = ''
-      nextTick(() => {
-        virtualListRef.value?.setScrollTop(0)
-      })
+      if (needScroll) {
+        nextTick(() => {
+          virtualListRef.value?.setScrollTop(0)
+        })
+      }
     }
     const selectClick = () => {
+      if (props.disabled) return
+
       optionListShow.value = !optionListShow.value
       if (optionListShow.value) {
         nextTick(() => {
@@ -70,8 +80,13 @@ export default defineComponent({
       }
     )
     watch(singleActiveItem, () => {
-      ctx.emit('update:modelValue', singleActiveItem.value.value)
+      ctx.emit('update:modelValue', singleActiveItem.value?.value)
     })
+
+    const classes = computed(() => ({
+      [ns.b()]: true,
+      [ns.m('disabled')]: props.disabled
+    }))
 
     const renderSelectItem = ({ row }: RenderItemProps<ISelectOption>) => {
       return <div class={ns.e('option_content')}>{row.label}</div>
@@ -101,6 +116,7 @@ export default defineComponent({
           class={ns.e('input')}
           v-model={inputValue.value}
           ref={selectInputRef}
+          disabled={props.disabled}
           style={{
             width: inputValue.value.length * 14 + 'px'
           }}
@@ -114,19 +130,32 @@ export default defineComponent({
           class={[ns.e('input'), ns.e('single-value-input')]}
           v-model={inputValue.value}
           ref={selectInputRef}
+          disabled={props.disabled}
           style={{
             width: '100%'
           }}
-          placeholder={singleActiveItem.value.label}
+          placeholder={singleActiveItem.value?.label}
         ></input>
       ) : (
         <span class={ns.e('single-value')}>{singleActiveItem.value?.label}</span>
       )
 
+    const IconComponent = shallowRef(ChevronDownSharp)
     return () => {
       return (
-        <div class="pui-select" onClick={selectClick} ref={selectRef}>
+        <div
+          class={classes.value}
+          onClick={selectClick}
+          ref={selectRef}
+          onMouseenter={() => (IconComponent.value = CloseCircleOutline)}
+          onMouseleave={() => (IconComponent.value = ChevronDownSharp)}
+        >
           {props.multiple ? renderMultiple() : renderSingle()}
+          {props.clearable && (
+            <div class={ns.e('clear')} onClick={onClearOpiton}>
+              <Icon component={IconComponent.value} />
+            </div>
+          )}
           <Overlay
             v-model={optionListShow.value}
             position="bottom-start"

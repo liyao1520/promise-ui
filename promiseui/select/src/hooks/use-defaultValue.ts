@@ -1,7 +1,9 @@
 import { ISelectOption, selectActiveKey, SelectProps } from '../select-types'
 
 export default function (props: SelectProps) {
-  const defaultSingleActiveItem = props.options?.find((item) => item.value === props.modelValue)
+  const defaultSingleActiveItem = props.options
+    ? props.options.find((item) => item.value === props.modelValue)
+    : undefined
   let defaultMultipleActiveItems: ISelectOption[] = []
 
   if (Array.isArray(props.modelValue)) {
