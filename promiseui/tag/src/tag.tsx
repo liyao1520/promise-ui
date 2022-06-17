@@ -18,9 +18,9 @@ export default defineComponent({
       [ns.e(props.type)]: true,
       [ns.m('disabled')]: props.disabled
     }))
-    const onClose = () => {
+    const onClose = (e: Event) => {
       if (props.disabled) return
-      emit('close')
+      emit('close', e)
     }
     return () => {
       return (

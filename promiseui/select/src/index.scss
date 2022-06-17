@@ -1,31 +1,64 @@
 @import '../../styles-var';
 
+@mixin placeholder-color($color) {
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
+  &::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: $color;
+  }
+  &:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: $color;
+  }
+  &:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: $color;
+  }
+}
 .#{$prefix}-select {
   /* your style */
   position: relative;
   width: 100%;
   display: flex;
   align-items: center;
-  height: 30px;
+  min-height: 30px;
   border: 1px solid $border-color;
   cursor: pointer;
   color: $text;
-  padding: 0 10px;
+  padding: 1.5px 10px;
   font-size: $font-size-lg;
+
   &__tags {
     display: flex;
     flex-wrap: wrap;
+    align-content: space-around;
   }
   &__tag {
-    margin-right: 10px;
+    margin: 1.5px 7px 1.5px 0;
   }
   &__single-value {
     @include text-overflow;
   }
   &__input {
-    @include text-overflow;
+    display: inline-flex;
+    font-size: inherit;
+    line-height: inherit;
+    outline: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    border: none;
+    min-width: $font-size;
+  }
+  &__single-value-input {
+    @include placeholder-color($text);
+    &:focus {
+      @include placeholder-color($placeholder);
+    }
   }
   &__option {
+    user-select: none;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -44,5 +77,11 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+  }
+  &__no-match {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
   }
 }

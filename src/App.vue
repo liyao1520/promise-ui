@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p-select v-model="active" :options="options" class="dmoe" multiple></p-select>
+    <p-select v-model="active" :options="options" class="dmoe" filterable></p-select>
     <p-tag>标签</p-tag>
     <p-tag type="success">标签</p-tag>
     <p-tag type="danger">标签</p-tag>
@@ -29,7 +29,7 @@
     }
   }
   const options = ref(list)
-  const active = ref([2, 10])
+  const active = ref(2)
   watch(active, () => {
     console.log(active.value)
   })

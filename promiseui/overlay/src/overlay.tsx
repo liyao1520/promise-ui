@@ -14,6 +14,7 @@ import './index.scss'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import useOverlay from './hooks/use-overlay'
 import useClickOutside from '../../shared/hooks/use-click-outside'
+import { onClickOutside } from '@vueuse/core'
 
 export default defineComponent({
   name: 'POverlay',
@@ -25,7 +26,7 @@ export default defineComponent({
     const ns = useNamespace('overlay')
     const overlayEl = ref<HTMLDivElement | null>(null)
     const { x, y, isVisible, realPosition } = useOverlay(overlayEl, props)
-    useClickOutside(
+    onClickOutside(
       overlayEl,
       () => {
         emit('outsideClick')

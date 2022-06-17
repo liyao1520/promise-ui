@@ -1,5 +1,6 @@
+import { useResizeObserver } from '@vueuse/core'
 import { Placement } from './../overlay-types'
-import { ComponentPublicInstance, computed, nextTick, ref, Ref, toRefs, watchEffect } from 'vue'
+import { ComponentPublicInstance, computed, ref, Ref, toRef, toRefs, watchEffect } from 'vue'
 import { OverlayProps } from '../overlay-types'
 
 const useOverlay = (overlayEl: Ref<HTMLDivElement | null>, props: OverlayProps) => {
@@ -90,6 +91,10 @@ const useOverlay = (overlayEl: Ref<HTMLDivElement | null>, props: OverlayProps) 
       window.addEventListener('scroll', updatePosition)
       window.addEventListener('resize', updatePosition)
     }
+  })
+
+  useResizeObserver(toRef(props, 'origin'), () => {
+    updatePosition()
   })
   const isVisible = computed(() => modelValue.value && shouldShow.value)
   return {

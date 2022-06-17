@@ -1,4 +1,5 @@
 import type { PropType, ExtractPropTypes, CSSProperties } from 'vue'
+import { ICommonColor } from '../../types'
 export const selectActiveKey = Symbol.for('promiseui-select-active')
 export interface ISelectOption {
   value?: string | number
@@ -43,7 +44,12 @@ export const selectProps = {
   multipleLimit: {
     type: Number,
     default: Infinity
-  }
+  },
+  tagType: {
+    type: String as PropType<ICommonColor | 'default'>,
+    default: 'default'
+  },
+  addible: Boolean
 } as const
 
 export interface ISelectItem {

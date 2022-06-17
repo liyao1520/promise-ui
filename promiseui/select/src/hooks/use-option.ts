@@ -1,3 +1,4 @@
+import { log } from 'console'
 import { UseNamespace } from './../../../shared/hooks/use-namespace'
 import { ref, Ref, SetupContext, watch } from 'vue'
 import { RenderItemProps } from '../../../virtualScroll'
@@ -48,6 +49,7 @@ export default function (
       [ns.em('option', 'active')]: isActive(row)
     }
   }
+
   return {
     selectOptionClick,
     selectOptionClass,
