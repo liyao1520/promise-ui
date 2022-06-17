@@ -1,3 +1,4 @@
+import { MaybeElement, MaybeElementRef } from '@vueuse/core'
 import type { PropType, ExtractPropTypes, ComponentPublicInstance, CSSProperties } from 'vue'
 export type Placement =
   | 'top'
@@ -58,6 +59,10 @@ export const overlayProps = {
   flip: {
     type: Boolean,
     default: false
+  },
+  clickOutsideIgnore: {
+    type: Array as PropType<MaybeElementRef<MaybeElement>[]>,
+    default: []
   }
 } as const
 

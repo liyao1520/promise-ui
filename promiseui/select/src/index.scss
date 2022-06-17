@@ -103,4 +103,8 @@
       background-color: $item-bg-hover;
     }
   }
+  &__tag-dropdown {
+    width: 300px;
+    padding: 5px;
+  }
 }

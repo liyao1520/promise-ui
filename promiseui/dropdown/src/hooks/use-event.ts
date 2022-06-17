@@ -9,8 +9,13 @@ export default function (trigger: Ref<TriggerType>, visible: Ref<boolean>) {
     visible.value = !visible.value
   }
 
+  const handleLeave = () => {
+    visible.value = false
+  }
+
   const onMouseenter = () => {
     if (trigger.value === 'click') return
+    clearTimeout(timer)
     isEnter = true
     visible.value = true
   }
@@ -19,10 +24,7 @@ export default function (trigger: Ref<TriggerType>, visible: Ref<boolean>) {
     if (trigger.value === 'click') return
     isEnter = false
     clearTimeout(timer)
-    timer = window.setTimeout(() => {
-      if (isEnter) return
-      visible.value = false
-    }, 300)
+    timer = window.setTimeout(handleLeave, 300)
   }
   return { onClick, onMouseenter, onMouseleave }
 }

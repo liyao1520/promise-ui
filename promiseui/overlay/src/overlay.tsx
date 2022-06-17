@@ -13,7 +13,7 @@ import { overlayProps, OverlayProps } from './overlay-types'
 import './index.scss'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import useOverlay from './hooks/use-overlay'
-import useClickOutside from '../../shared/hooks/use-click-outside'
+
 import { onClickOutside } from '@vueuse/core'
 
 export default defineComponent({
@@ -31,7 +31,7 @@ export default defineComponent({
       () => {
         emit('outsideClick')
       },
-      { ignore: [origin] }
+      { ignore: [origin, ...props.clickOutsideIgnore] }
     )
     const darkStyle = dark.value
       ? {

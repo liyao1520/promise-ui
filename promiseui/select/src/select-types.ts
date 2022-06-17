@@ -36,6 +36,10 @@ export const selectProps = {
     type: Boolean,
     default: false
   },
+  maxTagCount: {
+    type: Number,
+    default: Infinity
+  },
   maxOptionCount: {
     type: Number,
     default: 10

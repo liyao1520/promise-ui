@@ -1,12 +1,14 @@
 <template>
   <div>
     <p-select
-      clearable
       v-model="active"
+      clearable
       :options="options"
       class="dmoe"
       multiple
       filterable
+      :max-tag-count="2"
+      :multipleLimit="3"
     ></p-select>
     <p-tag>标签</p-tag>
     <p-tag type="success">标签</p-tag>

@@ -22,7 +22,6 @@ const useClickOutside = (
       ignore?.some((i) => {
         const plain = unref(i)
         const el = ((plain as ComponentPublicInstance).$el ?? plain) as HTMLElement
-
         return el === e.target || el.contains(e.target as HTMLElement)
       })
     )

@@ -26,7 +26,6 @@ export default defineComponent({
       },
       props
     })
-    const defaultSlot = slots.default && slots.default()
 
     const onOutsideClick = () => (visible.value = false)
 
@@ -36,7 +35,7 @@ export default defineComponent({
 
     const renderLink = () => (
       <span class={[ns.e('a'), ns.em(props.type, props.size)]} {...commonProps}>
-        {defaultSlot}
+        {slots.default?.()}
         <Icon>
           <ChevronDownOutline />
         </Icon>
@@ -50,7 +49,7 @@ export default defineComponent({
           size={size.value}
           onClick={(e) => emit('click', e)}
         >
-          {defaultSlot}
+          {slots.default?.()}
         </Button>
         <Button type={btnType.value} shake={false} size={size.value} {...commonProps}>
           <Icon>
@@ -62,7 +61,7 @@ export default defineComponent({
     const renderSlotDefault = () => {
       return (
         <div class={ns.e('content')} {...commonProps}>
-          {defaultSlot}
+          {slots.default?.()}
         </div>
       )
     }

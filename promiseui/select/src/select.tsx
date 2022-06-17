@@ -15,6 +15,7 @@ import useDefaultValue from './hooks/use-defaultValue'
 import { computed } from '@vue/reactivity'
 import { Icon } from '../../icon'
 import { ChevronDownSharp, CloseCircleOutline } from '@vicons/ionicons5'
+import { Dropdown } from '../../dropdown'
 
 const ITEM_HEIGHT = 32
 
@@ -28,6 +29,7 @@ export default defineComponent({
     const overlayRef = ref()
     const virtualListRef = ref()
     const selectInputRef = ref<HTMLInputElement>()
+    const tagDropdownRef = ref<HTMLElement>()
     const optionListShow = ref(false)
     const inputValue = ref('')
     const onOutsideClick = () => {
@@ -98,20 +100,41 @@ export default defineComponent({
         <div class={ns.e('no-match')}>No matching data</div>
       )
     }
-
-    const renderMultiple = () => (
-      <div class={ns.e('tags')}>
-        {multipleActiveItems.value.map((item) => (
+    const renderTags = () => {
+      const remainingCount = multipleActiveItems.value.length - props.maxTagCount
+      const sliceTags = (start: number, end?: number) =>
+        multipleActiveItems.value.slice(start, end).map((item) => (
           <Tag
             class={ns.e('tag')}
             type={props.tagType}
             closable
             onClose={(e) => onTagClose(e, item)}
+            key={item.value}
           >
             {item.label}
           </Tag>
-        ))}
-
+        ))
+      return (
+        <>
+          {sliceTags(0, props.maxTagCount)}
+          {remainingCount > 0 && (
+            <Dropdown position="top">
+              {{
+                dropdown: () => (
+                  <div class={ns.e('tag-dropdown')} ref={tagDropdownRef}>
+                    {sliceTags(props.maxTagCount)}
+                  </div>
+                ),
+                default: () => <Tag>+{remainingCount}</Tag>
+              }}
+            </Dropdown>
+          )}
+        </>
+      )
+    }
+    const renderMultiple = () => (
+      <div class={ns.e('tags')}>
+        {renderTags()}
         <input
           class={ns.e('input')}
           v-model={inputValue.value}
@@ -164,6 +187,7 @@ export default defineComponent({
             style={{ width: selectRef.value?.clientWidth + 'px' || 'unset', padding: '0' }}
             ref={overlayRef}
             onOutsideClick={onOutsideClick}
+            clickOutsideIgnore={[tagDropdownRef]}
           >
             {options.value.length ? (
               <VirtualScroll
