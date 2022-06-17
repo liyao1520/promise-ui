@@ -28,6 +28,7 @@ export default function (
   }
 
   const selectOptionClick = (e: Event, { row }: RenderItemProps<ISelectOption>) => {
+    if (row.disabled) return
     if (props.multiple) {
       if (row[selectActiveKey]) {
         row[selectActiveKey] = false
@@ -47,7 +48,8 @@ export default function (
   const selectOptionClass = ({ row }: RenderItemProps<ISelectOption>) => {
     return {
       [ns.e('option')]: true,
-      [ns.em('option', 'active')]: isActive(row)
+      [ns.em('option', 'active')]: isActive(row),
+      [ns.em('option', 'disabled')]: row.disabled
     }
   }
 

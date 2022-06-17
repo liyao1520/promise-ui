@@ -74,6 +74,10 @@
       color: $brand;
       font-weight: $font-title-weight;
     }
+    &--disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
   &__option_content {
     text-overflow: ellipsis;

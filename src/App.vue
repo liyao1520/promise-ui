@@ -34,7 +34,8 @@
   for (let i = 0; i < 1000; i++) {
     list[i] = {
       label: 'label' + i,
-      value: i
+      value: i,
+      disabled: i === 10
     }
   }
   const options = ref(list)
