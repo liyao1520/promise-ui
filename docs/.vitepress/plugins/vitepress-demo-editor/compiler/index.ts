@@ -1,6 +1,8 @@
+import { templateWrap } from './templateWrap'
 import { getComponents, initialVue, getGlobalProperties } from '../memo'
 import { handleImportMaps } from './importMaps'
 import * as compiler from 'vue/compiler-sfc'
+import { log } from 'console'
 
 type ErrorFn = (errors: (compiler.CompilerError | SyntaxError)[]) => void
 let g_id = 0
@@ -34,6 +36,8 @@ export default class Compiler {
     })
   }
   async compileCode(code: string): Promise<string | undefined> {
+    code = templateWrap(code)
+
     try {
       // 清空之前的 ObjectURL
       this.revokeAllObjectURL()
@@ -55,6 +59,7 @@ export default class Compiler {
       const id = generateID()
 
       const template = this.compilerTemplate(ast, id)
+
       this.templateUrl = createObjectURL(template)
 
       const script = this.compilerScript(ast, id)
@@ -90,6 +95,8 @@ export default class Compiler {
       slotted: ast.descriptor.slotted
     })
     const template = temp.code
+    console.log(template)
+
     return handleImportMaps(template)
   }
   private compilerScript(ast: compiler.SFCParseResult, id: string) {

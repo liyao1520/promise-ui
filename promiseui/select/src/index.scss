@@ -42,8 +42,19 @@
   &__single-value {
     flex: 1;
     @include text-overflow;
+    &--placeholder {
+      color: $placeholder;
+    }
+  }
+  &__placeholder {
+    color: $placeholder;
   }
   &__input {
+    background-color: transparent;
+    @include placeholder-color($text);
+    &:focus {
+      @include placeholder-color($placeholder);
+    }
     display: inline-flex;
     font-size: inherit;
     line-height: inherit;
@@ -51,13 +62,9 @@
     cursor: pointer;
     box-sizing: border-box;
     border: none;
-    min-width: $font-size;
+    padding: 0;
   }
   &__single-value-input {
-    @include placeholder-color($text);
-    &:focus {
-      @include placeholder-color($placeholder);
-    }
   }
   &__option {
     user-select: none;

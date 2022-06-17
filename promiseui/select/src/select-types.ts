@@ -1,4 +1,5 @@
-import type { PropType, ExtractPropTypes, CSSProperties } from 'vue'
+import { RenderItemProps } from './../../virtualScroll/src/virtualScroll-types'
+import type { PropType, ExtractPropTypes, CSSProperties, VNodeChild } from 'vue'
 import { ICommonColor } from '../../types'
 export const selectActiveKey = Symbol.for('promiseui-select-active')
 export interface ISelectOption {
@@ -6,6 +7,7 @@ export interface ISelectOption {
   label?: string
   class?: string
   style?: string | CSSProperties
+  tagType?: ICommonColor | 'default'
   disabled?: boolean
   [selectActiveKey]?: boolean
 }
@@ -15,8 +17,8 @@ export const selectProps = {
   options: {
     type: Array as PropType<any[]>
   },
-  renderItem: {
-    type: Function
+  renderLabel: {
+    type: Function as PropType<(itemProps: RenderItemProps<ISelectOption>) => VNodeChild>
   },
   disabled: {
     type: Boolean,
@@ -36,6 +38,9 @@ export const selectProps = {
     type: Boolean,
     default: false
   },
+  filterMethod: {
+    type: Function
+  },
   maxTagCount: {
     type: Number,
     default: Infinity
@@ -53,7 +58,11 @@ export const selectProps = {
     type: String as PropType<ICommonColor | 'default'>,
     default: 'default'
   },
-  addible: Boolean
+  addible: Boolean,
+  placeholder: {
+    type: String,
+    default: 'select'
+  }
 } as const
 
 export interface ISelectItem {

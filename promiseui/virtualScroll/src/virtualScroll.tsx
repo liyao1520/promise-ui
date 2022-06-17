@@ -157,7 +157,10 @@ export default defineComponent({
         return (
           <li
             key={props.itemKey ? (row as any)[props.itemKey] : index}
-            style={[handleItemStyle({ row, index, rows }), { height: props.itemHeight + 'px' }]}
+            style={[
+              handleItemStyle({ row, index, rows }),
+              { height: props.itemHeight + 'px !important', overflow: 'hidden !important' }
+            ]}
             class={handleItemClass({ row, index, rows })}
             onClick={(e) => emit('item-click', e, { row, index, rows })}
           >

@@ -1,35 +1,11 @@
 <template>
   <div>
-    <p-select
-      v-model="active"
-      clearable
-      :options="options"
-      class="dmoe"
-      multiple
-      filterable
-      :max-tag-count="2"
-      :multipleLimit="3"
-    ></p-select>
-    <p-tag>标签</p-tag>
-    <p-tag type="success">标签</p-tag>
-    <p-tag type="danger">标签</p-tag>
-    <p-tag type="warning">标签</p-tag>
-    <p-tag type="info">标签</p-tag>
-    <p-tag size="sm">标签</p-tag>
-    <p-tag size="sm" type="success">标签</p-tag>
-    <p-tag size="sm" type="danger">标签</p-tag>
-    <p-tag size="sm" type="warning">标签</p-tag>
-    <p-tag size="sm" type="info">标签</p-tag>
-    <p-tag size="lg">标签</p-tag>
-    <p-tag size="lg" type="success">标签</p-tag>
-    <p-tag size="lg" type="danger">标签</p-tag>
-    <p-tag size="lg" type="warning">标签</p-tag>
-    <p-tag size="lg" type="info">标签</p-tag>
+    <p-select v-model="actives" clearable :options="options" multiple filterable></p-select>
   </div>
 </template>
 
 <script setup>
-  import { ref, watch } from 'vue'
+  import { ref } from 'vue'
   const list = []
   for (let i = 0; i < 1000; i++) {
     list[i] = {
@@ -39,15 +15,5 @@
     }
   }
   const options = ref(list)
-  const active = ref(2)
-  watch(active, () => {
-    console.log(active.value)
-  })
+  const actives = ref([2])
 </script>
-
-<style scoped>
-  .dmoe {
-    width: 600px;
-    margin: 100px auto;
-  }
-</style>

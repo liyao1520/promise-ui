@@ -22,7 +22,7 @@ const ITEM_HEIGHT = 32
 export default defineComponent({
   name: 'PSelect',
   props: selectProps,
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'change'],
   setup(props: SelectProps, ctx) {
     const ns = useNamespace('select')
     const selectRef = ref<HTMLDivElement | null>(null)
@@ -51,7 +51,15 @@ export default defineComponent({
       inputValue,
       ns
     )
-    const { onAddTag, onTagClose } = useInput(props, inputValue, multipleActiveItems, options)
+
+    const { onAddTag, onTagClose } = useInput(
+      props,
+      inputValue,
+      multipleActiveItems,
+      options,
+      optionListShow
+    )
+
     const handleSelectOptionClick = (e: Event, itemProps: RenderItemProps<ISelectOption>) => {
       selectOptionClick(e, itemProps)
       const needScroll = inputValue.value.length !== 0
@@ -79,10 +87,12 @@ export default defineComponent({
           'update:modelValue',
           multipleActiveItems.value.map((item) => item.value)
         )
+        ctx.emit('change', multipleActiveItems.value)
       }
     )
     watch(singleActiveItem, () => {
       ctx.emit('update:modelValue', singleActiveItem.value?.value)
+      ctx.emit('change', singleActiveItem.value)
     })
 
     const classes = computed(() => ({
@@ -90,8 +100,13 @@ export default defineComponent({
       [ns.m('disabled')]: props.disabled
     }))
 
-    const renderSelectItem = ({ row }: RenderItemProps<ISelectOption>) => {
-      return <div class={ns.e('option_content')}>{row.label}</div>
+    const renderOptionItem = (itemProps: RenderItemProps<ISelectOption>) => {
+      const { row } = itemProps
+      return props.renderLabel ? (
+        props.renderLabel(itemProps)
+      ) : (
+        <div class={ns.e('option_content')}>{row.label}</div>
+      )
     }
     const renderNoMatch = () => {
       return ctx.slots.noMatch ? (
@@ -106,7 +121,7 @@ export default defineComponent({
         multipleActiveItems.value.slice(start, end).map((item) => (
           <Tag
             class={ns.e('tag')}
-            type={props.tagType}
+            type={item.tagType ? item.tagType : props.tagType}
             closable
             onClose={(e) => onTagClose(e, item)}
             key={item.value}
@@ -135,20 +150,29 @@ export default defineComponent({
     const renderMultiple = () => (
       <div class={ns.e('tags')}>
         {renderTags()}
-        <input
-          class={ns.e('input')}
-          v-model={inputValue.value}
-          ref={selectInputRef}
-          disabled={props.disabled}
-          style={{
-            width: inputValue.value.length * 14 + 'px'
-          }}
-          onKeyup={onAddTag}
-        ></input>
+        {props.filterable ? (
+          <input
+            class={ns.e('input')}
+            v-model={inputValue.value}
+            ref={selectInputRef}
+            disabled={props.disabled}
+            style={{
+              width: Math.max(inputValue.value.length, props.placeholder.length) * 14 + 'px'
+            }}
+            placeholder={multipleActiveItems.value.length === 0 ? props.placeholder : ''}
+            onKeyup={onAddTag}
+          ></input>
+        ) : (
+          multipleActiveItems.value.length === 0 && (
+            <span class={ns.e('placeholder')}>{props.placeholder}</span>
+          )
+        )}
       </div>
     )
-    const renderSingle = () =>
-      props.filterable ? (
+    const renderSingle = () => {
+      const label = singleActiveItem.value?.label || props.placeholder
+
+      return props.filterable ? (
         <input
           class={[ns.e('input'), ns.e('single-value-input')]}
           v-model={inputValue.value}
@@ -157,11 +181,21 @@ export default defineComponent({
           style={{
             width: '100%'
           }}
-          placeholder={singleActiveItem.value?.label}
+          placeholder={singleActiveItem.value ? label : props.placeholder}
         ></input>
       ) : (
-        <span class={ns.e('single-value')}>{singleActiveItem.value?.label}</span>
+        <span
+          class={[
+            ns.e('single-value'),
+            {
+              [ns.em('single-value', 'placeholder')]: !singleActiveItem.value
+            }
+          ]}
+        >
+          {label}
+        </span>
       )
+    }
 
     const IconComponent = shallowRef(ChevronDownSharp)
     return () => {
@@ -170,15 +204,17 @@ export default defineComponent({
           class={classes.value}
           onClick={selectClick}
           ref={selectRef}
-          onMouseenter={() => (IconComponent.value = CloseCircleOutline)}
+          onMouseenter={() => {
+            if (props.clearable) IconComponent.value = CloseCircleOutline
+          }}
           onMouseleave={() => (IconComponent.value = ChevronDownSharp)}
         >
           {props.multiple ? renderMultiple() : renderSingle()}
-          {props.clearable && (
+          {
             <div class={ns.e('clear')} onClick={onClearOpiton}>
               <Icon component={IconComponent.value} />
             </div>
-          )}
+          }
           <Overlay
             v-model={optionListShow.value}
             position="bottom-start"
@@ -188,6 +224,7 @@ export default defineComponent({
             ref={overlayRef}
             onOutsideClick={onOutsideClick}
             clickOutsideIgnore={[tagDropdownRef]}
+            flip
           >
             {options.value.length ? (
               <VirtualScroll
@@ -204,7 +241,7 @@ export default defineComponent({
                 )}
               >
                 {{
-                  item: renderSelectItem
+                  item: renderOptionItem
                 }}
               </VirtualScroll>
             ) : (

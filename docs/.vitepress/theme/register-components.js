@@ -7,7 +7,9 @@ import {
   ChatboxSharp,
   PawSharp,
   CheckmarkSharp,
-  CloseSharp
+  CloseSharp,
+  MusicalNotesSharp,
+  FlameSharp
 } from '@vicons/ionicons5'
 // 引入scss
 import '../../../promiseui/styles/index.scss'
@@ -20,7 +22,9 @@ const icons = {
   ChatboxSharp,
   PawSharp,
   CheckmarkSharp,
-  CloseSharp
+  CloseSharp,
+  MusicalNotesSharp,
+  FlameSharp
 }
 let first = true
 export function registerComponents(app) {

@@ -1,4 +1,4 @@
-import { ISelectOption } from './../select-types'
+import { ISelectOption, selectActiveKey } from './../select-types'
 import { Ref, watch } from 'vue'
 import { SelectProps } from '../select-types'
 
@@ -6,7 +6,8 @@ export default function (
   props: SelectProps,
   inputValue: Ref<string>,
   multipleActiveItems: Ref<ISelectOption[]>,
-  options: Ref<ISelectOption[]>
+  options: Ref<ISelectOption[]>,
+  optionListShow: Ref<boolean>
 ) {
   const onAddTag = (e: KeyboardEvent) => {
     if (!props.addible) return
@@ -21,16 +22,35 @@ export default function (
   const onTagClose = (e: Event, optionItem: ISelectOption) => {
     e.stopPropagation()
     const index = multipleActiveItems.value.findIndex((item) => item === optionItem)
-    multipleActiveItems.value.splice(index, 1)
+    if (index !== -1) {
+      multipleActiveItems.value[index][selectActiveKey] = false
+      multipleActiveItems.value.splice(index, 1)
+    }
   }
+
+  const filterMethod =
+    typeof props.filterMethod === 'function'
+      ? props.filterMethod
+      : (inputValue: string, item: ISelectOption) => {
+          const val = inputValue.trim().toLowerCase()
+          return item.label?.toLowerCase().includes(val)
+        }
+
   watch(inputValue, () => {
+    // 输入时,需要显示列表
+    optionListShow.value = true
+
     const val = inputValue.value.trim().toLowerCase()
     if (val.length === 0) {
       options.value = props.options || []
     } else {
-      options.value = props.options
-        ? props.options.filter((item) => item.label?.toLowerCase().includes(val))
+      const newOptions = props.options
+        ? props.options.filter((item) => filterMethod(inputValue.value, item))
         : []
+      if (props.addible) {
+        newOptions.push({ value: inputValue.value, label: inputValue.value })
+      }
+      options.value = newOptions
     }
   })
   return { onAddTag, onTagClose }

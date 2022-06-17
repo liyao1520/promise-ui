@@ -35,7 +35,8 @@ export default function (
         const index = multipleActiveItems.value.findIndex((item) => item === row)
         multipleActiveItems.value.splice(index, 1)
       } else {
-        if (multipleActiveItems.value.length > props.multipleLimit) return
+        // 最大选择数量
+        if (multipleActiveItems.value.length >= props.multipleLimit) return
         row[selectActiveKey] = true
         multipleActiveItems.value.push(row)
       }
