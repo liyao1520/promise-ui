@@ -16,6 +16,7 @@ import { computed } from '@vue/reactivity'
 import { Icon } from '../../icon'
 import { ChevronDownSharp, CloseCircleOutline } from '@vicons/ionicons5'
 import { Dropdown } from '../../dropdown'
+import Wave from '../../shared/components/wave'
 
 const ITEM_HEIGHT = 32
 
@@ -32,6 +33,7 @@ export default defineComponent({
     const tagDropdownRef = ref<HTMLElement>()
     const optionListShow = ref(false)
     const inputValue = ref('')
+
     const onOutsideClick = () => {
       optionListShow.value = false
       inputValue.value = ''
@@ -97,7 +99,10 @@ export default defineComponent({
 
     const classes = computed(() => ({
       [ns.b()]: true,
-      [ns.m('disabled')]: props.disabled
+      [ns.m('disabled')]: props.disabled,
+      [ns.m(props.size)]: true,
+      [ns.m(props.status + '-status')]: props.status,
+      [ns.m('focus')]: optionListShow.value
     }))
 
     const renderOptionItem = (itemProps: RenderItemProps<ISelectOption>) => {
@@ -200,55 +205,57 @@ export default defineComponent({
     const IconComponent = shallowRef(ChevronDownSharp)
     return () => {
       return (
-        <div
-          class={classes.value}
-          onClick={selectClick}
-          ref={selectRef}
-          onMouseenter={() => {
-            if (props.clearable) IconComponent.value = CloseCircleOutline
-          }}
-          onMouseleave={() => (IconComponent.value = ChevronDownSharp)}
-        >
-          {props.multiple ? renderMultiple() : renderSingle()}
-          {
-            <div class={ns.e('clear')} onClick={onClearOpiton}>
-              <Icon component={IconComponent.value} />
-            </div>
-          }
-          <Overlay
-            v-model={optionListShow.value}
-            position="bottom-start"
-            origin={selectRef.value}
-            offset={2}
-            style={{ width: selectRef.value?.clientWidth + 'px' || 'unset', padding: '0' }}
-            ref={overlayRef}
-            onOutsideClick={onOutsideClick}
-            clickOutsideIgnore={[tagDropdownRef]}
-            flip
+        <Wave>
+          <div
+            class={classes.value}
+            onClick={selectClick}
+            ref={selectRef}
+            onMouseenter={() => {
+              if (props.clearable) IconComponent.value = CloseCircleOutline
+            }}
+            onMouseleave={() => (IconComponent.value = ChevronDownSharp)}
           >
-            {options.value.length ? (
-              <VirtualScroll
-                ref={virtualListRef}
-                keepAlive
-                itemKey="value"
-                itemHeight={32}
-                listData={options.value}
-                itemClass={selectOptionClass}
-                onItemClick={handleSelectOptionClick}
-                wrapHeight={Math.min(
-                  props.maxOptionCount * ITEM_HEIGHT,
-                  options.value.length * ITEM_HEIGHT
-                )}
-              >
-                {{
-                  item: renderOptionItem
-                }}
-              </VirtualScroll>
-            ) : (
-              renderNoMatch()
-            )}
-          </Overlay>
-        </div>
+            {props.multiple ? renderMultiple() : renderSingle()}
+            {
+              <div class={ns.e('clear')} onClick={onClearOpiton}>
+                <Icon component={IconComponent.value} />
+              </div>
+            }
+            <Overlay
+              v-model={optionListShow.value}
+              position="bottom-start"
+              origin={selectRef.value}
+              offset={2}
+              style={{ width: selectRef.value?.clientWidth + 'px' || 'unset', padding: '0' }}
+              ref={overlayRef}
+              onOutsideClick={onOutsideClick}
+              clickOutsideIgnore={[tagDropdownRef]}
+              flip
+            >
+              {options.value.length ? (
+                <VirtualScroll
+                  ref={virtualListRef}
+                  keepAlive
+                  itemKey="value"
+                  itemHeight={32}
+                  listData={options.value}
+                  itemClass={selectOptionClass}
+                  onItemClick={handleSelectOptionClick}
+                  wrapHeight={Math.min(
+                    props.maxOptionCount * ITEM_HEIGHT,
+                    options.value.length * ITEM_HEIGHT
+                  )}
+                >
+                  {{
+                    item: renderOptionItem
+                  }}
+                </VirtualScroll>
+              ) : (
+                renderNoMatch()
+              )}
+            </Overlay>
+          </div>
+        </Wave>
       )
     }
   }

@@ -366,7 +366,7 @@
   import { ref } from 'vue'
   const list1 = []
   const list2 = []
-  const tagTypes = ['success', 'danger', 'warning', 'info', 'default']
+  const tagTypes = ['primary', 'success', 'danger', 'warning', 'info', 'default']
 
   for (let i = 0; i < 10; i++) {
     list1[i] = {
@@ -376,13 +376,13 @@
     list2[i] = {
       label: 'label' + i,
       value: i,
-      tagType: tagTypes[i % 5]
+      tagType: tagTypes[i % 6]
     }
   }
   const options1 = ref(list1)
   const options2 = ref(list2)
-  const actives1 = ref([0, 1])
-  const actives2 = ref([0, 1])
+  const actives1 = ref([0, 1, 2, 3, 4, 5])
+  const actives2 = ref([0, 1, 2, 3, 4, 5])
 </script>
 ```
 
@@ -507,6 +507,44 @@
       ]
     )
   }
+</script>
+```
+
+:::
+
+### 尺寸
+
+:::demo
+
+```vue
+<template>
+  <p-space>
+    <p-select v-model="selected" :options="options" size="sm" />
+    <p-select v-model="selected" :options="options" size="md" />
+    <p-select v-model="selected" :options="options" size="lg" />
+  </p-space>
+</template>
+<script setup>
+  import { ref } from 'vue'
+  const selected = ref('1')
+  const options = [
+    {
+      label: '选项1',
+      value: '1'
+    },
+    {
+      label: '选项2',
+      value: '2'
+    },
+    {
+      label: '选项3',
+      value: '3'
+    },
+    {
+      label: '选项4',
+      value: '4'
+    }
+  ]
 </script>
 ```
 

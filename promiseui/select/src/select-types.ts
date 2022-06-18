@@ -1,6 +1,6 @@
 import { RenderItemProps } from './../../virtualScroll/src/virtualScroll-types'
 import type { PropType, ExtractPropTypes, CSSProperties, VNodeChild } from 'vue'
-import { ICommonColor } from '../../types'
+import { ICommonColor, ICommonFormStatus, ICommonSize } from '../../types'
 export const selectActiveKey = Symbol.for('promiseui-select-active')
 export interface ISelectOption {
   value?: string | number
@@ -62,6 +62,13 @@ export const selectProps = {
   placeholder: {
     type: String,
     default: 'select'
+  },
+  status: {
+    type: String as PropType<ICommonFormStatus>
+  },
+  size: {
+    type: String as PropType<ICommonSize>,
+    default: 'md'
   }
 } as const
 

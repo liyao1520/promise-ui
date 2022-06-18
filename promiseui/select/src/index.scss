@@ -23,13 +23,30 @@
   width: 100%;
   display: flex;
   align-items: center;
-  min-height: 30px;
   border: 1px solid $border-color;
   cursor: pointer;
   color: $text;
-  padding: 1.5px 10px;
-  font-size: $font-size-lg;
-
+  @include form-status;
+  transition: all 0.2s, box-shadow 0.4s;
+  &--focus {
+    border-color: $brand;
+    box-shadow: 0 0 4px 2px $brand-shadow;
+  }
+  &--sm {
+    min-height: 28px;
+    padding: 1.5px 10px;
+    font-size: $font-size-sm;
+  }
+  &--md {
+    min-height: 32px;
+    padding: 1.5px 10px;
+    font-size: $font-size-md;
+  }
+  &--lg {
+    min-height: 36px;
+    padding: 1.5px 10px;
+    font-size: $font-size-lg;
+  }
   &__tags {
     flex: 1;
     display: flex;

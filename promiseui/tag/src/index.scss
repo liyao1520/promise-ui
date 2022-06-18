@@ -10,6 +10,12 @@
   &__default {
     color: $text;
     border-color: $border-color;
+    background-color: transparent;
+  }
+  &__primary {
+    color: $brand;
+    background-color: $brand-bg;
+    border-color: $brand;
   }
   &__success {
     color: $success;
