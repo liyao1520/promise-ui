@@ -1,0 +1,13 @@
+@import '../../styles-var';
+@import '../../select/src/index.scss';
+.#{$prefix}-auto-complete {
+  @include base-select;
+  &__input {
+    position: absolute;
+    height: 32px;
+    left: 10px;
+    right: 10px;
+    top: 0;
+    bottom: 0;
+  }
+}

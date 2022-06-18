@@ -17,7 +17,7 @@
     color: $color;
   }
 }
-.#{$prefix}-select {
+@mixin base-select {
   /* your style */
   position: relative;
   width: 100%;
@@ -47,25 +47,6 @@
     padding: 1.5px 10px;
     font-size: $font-size-lg;
   }
-  &__tags {
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: space-around;
-  }
-  &__tag {
-    margin: 1.5px 7px 1.5px 0;
-  }
-  &__single-value {
-    flex: 1;
-    @include text-overflow;
-    &--placeholder {
-      color: $placeholder;
-    }
-  }
-  &__placeholder {
-    color: $placeholder;
-  }
   &__input {
     background-color: transparent;
     @include placeholder-color($text);
@@ -80,8 +61,6 @@
     box-sizing: border-box;
     border: none;
     padding: 0;
-  }
-  &__single-value-input {
   }
   &__option {
     user-select: none;
@@ -108,6 +87,32 @@
     overflow: hidden;
     white-space: nowrap;
   }
+}
+.#{$prefix}-select {
+  @include base-select;
+  &__tags {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+  }
+  &__tag {
+    margin: 1.5px 7px 1.5px 0;
+  }
+  &__single-value {
+    flex: 1;
+    @include text-overflow;
+    &--placeholder {
+      color: $placeholder;
+    }
+  }
+  &__placeholder {
+    color: $placeholder;
+  }
+
+  &__single-value-input {
+  }
+
   &__no-match {
     display: flex;
     justify-content: center;

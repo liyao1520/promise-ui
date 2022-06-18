@@ -23,7 +23,7 @@ const ITEM_HEIGHT = 32
 export default defineComponent({
   name: 'PSelect',
   props: selectProps,
-  emits: ['update:modelValue', 'change'],
+  emits: ['update:modelValue', 'change', 'inputChange'],
   setup(props: SelectProps, ctx) {
     const ns = useNamespace('select')
     const selectRef = ref<HTMLDivElement | null>(null)
@@ -166,6 +166,7 @@ export default defineComponent({
             }}
             placeholder={multipleActiveItems.value.length === 0 ? props.placeholder : ''}
             onKeyup={onAddTag}
+            onChange={(e) => ctx.emit('input-change', (e.target as HTMLInputElement).value)}
           ></input>
         ) : (
           multipleActiveItems.value.length === 0 && (
@@ -187,6 +188,7 @@ export default defineComponent({
             width: '100%'
           }}
           placeholder={singleActiveItem.value ? label : props.placeholder}
+          onChange={(e) => ctx.emit('inputChange', (e.target as HTMLInputElement).value)}
         ></input>
       ) : (
         <span

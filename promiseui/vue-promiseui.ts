@@ -14,6 +14,7 @@ import SelectInstall, { Select } from './select'
 import ScrollbarInstall, { Scrollbar } from './scrollbar'
 import VirtualScrollInstall, { VirtualScroll } from './virtualScroll'
 import TagInstall, { Tag } from './tag'
+import AutoCompleteInstall, { AutoComplete } from './autoComplete'
 
 const installs = [
   ButtonInstall,
@@ -30,7 +31,8 @@ const installs = [
   SelectInstall,
   ScrollbarInstall,
   VirtualScrollInstall,
-  TagInstall
+  TagInstall,
+  AutoCompleteInstall
 ]
 
 export {
@@ -52,7 +54,8 @@ export {
   Select,
   Scrollbar,
   VirtualScroll,
-  Tag
+  Tag,
+  AutoComplete
 }
 
 export default {
