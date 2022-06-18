@@ -21,6 +21,10 @@ export const radioProps = {
   modelValue: {
     type: [String, Number, Boolean] as PropType<ValueType>,
     default: 'on'
+  },
+  size: {
+    type: String as PropType<ICommonSize>,
+    default: 'md'
   }
 } as const
 
@@ -55,7 +59,7 @@ export const radioGroupProps = {
     type: [String, Number, Boolean] as PropType<ValueType>,
     default: 'on'
   },
-  btnSize: {
+  size: {
     type: String as PropType<ICommonSize>,
     default: 'md'
   }

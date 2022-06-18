@@ -15,11 +15,13 @@ export default defineComponent({
     const ns = useNamespace('radio')
     const wareRef = ref<any>()
 
-    const { checked, inputName, handleChange } = useRadio(props, ctx as SetupContext)
+    const { checked, inputName, handleChange, size } = useRadio(props, ctx as SetupContext)
+
     const classes = computed(() => ({
       [ns.b()]: true,
       [ns.m('checked')]: checked.value,
-      [ns.m('disabled')]: props.disabled
+      [ns.m('disabled')]: props.disabled,
+      [ns.m(size.value)]: true
     }))
 
     watch(

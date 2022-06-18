@@ -22,12 +22,12 @@ export default function (props: RadioProps | RadioButtonProps, { emit }: SetupCo
     }
   }
 
-  const BtnSize = computed(() => RadioContext?.props.btnSize || (props as RadioButtonProps).size)
+  const size = computed(() => RadioContext?.props.size || props.size)
 
   return {
     checked,
     inputName,
     handleChange,
-    BtnSize
+    size
   }
 }

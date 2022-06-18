@@ -55,6 +55,45 @@
 
 :::
 
+### 尺寸
+
+:::demo
+
+```vue
+<template>
+  <p-space>
+    <p-radio-group v-model="value" name="fruits" size="sm">
+      <p-radio v-for="item in fruits" :key="item.value" :value="item.value">
+        {{ item.label }}</p-radio
+      >
+    </p-radio-group>
+    <p-radio-group v-model="value" name="fruits" size="md">
+      <p-radio v-for="item in fruits" :key="item.value" :value="item.value">
+        {{ item.label }}</p-radio
+      >
+    </p-radio-group>
+    <p-radio-group v-model="value" name="fruits" size="lg">
+      <p-radio v-for="item in fruits" :key="item.value" :value="item.value">
+        {{ item.label }}</p-radio
+      >
+    </p-radio-group>
+  </p-space>
+</template>
+
+<script setup>
+  import { ref } from 'vue'
+  import { Message } from 'promiseui'
+  const fruits = ref([
+    { label: 'Apple', value: 'Apple' },
+    { label: 'Pear', value: 'Pear' },
+    { label: 'Orange', value: 'Orange' }
+  ])
+  const value = ref('Apple')
+</script>
+```
+
+:::
+
 ### 按钮风格
 
 只需要把 `p-radio` 元素换成 `p-radio-button` 元素即可，此外，还提供了 size 属性。
@@ -64,21 +103,21 @@
 ```vue
 <template>
   <div>
-    <p-radio-group v-model="value" name="fruits" btnSize="sm">
+    <p-radio-group v-model="value" name="fruits" size="sm">
       <p-radio-button v-for="item in fruits" :key="item.value" :value="item.value">
         {{ item.label }}</p-radio-button
       >
     </p-radio-group>
     <br />
     <br />
-    <p-radio-group v-model="value" name="fruits" btnSize="md" @change="onChange">
+    <p-radio-group v-model="value" name="fruits" size="md" @change="onChange">
       <p-radio-button v-for="item in fruits" :key="item.value" :value="item.value">
         {{ item.label }}</p-radio-button
       >
     </p-radio-group>
     <br />
     <br />
-    <p-radio-group v-model="value" name="fruits" btnSize="lg">
+    <p-radio-group v-model="value" name="fruits" size="lg">
       <p-radio-button v-for="item in fruits" :key="item.value" :value="item.value">
         {{ item.label }}</p-radio-button
       >
