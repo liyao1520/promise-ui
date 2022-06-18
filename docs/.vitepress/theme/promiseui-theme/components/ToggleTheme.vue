@@ -40,26 +40,45 @@
   import { onMounted, ref, watch } from 'vue'
   const theme = ref('')
   let Theme = null
-
+  const themes = ['light', 'dark']
   onMounted(() => {
     // 引用themes,需要动态引入,否则打包报错
     // const item = localStorage.getItem('theme')
     // const localTheme = item === 'dark' ? 'dark' : 'light'
     import('../../../../../promiseui/theme').then(({ default: PTheme }) => {
       Theme = PTheme
-      PTheme.use('light')
-      theme.value = 'light'
+      const themeName = localStorage.getItem('theme')
+
+      if (themeName && themes.includes(themeName)) {
+        theme.value = themeName
+        Theme.use(themeName)
+      }
+    })
+    let monaco,
+      init = true
+    Object.defineProperty(window, 'monaco', {
+      get() {
+        if (monaco && init) {
+          monaco.editor.setTheme(theme.value === 'dark' ? 'iDark' : 'vs')
+          init = false
+        }
+        return monaco
+      },
+      set(newValue) {
+        monaco = newValue
+      }
     })
   })
+
   watch(theme, (newTheme) => {
     if (!Theme) return
     Theme.use(newTheme)
-    // localStorage.setItem('theme', newTheme)
+    localStorage.setItem('theme', newTheme)
   })
   const toggleTheme = () => {
     if (!Theme) return
     theme.value = theme.value === 'dark' ? 'light' : 'dark'
-    monaco.editor.setTheme(theme.value === 'dark' ? 'iDark' : 'vs')
+    monaco && monaco.editor.setTheme(theme.value === 'dark' ? 'iDark' : 'vs')
   }
 </script>
 
