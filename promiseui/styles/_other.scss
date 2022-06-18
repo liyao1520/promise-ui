@@ -12,6 +12,87 @@ $box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08
   opacity: 0;
 }
 
+@keyframes pui-bottom-in {
+  0% {
+    transform: scaleY(0.8);
+    transform-origin: 0% 0%;
+    opacity: 0;
+  }
+
+  100% {
+    transform: scaleY(1);
+    transform-origin: 0% 0%;
+    opacity: 1;
+  }
+}
+@keyframes pui-bottom-out {
+  0% {
+    transform: scaleY(1);
+    transform-origin: 0% 0%;
+    opacity: 1;
+  }
+
+  100% {
+    transform: scaleY(0.8);
+    transform-origin: 0% 0%;
+    opacity: 0;
+  }
+}
+@keyframes pui-top-in {
+  0% {
+    transform: scaleY(0.8);
+    transform-origin: 100% 100%;
+    opacity: 0;
+  }
+
+  100% {
+    transform: scaleY(1);
+    transform-origin: 100% 100%;
+    opacity: 1;
+  }
+}
+@keyframes pui-top-out {
+  0% {
+    transform: scaleY(1);
+    transform-origin: 100% 100%;
+    opacity: 1;
+  }
+
+  100% {
+    transform: scaleY(0.8);
+    transform-origin: 100% 100%;
+    opacity: 0;
+  }
+}
+@keyframes pui-left-in {
+}
+@keyframes pui-left-out {
+}
+@keyframes pui-right-in {
+}
+@keyframes pui-right-out {
+}
+@mixin animation($name) {
+  .pui-#{$name}-enter-active,
+  .pui-#{$name}-leave-active {
+    animation-duration: 0.2s;
+  }
+  .pui-#{$name}-enter-active {
+    animation-name: pui-#{$name}-in;
+  }
+  .pui-#{$name}-leave-active {
+    animation-name: pui-#{$name}-out;
+  }
+}
+
+@include animation('left');
+
+@include animation('right');
+
+@include animation('top');
+
+@include animation('bottom');
+
 @mixin text-overflow {
   overflow: hidden;
   white-space: nowrap;

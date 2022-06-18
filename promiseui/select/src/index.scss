@@ -49,10 +49,7 @@
   }
   &__input {
     background-color: transparent;
-    @include placeholder-color($text);
-    &:focus {
-      @include placeholder-color($placeholder);
-    }
+
     display: inline-flex;
     font-size: inherit;
     line-height: inherit;
@@ -109,7 +106,12 @@
   &__placeholder {
     color: $placeholder;
   }
-
+  &__input {
+    @include placeholder-color($text);
+    &:focus {
+      @include placeholder-color($placeholder);
+    }
+  }
   &__single-value-input {
   }
 

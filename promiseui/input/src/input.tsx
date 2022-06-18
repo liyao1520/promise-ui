@@ -16,6 +16,8 @@ export default defineComponent({
   emits: ['update:modelValue', 'input', 'blur', 'focus'],
   setup(props: InputProps, ctx: SetupContext) {
     const { attrs, slots, emit } = ctx
+    const inputRef = ref<HTMLInputElement | null>(null)
+    const wapperRef = ref<HTMLInputElement | null>(null)
     const { size, disabled, modelValue, clearable, showPassword } = toRefs(props)
     const ns = useNamespace('input')
     const focused = ref(false)
@@ -57,10 +59,15 @@ export default defineComponent({
       return slots.prefix && slots.prefix()
     }
 
+    ctx.expose({
+      input: inputRef,
+      wapper: wapperRef
+    })
+
     return () => {
       return (
         <Wave>
-          <div class={classes.value}>
+          <div class={classes.value} ref={wapperRef}>
             {slots.prepend && <span class={ns.e('prepend')}>{slots.prepend()}</span>}
 
             <span class={ns.e('prefix')}>{renderPrefix()}</span>
@@ -73,6 +80,7 @@ export default defineComponent({
               onInput={onInput}
               onFocus={onFocus}
               onBlur={onBlur}
+              ref={inputRef}
             />
 
             <span class={ns.e('suffix')}>{renderSuffix()}</span>

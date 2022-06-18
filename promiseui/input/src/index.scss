@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   height: 32px;
-  font-size: $font-size;
+  font-size: $font-size-md;
   border: 1px solid $border-color;
   border-radius: $border-radius;
   transition: all 0.2s, box-shadow 0.4s;
@@ -32,9 +32,11 @@
   }
   &--lg {
     height: 36px;
+    font-size: $font-size-lg;
   }
   &--sm {
     height: 28px;
+    font-size: $font-size-sm;
   }
   &--disabled {
     user-select: none;

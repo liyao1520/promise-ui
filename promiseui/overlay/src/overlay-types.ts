@@ -25,7 +25,7 @@ export const overlayProps = {
     required: false
   },
   origin: {
-    type: [Object, null] as PropType<HTMLElement | ComponentPublicInstance | null>,
+    type: [Object, null] as PropType<MaybeElement>,
     default: null,
     required: false
   },

@@ -1,12 +1,12 @@
 import {
   computed,
   defineComponent,
-  onMounted,
   ref,
   StyleValue,
   Teleport,
   toRefs,
-  Transition
+  Transition,
+  watch
 } from 'vue'
 import { overlayProps, OverlayProps } from './overlay-types'
 
@@ -26,6 +26,7 @@ export default defineComponent({
     const ns = useNamespace('overlay')
     const overlayEl = ref<HTMLDivElement | null>(null)
     const { x, y, isVisible, realPosition } = useOverlay(overlayEl, props)
+
     onClickOutside(
       overlayEl,
       () => {
@@ -49,6 +50,11 @@ export default defineComponent({
       [ns.m(realPosition.value)]: true,
       [className.value]: true
     }))
+    const animationName = computed(
+      () =>
+        'pui-' +
+        ['bottom', 'top', 'left', 'right'].find((item) => realPosition.value.includes(item))
+    )
 
     expose({
       el: overlayEl
@@ -56,7 +62,11 @@ export default defineComponent({
     return () => {
       return (
         <Teleport to={'body'}>
-          <Transition onBeforeEnter={(e) => emit('open')} onAfterLeave={(e) => emit('close')}>
+          <Transition
+            name={animationName.value}
+            onBeforeEnter={(e) => emit('open')}
+            onAfterLeave={(e) => emit('close')}
+          >
             {isVisible.value && (
               <div style={styles.value} class={classes.value} ref={overlayEl}>
                 {slots.default && slots.default()}

@@ -1,5 +1,9 @@
 <template>
-  <div><p-auto-complete v-model="input" :options="options" /> </div>
+  <div
+    ><p-auto-complete v-model="input" :options="options" />
+
+    {{ options }}</div
+  >
 </template>
 
 <script setup>

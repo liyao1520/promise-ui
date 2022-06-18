@@ -166,7 +166,7 @@ export default defineComponent({
             }}
             placeholder={multipleActiveItems.value.length === 0 ? props.placeholder : ''}
             onKeyup={onAddTag}
-            onChange={(e) => ctx.emit('input-change', (e.target as HTMLInputElement).value)}
+            onChange={(e) => ctx.emit('inputChange', (e.target as HTMLInputElement).value)}
           ></input>
         ) : (
           multipleActiveItems.value.length === 0 && (

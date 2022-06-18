@@ -457,7 +457,7 @@
 
 ### 自定义选项渲染
 
-`renderLabel` 届搜一个函数需要返回`vnode`
+`renderLabel` 接收一个函数需要返回`vnode`
 
 :::demo
 

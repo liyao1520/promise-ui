@@ -1,5 +1,5 @@
-import { emit } from 'process'
-import { computed, defineComponent, ref, watch } from 'vue'
+import { defineComponent, ref, shallowRef } from 'vue'
+import { Input } from '../../input'
 import { Overlay } from '../../overlay'
 
 import Wave from '../../shared/components/wave'
@@ -19,12 +19,8 @@ export default defineComponent({
     const overlayRef = ref()
     const virtualListRef = ref()
 
-    const selectRef = ref<HTMLDivElement | null>(null)
-    const classes = computed(() => ({
-      [ns.b()]: true,
-      [ns.m(props.size)]: true,
-      [ns.m('focus')]: optionListShow.value
-    }))
+    const inputRef = shallowRef()
+
     const onOutsideClick = () => {
       optionListShow.value = false
     }
@@ -33,53 +29,68 @@ export default defineComponent({
       optionListShow.value = false
     }
 
-    const renderOptionItem = ({ row }: RenderItemProps<IAutoCompleteOption>) => (
-      <div class={ns.e('option-content')}>{row.label}</div>
-    )
+    const renderOptionItem = (itemProps: RenderItemProps<IAutoCompleteOption>) => {
+      const { row } = itemProps
+      return props.renderLabel ? (
+        props.renderLabel(itemProps)
+      ) : (
+        <div class={ns.e('option_content')}>{row.label}</div>
+      )
+    }
 
     return () => (
-      <Wave disabled>
-        <div class={classes.value} ref={selectRef}>
-          <input
-            type="text"
-            class={ns.e('input')}
+      <>
+        <Wave disabled>
+          <Input
+            ref={(target: any) => {
+              if (target.input && !inputRef.value) {
+                inputRef.value = target.wapper
+              }
+            }}
             value={props.modelValue}
             placeholder={props.placeholder}
-            onInput={(e) => ctx.emit('update:modelValue', (e.target as HTMLInputElement).value)}
-            onFocus={() => (optionListShow.value = true)}
+            size={props.size}
+            onInput={(e: Event) => {
+              ctx.emit('update:modelValue', (e.target as HTMLInputElement).value)
+            }}
+            disabled={!!props.disabled}
+            onFocus={() => {
+              optionListShow.value = true
+              console.log(optionListShow.value)
+            }}
           />
-          <Overlay
-            v-model={optionListShow.value}
-            position="bottom-start"
-            origin={selectRef.value}
-            offset={2}
-            style={{ width: selectRef.value?.clientWidth + 'px' || 'unset', padding: '0' }}
-            ref={overlayRef}
-            onOutsideClick={onOutsideClick}
-            flip
-          >
-            {props.modelValue && (
-              <VirtualScroll
-                ref={virtualListRef}
-                keepAlive
-                itemKey="value"
-                itemHeight={32}
-                listData={props.options}
-                itemClass={ns.e('option')}
-                onItemClick={handleOptionClick}
-                wrapHeight={Math.min(
-                  props.maxOptionCount * ITEM_HEIGHT,
-                  props.options.length * ITEM_HEIGHT
-                )}
-              >
-                {{
-                  item: renderOptionItem
-                }}
-              </VirtualScroll>
-            )}
-          </Overlay>
-        </div>
-      </Wave>
+        </Wave>
+        <Overlay
+          v-model={optionListShow.value}
+          position="bottom-start"
+          origin={inputRef.value}
+          offset={2}
+          style={{ width: inputRef.value?.clientWidth + 'px' || 'unset', padding: '0' }}
+          ref={overlayRef}
+          onOutsideClick={onOutsideClick}
+          flip
+        >
+          {props.modelValue && (
+            <VirtualScroll
+              ref={virtualListRef}
+              keepAlive
+              itemKey="value"
+              itemHeight={32}
+              listData={props.options}
+              itemClass={ns.e('option')}
+              onItemClick={handleOptionClick}
+              wrapHeight={Math.min(
+                props.maxOptionCount * ITEM_HEIGHT,
+                props.options.length * ITEM_HEIGHT
+              )}
+            >
+              {{
+                item: renderOptionItem
+              }}
+            </VirtualScroll>
+          )}
+        </Overlay>
+      </>
     )
   }
 })
