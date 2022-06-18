@@ -1,5 +1,5 @@
 import { ICommonSize } from './../../types'
-import type { PropType, ExtractPropTypes, CSSProperties } from 'vue'
+import { PropType, ExtractPropTypes, CSSProperties, provide, InjectionKey } from 'vue'
 
 export const formProps = {
   disabled: {
@@ -53,5 +53,10 @@ export const formItemProps = {
   }
   // rule:{}
 }
+export interface IFormContext {
+  props: FormProps
+}
+export const formContextKey: InjectionKey<IFormContext> = Symbol('formContextKey')
 
 export type FormProps = ExtractPropTypes<typeof formProps>
+export type FormItemProps = ExtractPropTypes<typeof formItemProps>
