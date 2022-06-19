@@ -52,8 +52,7 @@
     <p-tag type="warning" size="md">标签5</p-tag>
     <p-tag type="info" size="md">标签6</p-tag>
   </p-space>
-  <p-space
-    >lg
+  <p-space>
     <p-tag size="lg">标签1</p-tag>
     <p-tag type="primary" size="lg">标签2</p-tag>
     <p-tag type="success" size="lg">标签3</p-tag>

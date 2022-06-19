@@ -56,7 +56,6 @@ export default defineComponent({
             disabled={!!props.disabled}
             onFocus={() => {
               optionListShow.value = true
-              console.log(optionListShow.value)
             }}
           />
         </Wave>

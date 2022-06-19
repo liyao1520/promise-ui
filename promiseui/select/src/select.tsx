@@ -17,6 +17,7 @@ import { Icon } from '../../icon'
 import { ChevronDownSharp, CloseCircleOutline } from '@vicons/ionicons5'
 import { Dropdown } from '../../dropdown'
 import Wave from '../../shared/components/wave'
+import useFormValidate from './hooks/use-form-validate'
 
 const ITEM_HEIGHT = 32
 
@@ -38,7 +39,7 @@ export default defineComponent({
       optionListShow.value = false
       inputValue.value = ''
     }
-
+    useFormValidate(props, optionListShow)
     useMemoScrollTop(optionListShow, virtualListRef)
     const { defaultSingleActiveItem, defaultMultipleActiveItems } = useDefaultValue(props)
     const singleActiveItem = ref<ISelectOption>(defaultSingleActiveItem)
@@ -180,14 +181,14 @@ export default defineComponent({
 
       return props.filterable ? (
         <input
-          class={[ns.e('input'), ns.e('single-value-input')]}
-          v-model={inputValue.value}
+          class={[ns.e('input'), !props.modelValue && ns.em('input', 'placeholder')]}
           ref={selectInputRef}
+          v-model={inputValue.value}
           disabled={props.disabled}
           style={{
             width: '100%'
           }}
-          placeholder={singleActiveItem.value ? label : props.placeholder}
+          placeholder={label}
           onChange={(e) => ctx.emit('inputChange', (e.target as HTMLInputElement).value)}
         ></input>
       ) : (

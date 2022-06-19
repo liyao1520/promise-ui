@@ -1,5 +1,5 @@
-import { computed } from '@vue/reactivity'
-import { defineComponent, provide } from 'vue'
+import { Values } from 'async-validator'
+import { defineComponent, provide, computed, ref } from 'vue'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import { formContextKey, formProps, FormProps } from './form-types'
 
@@ -11,15 +11,55 @@ export default defineComponent({
   emits: [],
   setup(props: FormProps, ctx) {
     const ns = useNamespace('form')
+    const maxChildLabelWidth = ref<number>()
     const classes = computed(() => ({
-      [ns.b()]: true
+      [ns.b()]: true,
+      [ns.m('inline')]: props.inline
     }))
+
+    const childLabelWidthRace = (width: number) => {
+      if (maxChildLabelWidth.value === undefined || width > maxChildLabelWidth.value) {
+        maxChildLabelWidth.value = width
+      }
+    }
+
+    const validateFns: (() => Promise<Values>)[] = []
+
+    const addValidateFn = (validateFn: () => Promise<Values>): void => {
+      validateFns.push(validateFn)
+    }
+
+    const fromValidate = async () => {
+      let fulfilled = true
+      for (let validator of validateFns) {
+        try {
+          await validator()
+        } catch (e) {
+          fulfilled = false
+        }
+      }
+      return fulfilled
+    }
+
     provide(formContextKey, {
-      props
+      props,
+      maxChildLabelWidth,
+      childLabelWidthRace,
+      model: props.model,
+      addValidateFn
     })
-    ctx.expose({})
+    ctx.expose({
+      validate: fromValidate
+    })
+    const onSubmit = (e: Event) => {
+      e.preventDefault()
+    }
     return () => {
-      return <div class={classes}>{ctx.slots.default?.()}</div>
+      return (
+        <form class={classes.value} onSubmit={onSubmit}>
+          {ctx.slots.default?.()}
+        </form>
+      )
     }
   }
 })

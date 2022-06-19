@@ -1,5 +1,74 @@
-@import "../../styles-var";;
+@import '../../styles-var';
 
 .#{$prefix}-form {
   /* your style */
+  &--inline {
+    .#{$prefix}-form-item {
+      display: inline-flex;
+      vertical-align: middle;
+      margin-right: 32px;
+    }
+  }
+}
+.#{$prefix}-form-item {
+  display: flex;
+  margin-bottom: 18px;
+  &__error {
+    color: $danger;
+    font-size: $font-size-sm;
+    position: absolute;
+    left: 0;
+    top: 100%;
+  }
+  &--md {
+    font-size: $font-size-md;
+  }
+  &--sm {
+    font-size: $font-size-sm;
+  }
+  &--lg {
+    font-size: $font-size-lg;
+  }
+  &--left {
+    .#{$prefix}-form-item__label {
+      justify-content: flex-start;
+    }
+  }
+  &--right {
+    .#{$prefix}-form-item__label {
+      justify-content: flex-end;
+    }
+  }
+  &--center {
+    .#{$prefix}-form-item__label {
+      justify-content: center;
+    }
+  }
+  &--top {
+    flex-direction: column;
+    .#{$prefix}-form-item__label {
+      justify-content: flex-start;
+      margin-bottom: 8px;
+    }
+  }
+  &__label {
+    display: flex;
+    align-items: center;
+    padding: 0 12px 0 0;
+    justify-content: flex-end;
+  }
+  &__content {
+    flex: 1;
+    position: relative;
+  }
+}
+
+.#{$prefix}-form-item {
+  &--is-error {
+    .#{$prefix}-input,
+    .#{$prefix}-select {
+      border-color: $danger;
+      box-shadow: none;
+    }
+  }
 }

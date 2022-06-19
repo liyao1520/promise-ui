@@ -111,6 +111,9 @@
     &:focus {
       @include placeholder-color($placeholder);
     }
+    &--placeholder {
+      @include placeholder-color($placeholder);
+    }
   }
   &__single-value-input {
   }

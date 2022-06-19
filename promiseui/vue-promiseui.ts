@@ -15,6 +15,7 @@ import ScrollbarInstall, { Scrollbar } from './scrollbar'
 import VirtualScrollInstall, { VirtualScroll } from './virtualScroll'
 import TagInstall, { Tag } from './tag'
 import AutoCompleteInstall, { AutoComplete } from './autoComplete'
+import FormInstall, { Form, FormItem } from './form'
 
 const installs = [
   ButtonInstall,
@@ -32,7 +33,8 @@ const installs = [
   ScrollbarInstall,
   VirtualScrollInstall,
   TagInstall,
-  AutoCompleteInstall
+  AutoCompleteInstall,
+  FormInstall
 ]
 
 export {
@@ -55,7 +57,9 @@ export {
   Scrollbar,
   VirtualScroll,
   Tag,
-  AutoComplete
+  AutoComplete,
+  Form,
+  FormItem
 }
 
 export default {
