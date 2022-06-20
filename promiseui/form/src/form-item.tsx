@@ -1,4 +1,7 @@
+import { HelpCircleSharp } from '@vicons/ionicons5'
 import { computed, defineComponent, provide, ref } from 'vue'
+import { Icon } from '../../icon'
+import { Popover } from '../../popover'
 
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import toArray from '../../shared/utils/toArray'
@@ -48,6 +51,13 @@ export default defineComponent({
             <label ref={labelRef} class={[ns.e('label')]} style={labelStyles.value}>
               <span class={ns.e('require-mark')}>{showRequireMark.value ? '*' : ''}</span>
               {props.label}
+              {props.helpTips && (
+                <Popover content={props.helpTips}>
+                  <span class={ns.e('help-tips')}>
+                    <Icon component={HelpCircleSharp} />
+                  </span>
+                </Popover>
+              )}
             </label>
           )}
 

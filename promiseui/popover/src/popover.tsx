@@ -64,14 +64,16 @@ export default defineComponent({
             class={props.class}
             onOutsideClick={(_) => (isShow.value = false)}
           >
-            <span
-              ref={contentRef}
-              class={ns.e('content')}
-              onMouseenter={(_) => clearTimeout(timer)}
-              onMouseleave={handleLeavle}
-            >
-              {ctx.slots.content ? ctx.slots.content() : props.content}
-            </span>
+            {!props.disabled && (
+              <span
+                ref={contentRef}
+                class={ns.e('content')}
+                onMouseenter={(_) => clearTimeout(timer)}
+                onMouseleave={handleLeavle}
+              >
+                {ctx.slots.content ? ctx.slots.content() : props.content}
+              </span>
+            )}
           </Overlay>
         </>
       )

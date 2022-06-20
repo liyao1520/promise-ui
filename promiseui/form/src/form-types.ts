@@ -77,7 +77,8 @@ export const formItemProps = {
   required: {
     type: [Boolean, String] as PropType<boolean | string>,
     default: false
-  }
+  },
+  helpTips: String
 }
 export interface IFormContext {
   props: FormProps

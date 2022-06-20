@@ -29,7 +29,8 @@ export const popoverProps = {
   },
   class: {
     default: ''
-  }
+  },
+  disabled: Boolean
 } as const
 
 export type PopoverProps = ExtractPropTypes<typeof popoverProps>

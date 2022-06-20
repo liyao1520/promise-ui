@@ -31,9 +31,9 @@
         </span>
         <span>可编辑</span>
       </div>
-
       <Edit
         class="edit"
+        v-if="demoEditShow"
         :style="{
           height: editHeight + 'px',
           minHeight: $props.direction === 'row' ? '200px' : '300px'
@@ -47,6 +47,50 @@
           <div v-if="errors.length > 4">...</div>
         </template>
       </Edit>
+      <div
+        v-if="$props.direction === 'column' && demoEditShow"
+        class="demo-control"
+        @click="demoEditShow = false"
+      >
+        隐藏代码
+        <svg
+          t="1655722520234"
+          class="icon"
+          viewBox="0 0 1024 1024"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          p-id="6572"
+          width="14"
+          height="14"
+        >
+          <path
+            d="M946.33106 697.353498 541.30749 284.093337c-15.690354-16.009625-41.469484-16.009625-57.160861 0l-405.024593 413.260162c-24.819269 25.323758-6.877641 68.028373 28.579919 68.028373l810.048163 0C953.209724 765.381871 971.150328 722.677257 946.33106 697.353498z"
+            p-id="6573"
+          ></path>
+        </svg>
+      </div>
+      <div
+        v-if="$props.direction === 'column' && !demoEditShow"
+        class="demo-control"
+        @click="demoEditShow = true"
+      >
+        展示代码
+        <svg
+          t="1655722463269"
+          class="icon"
+          viewBox="0 0 1024 1024"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          p-id="6417"
+          width="14"
+          height="14"
+        >
+          <path
+            d="M79.123059 327.850933l405.024593 413.260162c15.690354 16.009625 41.469484 16.009625 57.160861 0l405.02357-413.260162c24.819269-25.323758 6.877641-68.028373-28.579919-68.028373L107.704001 259.82256C72.245418 259.82256 54.30379 302.527175 79.123059 327.850933z"
+            p-id="6418"
+          ></path>
+        </svg>
+      </div>
     </div>
   </div>
 </template>
@@ -61,6 +105,8 @@
       direction: 'row'
     }
   )
+
+  const demoEditShow = ref(props.direction == 'row')
 
   const errors = ref<any[]>([])
   const editHeight = ref<number>(0)
@@ -179,5 +225,12 @@
   }
   .error > div {
     margin: 5px 0;
+  }
+  .demo-control {
+    text-align: center;
+    cursor: pointer;
+  }
+  .demo-control svg {
+    fill: currentColor;
   }
 </style>
