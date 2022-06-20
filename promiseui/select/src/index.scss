@@ -1,22 +1,5 @@
 @import '../../styles-var';
 
-@mixin placeholder-color($color) {
-  &::-webkit-input-placeholder {
-    color: $color;
-  }
-  &::-moz-placeholder {
-    /* Mozilla Firefox 19+ */
-    color: $color;
-  }
-  &:-moz-placeholder {
-    /* Mozilla Firefox 4 to 18 */
-    color: $color;
-  }
-  &:-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
-    color: $color;
-  }
-}
 @mixin base-select {
   /* your style */
   position: relative;
@@ -98,6 +81,7 @@
   }
   &__single-value {
     flex: 1;
+    user-select: none;
     @include text-overflow;
     &--placeholder {
       color: $placeholder;

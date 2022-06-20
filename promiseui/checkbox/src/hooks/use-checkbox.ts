@@ -1,5 +1,5 @@
 import { inject, ref, SetupContext, watch, computed } from 'vue'
-import { check } from 'yargs'
+import useFormItem from '../../../form/src/hooks/use-form-item'
 import { checkBoxKey, CheckboxProps } from '../checkbox-types'
 
 export default function (props: CheckboxProps, ctx: SetupContext) {
@@ -28,13 +28,18 @@ export default function (props: CheckboxProps, ctx: SetupContext) {
       ctx.emit('update:modelValue', checked.value)
     }
   }
+  const { triggerValidate } = useFormItem()
   watch(
     () => props.modelValue,
     () => {
       checked.value = props.modelValue
     }
   )
-  watch(checked, () => ctx.emit('change', checked.value))
+  watch(checked, () => {
+    triggerValidate('change')
+    triggerValidate('blur')
+    ctx.emit('change', checked.value)
+  })
   watch(
     () => CheckboxContext?.props.modelValue,
     (valueArr) => {

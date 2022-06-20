@@ -72,7 +72,9 @@
     align-items: flex-start;
     .#{$prefix}-form-item__label {
       justify-content: flex-start;
-      margin-bottom: 8px;
+    }
+    .#{$prefix}-form-item__content {
+      width: 100%;
     }
   }
   &__label {

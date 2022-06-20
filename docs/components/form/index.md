@@ -158,3 +158,317 @@
 ```
 
 :::
+
+### 行内表单
+
+设置 `inline` , 当垂直方向空间受限且表单较简单时，可以在一行内放置表单。
+
+:::demo column
+
+```vue
+<template>
+  <p-form inline>
+    <p-form-item label="姓名">
+      <p-input v-model="formData.name" placeholder="请输入姓名" />
+    </p-form-item>
+    <p-form-item label="年龄">
+      <p-input v-model="formData.age" placeholder="请输入年龄" />
+    </p-form-item>
+    <p-form-item label="电话号码">
+      <p-input v-model="formData.phone" placeholder="请输入电话号码" />
+    </p-form-item>
+    <p-form-item>
+      <p-button>查询</p-button>
+    </p-form-item>
+  </p-form>
+</template>
+<script setup>
+  import { reactive } from 'vue'
+  const formData = reactive({
+    name: '',
+    age: '',
+    phone: ''
+  })
+</script>
+```
+
+:::
+
+### 表单验证
+
+:::demo
+
+```vue
+<template>
+  <div class="demo">
+    <p-form ref="formRef" :model="formData" :rules="rules">
+      <p-form-item label="用户名" prop="user.name">
+        <p-input v-model="formData.user.name" placeholder="请输入用户名" />
+      </p-form-item>
+      <p-form-item label="年龄" prop="user.age">
+        <p-input v-model="formData.user.age" type="number" placeholder="请输入年龄" />
+      </p-form-item>
+      <p-form-item label="学历" prop="education">
+        <p-select
+          v-model="formData.education"
+          placeholder="请选择学历"
+          :options="[
+            { label: '本科', value: '本科' },
+            { label: '专科', value: '专科' }
+          ]"
+        />
+      </p-form-item>
+      <p-form-item label="邮箱" prop="email">
+        <p-auto-complete
+          v-model="formData.email"
+          placeholder="请输入"
+          :options="autoCompleteOptions"
+        />
+      </p-form-item>
+      <p-form-item label="性别" prop="user.gender">
+        <p-radio-group v-model="formData.user.gender">
+          <p-radio value="男" label="男" />
+          <p-radio value="女" label="女" />
+        </p-radio-group>
+      </p-form-item>
+      <p-form-item label="爱好" prop="likes">
+        <p-checkbox-group v-model="formData.likes">
+          <p-checkbox value="唱" label="唱" />
+          <p-checkbox value="跳" label="跳" />
+          <p-checkbox value="rap" label="rap" />
+        </p-checkbox-group>
+      </p-form-item>
+      <p-form-item>
+        <p-button type="primary" @click="submit">提交</p-button>
+      </p-form-item>
+    </p-form>
+  </div>
+</template>
+
+<script setup>
+  import { reactive, ref, watchEffect } from 'vue'
+  import { Message } from 'promiseui'
+  const formRef = ref()
+  const formData = reactive({
+    user: {
+      name: '',
+      age: '',
+      gender: '男'
+    },
+    email: '',
+    education: '',
+    likes: []
+  })
+
+  const rules = {
+    user: {
+      name: {
+        required: true,
+        message: '用户名不能为空'
+      },
+      age: {
+        required: true,
+        validator(rule, value) {
+          const val = parseInt(value)
+          return val >= 12 && val <= 100
+        },
+        message: '年龄必须>=12且<=100'
+      },
+      gender: { required: true }
+    },
+    email: {
+      required: true,
+      type: 'email'
+    },
+    education: {
+      required: true
+    },
+    likes: {
+      type: 'array',
+      required: true
+    }
+  }
+
+  const autoCompleteOptions = ref([])
+  watchEffect(() => {
+    const email = formData.email
+    autoCompleteOptions.value = ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
+      const prefix = email.split('@')[0]
+      return {
+        label: prefix + suffix,
+        value: prefix + suffix
+      }
+    })
+  })
+  const submit = () => {
+    formRef.value?.validate((valid) => {
+      if (valid) {
+        Message.success('提交成功~')
+      } else {
+        Message.error('提交失败,请验证表单正确性~')
+      }
+    })
+  }
+</script>
+<style>
+  .demo {
+    padding: 0 20px;
+  }
+</style>
+```
+
+:::
+
+### 只执行部分规则
+
+执行部分规则可以使用 `form.validateFields`, 传入 `fields` 指定部分字段进行验证,
+
+清除验证可以用 `form.clearValidate` 传入 `fields` 指定部分字段进行清除,若 `fields` 没传,则清除全部
+
+:::demo
+
+```vue
+<template>
+  <p-space>
+    <p-button @click="validateAll">验证全部</p-button>
+    <p-button @click="validatePartial('input1')">验证第一个input</p-button>
+    <p-button @click="validatePartial('input2')">验证第二个input</p-button>
+    <p-button @click="clearValidate">清空验证</p-button>
+  </p-space>
+  <p-form ref="formRef" :model="formData" :rules="rules" label-position="top">
+    <p-form-item label="最短长度为2" prop="input1">
+      <p-input v-model="formData.input1" />
+    </p-form-item>
+    <p-form-item label="最短长度为3" prop="input2">
+      <p-input v-model="formData.input2" />
+    </p-form-item>
+  </p-form>
+</template>
+
+<script setup>
+  import { reactive, ref } from 'vue'
+  const formRef = ref()
+  const formData = reactive({
+    input1: '',
+    input2: ''
+  })
+  const rules = {
+    input1: {
+      required: true,
+      min: 2,
+      message: '最小长度2'
+    },
+    input2: {
+      required: true,
+      min: 3,
+      message: '最小长度3'
+    }
+  }
+  const validateAll = () => {
+    formRef.value?.validate()
+  }
+  const validatePartial = (prop) => {
+    formRef.value?.validateFields([prop])
+  }
+  const clearValidate = () => {
+    formRef.value?.clearValidate()
+  }
+</script>
+```
+
+:::
+
+### 必填项
+
+除了设置 `form rules`,也可以设置`form-item` 的 `required` 属性,如果为 `truly` 则为 必填项, 当 `required` 为 `string`类型时,为作为 `rule` 的 `message`
+
+必选项会出现小红点,若不想要,则设置`show-require-mark`为`false`
+
+:::demo
+
+```vue
+<template>
+  <p-form :model="formData">
+    <p-form-item label="名字" prop="name" required="名字不能为空">
+      <p-input v-model="formData.name" />
+    </p-form-item>
+    <p-form-item label="年龄" prop="age" required="年龄不能为空" :showRequireMark="false">
+      <p-input v-model="formData.age" />
+    </p-form-item>
+  </p-form>
+</template>
+
+<script setup>
+  import { reactive, ref } from 'vue'
+  const formRef = ref()
+  const formData = reactive({
+    name: '',
+    age: ''
+  })
+</script>
+```
+
+:::
+
+### 自定义 labelWidth
+
+`labelWidth` 默认为`auto`,会根据所有的 `form-item` 的 `label` 宽度计算出最大值,作为`labelWidth` 的宽度, 若不想这样,可以传固定值
+
+:::demo
+
+```vue
+<template>
+  <p-form :model="formData" labelWidth="100px">
+    <p-form-item label="名字" prop="name" required="名字不能为空">
+      <p-input v-model="formData.name" />
+    </p-form-item>
+    <p-form-item label="年龄" prop="age" required="年龄不能为空">
+      <p-input v-model="formData.age" />
+    </p-form-item>
+  </p-form>
+</template>
+
+<script setup>
+  import { reactive, ref } from 'vue'
+  const formRef = ref()
+  const formData = reactive({
+    name: '',
+    age: ''
+  })
+</script>
+```
+
+:::
+
+### 展示 label
+
+设置 `showLabel` 确定是否展示 label
+
+:::demo
+
+```vue
+<template>
+  <p-space> 展示label <p-switch v-model="showLabel" /> </p-space>
+
+  <p-form :model="formData" :showLabel="showLabel">
+    <p-form-item label="名字" prop="name" required="名字不能为空">
+      <p-input v-model="formData.name" />
+    </p-form-item>
+    <p-form-item label="年龄" prop="age" required="年龄不能为空">
+      <p-input v-model="formData.age" />
+    </p-form-item>
+  </p-form>
+</template>
+
+<script setup>
+  import { reactive, ref } from 'vue'
+  const formRef = ref()
+  const showLabel = ref(true)
+  const formData = reactive({
+    name: '',
+    age: ''
+  })
+</script>
+```
+
+:::

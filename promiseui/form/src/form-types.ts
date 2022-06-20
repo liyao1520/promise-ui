@@ -3,10 +3,10 @@ import { PropType, ExtractPropTypes, CSSProperties, provide, InjectionKey, Ref }
 import { Rules, Rule, Values } from 'async-validator'
 export type triggerType = 'blur' | 'change'
 export const formProps = {
-  disabled: {
-    type: Boolean,
-    default: false
-  },
+  // disabled: {
+  //   type: Boolean,
+  //   default: false
+  // },
   inline: Boolean,
   labelWidth: {
     type: String as PropType<number | string | 'auto'>,
@@ -60,7 +60,11 @@ export const formItemProps = {
     type: [String, Object] as PropType<CSSProperties | string>
   },
   showLabel: Boolean,
-  showRequireMark: Boolean,
+  showRequireMark: {
+    type: Boolean,
+    required: false,
+    default: undefined
+  },
   size: {
     type: String as PropType<ICommonSize>
   },
@@ -85,7 +89,12 @@ export interface IFormContext {
   maxChildLabelWidth: Ref<number | undefined>
   childLabelWidthRace: (width: number) => void
   model: object
-  addValidateFn: (validateFn: () => Promise<Values>) => void
+  addValidateFn: (validateFn: IValidateInfo) => void
+  onClearValidate: (cb: () => void, prop: string | undefined) => void
+}
+export interface IValidateInfo {
+  validateFn: () => Promise<Values>
+  prop: string | undefined
 }
 export interface IFormItemContext {
   validate: () => Promise<Values>

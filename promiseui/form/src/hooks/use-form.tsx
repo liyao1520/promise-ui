@@ -22,7 +22,6 @@ const findRequiredRule = (rules: RuleItem[]) => {
 export default function (props: FormItemProps, labelRef: Ref<HTMLLabelElement | undefined>) {
   const FormContext = inject(formContextKey, undefined)
   const validateError = ref<null | ValidateError>()
-  const hasRequiredRule = ref(false)
   const childLabelWidthRace = () => {
     if (!labelRef.value) return
     const width = Number(getComputedStyle(labelRef.value).width.slice(0, -2))
@@ -68,11 +67,11 @@ export default function (props: FormItemProps, labelRef: Ref<HTMLLabelElement | 
   const showLabel = computed(() =>
     props.showLabel ? props.showLabel : !!FormContext?.props.showLabel
   )
-  const showRequireMark = computed(
-    () =>
-      (props.showRequireMark ? props.showRequireMark : !!FormContext?.props.showRequireMark) &&
-      findRequiredRule(getMergeRules())
-  )
+  const showRequireMark = computed(() => {
+    if (props.showRequireMark !== undefined) return props.showRequireMark
+
+    return !!FormContext?.props.showRequireMark && findRequiredRule(getMergeRules())
+  })
   const getMergeRules = () => {
     const propsRules = toArray(props.rules)
     if (props.required) {
@@ -125,9 +124,11 @@ export default function (props: FormItemProps, labelRef: Ref<HTMLLabelElement | 
         )
       : Promise.resolve([])
   if (FormContext?.model && props.prop) {
-    FormContext.addValidateFn(validateFn)
+    FormContext.addValidateFn({ validateFn, prop: props.prop })
   }
-
+  FormContext?.onClearValidate(() => {
+    validateError.value = null
+  }, props.prop)
   return {
     labelWidth,
     labelPosition,
