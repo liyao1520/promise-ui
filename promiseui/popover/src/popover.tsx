@@ -52,7 +52,7 @@ export default defineComponent({
           <Overlay
             v-model={isShow.value}
             origin={nodeRef.value}
-            position={props.posititon}
+            position={props.position}
             flip
             offset={props.offset}
             showArrow={props.showArrow}
@@ -70,7 +70,7 @@ export default defineComponent({
               onMouseenter={(_) => clearTimeout(timer)}
               onMouseleave={handleLeavle}
             >
-              {props.content}
+              {ctx.slots.content ? ctx.slots.content() : props.content}
             </span>
           </Overlay>
         </>

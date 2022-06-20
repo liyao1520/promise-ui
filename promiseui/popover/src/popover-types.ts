@@ -7,7 +7,7 @@ export const popoverProps = {
     type: String as PropType<'click' | 'hover'>,
     default: 'hover'
   },
-  posititon: {
+  position: {
     type: String as PropType<Placement>,
     default: 'top'
   },
