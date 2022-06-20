@@ -1,5 +1,5 @@
 import { Values } from 'async-validator'
-import { defineComponent, provide, computed, ref } from 'vue'
+import { defineComponent, provide, computed, ref, watch } from 'vue'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import { formContextKey, formProps, FormProps } from './form-types'
 
@@ -22,7 +22,15 @@ export default defineComponent({
         maxChildLabelWidth.value = width
       }
     }
-
+    const clearLabelWidth = () => {
+      maxChildLabelWidth.value = undefined
+    }
+    watch(
+      () => props.size,
+      () => {
+        clearLabelWidth()
+      }
+    )
     const validateFns: (() => Promise<Values>)[] = []
 
     const addValidateFn = (validateFn: () => Promise<Values>): void => {

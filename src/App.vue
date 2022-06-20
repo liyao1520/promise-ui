@@ -1,33 +1,8 @@
 <template>
   <div class="demo">
-    <p-form ref="formRef" label-position="right" :model="form" :rules="rules" size="sm">
-      <p-form-item label="账号" prop="user.name" :trigger="['change', 'blur']">
-        <p-input v-model="form.name" />
-      </p-form-item>
-      <p-form-item label="密码" prop="password">
-        <p-input v-model="form.password" />
-      </p-form-item>
-
-      <p-form-item label="密码" prop="select">
-        <p-select
-          v-model="form.select"
-          filterable
-          :options="[{ value: '1', label: 'xuanxiangyi' }]"
-        />
-      </p-form-item>
-      <p-form-item label="密码" prop="complete" required>
-        <p-auto-complete v-model="form.complete" />
-      </p-form-item>
-      <p-form-item label="密码" prop="radio" required>
-        <p-radio-group v-model="form.radio">
-          <p-radio label="123" value="1" />
-          <p-radio label="456" value="3" />
-        </p-radio-group>
-      </p-form-item>
-      <p-form-item label="密码">
-        <p-button @click="click">提交</p-button>
-      </p-form-item>
-    </p-form>
+    <p-form-item :rules="[{ required: true }]">
+      <p-input v-model="form.user.name" />
+    </p-form-item>
   </div>
 </template>
 
@@ -50,7 +25,7 @@
   }
   const rules = {
     user: {
-      name: { required: true, min: 10 }
+      name: { min: 10 }
     },
     password: {
       required: true,
@@ -60,6 +35,7 @@
       required: true
     }
   }
+  const size = ref('md')
 </script>
 
 <style>

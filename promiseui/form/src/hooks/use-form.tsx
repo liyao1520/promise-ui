@@ -1,7 +1,8 @@
 import { inject, onMounted, Ref, computed, watch, ref } from 'vue'
-import Schema, { Rule, ValidateError } from 'async-validator'
+import Schema, { Rule, RuleItem, ValidateError } from 'async-validator'
 import { formContextKey, FormItemProps } from '../form-types'
 import toArray from '../../../shared/utils/toArray'
+import useFormSize from './use-form-size'
 const getValueByPathname = (pathname: string, target: any) => {
   const path = pathname.split('.')
 
@@ -15,14 +16,30 @@ const getValueByPathname = (pathname: string, target: any) => {
 
   return target
 }
+const findRequiredRule = (rules: RuleItem[]) => {
+  return !!rules.find((rule) => rule.required)
+}
 export default function (props: FormItemProps, labelRef: Ref<HTMLLabelElement | undefined>) {
   const FormContext = inject(formContextKey, undefined)
   const validateError = ref<null | ValidateError>()
-  onMounted(() => {
+  const hasRequiredRule = ref(false)
+  const childLabelWidthRace = () => {
     if (!labelRef.value) return
     const width = Number(getComputedStyle(labelRef.value).width.slice(0, -2))
     FormContext?.childLabelWidthRace(width)
+  }
+
+  onMounted(() => {
+    childLabelWidthRace()
   })
+
+  watch(
+    useFormSize(),
+    () => {
+      childLabelWidthRace()
+    },
+    { flush: 'post' }
+  )
 
   const labelWidth = computed(() => {
     const maxChildLabelWidth = FormContext?.maxChildLabelWidth.value
@@ -34,8 +51,9 @@ export default function (props: FormItemProps, labelRef: Ref<HTMLLabelElement | 
     } else {
       // props.label 没有值,继承form的label
       const FormLabelWidth = FormContext?.props.labelWidth
+
       if (FormLabelWidth === 'auto') {
-        return maxChildLabelWidth + 'px'
+        return maxChildLabelWidth ? maxChildLabelWidth + 'px' : maxChildLabelWidth
       } else {
         return typeof FormLabelWidth === 'number' ? FormLabelWidth + 'px' : FormLabelWidth
       }
@@ -50,11 +68,12 @@ export default function (props: FormItemProps, labelRef: Ref<HTMLLabelElement | 
   const showLabel = computed(() =>
     props.showLabel ? props.showLabel : !!FormContext?.props.showLabel
   )
-  const showRequireMark = computed(() =>
-    props.showRequireMark ? props.showRequireMark : !!FormContext?.props.showRequireMark
+  const showRequireMark = computed(
+    () =>
+      (props.showRequireMark ? props.showRequireMark : !!FormContext?.props.showRequireMark) &&
+      findRequiredRule(getMergeRules())
   )
-
-  const rules = computed(() => {
+  const getMergeRules = () => {
     const propsRules = toArray(props.rules)
     if (props.required) {
       propsRules.push({
@@ -67,8 +86,15 @@ export default function (props: FormItemProps, labelRef: Ref<HTMLLabelElement | 
       formRules = getValueByPathname(props.prop, FormContext.props.rules)
     }
 
-    return formRules ? propsRules.concat(formRules) : propsRules
+    const mergeRules = formRules ? propsRules.concat(formRules) : propsRules
+
+    return mergeRules
+  }
+
+  const rules = computed(() => {
+    return getMergeRules()
   })
+
   const propsName = computed(() => {
     if (Array.isArray(props.prop)) {
       return props.prop.join('.')

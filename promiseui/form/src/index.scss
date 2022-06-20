@@ -66,6 +66,11 @@
     padding: 0 12px 0 0;
     justify-content: flex-end;
   }
+  &__require-mark {
+    color: $danger;
+    user-select: none;
+    padding-right: 2px;
+  }
   &__content {
     flex: 1;
     position: relative;
