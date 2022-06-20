@@ -16,6 +16,7 @@ import VirtualScrollInstall, { VirtualScroll } from './virtualScroll'
 import TagInstall, { Tag } from './tag'
 import AutoCompleteInstall, { AutoComplete } from './autoComplete'
 import FormInstall, { Form, FormItem } from './form'
+import PopoverInstall, { Popover } from './popover'
 
 const installs = [
   ButtonInstall,
@@ -34,7 +35,8 @@ const installs = [
   VirtualScrollInstall,
   TagInstall,
   AutoCompleteInstall,
-  FormInstall
+  FormInstall,
+  PopoverInstall
 ]
 
 export {
@@ -59,7 +61,8 @@ export {
   Tag,
   AutoComplete,
   Form,
-  FormItem
+  FormItem,
+  Popover
 }
 
 export default {

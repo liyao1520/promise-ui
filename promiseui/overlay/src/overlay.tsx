@@ -34,21 +34,17 @@ export default defineComponent({
       },
       { ignore: [origin, ...props.clickOutsideIgnore] }
     )
-    const darkStyle = dark.value
-      ? {
-          ['--promiseui-block']: '#464d6e'
-        }
-      : {}
+
     const styles = computed<StyleValue>(() => ({
       top: y.value + 'px',
       left: x.value + 'px',
-      ...style.value,
-      ...darkStyle
+      ...style.value
     }))
     const classes = computed(() => ({
       [ns.b()]: true,
       [ns.m(realPosition.value)]: true,
-      [className.value]: true
+      [className.value]: true,
+      [ns.m('dark')]: props.dark
     }))
     const animationName = computed(
       () =>

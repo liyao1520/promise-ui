@@ -9,6 +9,10 @@
   box-shadow: 0 2px 8px 0 $shadow;
   z-index: 1000;
   color: $text;
+  &--dark {
+    --promiseui-block: #464d6e;
+    color: $overlay-text;
+  }
   .#{$prefix}-overlay__arrow {
     position: absolute;
     width: 0;
