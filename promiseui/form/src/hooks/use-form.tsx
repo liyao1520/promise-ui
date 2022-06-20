@@ -5,13 +5,14 @@ import toArray from '../../../shared/utils/toArray'
 const getValueByPathname = (pathname: string, target: any) => {
   const path = pathname.split('.')
 
-  for (let name of path) {
+  for (const name of path) {
     if (typeof target === 'undefined') {
       // 没有找到值
       return undefined
     }
     target = target[name]
   }
+
   return target
 }
 export default function (props: FormItemProps, labelRef: Ref<HTMLLabelElement | undefined>) {
@@ -55,18 +56,24 @@ export default function (props: FormItemProps, labelRef: Ref<HTMLLabelElement | 
 
   const rules = computed(() => {
     const propsRules = toArray(props.rules)
-    let formItemRules: Rule | undefined
-    if (typeof props.name === 'string' && FormContext) {
-      formItemRules = getValueByPathname(props.name, FormContext.props.rules)
+    if (props.required) {
+      propsRules.push({
+        required: true,
+        message: typeof props.required === 'string' ? props.required : undefined
+      })
+    }
+    let formRules: Rule | undefined
+    if (typeof props.prop === 'string' && FormContext) {
+      formRules = getValueByPathname(props.prop, FormContext.props.rules)
     }
 
-    return formItemRules ? propsRules.concat(formItemRules) : propsRules
+    return formRules ? propsRules.concat(formRules) : propsRules
   })
   const propsName = computed(() => {
-    if (Array.isArray(props.name)) {
-      return props.name.join('.')
-    } else if (typeof props.name === 'string') {
-      return props.name
+    if (Array.isArray(props.prop)) {
+      return props.prop.join('.')
+    } else if (typeof props.prop === 'string') {
+      return props.prop
     }
     return ''
   })
@@ -77,21 +84,21 @@ export default function (props: FormItemProps, labelRef: Ref<HTMLLabelElement | 
       })
   )
   const validateFn = () =>
-    props.name && FormContext
+    props.prop && FormContext
       ? validator.value.validate(
           {
-            [props.name]: getValueByPathname(props.name, FormContext.model)
+            [props.prop]: getValueByPathname(props.prop, FormContext.model)
           },
           { firstFields: true },
           (error) => {
             validateError.value = error ? error[0] : null
             if (error) {
-              console.warn(`validate error! ${props.name}`, error)
+              console.warn(`validate error! ${props.prop}`, error)
             }
           }
         )
       : Promise.resolve([])
-  if (FormContext?.model && props.name) {
+  if (FormContext?.model && props.prop) {
     FormContext.addValidateFn(validateFn)
   }
 

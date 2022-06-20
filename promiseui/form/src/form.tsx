@@ -31,7 +31,7 @@ export default defineComponent({
 
     const fromValidate = async () => {
       let fulfilled = true
-      for (let validator of validateFns) {
+      for (const validator of validateFns) {
         try {
           await validator()
         } catch (e) {

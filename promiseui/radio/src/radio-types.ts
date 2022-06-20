@@ -23,8 +23,7 @@ export const radioProps = {
     default: 'on'
   },
   size: {
-    type: String as PropType<ICommonSize>,
-    default: 'md'
+    type: String as PropType<ICommonSize>
   }
 } as const
 
@@ -48,8 +47,7 @@ export const radioButtonProps = {
     default: 'on'
   },
   size: {
-    type: String as PropType<ICommonSize>,
-    default: 'md'
+    type: String as PropType<ICommonSize>
   }
 } as const
 
@@ -60,8 +58,7 @@ export const radioGroupProps = {
     default: 'on'
   },
   size: {
-    type: String as PropType<ICommonSize>,
-    default: 'md'
+    type: String as PropType<ICommonSize>
   }
 } as const
 

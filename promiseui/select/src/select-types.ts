@@ -67,8 +67,7 @@ export const selectProps = {
     type: String as PropType<ICommonFormStatus>
   },
   size: {
-    type: String as PropType<ICommonSize>,
-    default: 'md'
+    type: String as PropType<ICommonSize>
   }
 } as const
 

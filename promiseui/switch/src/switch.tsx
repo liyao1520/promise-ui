@@ -5,6 +5,7 @@ import Wave from '../../shared/components/wave'
 import { commonType } from '../../shared/common'
 import './index.scss'
 import IconLoading from '../../shared/components/loading'
+import useFormSize from '../../form/src/hooks/use-form-size'
 
 export default defineComponent({
   name: 'PSwitch',
@@ -19,9 +20,11 @@ export default defineComponent({
 
     const isCustomActiveColor = computed(() => !commonType.includes(props.activeColor))
 
+    const formSize = useFormSize()
+    const selectSize = computed(() => props.size || formSize.value || 'md')
     const classes = computed(() => ({
       [ns.b()]: true,
-      [ns.m(props.size)]: true,
+      [ns.m(selectSize.value)]: true,
       [ns.m('checked')]: checked.value,
       [ns.m(props.activeColor)]: !isCustomActiveColor.value,
       [ns.m('disabled')]: props.disabled,

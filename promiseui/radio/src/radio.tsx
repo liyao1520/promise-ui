@@ -5,6 +5,7 @@ import './index.scss'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import Wave from '../../shared/components/wave'
 import useRadio from './hooks/use-radio'
+import useFormSize from '../../form/src/hooks/use-form-size'
 
 export default defineComponent({
   name: 'PRadio',
@@ -17,11 +18,13 @@ export default defineComponent({
 
     const { checked, inputName, handleChange, size } = useRadio(props, ctx as SetupContext)
 
+    const formSize = useFormSize()
+    const radioSize = computed(() => size.value || formSize.value || 'md')
     const classes = computed(() => ({
       [ns.b()]: true,
       [ns.m('checked')]: checked.value,
       [ns.m('disabled')]: props.disabled,
-      [ns.m(size.value)]: true
+      [ns.m(radioSize.value)]: true
     }))
 
     watch(

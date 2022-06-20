@@ -7,6 +7,8 @@ import { Icon } from '../../icon'
 import useEvent from './hooks/use-event'
 import Wave from '../../shared/components/wave'
 
+import useFormSize from '../../form/src/hooks/use-form-size'
+
 export default defineComponent({
   name: 'PButton',
   inheritAttrs: false,
@@ -17,7 +19,7 @@ export default defineComponent({
     const {
       type,
       disabled,
-      size,
+
       fillMode,
       loading,
       shake,
@@ -26,10 +28,13 @@ export default defineComponent({
     } = toRefs(props)
     const ns = useNamespace('button')
     const { onClick, onMousedown, onMouseup, isMouseDown } = useEvent(props, emit)
+
+    const formSize = useFormSize()
+    const buttonSize = computed(() => props.size || formSize.value || 'md')
     const classes = computed(() => ({
       [ns.b()]: true,
       [ns.m(type.value)]: true,
-      [ns.m(size.value)]: true,
+      [ns.m(buttonSize.value)]: true,
       [ns.m(fillMode.value)]: true,
       [ns.m('isloading')]: loading.value,
       [ns.m('mousedown')]: isMouseDown.value && shake.value

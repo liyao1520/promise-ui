@@ -6,6 +6,7 @@ import { CheckmarkSharp, RemoveSharp } from '@vicons/ionicons5'
 import './index.scss'
 import { Icon } from '../../icon'
 import useCheckbox from './hooks/use-checkbox'
+import useFormSize from '../../form/src/hooks/use-form-size'
 
 export default defineComponent({
   name: 'PCheckbox',
@@ -15,9 +16,13 @@ export default defineComponent({
     const ns = useNamespace('checkbox')
 
     const { handleClick, checked, disabled, size } = useCheckbox(props, ctx as SetupContext)
+    const formSize = useFormSize()
+
+    const checkBox = computed(() => size.value || formSize.value || 'md')
+
     const classes = computed(() => ({
       [ns.b()]: true,
-      [ns.m(size.value)]: true,
+      [ns.m(checkBox.value)]: true,
       [ns.m('checked')]: checked.value || props.indeterminate,
       [ns.m('disabled')]: disabled.value
     }))

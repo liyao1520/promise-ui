@@ -18,6 +18,7 @@ import { ChevronDownSharp, CloseCircleOutline } from '@vicons/ionicons5'
 import { Dropdown } from '../../dropdown'
 import Wave from '../../shared/components/wave'
 import useFormValidate from './hooks/use-form-validate'
+import useFormSize from '../../form/src/hooks/use-form-size'
 
 const ITEM_HEIGHT = 32
 
@@ -98,10 +99,13 @@ export default defineComponent({
       ctx.emit('change', singleActiveItem.value)
     })
 
+    const fromSize = useFormSize()
+    const selectSize = computed(() => props.size || fromSize.value || 'md')
+
     const classes = computed(() => ({
       [ns.b()]: true,
       [ns.m('disabled')]: props.disabled,
-      [ns.m(props.size)]: true,
+      [ns.m(selectSize.value)]: true,
       [ns.m(props.status + '-status')]: props.status,
       [ns.m('focus')]: optionListShow.value
     }))

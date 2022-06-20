@@ -18,8 +18,7 @@ export const checkboxProps = {
     default: false
   },
   size: {
-    type: String as PropType<ICommonSize>,
-    default: 'md'
+    type: String as PropType<ICommonSize>
   }
 } as const
 export const checkboxGroupProps = {
@@ -40,8 +39,7 @@ export const checkboxGroupProps = {
     default: -Infinity
   },
   size: {
-    type: String as PropType<ICommonSize>,
-    default: 'md'
+    type: String as PropType<ICommonSize>
   }
 } as const
 

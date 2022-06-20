@@ -5,7 +5,9 @@ export default function (props: RadioProps | RadioButtonProps, { emit }: SetupCo
   const RadioContext = inject(RadioKey, undefined)
 
   const checked = computed(() => {
-    const value = RadioContext?.props.modelValue || props.modelValue
+    const contextModelValue = RadioContext?.props.modelValue
+    const value = contextModelValue == null ? props.modelValue : contextModelValue
+
     return value === props.value
   })
 

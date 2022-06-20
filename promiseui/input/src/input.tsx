@@ -8,6 +8,8 @@ import { useNamespace } from '../../shared/hooks/use-namespace'
 import useEvent from './hooks/use-event'
 import nativeClick from '../../shared/utils/nativeClick'
 import Wave from '../../shared/components/wave'
+import useForm from '../../form/src/hooks/use-form'
+import useFormSize from '../../form/src/hooks/use-form-size'
 
 export default defineComponent({
   name: 'PInput',
@@ -18,13 +20,17 @@ export default defineComponent({
     const { attrs, slots, emit } = ctx
     const inputRef = ref<HTMLInputElement | null>(null)
     const wapperRef = ref<HTMLInputElement | null>(null)
-    const { size, disabled, modelValue, clearable, showPassword } = toRefs(props)
+    const { disabled, modelValue, clearable, showPassword } = toRefs(props)
     const ns = useNamespace('input')
     const focused = ref(false)
     const isPasswordType = ref(showPassword.value)
+
+    const formSize = useFormSize()
+    const inputSize = computed(() => props.size || formSize.value || 'md')
+
     const classes = computed(() => ({
       [ns.b()]: true,
-      [ns.m(size.value)]: true,
+      [ns.m(inputSize.value)]: true,
       [ns.m('disabled')]: disabled.value,
       [ns.m('focus')]: focused.value
     }))

@@ -9,8 +9,7 @@ export const switchProps = {
     default: false
   },
   size: {
-    type: String as PropType<ICommonSize>,
-    default: 'md'
+    type: String as PropType<ICommonSize>
   },
   disabled: {
     type: Boolean,

@@ -9,8 +9,7 @@ export const buttonProps = {
     default: 'default'
   },
   size: {
-    type: String as PropType<IButtonSize>,
-    default: 'md'
+    type: String as PropType<IButtonSize>
   },
   loading: {
     type: Boolean,

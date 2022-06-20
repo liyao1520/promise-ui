@@ -11,8 +11,7 @@ export const inputProps = {
     default: false
   },
   size: {
-    type: String as PropType<ICommonSize>,
-    default: 'md'
+    type: String as PropType<ICommonSize>
   },
   clearable: {
     type: Boolean,

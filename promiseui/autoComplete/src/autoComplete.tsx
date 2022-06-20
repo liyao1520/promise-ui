@@ -1,4 +1,6 @@
+import { computed } from '@vue/reactivity'
 import { defineComponent, ref, shallowRef } from 'vue'
+import useFormSize from '../../form/src/hooks/use-form-size'
 import { Input } from '../../input'
 import { Overlay } from '../../overlay'
 
@@ -20,6 +22,9 @@ export default defineComponent({
     const virtualListRef = ref()
 
     const inputRef = shallowRef()
+
+    const formSize = useFormSize()
+    const inputSize = computed(() => props.size || formSize.value || 'md')
 
     const onOutsideClick = () => {
       optionListShow.value = false
@@ -49,7 +54,7 @@ export default defineComponent({
             }}
             value={props.modelValue}
             placeholder={props.placeholder}
-            size={props.size}
+            size={inputSize.value}
             onInput={(e: Event) => {
               ctx.emit('update:modelValue', (e.target as HTMLInputElement).value)
             }}

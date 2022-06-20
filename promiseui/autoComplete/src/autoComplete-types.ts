@@ -22,8 +22,7 @@ export const autoCompleteProps = {
   modelValue: String,
   placeholder: String,
   size: {
-    type: String as PropType<ICommonSize>,
-    default: 'md'
+    type: String as PropType<ICommonSize>
   },
   disabled: Boolean,
   renderLabel: {

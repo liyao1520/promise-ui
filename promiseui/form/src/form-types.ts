@@ -43,7 +43,7 @@ export const formProps = {
 } as const
 
 export const formItemProps = {
-  name: {
+  prop: {
     type: String
   },
   label: {
@@ -73,6 +73,10 @@ export const formItemProps = {
   trigger: {
     type: [String, Array] as PropType<triggerType | string[]>,
     default: 'blur'
+  },
+  required: {
+    type: [Boolean, String] as PropType<boolean | string>,
+    default: false
   }
 }
 export interface IFormContext {

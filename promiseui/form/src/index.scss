@@ -22,12 +22,21 @@
   }
   &--md {
     font-size: $font-size-md;
+    .#{$prefix}-form-item__label {
+      line-height: 32px;
+    }
   }
   &--sm {
     font-size: $font-size-sm;
+    .#{$prefix}-form-item__label {
+      line-height: 28px;
+    }
   }
   &--lg {
     font-size: $font-size-lg;
+    .#{$prefix}-form-item__label {
+      line-height: 36px;
+    }
   }
   &--left {
     .#{$prefix}-form-item__label {
@@ -60,6 +69,8 @@
   &__content {
     flex: 1;
     position: relative;
+    display: flex;
+    align-items: center;
   }
 }
 
