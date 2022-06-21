@@ -212,10 +212,23 @@ form {
   width: 100vw;
   height: 100vh;
 }
-body>* ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px
+
+html[pui-theme="dark"] body::-webkit-scrollbar {
+  background-color: #424242;
 }
+html[pui-theme="dark"] body::-webkit-scrollbar-thumb {
+  background-color: #686868;
+}
+html[pui-theme="dark"] body::-webkit-scrollbar-thumb:hover {
+  background-color: #7b7b7b;
+}
+
+body>* ::-webkit-scrollbar {
+  width: 4px;
+  height: 4px
+}
+
+
 
 body>* ::-webkit-scrollbar-track {
   background-color: transparent
@@ -223,13 +236,12 @@ body>* ::-webkit-scrollbar-track {
 
 body>* ::-webkit-scrollbar-thumb {
   border-radius: 8px;
-  background-color: #adb0b8;
-  background-color: var(--devui-line, #adb0b8)
+  background-color: var(--promiseui-line, #adb0b8)
+
 }
 
 body>* ::-webkit-scrollbar-thumb:hover {
   background-color: #8a8e99;
-  background-color: var(--devui-placeholder, #8a8e99)
 }
 
 body>* ::-webkit-scrollbar-corner {
