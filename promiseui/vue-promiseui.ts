@@ -17,6 +17,7 @@ import TagInstall, { Tag } from './tag'
 import AutoCompleteInstall, { AutoComplete } from './autoComplete'
 import FormInstall, { Form, FormItem } from './form'
 import PopoverInstall, { Popover } from './popover'
+import ModalInstall, { Modal } from './modal'
 
 const installs = [
   ButtonInstall,
@@ -36,7 +37,8 @@ const installs = [
   TagInstall,
   AutoCompleteInstall,
   FormInstall,
-  PopoverInstall
+  PopoverInstall,
+  ModalInstall
 ]
 
 export {
@@ -62,7 +64,8 @@ export {
   AutoComplete,
   Form,
   FormItem,
-  Popover
+  Popover,
+  Modal
 }
 
 export default {

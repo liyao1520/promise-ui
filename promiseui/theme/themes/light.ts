@@ -31,6 +31,7 @@ export default {
   waiting: '#9faad7',
   'text-weak': '#575d6c',
   'light-text': '#ffffff',
+  'title-text': 'rgb(31, 34, 37)',
   'disabled-bg': '#f6f6f6',
   'disabled-line': '#dfe1e6',
   'disabled-text': '#cbcacb',

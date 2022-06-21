@@ -127,20 +127,22 @@
   }
 }
 
-.pui-scalein-leave-to,
-.pui-scalein-enter-from {
+.#{$prefix}-scalein-leave-to,
+.#{$prefix}-scalein-enter-from {
   opacity: 0;
   transform: scale(0.5);
 }
-.pui-scalein-leave-from,
-.pui-scalein-enter-to {
+.#{$prefix}-scalein-leave-from,
+.#{$prefix}-scalein-enter-to {
   opacity: 1;
   transform: scale(1);
 }
-.pui-scalein-leave-active,
-.pui-scalein-enter-active {
+.#{$prefix}-scalein-leave-active,
+.#{$prefix}-scalein-enter-active {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
+
 
 @include animation('left');
 
@@ -151,3 +153,4 @@
 @include animation('bottom');
 
 @include animation('scalein');
+@include animation('modal-scalein');
