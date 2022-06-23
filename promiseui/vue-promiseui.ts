@@ -19,6 +19,7 @@ import FormInstall, { Form, FormItem } from './form'
 import PopoverInstall, { Popover } from './popover'
 import ModalInstall, { Modal } from './modal'
 import MessageBoxInstall, { MessageBox } from './messageBox'
+import LoadingBarInstall, { useLoadingBar } from './loadingBar'
 
 const installs = [
   ButtonInstall,
@@ -40,7 +41,8 @@ const installs = [
   FormInstall,
   PopoverInstall,
   ModalInstall,
-  MessageBoxInstall
+  MessageBoxInstall,
+  LoadingBarInstall
 ]
 
 export {
@@ -68,7 +70,8 @@ export {
   FormItem,
   Popover,
   Modal,
-  MessageBox
+  MessageBox,
+  useLoadingBar
 }
 
 export default {

@@ -55,9 +55,9 @@
     color: $text;
     border-color: $border-color;
     background-color: $block;
-    &:hover,
-    &:active,
-    &:focus {
+    &:hover:not(&:disabled),
+    &:active:not(&:disabled),
+    &:focus:not(&:disabled) {
       color: $brand;
       border-color: $brand;
     }
@@ -92,6 +92,7 @@
       background-color: $danger-active;
     }
   }
+  &--default,
   &--success,
   &--primary,
   &--info,
@@ -101,6 +102,7 @@
       opacity: 0.5;
     }
   }
+
   &--outline,
   &--dashed,
   &--none {

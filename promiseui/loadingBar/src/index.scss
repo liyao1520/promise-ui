@@ -12,9 +12,9 @@
   }
 }
 .#{$prefix}-loading-bar-leave-active {
-  transition: all 0.2s;
+  transition: all 0.5s;
   > div.#{$prefix}-loading-bar {
-    transition: max-width 0.2s linear, background-color 0.4s linear;
+    transition: max-width 0.3s linear, background-color 0.5s linear;
   }
 }
 .#{$prefix}-loading-bar-enter-active {
