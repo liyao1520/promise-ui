@@ -22,12 +22,12 @@ import dragDirective from '../../shared/directives/drag'
 
 export default defineComponent({
   name: 'PModal',
-  props: modalProps,
-  emits: ['update:modelValue'],
-  inheritAttrs: false,
   directives: {
     drag: dragDirective
   },
+  inheritAttrs: false,
+  props: modalProps,
+  emits: ['update:modelValue', 'closeIconClick'],
   setup(props: ModalProps, { slots, emit, attrs }) {
     const ns = useNamespace('modal')
     const modelRef = ref<HTMLDivElement>()
@@ -59,19 +59,6 @@ export default defineComponent({
     onUnmounted(() => {
       window.removeEventListener('keyup', keyupHandle)
     })
-    watch(
-      toRef(props, 'modelValue'),
-      (isShow) => {
-        if (isShow) {
-          props.onAfterEnter?.()
-        } else {
-          props.onAfterLeave?.()
-        }
-      },
-      {
-        flush: 'post'
-      }
-    )
 
     watchEffect(() => {
       if (props.blockScroll) {
@@ -89,7 +76,13 @@ export default defineComponent({
             <Icon
               class={ns.e('close-icon')}
               component={CloseOutline}
-              onClick={() => emit('update:modelValue', false)}
+              onClick={() => {
+                if (props.onCloseIconClick) {
+                  emit('closeIconClick')
+                } else {
+                  emit('update:modelValue', false)
+                }
+              }}
             />
           )
     }
@@ -112,7 +105,12 @@ export default defineComponent({
     return () => {
       return (
         <Teleport to={props.to}>
-          <Transition name="pui-modal-scalein">
+          <Transition
+            name="pui-modal-scalein"
+            appear
+            onAfterEnter={props.onAfterEnter}
+            onAfterLeave={props.onAfterLeave}
+          >
             {props.displayDirective === 'if' ? (
               <div v-show={props.modelValue} class={ns.e('mask')} style={{ zIndex: props.zIndex }}>
                 {renderModalContent()}

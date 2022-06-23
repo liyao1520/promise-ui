@@ -1,18 +1,39 @@
 <template>
   <div>
-    <p-modal v-model="isShow" title="模态框" style="height: 50vh">
-      内容
-      <template #footer>footer</template>
-      <template #header-extra> 噢！ </template>
-    </p-modal>
-    <p-button @click="isShow = true">show</p-button>
+    <p-button @click="show('success')">success</p-button>
+    <p-button @click="show('error')">error</p-button>
+    <p-button @click="show('info')">info</p-button>
+    <p-button @click="show('warning')">warning</p-button>
+    <p-button @click="show('open')">open</p-button>
   </div>
 </template>
 
-<script setup>
-  import { ref } from 'vue'
+<script setup lang="ts">
+  import { Message } from '../promiseui/message'
+  import { MessageBox } from '../promiseui/messageBox'
 
-  const isShow = ref(true)
+  const show = (type: any) => {
+    ;(MessageBox as any)
+      [type]({
+        title: 'title',
+        content: 'content',
+        showClose: false,
+        confirmButtonText: 'confirm',
+        beforeClose(type: string) {
+          return new Promise((resovle) => {
+            setTimeout(() => {
+              resovle(true)
+            }, 1000)
+          })
+        }
+      })
+      .then(() => {
+        Message.success('ok')
+      })
+      .catch(() => {
+        Message.error('unok')
+      })
+  }
 </script>
 
 <style></style>

@@ -132,6 +132,7 @@
     border-style: dashed;
   }
   &__loading {
+    margin-right: 4px;
     animation: loading 1s infinite linear;
   }
   &--isloading {

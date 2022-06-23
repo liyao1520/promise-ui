@@ -4,7 +4,10 @@ import { defineComponent, ref } from 'vue'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 export default defineComponent({
   props: {
-    minSize: Number,
+    minSize: {
+      type: Number,
+      default: 20
+    },
     heightRatio: {
       type: Number,
       required: true
@@ -23,7 +26,10 @@ export default defineComponent({
     },
     isShowYBar: Boolean,
     isShowXBar: Boolean,
-    scrollByOffset: Function
+    scrollByOffset: {
+      type: Function,
+      required: false
+    }
   },
   setup(props) {
     const ns = useNamespace('scrollbar')

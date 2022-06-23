@@ -43,7 +43,8 @@ export const modalProps = {
   onAfterLeave: {
     type: Function as PropType<() => void>
   },
-  onMaskClick: { type: Function as PropType<() => void> }
+  onMaskClick: { type: Function as PropType<() => void> },
+  onCloseIconClick: Function
 } as const
 
 export type ModalProps = ExtractPropTypes<typeof modalProps>

@@ -1,6 +1,6 @@
-import type { PropType, ExtractPropTypes, HTMLAttributes, StyleValue } from 'vue'
+import type { PropType, ExtractPropTypes, StyleValue } from 'vue'
 
-export type IButtonType = 'primary' | 'success' | 'info' | 'wraning' | 'danger'
+export type IButtonType = 'primary' | 'success' | 'info' | 'warning' | 'danger'
 type IButtonSize = 'lg' | 'md' | 'sm' | 'xs'
 type IFillMode = 'outline' | 'none' | 'dashed'
 export const buttonProps = {
