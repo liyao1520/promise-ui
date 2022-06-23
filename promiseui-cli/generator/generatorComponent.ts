@@ -8,6 +8,7 @@ import genTypesTemplate from '../templates/types'
 import genIndexTemplate from '../templates'
 import genTestTemplate from '../templates/component-test'
 import { coreName } from '../templates/utils'
+import { string } from 'yargs'
 interface IWriteFileOptions {
   encoding: 'utf-8'
 }
@@ -60,6 +61,16 @@ export default async function generatorComponent(info: {
     text: `${coreName(name)} ${title}`,
     link: `/components/${name}/`
   }
+  interface ISidebarItem {
+    text: string
+    children?: ISidebarItem[]
+  }
+  json['/'].forEach((item: ISidebarItem) => {
+    if (Array.isArray(item.children)) {
+      item.children.sort((a, b) => (a.text < b.text ? -1 : 1))
+    }
+  })
+
   sidebarItem.children = sidebarItem.children ? [...sidebarItem.children, config] : [config]
   await fs.writeFile(
     resolve(rootDir, 'docs/.vitepress/sidebar.json'),

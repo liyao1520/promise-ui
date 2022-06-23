@@ -26,7 +26,6 @@
     },
     methods: {
       click2() {
-        console.log(this)
         this.$message({ message: 'this.$message' })
       }
     }

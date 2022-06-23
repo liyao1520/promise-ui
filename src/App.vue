@@ -17,7 +17,7 @@
       [type]({
         title: 'title',
         content: 'content',
-        showClose: false,
+        cancelButtonText: 'cancel',
         confirmButtonText: 'confirm',
         beforeClose(type: string) {
           return new Promise((resovle) => {

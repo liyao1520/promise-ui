@@ -18,6 +18,7 @@ import AutoCompleteInstall, { AutoComplete } from './autoComplete'
 import FormInstall, { Form, FormItem } from './form'
 import PopoverInstall, { Popover } from './popover'
 import ModalInstall, { Modal } from './modal'
+import MessageBoxInstall, { MessageBox } from './messageBox'
 
 const installs = [
   ButtonInstall,
@@ -38,7 +39,8 @@ const installs = [
   AutoCompleteInstall,
   FormInstall,
   PopoverInstall,
-  ModalInstall
+  ModalInstall,
+  MessageBoxInstall
 ]
 
 export {
@@ -65,7 +67,8 @@ export {
   Form,
   FormItem,
   Popover,
-  Modal
+  Modal,
+  MessageBox
 }
 
 export default {

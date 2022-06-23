@@ -45,6 +45,7 @@ export default defineComponent({
         }
       } else {
         emit('cancel')
+        isShow.value = false
       }
     }
     const confimHandle = async () => {
@@ -63,6 +64,7 @@ export default defineComponent({
         }
       } else {
         emit('confirm')
+        isShow.value = false
       }
     }
     const closehandle = async () => {
@@ -74,6 +76,7 @@ export default defineComponent({
           isShow.value = false
         }
       } else {
+        emit('close')
         isShow.value = false
       }
     }
