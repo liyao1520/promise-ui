@@ -1,15 +1,26 @@
-import { defineComponent } from 'vue'
+import { defineComponent, nextTick, ref, Teleport, Transition } from 'vue'
 import { loadingBarProps, LoadingBarProps } from './loadingBar-types'
 
-import "./index.scss"
+import './index.scss'
+import { useNamespace } from '../../shared/hooks/use-namespace'
 
 export default defineComponent({
   name: 'PLoadingBar',
   props: loadingBarProps,
   emits: [],
-  setup(props: LoadingBarProps, ctx) {
+  setup(props: LoadingBarProps, { expose }) {
+    const ns = useNamespace('loading-bar')
+
     return () => {
-      return (<div class="pui-loadingBar"></div>)
+      return (
+        <Teleport to="body">
+          <Transition name={ns.b()} appear>
+            <div class={ns.e('container')} v-show={props.show}>
+              <div class={[ns.b(), props.isError && ns.m('error')]}></div>
+            </div>
+          </Transition>
+        </Teleport>
+      )
     }
   }
 })

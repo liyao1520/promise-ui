@@ -1,9 +1,11 @@
-import type { PropType, ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes } from 'vue'
 
 export const loadingBarProps = {
-  /* test: {
-    type: Object as PropType<{ xxx: xxx }>
-  } */
+  show: {
+    type: Boolean,
+    default: false
+  },
+  isError: Boolean
 } as const
 
 export type LoadingBarProps = ExtractPropTypes<typeof loadingBarProps>

@@ -1,38 +1,23 @@
 <template>
   <div>
-    <p-button @click="show('success')">success</p-button>
-    <p-button @click="show('error')">error</p-button>
-    <p-button @click="show('info')">info</p-button>
-    <p-button @click="show('warning')">warning</p-button>
-    <p-button @click="show('open')">open</p-button>
+    <p-button @click="start">start</p-button>
+    <p-button @click="finish">finish</p-button>
+    <p-button @click="error">error</p-button>
   </div>
 </template>
 
-<script setup lang="ts">
-  import { Message } from '../promiseui/message'
-  import { MessageBox } from '../promiseui/messageBox'
+<script setup>
+  import useLoadingBar from '../promiseui/loadingBar/src/loadingBarService'
 
-  const show = (type: any) => {
-    ;(MessageBox as any)
-      [type]({
-        title: 'title',
-        content: 'content',
-        cancelButtonText: 'cancel',
-        confirmButtonText: 'confirm',
-        beforeClose(type: string) {
-          return new Promise((resovle) => {
-            setTimeout(() => {
-              resovle(true)
-            }, 1000)
-          })
-        }
-      })
-      .then(() => {
-        Message.success('ok')
-      })
-      .catch(() => {
-        Message.error('unok')
-      })
+  const loadingbar = useLoadingBar()
+  const start = () => {
+    loadingbar.start()
+  }
+  const error = () => {
+    loadingbar.error()
+  }
+  const finish = () => {
+    loadingbar.finish()
   }
 </script>
 
