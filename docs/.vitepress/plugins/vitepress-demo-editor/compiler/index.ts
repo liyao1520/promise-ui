@@ -2,7 +2,6 @@ import { templateWrap } from './templateWrap'
 import { getComponents, initialVue, getGlobalProperties } from '../memo'
 import { handleImportMaps } from './importMaps'
 import * as compiler from 'vue/compiler-sfc'
-import { log } from 'console'
 
 type ErrorFn = (errors: (compiler.CompilerError | SyntaxError)[]) => void
 let g_id = 0
@@ -95,7 +94,7 @@ export default class Compiler {
       slotted: ast.descriptor.slotted
     })
     const template = temp.code
-    console.log(template)
+    // console.log(template)
 
     return handleImportMaps(template)
   }
@@ -166,7 +165,7 @@ export default class Compiler {
     if (this.scriptEl) {
       this.scriptEl.innerHTML = main
     }
-    console.log(main)
+    // console.log(main)
 
     return main
   }

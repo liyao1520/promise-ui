@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import PageFooter from './PageFooter.vue'
   import NextAndPrevLinks from './NextAndPrevLinks.vue'
+  import Anchor from './Anchor.vue'
 </script>
 
 <template>
@@ -11,7 +12,7 @@
       <Content class="content" />
       <PageFooter />
       <NextAndPrevLinks />
-
+      <Anchor />
       <slot name="bottom" />
     </div>
   </main>
@@ -30,15 +31,19 @@
 
   @media (min-width: 960px) {
     .page {
-      margin-left: 20rem;
+      margin-left: 16rem;
     }
   }
 
   .container {
     margin: 0 auto;
-    padding: 0 1.5rem 4rem;
+    padding: 0 9.5rem 4rem 1.5rem;
   }
-
+  @media (max-width: 720px) {
+    .container {
+      padding: 0 1.5rem 4rem;
+    }
+  }
   .content {
     padding-bottom: 1.5rem;
   }

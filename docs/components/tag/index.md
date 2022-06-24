@@ -18,11 +18,11 @@
   <h4>禁用。</h4>
   <p-space>
     <p-tag disabled>标签1</p-tag>
-    <p-tag type="primary">标签6</p-tag>
+    <p-tag type="primary" disabled>标签2</p-tag>
     <p-tag type="success" disabled>标签3</p-tag>
     <p-tag type="danger" disabled>标签4</p-tag>
     <p-tag type="warning" disabled>标签5</p-tag>
-    <p-tag type="info" disabled>标签2</p-tag>
+    <p-tag type="info" disabled>标签6</p-tag>
   </p-space>
 </template>
 ```

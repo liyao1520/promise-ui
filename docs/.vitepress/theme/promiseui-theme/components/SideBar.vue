@@ -40,7 +40,7 @@
 
   @media (min-width: 960px) {
     .sidebar {
-      width: 20rem;
+      width: 17rem;
     }
   }
 
