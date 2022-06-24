@@ -8,7 +8,6 @@ import { useNamespace } from '../../shared/hooks/use-namespace'
 import useEvent from './hooks/use-event'
 import nativeClick from '../../shared/utils/nativeClick'
 import Wave from '../../shared/components/wave'
-import useForm from '../../form/src/hooks/use-form'
 import useFormSize from '../../form/src/hooks/use-form-size'
 
 export default defineComponent({

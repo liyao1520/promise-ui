@@ -1,5 +1,6 @@
 import { computed } from '@vue/reactivity'
-import { defineComponent, ref, shallowRef } from 'vue'
+import { defineComponent, nextTick, ref, shallowRef } from 'vue'
+import useFormItem from '../../form/src/hooks/use-form-item'
 import useFormSize from '../../form/src/hooks/use-form-size'
 import { Input } from '../../input'
 import { Overlay } from '../../overlay'
@@ -29,9 +30,13 @@ export default defineComponent({
     const onOutsideClick = () => {
       optionListShow.value = false
     }
+
+    const { triggerValidate } = useFormItem()
+
     const handleOptionClick = (e: Event, { row }: RenderItemProps<IAutoCompleteOption>) => {
       ctx.emit('update:modelValue', row.value)
       optionListShow.value = false
+      nextTick(() => triggerValidate('blur'))
     }
 
     const renderOptionItem = (itemProps: RenderItemProps<IAutoCompleteOption>) => {
