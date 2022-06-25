@@ -22,9 +22,7 @@
    * Typography
    * --------------------------------------------------------------------- */
 
-  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  --font-family-base:Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,\5fae\8f6f\96c5\9ed1,Arial,sans-serif;
   --font-family-mono: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 

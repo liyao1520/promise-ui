@@ -1,1 +1,1 @@
-export const commonType = ['primary', 'success', 'info', 'wraning', 'danger']
+export const commonType = ['primary', 'success', 'info', 'warning', 'danger']
