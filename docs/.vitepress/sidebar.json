@@ -1,6 +1,6 @@
 {
   "/": [
-    { "text": "快速开始", "link": "/" },
+    { "text": "快速开始", "link": "/quick-start/" },
     {
       "text": "通用",
       "children": [

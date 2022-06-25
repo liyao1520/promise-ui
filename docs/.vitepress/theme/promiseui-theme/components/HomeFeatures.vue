@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useData } from 'vitepress'
+  import { computed } from 'vue'
+  import { useData } from 'vitepress'
 
-const { frontmatter } = useData()
+  const { frontmatter } = useData()
 
-const hasFeatures = computed(() => {
-  return frontmatter.value.features && frontmatter.value.features.length > 0
-})
+  const hasFeatures = computed(() => {
+    return frontmatter.value.features && frontmatter.value.features.length > 0
+  })
 
-interface Feature {
-  title?: string
-  details?: string
-}
+  interface Feature {
+    title?: string
+    details?: string
+  }
 
-const features = computed<Feature[]>(() => {
-  return frontmatter.value.features ? frontmatter.value.features : []
-})
+  const features = computed<Feature[]>(() => {
+    return frontmatter.value.features ? frontmatter.value.features : []
+  })
 </script>
 
 <template>
@@ -23,11 +23,7 @@ const features = computed<Feature[]>(() => {
     <div class="wrapper">
       <div class="container">
         <div class="features">
-          <section
-            v-for="(feature, index) in features"
-            :key="index"
-            class="feature"
-          >
+          <section v-for="(feature, index) in features" :key="index" class="feature">
             <h2 class="title" v-if="feature.title">{{ feature.title }}</h2>
             <p class="details" v-if="feature.details">{{ feature.details }}</p>
           </section>
@@ -38,106 +34,106 @@ const features = computed<Feature[]>(() => {
 </template>
 
 <style scoped>
-.home-features {
-  margin: 0 auto;
-  padding: 2.5rem 0 2.75rem;
-  max-width: 960px;
-}
-
-.home-hero + .home-features {
-  padding-top: 0;
-}
-
-@media (min-width: 420px) {
   .home-features {
-    padding: 3.25rem 0 3.5rem;
+    margin: 0 auto;
+    padding: 2.5rem 0 2.75rem;
+    max-width: 960px;
   }
 
   .home-hero + .home-features {
     padding-top: 0;
   }
-}
 
-@media (min-width: 720px) {
-  .home-features {
-    padding-right: 1.5rem;
-    padding-left: 1.5rem;
+  @media (min-width: 420px) {
+    .home-features {
+      padding: 3.25rem 0 3.5rem;
+    }
+
+    .home-hero + .home-features {
+      padding-top: 0;
+    }
   }
-}
 
-.wrapper {
-  padding: 0 1.5rem;
-}
-
-.home-hero + .home-features .wrapper {
-  border-top: 1px solid var(--c-divider);
-  padding-top: 2.5rem;
-}
-
-@media (min-width: 420px) {
-  .home-hero + .home-features .wrapper {
-    padding-top: 3.25rem;
+  @media (min-width: 720px) {
+    .home-features {
+      padding-right: 1.5rem;
+      padding-left: 1.5rem;
+    }
   }
-}
 
-@media (min-width: 720px) {
   .wrapper {
-    padding-right: 0;
-    padding-left: 0;
+    padding: 0 1.5rem;
   }
-}
 
-.container {
-  margin: 0 auto;
-  max-width: 392px;
-}
+  .home-hero + .home-features .wrapper {
+    border-top: 1px solid var(--c-divider);
+    padding-top: 2.5rem;
+  }
 
-@media (min-width: 720px) {
+  @media (min-width: 420px) {
+    .home-hero + .home-features .wrapper {
+      padding-top: 3.25rem;
+    }
+  }
+
+  @media (min-width: 720px) {
+    .wrapper {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+
   .container {
-    max-width: 960px;
+    margin: 0 auto;
+    max-width: 392px;
   }
-}
 
-.features {
-  display: flex;
-  flex-wrap: wrap;
-  margin: -20px -24px;
-}
+  @media (min-width: 720px) {
+    .container {
+      max-width: 960px;
+    }
+  }
 
-.feature {
-  flex-shrink: 0;
-  padding: 20px 24px;
-  width: 100%;
-}
+  .features {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -20px -24px;
+  }
 
-@media (min-width: 720px) {
   .feature {
-    width: calc(100% / 3);
+    flex-shrink: 0;
+    padding: 20px 24px;
+    width: 100%;
   }
-}
 
-.title {
-  margin: 0;
-  border-bottom: 0;
-  line-height: 1.4;
-  font-size: 1.25rem;
-  font-weight: 500;
-}
+  @media (min-width: 720px) {
+    .feature {
+      width: calc(100% / 3);
+    }
+  }
 
-@media (min-width: 420px) {
   .title {
-    font-size: 1.4rem;
+    margin: 0;
+    border-bottom: 0;
+    line-height: 1.4;
+    font-size: 1.25rem;
+    font-weight: 500;
   }
-}
 
-.details {
-  margin: 0;
-  line-height: 1.6;
-  font-size: 1rem;
-  color: var(--c-text-light);
-}
+  @media (min-width: 420px) {
+    .title {
+      font-size: 1.4rem;
+    }
+  }
 
-.title + .details {
-  padding-top: 0.25rem;
-}
+  .details {
+    margin: 0;
+    line-height: 1.6;
+    font-size: 1rem;
+    color: var(--c-text-weak);
+  }
+
+  .title + .details {
+    padding-top: 0.25rem;
+  }
 </style>

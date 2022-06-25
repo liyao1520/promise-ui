@@ -26,7 +26,7 @@
 
   .logo {
     margin-left: 0.75rem;
-    height: 3.3rem;
+    height: 3rem;
     vertical-align: bottom;
   }
   .logo-text {

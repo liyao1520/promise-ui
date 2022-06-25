@@ -270,3 +270,10 @@ body>* ::-webkit-scrollbar-corner {
 [pui-theme="dark"] {
   --c-divider:rgba(255, 255, 255, 0.09)
 }
+
+h1,h2,h3,h4,h5,h6 {
+  font-weight:400;
+}
+svg.icon.outbound {
+  color: unset;
+}
