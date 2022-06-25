@@ -1,24 +1,45 @@
 <template>
   <div>
-    <p-button @click="start">start</p-button>
-    <p-button @click="finish">finish</p-button>
-    <p-button @click="error">error</p-button>
+    <Table :data-source="dataSource" :columns="columns" />
   </div>
 </template>
 
-<script setup>
-  import useLoadingBar from '../promiseui/loadingBar/src/loadingBarService'
-
-  const loadingbar = useLoadingBar()
-  const start = () => {
-    loadingbar.start()
-  }
-  const error = () => {
-    loadingbar.error()
-  }
-  const finish = () => {
-    loadingbar.finish()
-  }
+<script setup lang="ts">
+  import { Table } from '../promiseui/table'
+  const dataSource = Array.from({ length: 10 })
+    .fill(1)
+    .map((item, index) => {
+      return {
+        age: 'age' + index,
+        name: 'name' + index,
+        address: 'address' + index,
+        email: 'email' + index,
+        phone: 'phone' + String(Math.random()).replace('.', '')
+      }
+    })
+  const columns = [
+    {
+      title: '姓名',
+      dataIndex: 'name'
+    },
+    { title: '年龄', dataIndex: 'age' },
+    {
+      title: '地址',
+      dataIndex: 'address'
+    },
+    {
+      title: '地址',
+      dataIndex: 'address'
+    },
+    {
+      title: '邮箱',
+      dataIndex: 'email'
+    },
+    {
+      title: '电话',
+      dataIndex: 'phone'
+    }
+  ]
 </script>
 
 <style></style>

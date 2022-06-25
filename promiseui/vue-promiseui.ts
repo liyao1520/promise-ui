@@ -20,6 +20,7 @@ import PopoverInstall, { Popover } from './popover'
 import ModalInstall, { Modal } from './modal'
 import MessageBoxInstall, { MessageBox } from './messageBox'
 import LoadingBarInstall, { useLoadingBar } from './loadingBar'
+import TableInstall, { Table } from './table'
 
 const installs = [
   ButtonInstall,
@@ -42,7 +43,8 @@ const installs = [
   PopoverInstall,
   ModalInstall,
   MessageBoxInstall,
-  LoadingBarInstall
+  LoadingBarInstall,
+  TableInstall
 ]
 
 export {
@@ -71,7 +73,8 @@ export {
   Popover,
   Modal,
   MessageBox,
-  useLoadingBar
+  useLoadingBar,
+  Table
 }
 
 export default {
