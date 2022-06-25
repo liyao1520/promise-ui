@@ -56,7 +56,7 @@ export default defineComponent({
             flip
             offset={props.offset}
             showArrow={props.showArrow}
-            dark
+            dark={props.dark}
             style={{
               padding: 0,
               ...props.style

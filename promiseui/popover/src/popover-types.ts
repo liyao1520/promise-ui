@@ -13,7 +13,7 @@ export const popoverProps = {
   },
   offset: {
     type: Number,
-    default: 8,
+    default: 9,
     required: false
   },
   showArrow: {
@@ -30,7 +30,11 @@ export const popoverProps = {
   class: {
     default: ''
   },
-  disabled: Boolean
+  disabled: Boolean,
+  dark: {
+    type: Boolean,
+    default: true
+  }
 } as const
 
 export type PopoverProps = ExtractPropTypes<typeof popoverProps>

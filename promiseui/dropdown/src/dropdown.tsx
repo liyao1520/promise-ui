@@ -29,7 +29,7 @@ export default defineComponent({
 
     const onOutsideClick = () => (visible.value = false)
 
-    const { onClick, onMouseenter, onMouseleave } = useEvent(trigger, visible)
+    const { onClick, onMouseenter, onMouseleave } = useEvent(trigger, origin, overlayEl, visible)
 
     const commonProps = { onMouseenter, onMouseleave, onClick, ref: origin }
 

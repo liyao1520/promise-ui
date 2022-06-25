@@ -189,3 +189,26 @@
   }
 </style>
 ```
+
+:::
+
+### 颜色
+
+默认 颜色为 `dark` ,要想使用白色设置 `dark` 为 `false`
+
+:::demo
+
+```vue
+<template>
+  <p-space>
+    <p-popover content="hello world!" :dark="false">
+      <p-button>hover</p-button>
+    </p-popover>
+    <p-popover content="hello world!" trigger="click" :dark="false">
+      <p-button>click</p-button>
+    </p-popover>
+  </p-space>
+</template>
+```
+
+:::

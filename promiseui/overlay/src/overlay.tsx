@@ -1,13 +1,4 @@
-import {
-  computed,
-  defineComponent,
-  ref,
-  StyleValue,
-  Teleport,
-  toRefs,
-  Transition,
-  watch
-} from 'vue'
+import { computed, defineComponent, ref, StyleValue, Teleport, toRefs, Transition } from 'vue'
 import { overlayProps, OverlayProps } from './overlay-types'
 
 import './index.scss'
@@ -21,7 +12,7 @@ export default defineComponent({
   props: overlayProps,
   emits: ['update:modelValue', 'open', 'close', 'outsideClick'],
   setup(props: OverlayProps, { slots, emit, expose }) {
-    const { showArrow, class: className, style, dark, origin } = toRefs(props)
+    const { showArrow, class: className, style, origin } = toRefs(props)
 
     const ns = useNamespace('overlay')
     const overlayEl = ref<HTMLDivElement | null>(null)

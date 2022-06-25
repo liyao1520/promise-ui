@@ -2,10 +2,10 @@ import { Placement } from '../../overlay'
 import type { PropType, ExtractPropTypes, InjectionKey } from 'vue'
 import { IButtonType } from '../../button/src/button-types'
 import { ICommonSize } from '../../types'
-export type TriggerType = 'hover' | 'click' | 'contextmenu'
+export type TriggerType = 'hover' | 'click'
 export const dropdownProps = {
   type: {
-    type: String as PropType<'button' | 'a' | ''>,
+    type: String as PropType<'button' | 'a' | 'contextmenu' | ''>,
     default: ''
   },
   position: {
