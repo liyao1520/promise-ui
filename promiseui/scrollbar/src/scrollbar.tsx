@@ -4,7 +4,7 @@ import { scrollbarProps, ScrollbarProps } from './scrollbar-types'
 import './index.scss'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import getScrollbarWidth from '../../shared/utils/getScrollbarWidth'
-import { useMutationObserver, useResizeObserver, useThrottleFn } from '@vueuse/core'
+import { useMutationObserver, useResizeObserver } from '@vueuse/core'
 import Scrollbar from './scroll-bar'
 // 实现原理:
 /**
@@ -30,8 +30,10 @@ export default defineComponent({
   emits: ['scroll', 'native-scroll'],
   setup(props: ScrollbarProps, { slots, expose, emit }) {
     const ns = useNamespace('scrollbar')
-    const scrollbarWidth = getScrollbarWidth()
-
+    //-------控制滚动条的显示--------
+    const isEnter = ref(false)
+    const isMouseDown = ref(false)
+    //--------------
     const viewEl = ref<HTMLElement | null>(null)
     // clientHeight 占 scrollHeight 的比例
     const heightRatio = ref(0)
@@ -73,8 +75,22 @@ export default defineComponent({
         viewEl.value.scrollLeft += offset / widthRatio.value
       }
     }
-    const isShowYBar = computed(() => heightRatio.value < 1)
-    const isShowXBar = computed(() => widthRatio.value < 1)
+    const isShowYBar = computed(() => {
+      if (heightRatio.value >= 1) return false
+      if (props.always) {
+        return true
+      } else {
+        return isEnter.value || isMouseDown.value
+      }
+    })
+    const isShowXBar = computed(() => {
+      if (widthRatio.value >= 1) return false
+      if (props.always) {
+        return true
+      } else {
+        return isEnter.value || isMouseDown.value
+      }
+    })
 
     const wrapClasses = computed(() => [ns.e('wrap'), props.wrapClass])
     const viewClasses = computed(() => [ns.e('view'), props.viewClass])
@@ -88,18 +104,13 @@ export default defineComponent({
     ])
     const viewStyles = computed(() => [
       {
-        height: isShowXBar.value ? `calc(100% + ${scrollbarWidth}px)` : '100%',
-        width: isShowYBar.value ? `calc(100% + ${scrollbarWidth}px)` : '100%',
+        height: '100%',
+        width: '100%',
         maxHeight: props.maxHeight
       },
       props.viewStyle
     ])
-    const contentStyles = computed(() => [
-      {
-        height: isShowXBar.value ? `calc(100% - ${scrollbarWidth}px)` : 'unset',
-        width: isShowYBar.value ? `calc(100% - ${scrollbarWidth}px)` : 'unset'
-      }
-    ])
+
     const scrollTo = (options?: ScrollToOptions | undefined) => {
       viewEl.value && viewEl.value.scrollTo(options)
     }
@@ -116,16 +127,19 @@ export default defineComponent({
     })
     return () => {
       return (
-        <div class={wrapClasses.value} style={wrapStyles.value}>
+        <div
+          class={wrapClasses.value}
+          style={wrapStyles.value}
+          onMouseenter={() => (isEnter.value = true)}
+          onMouseleave={() => (isEnter.value = false)}
+        >
           <div
             class={viewClasses.value}
             style={viewStyles.value}
             ref={viewEl}
             onScroll={withModifiers(onScroll, ['passive'])}
           >
-            <div class={ns.e('content')} style={contentStyles.value}>
-              {slots.default?.()}
-            </div>
+            {slots.default?.()}
           </div>
           <Scrollbar
             minSize={props.minSize}
@@ -136,6 +150,8 @@ export default defineComponent({
             scrollByOffset={scrollByOffset}
             isShowXBar={isShowXBar.value}
             isShowYBar={isShowYBar.value}
+            onMousedown={() => (isMouseDown.value = true)}
+            onMouseup={() => (isMouseDown.value = false)}
           />
         </div>
       )

@@ -74,7 +74,7 @@
 <template>
   <p-button @click="add">Add Item</p-button>
   <p-button @click="onDelete">Delete Item</p-button>
-  <p-scrollbar max-height="300px">
+  <p-scrollbar max-height="300px" always>
     <p v-for="item in count" :key="item" class="scrollbar-demo-item"> {{ item }}</p>
   </p-scrollbar>
 </template>
@@ -117,7 +117,7 @@
   <p-button @click="scrollBy(+200)">-200px</p-button>
   <p-button @click="scrollBy(-200)">+200px</p-button>
   <br />
-  <p-scrollbar height="300px" ref="scrollbar">
+  <p-scrollbar height="300px" always ref="scrollbar">
     <p v-for="item in 20" :key="item" class="scrollbar-demo-item"> {{ item }}</p>
   </p-scrollbar>
 </template>
@@ -154,7 +154,7 @@
 ```vue
 <template>
   <h3> scrollTop: {{ scrollTop }} </h3>
-  <p-scrollbar height="300px" @scroll="onScroll">
+  <p-scrollbar height="300px" always @scroll="onScroll">
     <p v-for="item in 20" :key="item" class="scrollbar-demo-item"> {{ item }}</p>
   </p-scrollbar>
 </template>

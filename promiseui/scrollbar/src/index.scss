@@ -4,10 +4,18 @@
   position: relative;
   overflow: hidden;
   height: 100%;
+  &:hover {
+    .#{$prefix}-scrollbar__bar_y,
+    .#{$prefix}-scrollbar__bar_x {
+      display: block;
+    }
+  }
 }
+
 .#{$prefix}-scrollbar__view {
   overflow: auto;
   scrollbar-width: none;
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -18,8 +26,11 @@
   height: 100%;
   top: 0;
   right: 0;
-  width: 6px;
-  background-color: $line;
+  width: 5px;
+  background-color: $scrollbar-color;
+  &:hover {
+    background-color: $scrollbar-color-hover;
+  }
   border-radius: $border-radius;
   user-select: none;
   cursor: pointer;
@@ -29,8 +40,11 @@
   width: 100%;
   bottom: 0;
   left: 0;
-  height: 6px;
-  background-color: $line;
+  height: 5px;
+  background-color: $scrollbar-color;
+  &:hover {
+    background-color: $scrollbar-color-hover;
+  }
   border-radius: $border-radius;
   user-select: none;
   cursor: pointer;

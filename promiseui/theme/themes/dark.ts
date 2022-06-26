@@ -51,5 +51,7 @@ export default {
   'line-height-base': '1.5',
   'border-radius': '4px',
   'border-radius-feedback': '4px',
-  'border-radius-card': '6px'
+  'border-radius-card': '6px',
+  'scrollbar-color': 'rgba(255, 255, 255, 0.2)',
+  'scrollbar-color-hover': 'rgba(255, 255, 255, 0.3)'
 }

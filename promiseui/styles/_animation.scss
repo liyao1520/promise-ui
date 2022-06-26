@@ -1,11 +1,11 @@
 /* 下面我们会解释这些 class 是做什么的 */
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.2s ease;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.25s ease;
 }
 
-.v-enter-from,
-.v-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 
@@ -141,8 +141,6 @@
 .#{$prefix}-scalein-enter-active {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
-
-
 
 @include animation('left');
 

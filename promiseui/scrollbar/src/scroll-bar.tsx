@@ -1,8 +1,10 @@
 import { computed } from '@vue/reactivity'
 import { useThrottleFn } from '@vueuse/shared'
-import { defineComponent, ref } from 'vue'
+
+import { defineComponent, ref, Transition } from 'vue'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 export default defineComponent({
+  emits: ['mousedown', 'mouseup'],
   props: {
     minSize: {
       type: Number,
@@ -31,7 +33,7 @@ export default defineComponent({
       required: false
     }
   },
-  setup(props) {
+  setup(props, { emit }) {
     const ns = useNamespace('scrollbar')
 
     const isY = ref(true)
@@ -39,20 +41,19 @@ export default defineComponent({
     const xBarStyle = computed(() => ({
       minWidth: props.isShowXBar ? props.minSize + 'px' : 0,
       width: props.widthRatio * 100 + '%',
-      left: props.scrollXRatio * 100 + '%',
-      display: props.isShowXBar ? 'block' : 'none'
+      left: props.scrollXRatio * 100 + '%'
     }))
     const yBarStyle = computed(() => ({
       minHeight: props.isShowYBar ? props.minSize + 'px' : 0,
       height: props.heightRatio * 100 + '%',
-      top: props.scrollYRatio * 100 + '%',
-      display: props.isShowYBar ? 'block' : 'none'
+      top: props.scrollYRatio * 100 + '%'
     }))
     const isMouseDown = ref(false)
 
     const startPageY = ref(0)
     const startPageX = ref(0)
     const handleMouseup = (e: MouseEvent) => {
+      emit('mouseup')
       isMouseDown.value = false
       window.removeEventListener('mousemove', handleMousemove)
     }
@@ -62,6 +63,7 @@ export default defineComponent({
       window.addEventListener('mousemove', handleMousemove)
     }
     const onMousedown = (e: MouseEvent, _isY: boolean) => {
+      emit('mousedown')
       if (isMouseDown.value) return
 
       isY.value = _isY
@@ -86,16 +88,22 @@ export default defineComponent({
     }, 16.7)
     return () => (
       <>
-        <div
-          class={ns.e('bar_x')}
-          style={xBarStyle.value}
-          onMousedown={(e) => onMousedown(e, false)}
-        ></div>
-        <div
-          class={ns.e('bar_y')}
-          style={yBarStyle.value}
-          onMousedown={(e) => onMousedown(e, true)}
-        ></div>
+        <Transition name="fade">
+          <div
+            v-show={props.isShowXBar}
+            class={ns.e('bar_x')}
+            style={xBarStyle.value}
+            onMousedown={(e) => onMousedown(e, false)}
+          ></div>
+        </Transition>
+        <Transition name="fade">
+          <div
+            v-show={props.isShowYBar}
+            class={ns.e('bar_y')}
+            style={yBarStyle.value}
+            onMousedown={(e) => onMousedown(e, true)}
+          ></div>
+        </Transition>
       </>
     )
   }
