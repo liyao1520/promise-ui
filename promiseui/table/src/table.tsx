@@ -29,7 +29,11 @@ export default defineComponent({
         <div class={classes.value}>
           <table ref={tableRef} class={ns.e('table')} style={styles.value}>
             <TableHeader columns={props.columns} />
-            <TableBody columns={props.columns} dataSource={dataSource.value} />
+            <TableBody
+              columns={props.columns}
+              rowProps={props.rowProps}
+              dataSource={dataSource.value}
+            />
           </table>
           {dataSource.value.length === 0 && <Empty class={ns.e('empty')} description="无数据" />}
         </div>

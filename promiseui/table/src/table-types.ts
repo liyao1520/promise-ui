@@ -1,4 +1,4 @@
-import type { PropType, ExtractPropTypes, CSSProperties } from 'vue'
+import type { PropType, ExtractPropTypes, CSSProperties, InjectionKey } from 'vue'
 import { ICommonSize } from '../../types'
 export type Align = 'left' | 'right' | 'center'
 export type DataSource = Record<string | symbol, any>[]
@@ -20,6 +20,9 @@ export const tableProps = {
     default() {
       return []
     }
+  },
+  rowProps: {
+    type: Function as PropType<(row: any) => object>
   },
   rowKey: [String, Function] as PropType<string | (() => string | number)>,
   stripe: Boolean,
@@ -58,3 +61,9 @@ interface Column {
 export type TableColumn = Partial<Column> & {
   dataIndex: string
 }
+
+export interface ITableStore {
+  props: TableProps
+}
+
+export const TableStore: InjectionKey<ITableStore> = Symbol('TableStore')

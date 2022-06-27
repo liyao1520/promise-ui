@@ -4,7 +4,6 @@ import { useThrottleFn } from '@vueuse/shared'
 import { defineComponent, ref, Transition } from 'vue'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 export default defineComponent({
-  emits: ['mousedown', 'mouseup'],
   props: {
     minSize: {
       type: Number,
@@ -33,6 +32,7 @@ export default defineComponent({
       required: false
     }
   },
+  emits: ['mousedown', 'mouseup'],
   setup(props, { emit }) {
     const ns = useNamespace('scrollbar')
 

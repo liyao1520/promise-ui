@@ -1,6 +1,6 @@
 <template>
   <div class="demo">
-    <Table :data-source="dataSource" :columns="columns" border stripe />
+    <Table :data-source="dataSource" :columns="columns" :row-props="rowProps" border stripe />
   </div>
 </template>
 
@@ -40,6 +40,12 @@
       dataIndex: 'phone'
     }
   ]
+
+  const rowProps = (row: typeof columns[0]) => {
+    return {
+      style: 'cursor: pointer;'
+    }
+  }
 </script>
 
 <style>

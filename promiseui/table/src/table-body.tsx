@@ -1,5 +1,4 @@
-import { defineComponent, PropType } from 'vue'
-import Empty from '../../shared/components/empty'
+import { computed, defineComponent, PropType } from 'vue'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import { DataSource, TableColumn } from './table-types'
 
@@ -13,7 +12,8 @@ export default defineComponent({
     columns: {
       type: Array as PropType<TableColumn[]>,
       default: () => []
-    }
+    },
+    rowProps: Function as PropType<(row: any) => object>
   },
 
   setup(props) {
@@ -31,10 +31,19 @@ export default defineComponent({
         </td>
       )
     }
+    const renderRowProps = (item: any) => {
+      if (props.rowProps) {
+        return props.rowProps(item)
+      } else {
+        return {}
+      }
+    }
     return () => (
       <tbody>
         {props.dataSource.map((item) => (
-          <tr class={ns.e('row')}>{props.columns.map((col) => renderHeaderTd(item, col))}</tr>
+          <tr class={ns.e('row')} {...renderRowProps(item)}>
+            {props.columns.map((col) => renderHeaderTd(item, col))}
+          </tr>
         ))}
       </tbody>
     )
