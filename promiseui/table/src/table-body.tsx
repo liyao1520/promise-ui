@@ -1,28 +1,34 @@
-import { computed, defineComponent, PropType } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { useNamespace } from '../../shared/hooks/use-namespace'
-import { DataSource, TableColumn } from './table-types'
+import useTableStore from './hooks/use-table-store'
+import { RowFn, TableColumn } from './table-types'
 
 export default defineComponent({
   name: 'PTableBody',
   props: {
-    dataSource: {
-      type: Array as PropType<DataSource>,
-      default: () => []
-    },
-    columns: {
-      type: Array as PropType<TableColumn[]>,
-      default: () => []
-    },
-    rowProps: Function as PropType<(row: any) => object>
+    rowProps: Function as PropType<RowFn<object>>
   },
 
   setup(props) {
     const ns = useNamespace('table')
+    const { state } = useTableStore()
+    const { tableData, _columns } = state
+    let canLog = true
     const renderEmtpyWithError = (message: string) => {
-      console.warn(message)
+      if (canLog) {
+        canLog = false
+        setTimeout(() => {
+          console.warn(message)
+          canLog = true
+        })
+      }
       return null
     }
-    const renderHeaderTd = (item: Record<string | symbol, any>, col: TableColumn) => {
+    const renderHeaderTd = (
+      item: Record<string | symbol, any>,
+      col: TableColumn,
+      index: number
+    ) => {
       return (
         <td class={ns.e('cell')}>
           {typeof col.dataIndex === 'string'
@@ -31,18 +37,18 @@ export default defineComponent({
         </td>
       )
     }
-    const renderRowProps = (item: any) => {
+    const renderRowProps = (item: any, index: number) => {
       if (props.rowProps) {
-        return props.rowProps(item)
+        return props.rowProps(item, index)
       } else {
         return {}
       }
     }
     return () => (
       <tbody>
-        {props.dataSource.map((item) => (
-          <tr class={ns.e('row')} {...renderRowProps(item)}>
-            {props.columns.map((col) => renderHeaderTd(item, col))}
+        {tableData.value.map((item, index) => (
+          <tr class={ns.e('row')} {...renderRowProps(item, index)}>
+            {_columns.value.map((col) => renderHeaderTd(item, col, index))}
           </tr>
         ))}
       </tbody>

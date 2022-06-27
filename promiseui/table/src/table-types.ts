@@ -1,7 +1,8 @@
-import type { PropType, ExtractPropTypes, CSSProperties, InjectionKey } from 'vue'
+import type { PropType, ExtractPropTypes, CSSProperties, InjectionKey, Ref } from 'vue'
 import { ICommonSize } from '../../types'
 export type Align = 'left' | 'right' | 'center'
 export type DataSource = Record<string | symbol, any>[]
+export type RowFn<T> = (row: any, rowIndex: number) => T
 export const tableProps = {
   height: {
     type: [String, Number] as PropType<string | number>
@@ -21,9 +22,7 @@ export const tableProps = {
       return []
     }
   },
-  rowProps: {
-    type: Function as PropType<(row: any) => object>
-  },
+  rowProps: Function as PropType<RowFn<object>>,
   rowKey: [String, Function] as PropType<string | (() => string | number)>,
   stripe: Boolean,
   border: Boolean,
@@ -44,26 +43,38 @@ export const tableProps = {
 } as const
 
 export type TableProps = ExtractPropTypes<typeof tableProps>
-
+export type Sorter = (row1: any, row2: any) => number
 interface Column {
   dataIndex: string
   key: string // 不设置的化采用dataIndex
   title: string
   align: Align
-  colSpan: number
   width: number
   maxWidth: number
   minWidth: number
   resizable: boolean
   fixed: 'left' | 'right'
+  rowSpan: RowFn<number>
+  colSpan: RowFn<number>
+  sorter: Sorter
 }
 
 export type TableColumn = Partial<Column> & {
   dataIndex: string
 }
-
-export interface ITableStore {
-  props: TableProps
+export type SortMethod<T = any> = (a: T, b: T) => number
+export type SortDirection = 'ASC' | 'DESC' | ''
+export interface TableStore<T = any> {
+  state: {
+    //外部数据
+    _data: Ref<T[]>
+    // 列数据
+    _columns: Ref<TableColumn[]>
+    // 内部数据
+    tableData: Ref<T[]>
+  }
+  sortData: (direction: SortDirection, sortMethod: Sorter) => void
+  filterData: (filterMethod: (value: any, index: number, array: any[]) => boolean) => void
 }
 
-export const TableStore: InjectionKey<ITableStore> = Symbol('TableStore')
+export const TableStoreKey: InjectionKey<TableStore> = Symbol('TableStore')

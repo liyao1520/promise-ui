@@ -5,24 +5,36 @@
 </template>
 
 <script setup lang="ts">
-  import { Table } from '../promiseui/table'
+  import { Table, TableColumn } from '../promiseui/table'
   const dataSource = Array.from({ length: 10 })
     .fill(1)
     .map((item, index) => {
       return {
-        age: 'age' + index,
+        age: index,
         name: 'name' + index,
         address: 'address' + index,
         email: 'email' + index,
         phone: 'phone' + String(Math.random()).replace('.', '')
       }
     })
-  const columns = [
+  const columns: TableColumn[] = [
     {
       title: '姓名',
-      dataIndex: 'name'
+      dataIndex: 'name',
+      colSpan(row, rowIndex) {
+        return rowIndex === 0 ? 2 : 1
+      },
+      rowSpan(row, rowIndex) {
+        return rowIndex === 0 ? 2 : 1
+      }
     },
-    { title: '年龄', dataIndex: 'age' },
+    {
+      title: '年龄',
+      dataIndex: 'age',
+      sorter(a, b) {
+        return a.age - b.age
+      }
+    },
     {
       title: '地址',
       dataIndex: 'address'
