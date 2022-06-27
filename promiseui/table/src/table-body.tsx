@@ -1,4 +1,5 @@
 import { defineComponent, PropType } from 'vue'
+import Empty from '../../shared/components/empty'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import { DataSource, TableColumn } from './table-types'
 
@@ -19,7 +20,6 @@ export default defineComponent({
     const ns = useNamespace('table')
     const renderEmtpyWithError = (message: string) => {
       console.warn(message)
-
       return null
     }
     const renderHeaderTd = (item: Record<string | symbol, any>, col: TableColumn) => {
@@ -32,11 +32,11 @@ export default defineComponent({
       )
     }
     return () => (
-      <>
+      <tbody>
         {props.dataSource.map((item) => (
           <tr class={ns.e('row')}>{props.columns.map((col) => renderHeaderTd(item, col))}</tr>
         ))}
-      </>
+      </tbody>
     )
   }
 })

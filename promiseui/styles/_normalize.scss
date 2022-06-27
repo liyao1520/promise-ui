@@ -250,18 +250,7 @@ template {
   box-sizing: border-box;
 }
 
-// [class^='pui-'] {
-//   &::-webkit-scrollbar {
-//     width: 6px;
-//     height: 6px;
-//   }
-
-//   &::-webkit-scrollbar-thumb {
-//     background-color: var(--promiseui-line);
-//     border-radius: 10px;
-//     transition: all 0.2s ease-in-out;
-//   }
-//   &::-webkit-scrollbar-track {
-//     border-radius: 10px;
-//   }
-// }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', Segoe UI Symbol, 'Noto Color Emoji';
+}

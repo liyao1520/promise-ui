@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <Table :data-source="dataSource" :columns="columns" />
+  <div class="demo">
+    <Table :data-source="dataSource" :columns="columns" border stripe />
   </div>
 </template>
 
@@ -42,4 +42,9 @@
   ]
 </script>
 
-<style></style>
+<style>
+  .demo {
+    margin: 10px auto;
+    width: 900px;
+  }
+</style>

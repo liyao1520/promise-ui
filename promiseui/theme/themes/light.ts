@@ -53,5 +53,7 @@ export default {
   'border-radius-feedback': '4px',
   'border-radius-card': '6px',
   'scrollbar-color': 'rgba(0, 0, 0, 0.25)',
-  'scrollbar-color-hover': 'rgba(0, 0, 0, 0.4)'
+  'scrollbar-color-hover': 'rgba(0, 0, 0, 0.4)',
+  'fill-color-light': '#f5f7fa',
+  'fill-color-lighter': '#fafafa'
 }

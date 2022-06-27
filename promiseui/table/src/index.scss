@@ -1,16 +1,25 @@
 @import '../../styles-var';
 
 .#{$prefix}-table {
-  width: 100%;
   text-align: left;
   border-radius: $border-radius;
-  border-spacing: 0;
-  border-collapse: separate;
-  // border: 1px solid $border-color;
+  color: $text;
+  &__table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: separate;
+  }
+  &__empty {
+    padding: 48px 0;
+  }
   &__row:last-child > td {
     border-bottom: none;
   }
   &__header {
+    th {
+      font-weight: 500;
+      color: #000000d9;
+    }
   }
   &__cell {
     padding: 16px;
@@ -18,8 +27,23 @@
     border-bottom: 1px solid $border-color;
   }
   &__row {
-    &:nth-child(2n) {
-      background-color: $item-bg-hover;
+    background-color: $base-bg;
+    transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    &:hover {
+      background-color: $fill-color-light;
+    }
+  }
+}
+// 样式
+.#{$prefix}-table {
+  &--border {
+    border: 1px solid $border-color;
+  }
+  &--stripe {
+    .#{$prefix}-table__row {
+      &:nth-child(2n) {
+        background-color: $fill-color-lighter;
+      }
     }
   }
 }

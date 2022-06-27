@@ -6,6 +6,7 @@ import { useNamespace } from '../../shared/hooks/use-namespace'
 import useDataSource from './hooks/use-data-source'
 import TableBody from './table-body'
 import TableHeader from './table-header'
+import Empty from '../../shared/components/empty'
 
 export default defineComponent({
   name: 'PTable',
@@ -15,7 +16,9 @@ export default defineComponent({
     const tableRef = ref<HTMLElement>()
     const ns = useNamespace('table')
     const classes = computed(() => ({
-      [ns.b()]: true
+      [ns.b()]: true,
+      [ns.m('border')]: props.border,
+      [ns.m('stripe')]: props.stripe
     }))
     const styles = computed(() => ({}))
 
@@ -23,10 +26,13 @@ export default defineComponent({
 
     return () => {
       return (
-        <table ref={tableRef} class={classes.value} style={styles.value}>
-          <TableHeader columns={props.columns} />
-          <TableBody columns={props.columns} dataSource={dataSource.value} />
-        </table>
+        <div class={classes.value}>
+          <table ref={tableRef} class={ns.e('table')} style={styles.value}>
+            <TableHeader columns={props.columns} />
+            <TableBody columns={props.columns} dataSource={dataSource.value} />
+          </table>
+          {dataSource.value.length === 0 && <Empty class={ns.e('empty')} description="无数据" />}
+        </div>
       )
     }
   }

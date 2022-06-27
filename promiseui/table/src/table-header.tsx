@@ -16,11 +16,13 @@ export default defineComponent({
       [ns.e('header')]: true
     }))
     return () => (
-      <tr class={classes.value}>
-        {props.columns.map((item) => (
-          <th class={ns.e('cell')}>{item.title}</th>
-        ))}
-      </tr>
+      <thead class={classes.value}>
+        <tr>
+          {props.columns.map((item) => (
+            <th class={ns.e('cell')}>{item.title}</th>
+          ))}
+        </tr>
+      </thead>
     )
   }
 })
