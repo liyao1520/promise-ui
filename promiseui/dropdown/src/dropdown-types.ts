@@ -31,11 +31,11 @@ export const dropdownProps = {
   },
   offset: {
     type: Number,
-    default: 8
+    default: 3
   },
   showArrow: {
     type: Boolean,
-    default: true,
+    default: false,
     required: false
   },
   btnType: {

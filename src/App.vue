@@ -37,7 +37,14 @@
     },
     {
       title: '地址',
-      dataIndex: 'address'
+      dataIndex: 'address',
+      filter: (value, item) => {
+        return item.address.includes(value)
+      },
+      filterOptions: [
+        { label: 'address3', value: '3' },
+        { label: 'address4', value: '4' }
+      ]
     },
     {
       title: '地址',

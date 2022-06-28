@@ -14,7 +14,7 @@ export default defineComponent({
   name: 'PDropdown',
   props: dropdownProps,
   emits: ['click'],
-  setup(props: DropdownProps, { slots, emit }) {
+  setup(props: DropdownProps, { slots, emit, expose }) {
     const { type, trigger, offset, position, showArrow, size, btnType, dark } = toRefs(props)
     const origin = ref<any>(null)
     const visible = ref(false)
@@ -65,7 +65,11 @@ export default defineComponent({
         </div>
       )
     }
-
+    expose({
+      hide() {
+        visible.value = false
+      }
+    })
     return () => (
       <div class={ns.b()}>
         {type.value === 'a'

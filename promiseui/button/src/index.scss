@@ -12,6 +12,7 @@
   border: 1px solid transparent;
   transition: 0.25s;
   user-select: none;
+  cursor: pointer;
   &:disabled {
     &:hover {
       cursor: not-allowed;
@@ -21,13 +22,13 @@
   &:hover,
   &:focus {
     opacity: 0.9;
-    cursor: pointer;
   }
 
   &--xs {
     font-size: $font-size-sm;
     padding: 0 6px;
     height: 26px;
+    border-radius: 2px;
   }
   &--sm {
     font-size: $font-size-sm;

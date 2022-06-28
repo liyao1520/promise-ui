@@ -12,6 +12,32 @@
   &__empty {
     padding: 48px 0;
   }
+  &__filter-option.#{$prefix}-dropdown-item {
+    padding: 0;
+    .#{$prefix}-checkbox {
+      margin-right: 0;
+      width: 100%;
+      padding: 0 17px;
+    }
+  }
+
+  &__filter {
+    display: inline-flex;
+    vertical-align: middle;
+    cursor: pointer;
+    padding-left: 2px;
+    svg {
+      fill: $line !important;
+      color: $line !important;
+    }
+  }
+
+  &__filter-action {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 8px;
+    border-top: 1px solid $border-color;
+  }
   &__sorter {
     width: 16px;
     height: 16px;
@@ -40,7 +66,7 @@
   &__header {
     th {
       font-weight: 500;
-      color: #000000d9;
+      color: $title-text;
       vertical-align: middle;
     }
   }

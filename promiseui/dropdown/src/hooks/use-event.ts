@@ -7,7 +7,7 @@ export default function (
   visible: Ref<boolean>
 ) {
   let timer: number
-  let timeStamp = 0
+
   const onClick = () => {
     if (trigger.value === 'click') {
       visible.value = !visible.value
@@ -19,8 +19,6 @@ export default function (
   }
 
   const onMouseenter = (e: MouseEvent) => {
-    if (e.target === origin.value) [(timeStamp = e.timeStamp)]
-
     if (trigger.value === 'hover') {
       clearTimeout(timer)
       visible.value = true
@@ -28,10 +26,6 @@ export default function (
   }
 
   const onMouseleave = (e: MouseEvent) => {
-    if (e.timeStamp - timeStamp < 100 && e.target === overlayEl.value) {
-      return
-    }
-
     if (trigger.value === 'hover') {
       clearTimeout(timer)
       timer = window.setTimeout(handleLeave, 300)

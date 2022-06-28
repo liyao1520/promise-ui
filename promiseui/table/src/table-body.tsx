@@ -12,7 +12,7 @@ export default defineComponent({
   setup(props) {
     const ns = useNamespace('table')
     const { state } = useTableStore()
-    const { tableData, _columns } = state
+    const { tableData, _columns, filterMethod } = state
     let canLog = true
     const renderEmtpyWithError = (message: string) => {
       if (canLog) {
@@ -46,7 +46,7 @@ export default defineComponent({
     }
     return () => (
       <tbody>
-        {tableData.value.map((item, index) => (
+        {tableData.value.filter(filterMethod.value).map((item, index) => (
           <tr class={ns.e('row')} {...renderRowProps(item, index)}>
             {_columns.value.map((col) => renderHeaderTd(item, col, index))}
           </tr>

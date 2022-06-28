@@ -44,6 +44,8 @@ export const tableProps = {
 
 export type TableProps = ExtractPropTypes<typeof tableProps>
 export type Sorter = (row1: any, row2: any) => number
+export type Filter = (value: string | number, item: any, index: number, array: any[]) => boolean
+export type FilterOption = { label: string; value: string | number }
 interface Column {
   dataIndex: string
   key: string // 不设置的化采用dataIndex
@@ -57,6 +59,8 @@ interface Column {
   rowSpan: RowFn<number>
   colSpan: RowFn<number>
   sorter: Sorter
+  filter: Filter
+  filterOptions: FilterOption[]
 }
 
 export type TableColumn = Partial<Column> & {
@@ -64,6 +68,7 @@ export type TableColumn = Partial<Column> & {
 }
 export type SortMethod<T = any> = (a: T, b: T) => number
 export type SortDirection = 'ASC' | 'DESC' | ''
+export type filterMethod = (value: any, index: number, array: any[]) => boolean
 export interface TableStore<T = any> {
   state: {
     //外部数据
@@ -72,6 +77,7 @@ export interface TableStore<T = any> {
     _columns: Ref<TableColumn[]>
     // 内部数据
     tableData: Ref<T[]>
+    filterMethod: Ref<filterMethod>
   }
   sortData: (direction: SortDirection, sortMethod: Sorter) => void
   filterData: (filterMethod: (value: any, index: number, array: any[]) => boolean) => void
