@@ -15,6 +15,7 @@ export default function (props: CheckboxProps, ctx: SetupContext) {
     return props.modelValue === true
   }
   const initial = initialChecked()
+
   const checked = ref(initial)
   const handleClick = () => {
     if (disabled.value) return

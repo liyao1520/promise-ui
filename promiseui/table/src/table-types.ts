@@ -1,4 +1,4 @@
-import type { PropType, ExtractPropTypes, CSSProperties, InjectionKey, Ref } from 'vue'
+import type { PropType, ExtractPropTypes, CSSProperties, InjectionKey, Ref, ComputedRef } from 'vue'
 import { ICommonSize } from '../../types'
 export type Align = 'left' | 'right' | 'center'
 export type DataSource = Record<string | symbol, any>[]
@@ -23,7 +23,10 @@ export const tableProps = {
     }
   },
   rowProps: Function as PropType<RowFn<object>>,
-  rowKey: [String, Function] as PropType<string | ((item: any) => string | number)>,
+  rowKey: {
+    type: [String, Function] as PropType<string | ((item: any) => string | number)>,
+    default: 'key'
+  },
   stripe: Boolean,
   border: Boolean,
   size: {
@@ -39,13 +42,21 @@ export const tableProps = {
   cellClassName: Function as PropType<() => string>,
   cellStyle: Function as PropType<() => CSSProperties>,
   headerRowClassName: Function as PropType<() => string>,
-  headerRowStyle: Function as PropType<() => CSSProperties>
+  headerRowStyle: Function as PropType<() => CSSProperties>,
+  rowSelection: {
+    type: Object as PropType<RowSelection>
+  }
 } as const
-
+export type RowSelection = {
+  selectedRowKeys: (string | number)[]
+  fixed?: boolean // 是否固定在左边
+  onChange?: (rows: (string | number)[]) => void
+}
 export type TableProps = ExtractPropTypes<typeof tableProps>
 export type Sorter = (row1: any, row2: any) => number
 export type Filter = (value: string | number, item: any, index: number, array: any[]) => boolean
 export type FilterOption = { label: string; value: string | number }
+export type ColumnType = 'selection' | string
 interface Column {
   dataIndex: string
   key: string // 不设置的化采用dataIndex
@@ -63,9 +74,11 @@ interface Column {
   filterOptions: FilterOption[]
 }
 
-export type TableColumn = Partial<Column> & {
-  dataIndex: string
-}
+export type TableColumn =
+  | Partial<Column> & {
+      dataIndex: string
+    }
+
 export type SortMethod<T = any> = (a: T, b: T) => number
 export type SortDirection = 'ASC' | 'DESC' | ''
 export type filterMethod = (value: any, index: number, array: any[]) => boolean
@@ -79,10 +92,15 @@ export interface TableStore<T = any> {
     tableData: Ref<T[]>
     filterMethod: Ref<filterMethod>
     filterTableData: Ref<T[]>
+    selectionSet: ComputedRef<Set<string | number>>
+    isSelectionAll: Ref<boolean>
   }
   tableProps: TableProps
   sortData: (direction: SortDirection, sortMethod: Sorter) => void
   filterData: (filterMethod: (value: any, index: number, array: any[]) => boolean) => void
+  selectionClear: () => void
+  selectionAll: () => void
+  toggleSelection: (checked: boolean, rowKey: string | number) => void
 }
 
 export const TableStoreKey: InjectionKey<TableStore> = Symbol('TableStore')

@@ -12,6 +12,10 @@
   &__empty {
     padding: 48px 0;
   }
+  &__selection {
+    text-align: center;
+    width: 50px;
+  }
   &__filter-option.#{$prefix}-dropdown-item {
     padding: 0;
     .#{$prefix}-checkbox {

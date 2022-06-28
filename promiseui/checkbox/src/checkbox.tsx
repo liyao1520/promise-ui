@@ -45,7 +45,7 @@ export default defineComponent({
             </div>
           </Wave>
 
-          <label class={ns.e('label')}>{props.label}</label>
+          {props.label && <label class={ns.e('label')}>{props.label}</label>}
         </div>
       )
     }

@@ -7,11 +7,17 @@
       :row-props="rowProps"
       border
       stripe
+      :row-selection="{
+        selectedRowKeys: selectedRowKeys,
+        fixed: false,
+        onChange: onSelectionChange
+      }"
     />
   </div>
 </template>
 
 <script setup lang="ts">
+  import { ref } from 'vue'
   import { Table, TableColumn } from '../promiseui/table'
   const dataSource = Array.from({ length: 10 })
     .fill(1)
@@ -71,6 +77,10 @@
     return {
       style: 'cursor: pointer;'
     }
+  }
+  const selectedRowKeys = ref<(string | number)[]>([])
+  const onSelectionChange = (keyrows: (string | number)[]) => {
+    selectedRowKeys.value = keyrows
   }
 </script>
 

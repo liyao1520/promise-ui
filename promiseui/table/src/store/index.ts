@@ -1,4 +1,4 @@
-import { computed, ref, Ref, shallowRef, watchEffect } from 'vue'
+import { computed, ref, Ref, shallowRef, toRef, watchEffect } from 'vue'
 import {
   filterMethod,
   SortDirection,
@@ -7,7 +7,7 @@ import {
   TableProps,
   TableStore
 } from '../table-types'
-
+import useSelection from './use-selection'
 export function createStore<T>(
   dataSource: Ref<T[]>,
   columns: Ref<TableColumn[]>,
@@ -37,16 +37,29 @@ export function createStore<T>(
     filterMethod.value = _filterMethod
   }
   const filterTableData = computed(() => tableData.value.filter(filterMethod.value))
+
+  //
+  const { selectionClear, selectionAll, toggleSelection, selectionSet } = useSelection(
+    toRef(props, 'rowSelection'),
+    dataSource,
+    props.rowKey
+  )
+  const isSelectionAll = computed(() => selectionSet.value.size === filterTableData.value.length)
   return {
     state: {
       tableData,
       _data: dataSource,
       _columns: columns,
       filterMethod,
-      filterTableData
+      filterTableData,
+      selectionSet,
+      isSelectionAll
     },
     tableProps: props,
     sortData,
-    filterData
+    filterData,
+    selectionClear,
+    selectionAll,
+    toggleSelection
   }
 }

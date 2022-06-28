@@ -7,7 +7,7 @@ export const checkboxProps = {
     default: false
   },
   label: String,
-  value: [Boolean, String, Number] as PropType<string | boolean | number>,
+  value: [Boolean, String, Number] as PropType<string | boolean | number | any>,
   disabled: {
     type: Boolean,
     default: false

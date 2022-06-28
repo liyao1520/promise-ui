@@ -1,6 +1,8 @@
 import { defineComponent, PropType } from 'vue'
+import { Checkbox } from '../../checkbox'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import useTableStore from './hooks/use-table-store'
+import useSelection from './store/use-selection'
 import { RowFn, TableColumn } from './table-types'
 
 export default defineComponent({
@@ -11,8 +13,9 @@ export default defineComponent({
 
   setup(props) {
     const ns = useNamespace('table')
-    const { state, tableProps } = useTableStore()
-    const { _columns, filterTableData } = state
+    const { state, tableProps, toggleSelection } = useTableStore()
+
+    const { _columns, filterTableData, selectionSet } = state
     let canLog = true
     const renderEmtpyWithError = (message: string) => {
       if (canLog) {
@@ -33,18 +36,13 @@ export default defineComponent({
       } else {
         key = index
       }
-      console.log(key)
       return key
     }
-    const renderHeaderTd = (
-      item: Record<string | symbol, any>,
-      col: TableColumn,
-      index: number
-    ) => {
+    const renderHeaderTd = (row: Record<string | symbol, any>, col: TableColumn, index: number) => {
       return (
-        <td class={ns.e('cell')} key={item[col.dataIndex]}>
+        <td class={ns.e('cell')} key={row[col.dataIndex]}>
           {typeof col.dataIndex === 'string'
-            ? item[col.dataIndex]
+            ? row[col.dataIndex]
             : renderEmtpyWithError(`[columns] dataIndex类型为:${typeof col.dataIndex} 应为 string`)}
         </td>
       )
@@ -56,17 +54,28 @@ export default defineComponent({
         return {}
       }
     }
-    return () => (
-      <tbody>
-        {filterTableData.value.map((item, index) => {
-          const key = getKey(item, index)
-          return (
-            <tr key={key} class={ns.e('row')} {...renderRowProps(item, index)}>
-              {_columns.value.map((col) => renderHeaderTd(item, col, index))}
-            </tr>
-          )
-        })}
-      </tbody>
-    )
+    return () => {
+      return (
+        <tbody>
+          {filterTableData.value.map((item, index) => {
+            const rowkey = getKey(item, index)
+            return (
+              <tr key={rowkey} class={ns.e('row')} {...renderRowProps(item, index)}>
+                {/* render checkbox */}
+                {tableProps.rowSelection && (
+                  <th class={[ns.e('cell'), ns.e('selection')]}>
+                    <Checkbox
+                      modelValue={selectionSet.value.has(rowkey)}
+                      onChange={(checked) => toggleSelection(checked, rowkey)}
+                    />
+                  </th>
+                )}
+                {_columns.value.map((col) => renderHeaderTd(item, col, index))}
+              </tr>
+            )
+          })}
+        </tbody>
+      )
+    }
   }
 })
