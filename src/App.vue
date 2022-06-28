@@ -1,6 +1,13 @@
 <template>
   <div class="demo">
-    <Table :data-source="dataSource" :columns="columns" :row-props="rowProps" border stripe />
+    <Table
+      :data-source="dataSource"
+      :columns="columns"
+      :row-key="'address'"
+      :row-props="rowProps"
+      border
+      stripe
+    />
   </div>
 </template>
 
@@ -39,7 +46,7 @@
       title: '地址',
       dataIndex: 'address',
       filter: (value, item) => {
-        return item.address.includes(value)
+        return item.address.includes(value) && false
       },
       filterOptions: [
         { label: 'address3', value: '3' },

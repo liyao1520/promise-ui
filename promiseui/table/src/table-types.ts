@@ -23,7 +23,7 @@ export const tableProps = {
     }
   },
   rowProps: Function as PropType<RowFn<object>>,
-  rowKey: [String, Function] as PropType<string | (() => string | number)>,
+  rowKey: [String, Function] as PropType<string | ((item: any) => string | number)>,
   stripe: Boolean,
   border: Boolean,
   size: {
@@ -78,7 +78,9 @@ export interface TableStore<T = any> {
     // 内部数据
     tableData: Ref<T[]>
     filterMethod: Ref<filterMethod>
+    filterTableData: Ref<T[]>
   }
+  tableProps: TableProps
   sortData: (direction: SortDirection, sortMethod: Sorter) => void
   filterData: (filterMethod: (value: any, index: number, array: any[]) => boolean) => void
 }

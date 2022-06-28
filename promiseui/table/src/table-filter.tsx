@@ -45,7 +45,7 @@ export default defineComponent({
         filterData(() => true)
       } else {
         const filterMethod: filterMethod = (item: any, index: number, arr: any[]) => {
-          for (let value of checkedValues) {
+          for (const value of checkedValues) {
             if (props.filterMethod(value, item, index, arr)) {
               return true
             }

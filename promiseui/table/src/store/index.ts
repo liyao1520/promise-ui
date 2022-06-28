@@ -1,14 +1,18 @@
-import { ref, Ref, shallowRef, watchEffect } from 'vue'
+import { computed, ref, Ref, shallowRef, watchEffect } from 'vue'
 import {
   filterMethod,
   SortDirection,
   Sorter,
-  SortMethod,
   TableColumn,
+  TableProps,
   TableStore
 } from '../table-types'
 
-export function createStore<T>(dataSource: Ref<T[]>, columns: Ref<TableColumn[]>): TableStore<T> {
+export function createStore<T>(
+  dataSource: Ref<T[]>,
+  columns: Ref<TableColumn[]>,
+  props: TableProps
+): TableStore<T> {
   // 内部使用的data
   const tableData: Ref<T[]> = ref([])
   // 外部传来的data
@@ -32,14 +36,16 @@ export function createStore<T>(dataSource: Ref<T[]>, columns: Ref<TableColumn[]>
   const filterData = (_filterMethod: filterMethod) => {
     filterMethod.value = _filterMethod
   }
+  const filterTableData = computed(() => tableData.value.filter(filterMethod.value))
   return {
     state: {
       tableData,
       _data: dataSource,
       _columns: columns,
-      filterMethod
+      filterMethod,
+      filterTableData
     },
-
+    tableProps: props,
     sortData,
     filterData
   }

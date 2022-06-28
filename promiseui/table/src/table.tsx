@@ -15,7 +15,8 @@ export default defineComponent({
   emits: [],
   setup(props: TableProps, { slots, expose, attrs }) {
     const tableRef = ref<HTMLElement>()
-    provide(TableStoreKey, createStore(toRef(props, 'dataSource'), toRef(props, 'columns')))
+    const store = createStore(toRef(props, 'dataSource'), toRef(props, 'columns'), props)
+    provide(TableStoreKey, store)
     const ns = useNamespace('table')
     const classes = computed(() => ({
       [ns.b()]: true,
@@ -24,7 +25,7 @@ export default defineComponent({
     }))
     const styles = computed(() => ({}))
 
-    const { dataSource } = useDataSource(toRef(props, 'dataSource'))
+    const filterTableData = store.state.filterTableData
 
     return () => {
       return (
@@ -33,7 +34,9 @@ export default defineComponent({
             <TableHeader />
             <TableBody rowProps={props.rowProps} />
           </table>
-          {dataSource.value.length === 0 && <Empty class={ns.e('empty')} description="无数据" />}
+          {filterTableData.value.length === 0 && (
+            <Empty class={ns.e('empty')} description="无数据" />
+          )}
         </div>
       )
     }

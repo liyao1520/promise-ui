@@ -11,8 +11,8 @@ export default defineComponent({
 
   setup(props) {
     const ns = useNamespace('table')
-    const { state } = useTableStore()
-    const { tableData, _columns, filterMethod } = state
+    const { state, tableProps } = useTableStore()
+    const { _columns, filterTableData } = state
     let canLog = true
     const renderEmtpyWithError = (message: string) => {
       if (canLog) {
@@ -24,13 +24,25 @@ export default defineComponent({
       }
       return null
     }
+    const getKey = (item: any, index: number) => {
+      let key
+      if (typeof tableProps.rowKey === 'function') {
+        key = tableProps.rowKey(item)
+      } else if (typeof tableProps.rowKey === 'string') {
+        key = item[tableProps.rowKey]
+      } else {
+        key = index
+      }
+      console.log(key)
+      return key
+    }
     const renderHeaderTd = (
       item: Record<string | symbol, any>,
       col: TableColumn,
       index: number
     ) => {
       return (
-        <td class={ns.e('cell')}>
+        <td class={ns.e('cell')} key={item[col.dataIndex]}>
           {typeof col.dataIndex === 'string'
             ? item[col.dataIndex]
             : renderEmtpyWithError(`[columns] dataIndex类型为:${typeof col.dataIndex} 应为 string`)}
@@ -46,11 +58,14 @@ export default defineComponent({
     }
     return () => (
       <tbody>
-        {tableData.value.filter(filterMethod.value).map((item, index) => (
-          <tr class={ns.e('row')} {...renderRowProps(item, index)}>
-            {_columns.value.map((col) => renderHeaderTd(item, col, index))}
-          </tr>
-        ))}
+        {filterTableData.value.map((item, index) => {
+          const key = getKey(item, index)
+          return (
+            <tr key={key} class={ns.e('row')} {...renderRowProps(item, index)}>
+              {_columns.value.map((col) => renderHeaderTd(item, col, index))}
+            </tr>
+          )
+        })}
       </tbody>
     )
   }
