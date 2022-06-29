@@ -4,12 +4,12 @@ export type Align = 'left' | 'right' | 'center'
 export type DataSource = Record<string | symbol, any>[]
 export type RowFn<T> = (row: any, rowIndex: number) => T
 export const tableProps = {
+  tableLayout: String as PropType<'auto' | 'fixed'>,
   height: {
     type: [String, Number] as PropType<string | number>
   },
-  maxHeight: {
-    type: [String, Number] as PropType<string | number>
-  },
+  maxHeight: [String, Number] as PropType<string | number>,
+  minHeight: [String, Number] as PropType<string | number>,
   dataSource: {
     type: Array as PropType<DataSource>,
     default() {
@@ -51,6 +51,7 @@ export type RowSelection = {
   selectedRowKeys: (string | number)[]
   fixed?: boolean // 是否固定在左边
   onChange?: (keys: (string | number)[], rows: any[]) => void
+  style?: string | CSSProperties
 }
 export type TableProps = ExtractPropTypes<typeof tableProps>
 export type Sorter = (row1: any, row2: any) => number
@@ -62,9 +63,9 @@ interface Column {
   key: string // 不设置的化采用dataIndex
   title: string
   align: Align
-  width: number
-  maxWidth: number
-  minWidth: number
+  width: number | string
+  maxWidth: number | string
+  minWidth: number | string
   resizable: boolean
   fixed: 'left' | 'right'
   rowSpan: RowFn<number>

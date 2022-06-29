@@ -1,6 +1,7 @@
-import { defineComponent, PropType } from 'vue'
+import { computed, CSSProperties, defineComponent, PropType } from 'vue'
 import { Checkbox } from '../../checkbox'
 import { useNamespace } from '../../shared/hooks/use-namespace'
+import styleStringOrNumber from '../../shared/utils/styleStringOrNumber'
 import useTableStore from './hooks/use-table-store'
 import { RowFn, TableColumn } from './table-types'
 
@@ -43,9 +44,13 @@ export default defineComponent({
         return {}
       }
     }
+    const tableBodyStyles = computed<CSSProperties>(() => ({
+      maxHeight: styleStringOrNumber(tableProps.maxHeight),
+      minHeight: styleStringOrNumber(tableProps.maxHeight)
+    }))
     return () => {
       return (
-        <tbody>
+        <tbody class={ns.e('body')}>
           {filterTableData.value.map((row, index) => {
             const rowkey = row.__key__
             return (

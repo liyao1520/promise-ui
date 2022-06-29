@@ -4,10 +4,14 @@
   text-align: left;
   border-radius: $border-radius;
   color: $text;
+
   &__table {
     width: 100%;
     border-spacing: 0;
     border-collapse: separate;
+  }
+  &__body {
+    overflow: auto;
   }
   &__empty {
     padding: 48px 0;

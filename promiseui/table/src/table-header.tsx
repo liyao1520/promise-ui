@@ -1,4 +1,4 @@
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, PropType } from 'vue'
 import { Checkbox } from '../../checkbox'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import useTableStore from './hooks/use-table-store'
@@ -7,6 +7,7 @@ import TableSorter from './table-sorter'
 
 export default defineComponent({
   name: 'PTableHeader',
+
   setup(props) {
     const ns = useNamespace('table')
     const { state, tableProps, selectionAll, selectionClear } = useTableStore()
