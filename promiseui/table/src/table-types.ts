@@ -50,7 +50,7 @@ export const tableProps = {
 export type RowSelection = {
   selectedRowKeys: (string | number)[]
   fixed?: boolean // 是否固定在左边
-  onChange?: (rows: (string | number)[]) => void
+  onChange?: (keys: (string | number)[], rows: any[]) => void
 }
 export type TableProps = ExtractPropTypes<typeof tableProps>
 export type Sorter = (row1: any, row2: any) => number
@@ -94,13 +94,14 @@ export interface TableStore<T = any> {
     filterTableData: Ref<T[]>
     selectionSet: ComputedRef<Set<string | number>>
     isSelectionAll: Ref<boolean>
+    dataSourceMap: Map<string | number, object>
   }
   tableProps: TableProps
   sortData: (direction: SortDirection, sortMethod: Sorter) => void
   filterData: (filterMethod: (value: any, index: number, array: any[]) => boolean) => void
   selectionClear: () => void
   selectionAll: () => void
-  toggleSelection: (checked: boolean, rowKey: string | number) => void
+  toggleSelection: (checked: boolean, row: any) => void
 }
 
 export const TableStoreKey: InjectionKey<TableStore> = Symbol('TableStore')

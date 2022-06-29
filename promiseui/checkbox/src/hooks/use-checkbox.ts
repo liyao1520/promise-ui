@@ -19,14 +19,16 @@ export default function (props: CheckboxProps, ctx: SetupContext) {
   const checked = ref(initial)
   const handleClick = () => {
     if (disabled.value) return
-    checked.value = !checked.value
+
     if (CheckboxContext) {
+      checked.value = !checked.value
       const value = props.value
       if (!value) return // 如果没有value,不做任何反应
       const { addValue, removeValue } = CheckboxContext
       checked.value ? addValue(value) : removeValue(value)
     } else {
-      ctx.emit('update:modelValue', checked.value)
+      ctx.emit('update:modelValue', !props.modelValue)
+      ctx.emit('change', !props.modelValue)
     }
   }
   const { triggerValidate } = useFormItem()
@@ -39,7 +41,6 @@ export default function (props: CheckboxProps, ctx: SetupContext) {
   watch(checked, () => {
     triggerValidate('change')
     triggerValidate('blur')
-    ctx.emit('change', checked.value)
   })
   watch(
     () => CheckboxContext?.props.modelValue,

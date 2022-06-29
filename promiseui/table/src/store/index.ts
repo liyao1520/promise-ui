@@ -9,7 +9,7 @@ import {
 } from '../table-types'
 import useSelection from './use-selection'
 export function createStore<T>(
-  dataSource: Ref<T[]>,
+  dataSource: Ref<any[]>,
   columns: Ref<TableColumn[]>,
   props: TableProps
 ): TableStore<T> {
@@ -18,8 +18,29 @@ export function createStore<T>(
   // 外部传来的data
   // filterMethod
   const filterMethod = shallowRef<filterMethod>(() => true)
+  const getKey = (item: any, index: number) => {
+    let key
+    if (typeof props.rowKey === 'function') {
+      key = props.rowKey(item)
+    } else if (typeof props.rowKey === 'string') {
+      key = item[props.rowKey]
+    } else {
+      key = index
+    }
+    return key
+  }
+  const dataSourceMap = new Map()
+  const setDataSourceMap = () => {
+    for (let i = 0; i < dataSource.value.length; i++) {
+      const row = dataSource.value[i]
+      const key = getKey(row, i)
+      dataSourceMap.set(key, row)
+      row.__key__ = key
+    }
+  }
   watchEffect(() => {
     tableData.value = dataSource.value.slice() || []
+    setDataSourceMap()
   })
   const sortData = (direction: SortDirection, sortMethod: Sorter) => {
     if (direction === 'ASC') {
@@ -42,9 +63,12 @@ export function createStore<T>(
   const { selectionClear, selectionAll, toggleSelection, selectionSet } = useSelection(
     toRef(props, 'rowSelection'),
     dataSource,
-    props.rowKey
+    props.rowKey,
+    dataSourceMap
   )
-  const isSelectionAll = computed(() => selectionSet.value.size === filterTableData.value.length)
+  const isSelectionAll = computed(
+    () => !!selectionSet.value.size && selectionSet.value.size === filterTableData.value.length
+  )
   return {
     state: {
       tableData,
@@ -53,7 +77,8 @@ export function createStore<T>(
       filterMethod,
       filterTableData,
       selectionSet,
-      isSelectionAll
+      isSelectionAll,
+      dataSourceMap
     },
     tableProps: props,
     sortData,

@@ -2,7 +2,6 @@ import { defineComponent, PropType } from 'vue'
 import { Checkbox } from '../../checkbox'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import useTableStore from './hooks/use-table-store'
-import useSelection from './store/use-selection'
 import { RowFn, TableColumn } from './table-types'
 
 export default defineComponent({
@@ -27,17 +26,7 @@ export default defineComponent({
       }
       return null
     }
-    const getKey = (item: any, index: number) => {
-      let key
-      if (typeof tableProps.rowKey === 'function') {
-        key = tableProps.rowKey(item)
-      } else if (typeof tableProps.rowKey === 'string') {
-        key = item[tableProps.rowKey]
-      } else {
-        key = index
-      }
-      return key
-    }
+
     const renderHeaderTd = (row: Record<string | symbol, any>, col: TableColumn, index: number) => {
       return (
         <td class={ns.e('cell')} key={row[col.dataIndex]}>
@@ -57,20 +46,20 @@ export default defineComponent({
     return () => {
       return (
         <tbody>
-          {filterTableData.value.map((item, index) => {
-            const rowkey = getKey(item, index)
+          {filterTableData.value.map((row, index) => {
+            const rowkey = row.__key__
             return (
-              <tr key={rowkey} class={ns.e('row')} {...renderRowProps(item, index)}>
+              <tr key={rowkey} class={ns.e('row')} {...renderRowProps(row, index)}>
                 {/* render checkbox */}
                 {tableProps.rowSelection && (
                   <th class={[ns.e('cell'), ns.e('selection')]}>
                     <Checkbox
                       modelValue={selectionSet.value.has(rowkey)}
-                      onChange={(checked) => toggleSelection(checked, rowkey)}
+                      onChange={(checked) => toggleSelection(checked, row)}
                     />
                   </th>
                 )}
-                {_columns.value.map((col) => renderHeaderTd(item, col, index))}
+                {_columns.value.map((col) => renderHeaderTd(row, col, index))}
               </tr>
             )
           })}

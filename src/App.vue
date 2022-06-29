@@ -19,7 +19,7 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import { Table, TableColumn } from '../promiseui/table'
-  const dataSource = Array.from({ length: 10 })
+  const dataSource = Array.from({ length: 100 })
     .fill(1)
     .map((item, index) => {
       return {
@@ -79,8 +79,9 @@
     }
   }
   const selectedRowKeys = ref<(string | number)[]>([])
-  const onSelectionChange = (keyrows: (string | number)[]) => {
+  const onSelectionChange = (keyrows: (string | number)[], rows: any[]) => {
     selectedRowKeys.value = keyrows
+    console.log(rows)
   }
 </script>
 
