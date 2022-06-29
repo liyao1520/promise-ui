@@ -1,4 +1,4 @@
-import { computed, Ref } from 'vue'
+import { computed, Ref, watch } from 'vue'
 import { RowSelection } from '../table-types'
 
 export default function useSelection(
@@ -17,6 +17,7 @@ export default function useSelection(
       rowSelection.value.onChange(keys, getRows(keys))
     }
   }
+
   const toggleSelection = (checked: boolean, row: any) => {
     const rowKey = row.__key__
     if (!rowSelection.value?.onChange) return

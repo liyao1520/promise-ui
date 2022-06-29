@@ -10,6 +10,7 @@ export const tableProps = {
   },
   maxHeight: [String, Number] as PropType<string | number>,
   minHeight: [String, Number] as PropType<string | number>,
+  scrollX: [String, Number] as PropType<string | number>,
   dataSource: {
     type: Array as PropType<DataSource>,
     default() {

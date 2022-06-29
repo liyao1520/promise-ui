@@ -57,17 +57,37 @@ export default defineComponent({
         </table>
       </div>
     )
-    const fixedTable = () => (
-      <div class={classes.value}>
-        <table class={ns.e('table')}>
-          <div class={ns.e('header')}>
-            <table class={ns.e('table')} style={{ tableLayout: 'fixed' }}>
+    const headerRef = ref<HTMLElement>()
+    const fixedTable = () => {
+      const bodyStyles = {
+        maxHeight: styleStringOrNumber(props.maxHeight),
+        minHeight: styleStringOrNumber(props.minHeight)
+      }
+      const tableStyles: CSSProperties = {
+        tableLayout: 'fixed',
+        width: styleStringOrNumber(props.scrollX),
+        minWidth: '100%'
+      }
+      let scrollLeft = 0
+      const bodyScroll = (e: Event) => {
+        const target = e.target as HTMLElement
+        const _scrollLeft = target.scrollLeft
+        if (scrollLeft !== _scrollLeft) {
+          if (headerRef.value) headerRef.value.scrollLeft = _scrollLeft
+        }
+        scrollLeft = target.scrollLeft
+      }
+
+      return (
+        <div class={classes.value}>
+          <div class={ns.e('header-wrap')} ref={headerRef}>
+            <table class={ns.e('table')} style={tableStyles}>
               <TableHeader />
               {renderColgroup()}
             </table>
           </div>
-          <div class={ns.e('body')}>
-            <table class={ns.e('table')} style={{ tableLayout: 'fixed' }}>
+          <div class={ns.e('body-wrap')} style={bodyStyles} onScroll={bodyScroll}>
+            <table class={ns.e('table')} style={tableStyles}>
               <TableBody rowProps={props.rowProps} />
               {renderColgroup()}
             </table>
@@ -75,11 +95,12 @@ export default defineComponent({
           {filterTableData.value.length === 0 && (
             <Empty class={ns.e('empty')} description="无数据" />
           )}
-        </table>
-      </div>
-    )
+        </div>
+      )
+    }
+    const isFixed = props.maxHeight || props.scrollX
     return () => {
-      return baseTable()
+      return isFixed ? fixedTable() : baseTable()
     }
   }
 })

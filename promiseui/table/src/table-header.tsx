@@ -1,6 +1,7 @@
-import { computed, defineComponent, PropType } from 'vue'
+import { computed, defineComponent, nextTick, PropType, ref } from 'vue'
 import { Checkbox } from '../../checkbox'
 import { useNamespace } from '../../shared/hooks/use-namespace'
+import useCellClass from './hooks/use-cell-class'
 import useTableStore from './hooks/use-table-store'
 import TableFilter from './table-filter'
 import TableSorter from './table-sorter'
@@ -16,9 +17,16 @@ export default defineComponent({
       [ns.e('header')]: true
     }))
     const indeterminate = computed(() => !isSelectionAll.value && !!selectionSet.value.size)
+    const rowRef = ref<HTMLElement>()
+    nextTick(() => {
+      console.log(rowRef.value)
+
+      const tds = rowRef.value?.querySelectorAll('th')
+      console.log(tds)
+    })
     return () => (
       <thead class={classes.value}>
-        <tr>
+        <tr ref={rowRef}>
           {/* render checkbox */}
           {tableProps.rowSelection && (
             <th class={[ns.e('cell'), ns.e('selection')]}>
@@ -33,7 +41,7 @@ export default defineComponent({
           )}
           {_columns.value.map((col, index) => {
             return (
-              <th class={ns.e('cell')}>
+              <th class={useCellClass(col)}>
                 <div>
                   {col.title}
                   {typeof col.sorter === 'function' && <TableSorter sortMethod={col.sorter} />}

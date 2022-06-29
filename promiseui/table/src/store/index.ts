@@ -1,4 +1,4 @@
-import { computed, ref, Ref, shallowRef, toRef, watchEffect } from 'vue'
+import { computed, nextTick, ref, Ref, shallowRef, toRef, watchEffect } from 'vue'
 import {
   filterMethod,
   SortDirection,
@@ -31,6 +31,7 @@ export function createStore<T>(
   }
   const dataSourceMap = new Map()
   const setDataSourceMap = () => {
+    dataSourceMap.clear()
     for (let i = 0; i < dataSource.value.length; i++) {
       const row = dataSource.value[i]
       const key = getKey(row, i)
@@ -38,6 +39,7 @@ export function createStore<T>(
       row.__key__ = key
     }
   }
+
   watchEffect(() => {
     tableData.value = dataSource.value.slice() || []
     setDataSourceMap()

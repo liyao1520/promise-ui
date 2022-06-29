@@ -1,6 +1,7 @@
 @import '../../styles-var';
 
 .#{$prefix}-table {
+  position: relative;
   text-align: left;
   border-radius: $border-radius;
   color: $text;
@@ -10,10 +11,26 @@
     border-spacing: 0;
     border-collapse: separate;
   }
+  &__cell--fixed-left {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+  }
+  &__cell--fixed-right {
+    position: sticky;
+    right: 0;
+    z-index: 1;
+  }
   &__body-wrap {
     overflow: auto;
   }
   &__header-wrap {
+    overflow: scroll;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
   }
   &__body {
   }
@@ -86,6 +103,7 @@
     padding: 16px;
     overflow-wrap: break-word;
     border-bottom: 1px solid $border-color;
+    background-color: inherit;
   }
   &__row {
     background-color: $base-bg;

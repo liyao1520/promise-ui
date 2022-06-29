@@ -12,6 +12,8 @@
         fixed: false,
         onChange: onSelectionChange
       }"
+      :max-height="400"
+      :scroll-x="1000"
     />
   </div>
 </template>
@@ -39,7 +41,8 @@
       },
       rowSpan(row, rowIndex) {
         return rowIndex === 0 ? 2 : 1
-      }
+      },
+      fixed: 'left'
     },
     {
       title: '年龄',

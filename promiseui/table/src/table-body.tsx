@@ -1,7 +1,8 @@
-import { computed, CSSProperties, defineComponent, PropType } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { Checkbox } from '../../checkbox'
 import { useNamespace } from '../../shared/hooks/use-namespace'
-import styleStringOrNumber from '../../shared/utils/styleStringOrNumber'
+import useCellClass from './hooks/use-cell-class'
+
 import useTableStore from './hooks/use-table-store'
 import { RowFn, TableColumn } from './table-types'
 
@@ -30,7 +31,7 @@ export default defineComponent({
 
     const renderHeaderTd = (row: Record<string | symbol, any>, col: TableColumn, index: number) => {
       return (
-        <td class={ns.e('cell')} key={row[col.dataIndex]}>
+        <td class={useCellClass(col)} key={row[col.dataIndex]}>
           {typeof col.dataIndex === 'string'
             ? row[col.dataIndex]
             : renderEmtpyWithError(`[columns] dataIndex类型为:${typeof col.dataIndex} 应为 string`)}
@@ -44,10 +45,7 @@ export default defineComponent({
         return {}
       }
     }
-    const tableBodyStyles = computed<CSSProperties>(() => ({
-      maxHeight: styleStringOrNumber(tableProps.maxHeight),
-      minHeight: styleStringOrNumber(tableProps.maxHeight)
-    }))
+
     return () => {
       return (
         <tbody class={ns.e('body')}>
