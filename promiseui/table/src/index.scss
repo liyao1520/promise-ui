@@ -10,8 +10,12 @@
     border-spacing: 0;
     border-collapse: separate;
   }
-  &__body {
+  &__body-wrap {
     overflow: auto;
+  }
+  &__header-wrap {
+  }
+  &__body {
   }
   &__empty {
     padding: 48px 0;
