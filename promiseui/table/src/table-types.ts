@@ -69,6 +69,7 @@ export type FilterOption = { label: string; value: string | number }
 export type ColumnType = 'selection' | string
 
 interface Column<T> {
+  dataIndex: string | string[]
   key: string // 不设置的化采用dataIndex
   title: string | (() => VNodeChild)
   align: Align
@@ -85,10 +86,7 @@ interface Column<T> {
   render: (rowData: T, rowIndex: number) => VNodeChild
 }
 
-export type TableColumn<T = object> =
-  | Partial<Column<T>> & {
-      dataIndex: string | string[]
-    }
+export type TableColumn<T = object> = Partial<Column<T>>
 export type ScrollXPosition = 'left' | 'right' | ''
 export type SortMethod<T = any> = (a: T, b: T) => number
 export type SortDirection = 'ASC' | 'DESC' | ''

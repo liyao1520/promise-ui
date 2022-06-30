@@ -66,7 +66,13 @@ export default defineComponent({
 
     ctx.expose({
       input: inputRef,
-      wapper: wapperRef
+      wapper: wapperRef,
+      blur() {
+        inputRef.value?.blur()
+      },
+      focus() {
+        inputRef.value?.focus()
+      }
     })
 
     return () => {

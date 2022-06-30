@@ -41,18 +41,23 @@ export default defineComponent({
           ? row[col.dataIndex]
           : Array.isArray(col.dataIndex)
           ? getValueByPathArray(col.dataIndex, row)
-          : renderEmtpyWithError(`[columns] dataIndex类型为:${typeof col.dataIndex} 应为 string`)
+          : undefined
       }
     }
-    const renderHeaderTd = (row: Record<string | symbol, any>, col: TableColumn, index: number) => {
-      const fixedInfo = getFixedInfo('cell', index)
+    const renderHeaderTd = (
+      row: Record<string | symbol, any>,
+      col: TableColumn,
+      colIndex: number,
+      rowIndex: number
+    ) => {
+      const fixedInfo = getFixedInfo('cell', colIndex)
       return (
         <td
           class={[useCellClass(col), fixedInfo.class]}
           key={getColKey(col)}
           style={fixedInfo.styles}
         >
-          {renderBodyCell(row, col, index)}
+          {renderBodyCell(row, col, rowIndex)}
         </td>
       )
     }
@@ -87,13 +92,15 @@ export default defineComponent({
     return () => {
       return (
         <tbody class={ns.e('body')}>
-          {filterTableData.value.map((row, index) => {
+          {filterTableData.value.map((row, rowIndex) => {
             const rowkey = getRowKey(row)
             return (
-              <tr key={rowkey} class={ns.e('row')} {...renderRowProps(row, index)}>
+              <tr key={rowkey} class={ns.e('row')} {...renderRowProps(row, rowIndex)}>
                 {/* render checkbox */}
                 {renderSelection(rowkey, row)}
-                {_columns.value.map((col, index) => renderHeaderTd(row, col, index))}
+                {_columns.value.map((col, colIndex) =>
+                  renderHeaderTd(row, col, colIndex, rowIndex)
+                )}
               </tr>
             )
           })}
