@@ -1,4 +1,6 @@
-import { computed, nextTick, ref, Ref, shallowRef, toRef, watchEffect } from 'vue'
+import { ScrollXPosition } from './../table-types'
+import { computed, ref, Ref, shallowRef, toRef, watchEffect } from 'vue'
+import useStickyOffset from '../hooks/use-sticky-offset'
 import {
   filterMethod,
   SortDirection,
@@ -7,11 +9,13 @@ import {
   TableProps,
   TableStore
 } from '../table-types'
-import useSelection from './use-selection'
+import useSelection from '../hooks/use-selection'
+import { useNamespace } from '../../../shared/hooks/use-namespace'
 export function createStore<T>(
   dataSource: Ref<any[]>,
   columns: Ref<TableColumn[]>,
-  props: TableProps
+  props: TableProps,
+  tableRef: Ref<HTMLElement | undefined>
 ): TableStore<T> {
   // 内部使用的data
   const tableData: Ref<T[]> = ref([])
@@ -71,6 +75,19 @@ export function createStore<T>(
   const isSelectionAll = computed(
     () => !!selectionSet.value.size && selectionSet.value.size === filterTableData.value.length
   )
+
+  const { setFixedStyle, getFixedInfo } = useStickyOffset(
+    toRef(props, 'columns'),
+    props.rowSelection
+  )
+  let prevPos = 'left'
+  const ns = useNamespace('table')
+  const setScrollXPosition = (pos: ScrollXPosition) => {
+    if (prevPos === pos) return
+    tableRef.value?.classList.add(ns.m(`is${pos}`))
+    tableRef.value?.classList.remove(ns.m(`is${prevPos}`))
+    prevPos = pos
+  }
   return {
     state: {
       tableData,
@@ -87,6 +104,9 @@ export function createStore<T>(
     filterData,
     selectionClear,
     selectionAll,
-    toggleSelection
+    toggleSelection,
+    setFixedStyle,
+    getFixedInfo,
+    setScrollXPosition
   }
 }

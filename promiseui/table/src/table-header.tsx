@@ -2,46 +2,62 @@ import { computed, defineComponent, nextTick, PropType, ref } from 'vue'
 import { Checkbox } from '../../checkbox'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import useCellClass from './hooks/use-cell-class'
+import useStickyOffset from './hooks/use-sticky-offset'
 import useTableStore from './hooks/use-table-store'
 import TableFilter from './table-filter'
 import TableSorter from './table-sorter'
+import getColKey from './utils/getColKey'
 
 export default defineComponent({
   name: 'PTableHeader',
 
   setup(props) {
     const ns = useNamespace('table')
-    const { state, tableProps, selectionAll, selectionClear } = useTableStore()
+    const { state, tableProps, selectionAll, selectionClear, getFixedInfo } = useTableStore()
     const { _columns, isSelectionAll, selectionSet } = state
     const classes = computed(() => ({
       [ns.e('header')]: true
     }))
     const indeterminate = computed(() => !isSelectionAll.value && !!selectionSet.value.size)
     const rowRef = ref<HTMLElement>()
-    nextTick(() => {
-      console.log(rowRef.value)
-
-      const tds = rowRef.value?.querySelectorAll('th')
-      console.log(tds)
-    })
+    const renderSelection = () => {
+      const fixedInfo = getFixedInfo('selection', 0)
+      return (
+        tableProps.rowSelection && (
+          <th
+            class={[
+              ns.e('cell'),
+              ns.e('selection'),
+              tableProps.rowSelection.fixed && ns.em('cell', 'fixed-left'),
+              fixedInfo.class
+            ]}
+            style={fixedInfo.styles}
+          >
+            <Checkbox
+              indeterminate={indeterminate.value}
+              onChange={(checked) =>
+                checked || indeterminate.value ? selectionAll() : selectionClear()
+              }
+              modelValue={isSelectionAll.value}
+            />
+          </th>
+        )
+      )
+    }
     return () => (
       <thead class={classes.value}>
         <tr ref={rowRef}>
           {/* render checkbox */}
-          {tableProps.rowSelection && (
-            <th class={[ns.e('cell'), ns.e('selection')]}>
-              <Checkbox
-                indeterminate={indeterminate.value}
-                onChange={(checked) =>
-                  checked || indeterminate.value ? selectionAll() : selectionClear()
-                }
-                modelValue={isSelectionAll.value}
-              />
-            </th>
-          )}
+          {renderSelection()}
           {_columns.value.map((col, index) => {
+            const colKey = getColKey(col)
+            const fixedInfo = getFixedInfo('cell', index)
             return (
-              <th class={useCellClass(col)}>
+              <th
+                key={colKey}
+                class={[useCellClass(col), fixedInfo.class]}
+                style={fixedInfo.styles}
+              >
                 <div>
                   {col.title}
                   {typeof col.sorter === 'function' && <TableSorter sortMethod={col.sorter} />}

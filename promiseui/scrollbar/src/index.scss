@@ -34,6 +34,7 @@
   border-radius: $border-radius;
   user-select: none;
   cursor: pointer;
+  z-index: 1000;
 }
 .#{$prefix}-scrollbar__bar_x {
   position: absolute;
@@ -42,6 +43,7 @@
   left: 0;
   height: 5px;
   background-color: $scrollbar-color;
+  z-index: 1000;
   &:hover {
     background-color: $scrollbar-color-hover;
   }

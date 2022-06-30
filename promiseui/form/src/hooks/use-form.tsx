@@ -3,19 +3,8 @@ import Schema, { Rule, RuleItem, ValidateError } from 'async-validator'
 import { formContextKey, FormItemProps } from '../form-types'
 import toArray from '../../../shared/utils/toArray'
 import useFormSize from './use-form-size'
-const getValueByPathname = (pathname: string, target: any) => {
-  const path = pathname.split('.')
+import getValueByPathname from '../../../shared/utils/getValueByPathname'
 
-  for (const name of path) {
-    if (typeof target === 'undefined') {
-      // 没有找到值
-      return undefined
-    }
-    target = target[name]
-  }
-
-  return target
-}
 const findRequiredRule = (rules: RuleItem[]) => {
   return !!rules.find((rule) => rule.required)
 }

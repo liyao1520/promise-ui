@@ -9,11 +9,11 @@
       stripe
       :row-selection="{
         selectedRowKeys: selectedRowKeys,
-        fixed: false,
+        fixed: true,
         onChange: onSelectionChange
       }"
       :max-height="400"
-      :scroll-x="1000"
+      :scroll-x="2000"
     />
   </div>
 </template>
@@ -29,7 +29,9 @@
         name: 'name' + index,
         address: 'address' + index,
         email: 'email' + index,
-        phone: 'phone' + String(Math.random()).replace('.', '')
+        other: {
+          phone: 'phone' + String(Math.random()).replace('.', '')
+        }
       }
     })
   const columns: TableColumn[] = [
@@ -42,7 +44,8 @@
       rowSpan(row, rowIndex) {
         return rowIndex === 0 ? 2 : 1
       },
-      fixed: 'left'
+      fixed: 'left',
+      width: 100
     },
     {
       title: '年龄',
@@ -72,7 +75,9 @@
     },
     {
       title: '电话',
-      dataIndex: 'phone'
+      dataIndex: ['other', 'phone'],
+      fixed: 'right',
+      width: 200
     }
   ]
 

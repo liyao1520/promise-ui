@@ -60,7 +60,7 @@ export type Filter = (value: string | number, item: any, index: number, array: a
 export type FilterOption = { label: string; value: string | number }
 export type ColumnType = 'selection' | string
 interface Column {
-  dataIndex: string
+  dataIndex: string | string[]
   key: string // 不设置的化采用dataIndex
   title: string
   align: Align
@@ -78,9 +78,9 @@ interface Column {
 
 export type TableColumn =
   | Partial<Column> & {
-      dataIndex: string
+      dataIndex: string | string[]
     }
-
+export type ScrollXPosition = 'left' | 'right' | ''
 export type SortMethod<T = any> = (a: T, b: T) => number
 export type SortDirection = 'ASC' | 'DESC' | ''
 export type filterMethod = (value: any, index: number, array: any[]) => boolean
@@ -104,6 +104,18 @@ export interface TableStore<T = any> {
   selectionClear: () => void
   selectionAll: () => void
   toggleSelection: (checked: boolean, row: any) => void
+  setFixedStyle: (_offsetlefts: number[]) => void
+  getFixedInfo: (
+    type: 'cell' | 'selection',
+    index: number
+  ) => {
+    styles: {
+      left?: string
+      right?: string
+    }
+    class: string | undefined
+  }
+  setScrollXPosition: (pos: ScrollXPosition) => void
 }
 
 export const TableStoreKey: InjectionKey<TableStore> = Symbol('TableStore')

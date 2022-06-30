@@ -1,4 +1,4 @@
-import { computed, CSSProperties, defineComponent, inject, provide, ref, toRef } from 'vue'
+import { computed, CSSProperties, defineComponent, nextTick, provide, ref, toRef } from 'vue'
 import { TableColumn, tableProps, TableProps, TableStoreKey } from './table-types'
 
 import './index.scss'
@@ -9,6 +9,8 @@ import TableHeader from './table-header'
 import Empty from '../../shared/components/empty'
 import { createStore } from './store'
 import styleStringOrNumber from '../../shared/utils/styleStringOrNumber'
+import useStickyOffset from './hooks/use-sticky-offset'
+import { Scrollbar } from '../../scrollbar'
 
 export default defineComponent({
   name: 'PTable',
@@ -16,7 +18,7 @@ export default defineComponent({
   emits: [],
   setup(props: TableProps, { slots, expose, attrs }) {
     const tableRef = ref<HTMLElement>()
-    const store = createStore(toRef(props, 'dataSource'), toRef(props, 'columns'), props)
+    const store = createStore(toRef(props, 'dataSource'), toRef(props, 'columns'), props, tableRef)
     provide(TableStoreKey, store)
     const ns = useNamespace('table')
     const classes = computed(() => ({
@@ -24,11 +26,8 @@ export default defineComponent({
       [ns.m('border')]: props.border,
       [ns.m('stripe')]: props.stripe
     }))
-    const styles = computed<CSSProperties>(() => ({
-      tableLayout: props.tableLayout
-    }))
 
-    const columStyles = (col: TableColumn): CSSProperties => {
+    const columnStyles = (col: TableColumn): CSSProperties => {
       return {
         width: styleStringOrNumber(col.width),
         maxWidth: styleStringOrNumber(col.maxWidth),
@@ -37,17 +36,18 @@ export default defineComponent({
       }
     }
     const filterTableData = store.state.filterTableData
+
     const renderColgroup = () => (
       <colgroup>
         {props.rowSelection && <col style={props.rowSelection.style}></col>}
-        {store.state._columns.value.map((col) => (
-          <col style={columStyles(col)}></col>
+        {store.state._columns.value.map((col, index) => (
+          <col style={columnStyles(col)} key={index}></col>
         ))}
       </colgroup>
     )
 
     const baseTable = () => (
-      <div class={classes.value}>
+      <div class={classes.value} ref={tableRef}>
         <table class={ns.e('table')}>
           <TableHeader renderColgroup={renderColgroup} />
           <TableBody rowProps={props.rowProps} renderColgroup={renderColgroup} />
@@ -76,30 +76,46 @@ export default defineComponent({
           if (headerRef.value) headerRef.value.scrollLeft = _scrollLeft
         }
         scrollLeft = target.scrollLeft
+
+        if (scrollLeft === 0) {
+          store.setScrollXPosition('left')
+        } else if (scrollLeft + target.clientWidth + 1 < target.scrollWidth) {
+          store.setScrollXPosition('')
+        } else {
+          store.setScrollXPosition('right')
+        }
       }
 
       return (
-        <div class={classes.value}>
-          <div class={ns.e('header-wrap')} ref={headerRef}>
+        <div class={classes.value} ref={tableRef}>
+          <div class={[ns.e('header-wrap')]} ref={headerRef}>
             <table class={ns.e('table')} style={tableStyles}>
               <TableHeader />
               {renderColgroup()}
             </table>
           </div>
-          <div class={ns.e('body-wrap')} style={bodyStyles} onScroll={bodyScroll}>
+          <Scrollbar onScroll={bodyScroll} viewStyle={bodyStyles} always>
             <table class={ns.e('table')} style={tableStyles}>
               <TableBody rowProps={props.rowProps} />
               {renderColgroup()}
             </table>
-          </div>
+          </Scrollbar>
           {filterTableData.value.length === 0 && (
             <Empty class={ns.e('empty')} description="无数据" />
           )}
         </div>
       )
     }
+
     const isFixed = props.maxHeight || props.scrollX
+
     return () => {
+      nextTick(() => {
+        const fixeds = Array.from(headerRef.value?.querySelectorAll('th') || []).map(
+          (item) => item.offsetLeft
+        )
+        store.setFixedStyle(fixeds)
+      })
       return isFixed ? fixedTable() : baseTable()
     }
   }
