@@ -1,4 +1,4 @@
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, PropType, Slot } from 'vue'
 import { Checkbox } from '../../checkbox'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import getValueByPathArray from '../../shared/utils/getValueByPathArray'
@@ -13,7 +13,8 @@ import getRowKey from './utils/getRowKey'
 export default defineComponent({
   name: 'PTableBody',
   props: {
-    rowProps: Function as PropType<RowFn<object>>
+    rowProps: Function as PropType<(row: any, rowIndex: number) => object>,
+    bodyCellSlot: Function as PropType<Slot>
   },
 
   setup(props) {
@@ -32,7 +33,17 @@ export default defineComponent({
       }
       return null
     }
-
+    const renderBodyCell = (row: Record<string | symbol, any>, col: TableColumn, index: number) => {
+      if (typeof col.render === 'function') {
+        return col.render(row, index)
+      } else {
+        return typeof col.dataIndex === 'string'
+          ? row[col.dataIndex]
+          : Array.isArray(col.dataIndex)
+          ? getValueByPathArray(col.dataIndex, row)
+          : renderEmtpyWithError(`[columns] dataIndex类型为:${typeof col.dataIndex} 应为 string`)
+      }
+    }
     const renderHeaderTd = (row: Record<string | symbol, any>, col: TableColumn, index: number) => {
       const fixedInfo = getFixedInfo('cell', index)
       return (
@@ -41,11 +52,7 @@ export default defineComponent({
           key={getColKey(col)}
           style={fixedInfo.styles}
         >
-          {typeof col.dataIndex === 'string'
-            ? row[col.dataIndex]
-            : Array.isArray(col.dataIndex)
-            ? getValueByPathArray(col.dataIndex, row)
-            : renderEmtpyWithError(`[columns] dataIndex类型为:${typeof col.dataIndex} 应为 string`)}
+          {renderBodyCell(row, col, index)}
         </td>
       )
     }

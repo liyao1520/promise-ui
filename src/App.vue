@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { h, ref } from 'vue'
   import { Table, TableColumn } from '../promiseui/table'
   const dataSource = Array.from({ length: 100 })
     .fill(1)
@@ -34,10 +34,30 @@
         }
       }
     })
-  const columns: TableColumn[] = [
+  const columns: TableColumn<typeof dataSource[0]>[] = [
     {
-      title: '姓名',
+      title: () =>
+        h(
+          'div',
+          {
+            style: {
+              color: 'red'
+            }
+          },
+          '姓名'
+        ),
       dataIndex: 'name',
+      render(row, index) {
+        return h(
+          'span',
+          {
+            style: {
+              color: 'blue'
+            }
+          },
+          row.name
+        )
+      },
       colSpan(row, rowIndex) {
         return rowIndex === 0 ? 2 : 1
       },

@@ -59,7 +59,7 @@ export default defineComponent({
                 style={fixedInfo.styles}
               >
                 <div>
-                  {col.title}
+                  {typeof col.title === 'function' ? col.title() : col.title}
                   {typeof col.sorter === 'function' && <TableSorter sortMethod={col.sorter} />}
                   {typeof col.filter === 'function' && (
                     <TableFilter filterOptions={col.filterOptions} filterMethod={col.filter} />

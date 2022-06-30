@@ -1,8 +1,16 @@
-import type { PropType, ExtractPropTypes, CSSProperties, InjectionKey, Ref, ComputedRef } from 'vue'
+import {
+  PropType,
+  ExtractPropTypes,
+  CSSProperties,
+  InjectionKey,
+  Ref,
+  ComputedRef,
+  VNodeChild
+} from 'vue'
 import { ICommonSize } from '../../types'
 export type Align = 'left' | 'right' | 'center'
 export type DataSource = Record<string | symbol, any>[]
-export type RowFn<T> = (row: any, rowIndex: number) => T
+export type RowFn<T, R> = (row: T, rowIndex: number) => R
 export const tableProps = {
   tableLayout: String as PropType<'auto' | 'fixed'>,
   height: {
@@ -18,12 +26,12 @@ export const tableProps = {
     }
   },
   columns: {
-    type: Array as PropType<TableColumn[]>,
+    type: Array as PropType<TableColumn<any>[]>,
     default() {
       return []
     }
   },
-  rowProps: Function as PropType<RowFn<object>>,
+  rowProps: Function as PropType<(row: any, rowIndex: number) => object>,
   rowKey: {
     type: [String, Function] as PropType<string | ((item: any) => string | number)>,
     default: 'key'
@@ -59,25 +67,26 @@ export type Sorter = (row1: any, row2: any) => number
 export type Filter = (value: string | number, item: any, index: number, array: any[]) => boolean
 export type FilterOption = { label: string; value: string | number }
 export type ColumnType = 'selection' | string
-interface Column {
-  dataIndex: string | string[]
+
+interface Column<T> {
   key: string // 不设置的化采用dataIndex
-  title: string
+  title: string | (() => VNodeChild)
   align: Align
   width: number | string
   maxWidth: number | string
   minWidth: number | string
   resizable: boolean
   fixed: 'left' | 'right'
-  rowSpan: RowFn<number>
-  colSpan: RowFn<number>
+  rowSpan: RowFn<T, number>
+  colSpan: RowFn<T, number>
   sorter: Sorter
   filter: Filter
   filterOptions: FilterOption[]
+  render: (rowData: T, rowIndex: number) => VNodeChild
 }
 
-export type TableColumn =
-  | Partial<Column> & {
+export type TableColumn<T = object> =
+  | Partial<Column<T>> & {
       dataIndex: string | string[]
     }
 export type ScrollXPosition = 'left' | 'right' | ''

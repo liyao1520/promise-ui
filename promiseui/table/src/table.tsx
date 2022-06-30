@@ -26,6 +26,9 @@ export default defineComponent({
       [ns.m('border')]: props.border,
       [ns.m('stripe')]: props.stripe
     }))
+    // bodyCell
+
+    const bodyCellSlot = slots.bodyCell
 
     const columnStyles = (col: TableColumn): CSSProperties => {
       return {
@@ -50,7 +53,11 @@ export default defineComponent({
       <div class={classes.value} ref={tableRef}>
         <table class={ns.e('table')}>
           <TableHeader renderColgroup={renderColgroup} />
-          <TableBody rowProps={props.rowProps} renderColgroup={renderColgroup} />
+          <TableBody
+            rowProps={props.rowProps}
+            renderColgroup={renderColgroup}
+            bodyCellSlot={bodyCellSlot}
+          />
           {filterTableData.value.length === 0 && (
             <Empty class={ns.e('empty')} description="无数据" />
           )}
@@ -96,7 +103,7 @@ export default defineComponent({
           </div>
           <Scrollbar onScroll={bodyScroll} viewStyle={bodyStyles} always>
             <table class={ns.e('table')} style={tableStyles}>
-              <TableBody rowProps={props.rowProps} />
+              <TableBody rowProps={props.rowProps} bodyCellSlot={bodyCellSlot} />
               {renderColgroup()}
             </table>
           </Scrollbar>

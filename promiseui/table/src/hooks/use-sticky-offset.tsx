@@ -11,7 +11,7 @@ export default function (_columns: Ref<TableColumn[]>, rowSelection: RowSelectio
     selection: 0,
     cell: []
   })
-  let rowWidth: number = 0
+  const rowWidth = 0
   const fixeds = computed(() => {
     const cellFixeds = _columns.value.map((item) => ({
       fixed: item.fixed,
