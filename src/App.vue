@@ -7,11 +7,6 @@
       :row-props="rowProps"
       border
       stripe
-      :row-selection="{
-        selectedRowKeys: selectedRowKeys,
-        fixed: true,
-        onChange: onSelectionChange
-      }"
       :max-height="400"
       :scroll-x="2000"
     />
@@ -22,7 +17,7 @@
   import { defineComponent, h, nextTick, reactive, ref, withDirectives } from 'vue'
   import { Button } from '../promiseui/button'
   import { Input } from '../promiseui/input'
-  import { Table, TableColumn } from '../promiseui/table'
+  import { Table, TableColumnType } from '../promiseui/table'
   const ShowOrEdit = defineComponent({
     props: {
       value: [String, Number],
@@ -83,7 +78,7 @@
     dataSource.splice(index, 1)
   }
 
-  const columns: TableColumn<typeof dataSource[0]>[] = [
+  const columns: TableColumnType<typeof dataSource[0]>[] = [
     {
       title: () =>
         h(

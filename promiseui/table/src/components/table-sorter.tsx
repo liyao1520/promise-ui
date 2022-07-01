@@ -1,9 +1,9 @@
 import { CaretDownSharp, CaretUpSharp } from '@vicons/ionicons5'
 import { defineComponent, PropType, ref, watch } from 'vue'
-import { Icon } from '../../icon'
-import { useNamespace } from '../../shared/hooks/use-namespace'
-import useTableStore from './hooks/use-table-store'
-import { Sorter } from './table-types'
+import { Icon } from '../../../icon'
+import { useNamespace } from '../../../shared/hooks/use-namespace'
+import useTableStore from '../hooks/use-table-store'
+import { Sorter } from '../table-types'
 type IStatus = '↑' | '↓' | ''
 export default defineComponent({
   props: {

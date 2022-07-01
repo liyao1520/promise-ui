@@ -1,16 +1,14 @@
-import { computed, defineComponent, nextTick, PropType, ref } from 'vue'
-import { Checkbox } from '../../checkbox'
-import { useNamespace } from '../../shared/hooks/use-namespace'
-import useCellClass from './hooks/use-cell-class'
-import useStickyOffset from './hooks/use-sticky-offset'
-import useTableStore from './hooks/use-table-store'
+import { computed, defineComponent, ref } from 'vue'
+import { Checkbox } from '../../../checkbox'
+import { useNamespace } from '../../../shared/hooks/use-namespace'
+import useCellClass from '../hooks/use-cell-class'
+import useTableStore from '../hooks/use-table-store'
 import TableFilter from './table-filter'
 import TableSorter from './table-sorter'
-import getColKey from './utils/getColKey'
+import getColKey from '../utils/getColKey'
 
 export default defineComponent({
   name: 'PTableHeader',
-
   setup(props) {
     const ns = useNamespace('table')
     const { state, tableProps, selectionAll, selectionClear, getFixedInfo } = useTableStore()

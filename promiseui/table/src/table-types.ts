@@ -26,7 +26,7 @@ export const tableProps = {
     }
   },
   columns: {
-    type: Array as PropType<TableColumn<any>[]>,
+    type: Array as PropType<TableColumnType<any>[]>,
     default() {
       return []
     }
@@ -86,7 +86,7 @@ interface Column<T> {
   render: (rowData: T, rowIndex: number) => VNodeChild
 }
 
-export type TableColumn<T = object> = Partial<Column<T>>
+export type TableColumnType<T = object> = Partial<Column<T>>
 export type ScrollXPosition = 'left' | 'right' | ''
 export type SortMethod<T = any> = (a: T, b: T) => number
 export type SortDirection = 'ASC' | 'DESC' | ''
@@ -96,7 +96,7 @@ export interface TableStore<T = any> {
     //外部数据
     _data: Ref<T[]>
     // 列数据
-    _columns: Ref<TableColumn[]>
+    _columns: Ref<TableColumnType[]>
     // 内部数据
     tableData: Ref<T[]>
     filterMethod: Ref<filterMethod>
@@ -123,6 +123,11 @@ export interface TableStore<T = any> {
     class: string | undefined
   }
   setScrollXPosition: (pos: ScrollXPosition) => void
+}
+
+export type ColumnTemplateRender = {
+  (props: { row: any; index: number }): VNodeChild
+  __is_template: boolean
 }
 
 export const TableStoreKey: InjectionKey<TableStore> = Symbol('TableStore')

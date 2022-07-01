@@ -1,14 +1,14 @@
 import { defineComponent, PropType, Slot } from 'vue'
-import { Checkbox } from '../../checkbox'
-import { useNamespace } from '../../shared/hooks/use-namespace'
-import getValueByPathArray from '../../shared/utils/getValueByPathArray'
+import { Checkbox } from '../../../checkbox'
+import { useNamespace } from '../../../shared/hooks/use-namespace'
+import getValueByPathArray from '../../../shared/utils/getValueByPathArray'
 
-import useCellClass from './hooks/use-cell-class'
+import useCellClass from '../hooks/use-cell-class'
 
-import useTableStore from './hooks/use-table-store'
-import { RowFn, TableColumn } from './table-types'
-import getColKey from './utils/getColKey'
-import getRowKey from './utils/getRowKey'
+import useTableStore from '../hooks/use-table-store'
+import { ColumnTemplateRender, TableColumnType } from '../table-types'
+import getColKey from '../utils/getColKey'
+import getRowKey from '../utils/getRowKey'
 
 export default defineComponent({
   name: 'PTableBody',
@@ -23,19 +23,21 @@ export default defineComponent({
 
     const { _columns, filterTableData, selectionSet } = state
     let canLog = true
-    const renderEmtpyWithError = (message: string) => {
-      if (canLog) {
-        canLog = false
-        setTimeout(() => {
-          console.warn(message)
-          canLog = true
-        })
-      }
-      return null
-    }
-    const renderBodyCell = (row: Record<string | symbol, any>, col: TableColumn, index: number) => {
+
+    const renderBodyCell = (
+      row: Record<string | symbol, any>,
+      col: TableColumnType,
+      index: number
+    ) => {
       if (typeof col.render === 'function') {
-        return col.render(row, index)
+        if ((col.render as ColumnTemplateRender).__is_template) {
+          return (col.render as ColumnTemplateRender)({
+            row,
+            index
+          })
+        } else {
+          return col.render(row, index)
+        }
       } else {
         return typeof col.dataIndex === 'string'
           ? row[col.dataIndex]
@@ -46,7 +48,7 @@ export default defineComponent({
     }
     const renderHeaderTd = (
       row: Record<string | symbol, any>,
-      col: TableColumn,
+      col: TableColumnType,
       colIndex: number,
       rowIndex: number
     ) => {

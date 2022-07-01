@@ -1,24 +1,29 @@
 import { ScrollXPosition } from './../table-types'
-import { computed, ref, Ref, shallowRef, toRef, watchEffect } from 'vue'
+import { computed, ref, Ref, shallowRef, Slots, toRef, watchEffect } from 'vue'
 import useStickyOffset from '../hooks/use-sticky-offset'
 import {
   filterMethod,
   SortDirection,
   Sorter,
-  TableColumn,
+  TableColumnType,
   TableProps,
   TableStore
 } from '../table-types'
 import useSelection from '../hooks/use-selection'
 import { useNamespace } from '../../../shared/hooks/use-namespace'
+import { __TABLE_COLUMN } from '../table-column'
+import useColums from '../hooks/use-columns'
 export function createStore<T>(
   dataSource: Ref<any[]>,
-  columns: Ref<TableColumn[]>,
+  columns: Ref<TableColumnType[]>,
   props: TableProps,
-  tableRef: Ref<HTMLElement | undefined>
+  tableRef: Ref<HTMLElement | undefined>,
+  slots: Slots
 ): TableStore<T> {
   // 内部使用的data
   const tableData: Ref<T[]> = ref([])
+  // 列数据,如果没传props.columns 则找template
+  const _columns = useColums(columns, slots)
   // 外部传来的data
   // filterMethod
   const filterMethod = shallowRef<filterMethod>(() => true)
@@ -76,10 +81,7 @@ export function createStore<T>(
     () => !!selectionSet.value.size && selectionSet.value.size === filterTableData.value.length
   )
 
-  const { setFixedStyle, getFixedInfo } = useStickyOffset(
-    toRef(props, 'columns'),
-    props.rowSelection
-  )
+  const { setFixedStyle, getFixedInfo } = useStickyOffset(_columns, props.rowSelection)
   let prevPos = 'left'
   const ns = useNamespace('table')
   const setScrollXPosition = (pos: ScrollXPosition) => {
@@ -88,11 +90,12 @@ export function createStore<T>(
     tableRef.value?.classList.remove(ns.m(`is${prevPos}`))
     prevPos = pos
   }
+
   return {
     state: {
       tableData,
       _data: dataSource,
-      _columns: columns,
+      _columns,
       filterMethod,
       filterTableData,
       selectionSet,

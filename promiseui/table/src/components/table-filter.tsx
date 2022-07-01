@@ -1,13 +1,13 @@
 import { FunnelSharp } from '@vicons/ionicons5'
-import { defineComponent, PropType, ref, watch, watchEffect } from 'vue'
-import { propsTypesName } from '../../../promiseui-cli/templates/utils'
-import { Button } from '../../button'
-import { Checkbox } from '../../checkbox'
-import { Dropdown, DropdownItem } from '../../dropdown'
-import { Icon } from '../../icon'
-import { useNamespace } from '../../shared/hooks/use-namespace'
-import useTableStore from './hooks/use-table-store'
-import { Filter, filterMethod, FilterOption } from './table-types'
+import { defineComponent, PropType, ref, watchEffect } from 'vue'
+
+import { Button } from '../../../button'
+import { Checkbox } from '../../../checkbox'
+import { Dropdown, DropdownItem } from '../../../dropdown'
+import { Icon } from '../../../icon'
+import { useNamespace } from '../../../shared/hooks/use-namespace'
+import useTableStore from '../hooks/use-table-store'
+import { Filter, filterMethod, FilterOption } from '../table-types'
 
 export default defineComponent({
   props: {

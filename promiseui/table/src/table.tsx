@@ -1,15 +1,14 @@
 import { computed, CSSProperties, defineComponent, nextTick, provide, ref, toRef } from 'vue'
-import { TableColumn, tableProps, TableProps, TableStoreKey } from './table-types'
+import { TableColumnType, tableProps, TableProps, TableStoreKey } from './table-types'
 
 import './index.scss'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 
-import TableBody from './table-body'
-import TableHeader from './table-header'
+import TableBody from './components/table-body'
+import TableHeader from './components/table-header'
 import Empty from '../../shared/components/empty'
 import { createStore } from './store'
 import styleStringOrNumber from '../../shared/utils/styleStringOrNumber'
-import useStickyOffset from './hooks/use-sticky-offset'
 import { Scrollbar } from '../../scrollbar'
 
 export default defineComponent({
@@ -18,7 +17,13 @@ export default defineComponent({
   emits: [],
   setup(props: TableProps, { slots, expose, attrs }) {
     const tableRef = ref<HTMLElement>()
-    const store = createStore(toRef(props, 'dataSource'), toRef(props, 'columns'), props, tableRef)
+    const store = createStore(
+      toRef(props, 'dataSource'),
+      toRef(props, 'columns'),
+      props,
+      tableRef,
+      slots
+    )
     provide(TableStoreKey, store)
     const ns = useNamespace('table')
     const classes = computed(() => ({
@@ -30,7 +35,7 @@ export default defineComponent({
 
     const bodyCellSlot = slots.bodyCell
 
-    const columnStyles = (col: TableColumn): CSSProperties => {
+    const columnStyles = (col: TableColumnType): CSSProperties => {
       return {
         width: styleStringOrNumber(col.width),
         maxWidth: styleStringOrNumber(col.maxWidth),
