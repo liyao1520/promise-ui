@@ -1,46 +1,46 @@
 <template>
-  <div class="demo">
-    <Table
-      :data-source="dataSource"
-      :row-key="'address'"
-      :row-selection="{ selectedRowKeys: [] }"
-      border
-      stripe
-      :max-height="400"
-    >
-      <TableColumn title="name">
-        <template #default="{ row }"> {{ row.name }}</template>
-      </TableColumn>
-      <TableColumn title="123">123</TableColumn>
-    </Table>
-  </div>
+  <p-table :data-source="dataSource">
+    <p-table-column title="索引">
+      <template #default="{ index }">{{ index + 1 }}</template>
+    </p-table-column>
+    <p-table-column title="作品">
+      <template #default="{ row }">{{ row.title }}</template>
+    </p-table-column>
+    <p-table-column title="作者" dataIndex="author"></p-table-column>
+    <p-table-column title="出版单位" dataIndex="press"></p-table-column>
+    <p-table-column title="操作">
+      <template #default="{ index }">
+        <p-button size="sm" type="danger" @click="deleteItem(index)">删除</p-button>
+      </template>
+    </p-table-column>
+  </p-table>
 </template>
 
-<script setup lang="ts">
-  import { reactive, ref } from 'vue'
-  import { Table, TableColumn } from '../promiseui/table'
-  const count = ref(0)
-  setInterval(() => count.value++, 2000)
-  const dataSource = reactive(
-    Array.from({ length: 100 })
-      .fill(1)
-      .map((item, index) => {
-        return {
-          age: index,
-          name: 'name' + index,
-          address: 'address' + index,
-          email: 'email' + index,
-          other: {
-            phone: 'phone' + String(Math.random()).replace('.', '')
-          }
-        }
-      })
-  )
-</script>
-
-<style>
-  .demo {
-    margin: 10px auto;
-    width: 900px;
+<script setup>
+  import { reactive } from 'vue'
+  const dataSource = reactive([
+    {
+      title: '《人世间》',
+      author: '梁晓声',
+      press: '中国青年出版社'
+    },
+    {
+      title: '《牵风记》',
+      author: '徐怀中',
+      press: '人民文学出版社'
+    },
+    {
+      title: '《北上》',
+      author: '徐则臣',
+      press: '北京十月文艺出版社'
+    },
+    {
+      title: '《主角》',
+      author: '陈　彦',
+      press: '作家出版社'
+    }
+  ])
+  const deleteItem = (index) => {
+    dataSource.splice(index, 1)
   }
-</style>
+</script>

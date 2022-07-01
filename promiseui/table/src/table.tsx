@@ -30,11 +30,9 @@ export default defineComponent({
       [ns.b()]: true,
       [ns.m('border')]: props.border,
       [ns.m('stripe')]: props.stripe,
-      [ns.m(props.size)]: true
+      [ns.m(props.size)]: true,
+      [ns.m('isleft')]: true //默认在left
     }))
-    // bodyCell
-
-    const bodyCellSlot = slots.bodyCell
 
     const columnStyles = (col: TableColumnType): CSSProperties => {
       return {
@@ -57,17 +55,12 @@ export default defineComponent({
 
     const baseTable = () => (
       <div class={classes.value} ref={tableRef}>
-        <table class={ns.e('table')}>
-          {props.showHeader && <TableHeader renderColgroup={renderColgroup} />}
-          <TableBody
-            rowProps={props.rowProps}
-            renderColgroup={renderColgroup}
-            bodyCellSlot={bodyCellSlot}
-          />
-          {filterTableData.value.length === 0 && (
-            <Empty class={ns.e('empty')} description="无数据" />
-          )}
+        <table class={ns.e('table')} style={{ tableLayout: props.tableLayout }}>
+          {renderColgroup()}
+          {props.showHeader && <TableHeader />}
+          <TableBody />
         </table>
+        {filterTableData.value.length === 0 && <Empty class={ns.e('empty')} description="无数据" />}
       </div>
     )
     const headerRef = ref<HTMLElement>()
@@ -85,10 +78,9 @@ export default defineComponent({
       const bodyScroll = (e: Event) => {
         const target = e.target as HTMLElement
         const _scrollLeft = target.scrollLeft
-        if (scrollLeft !== _scrollLeft) {
-          if (headerRef.value) headerRef.value.scrollLeft = _scrollLeft
-        }
-        scrollLeft = target.scrollLeft
+        if (headerRef.value) headerRef.value.scrollLeft = _scrollLeft
+
+        scrollLeft = _scrollLeft
 
         if (scrollLeft === 0) {
           store.setScrollXPosition('left')
@@ -107,9 +99,9 @@ export default defineComponent({
               {renderColgroup()}
             </table>
           </div>
-          <Scrollbar onScroll={bodyScroll} viewStyle={bodyStyles} always>
+          <Scrollbar onScroll={bodyScroll} viewStyle={bodyStyles}>
             <table class={ns.e('table')} style={tableStyles}>
-              <TableBody rowProps={props.rowProps} bodyCellSlot={bodyCellSlot} />
+              <TableBody />
               {renderColgroup()}
             </table>
           </Scrollbar>

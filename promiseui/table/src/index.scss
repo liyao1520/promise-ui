@@ -21,6 +21,7 @@
     }
   }
   &__table {
+    display: table;
     width: 100%;
     border-spacing: 0;
     border-collapse: separate;
@@ -154,11 +155,12 @@
     border-bottom: none;
   }
   &__header {
+    color: $title-text;
     th {
       font-weight: 500;
       color: $title-text;
       vertical-align: middle;
-      background-color: $info-bg;
+      background-color: $fill-color-lighter;
     }
   }
   &__cell {

@@ -52,6 +52,9 @@
       if (themeName && themes.includes(themeName)) {
         theme.value = themeName
         Theme.use(themeName)
+      } else {
+        theme.value = 'light'
+        Theme.use('light')
       }
     })
     let monaco,

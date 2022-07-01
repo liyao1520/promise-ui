@@ -227,6 +227,8 @@
     margin: 5px 0;
   }
   .demo-control {
+    padding: 10px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
     text-align: center;
     cursor: pointer;
   }

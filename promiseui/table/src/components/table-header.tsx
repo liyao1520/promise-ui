@@ -9,6 +9,7 @@ import getColKey from '../utils/getColKey'
 
 export default defineComponent({
   name: 'PTableHeader',
+
   setup(props) {
     const ns = useNamespace('table')
     const { state, tableProps, selectionAll, selectionClear, getFixedInfo } = useTableStore()
@@ -17,7 +18,7 @@ export default defineComponent({
       [ns.e('header')]: true
     }))
     const indeterminate = computed(() => !isSelectionAll.value && !!selectionSet.value.size)
-    const rowRef = ref<HTMLElement>()
+
     const renderSelection = () => {
       const fixedInfo = getFixedInfo('selection', 0)
       return (
