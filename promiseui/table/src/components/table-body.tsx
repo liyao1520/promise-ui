@@ -22,7 +22,6 @@ export default defineComponent({
     const { state, tableProps, toggleSelection, getFixedInfo } = useTableStore()
 
     const { _columns, filterTableData, selectionSet } = state
-    let canLog = true
 
     const renderBodyCell = (
       row: Record<string | symbol, any>,
@@ -30,14 +29,7 @@ export default defineComponent({
       index: number
     ) => {
       if (typeof col.render === 'function') {
-        if ((col.render as ColumnTemplateRender).__is_template) {
-          return (col.render as ColumnTemplateRender)({
-            row,
-            index
-          })
-        } else {
-          return col.render(row, index)
-        }
+        return col.render(row, index)
       } else {
         return typeof col.dataIndex === 'string'
           ? row[col.dataIndex]
@@ -72,6 +64,7 @@ export default defineComponent({
     }
     const renderSelection = (rowkey: any, row: any) => {
       const fixedInfo = getFixedInfo('selection', 0)
+
       return (
         tableProps.rowSelection && (
           <td
