@@ -1,9 +1,11 @@
 import { computed, ref, Ref } from 'vue'
-import { selectProps } from '../../../select'
 import { useNamespace } from '../../../shared/hooks/use-namespace'
-import { RowSelection, TableColumn } from '../table-types'
+import { RowSelection, TableColumnType } from '../table-types'
 
-export default function (_columns: Ref<TableColumn[]>, rowSelection: RowSelection | undefined) {
+export default function (
+  _columns: Ref<TableColumnType[]>,
+  rowSelection: Ref<RowSelection | undefined>
+) {
   const offsetlefts: Ref<{
     selection: number
     cell: number[]
@@ -11,7 +13,7 @@ export default function (_columns: Ref<TableColumn[]>, rowSelection: RowSelectio
     selection: 0,
     cell: []
   })
-  const rowWidth = 0
+
   const fixeds = computed(() => {
     const cellFixeds = _columns.value.map((item) => ({
       fixed: item.fixed,
@@ -39,9 +41,9 @@ export default function (_columns: Ref<TableColumn[]>, rowSelection: RowSelectio
 
     return {
       cell: cellFixeds,
-      selection: rowSelection?.fixed
+      selection: rowSelection.value?.fixed
         ? {
-            fixed: rowSelection.fixed && 'left',
+            fixed: rowSelection.value.fixed && 'left',
             last: lastIndex === undefined,
             first: false
           }
@@ -51,8 +53,8 @@ export default function (_columns: Ref<TableColumn[]>, rowSelection: RowSelectio
 
   const setFixedStyle = (_offsetlefts: number[]) => {
     offsetlefts.value = {
-      selection: selectProps ? _offsetlefts[0] : 0,
-      cell: selectProps ? _offsetlefts.slice(1) : _offsetlefts
+      selection: rowSelection.value ? _offsetlefts[0] : 0,
+      cell: rowSelection.value ? _offsetlefts.slice(1) : _offsetlefts
     }
   }
 

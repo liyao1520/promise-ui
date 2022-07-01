@@ -1,4 +1,4 @@
-import { computed, Ref, Slots } from 'vue'
+import { computed, Ref, render, renderSlot, Slots } from 'vue'
 import { __TABLE_COLUMN } from '../table-column'
 import { TableColumnType } from '../table-types'
 
@@ -17,8 +17,11 @@ export default function (columns: Ref<TableColumnType[]>, slots: Slots) {
           const children = vnode.children as any
           if (children) {
             if (typeof children.default === 'function') {
-              children.default.__is_template = true
-              columnProps.render = children.default
+              columnProps.render = (row: any, index: number) =>
+                renderSlot(children, 'default', {
+                  row,
+                  index
+                })
             }
             // 传title插槽则用title插槽
             if (typeof children.title === 'function') {
@@ -30,7 +33,6 @@ export default function (columns: Ref<TableColumnType[]>, slots: Slots) {
           console.warn('Table 组件里只能是TableColumn组件')
         }
       }
-      console.log(columns)
 
       return columns
     }

@@ -71,8 +71,9 @@ export function createStore<T>(
   const filterTableData = computed(() => tableData.value.filter(filterMethod.value))
 
   //
+  const rowSelectionRef = toRef(props, 'rowSelection')
   const { selectionClear, selectionAll, toggleSelection, selectionSet } = useSelection(
-    toRef(props, 'rowSelection'),
+    rowSelectionRef,
     dataSource,
     props.rowKey,
     dataSourceMap
@@ -81,7 +82,7 @@ export function createStore<T>(
     () => !!selectionSet.value.size && selectionSet.value.size === filterTableData.value.length
   )
 
-  const { setFixedStyle, getFixedInfo } = useStickyOffset(_columns, props.rowSelection)
+  const { setFixedStyle, getFixedInfo } = useStickyOffset(_columns, rowSelectionRef)
   let prevPos = 'left'
   const ns = useNamespace('table')
   const setScrollXPosition = (pos: ScrollXPosition) => {
