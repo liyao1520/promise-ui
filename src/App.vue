@@ -1,6 +1,13 @@
 <template>
   <div class="demo">
-    <Table :data-source="dataSource" :row-key="'address'" border stripe :max-height="400">
+    <Table
+      :data-source="dataSource"
+      :row-key="'address'"
+      :row-selection="{ selectedRowKeys: [] }"
+      border
+      stripe
+      :max-height="400"
+    >
       <TableColumn title="name">
         <template #default="{ row }"> {{ row.name }}</template>
       </TableColumn>

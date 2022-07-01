@@ -27,9 +27,10 @@ export default defineComponent({
               ns.e('cell'),
               ns.e('selection'),
               tableProps.rowSelection.fixed && ns.em('cell', 'fixed-left'),
-              fixedInfo.class
+              fixedInfo.class,
+              tableProps.headerRowClassName
             ]}
-            style={fixedInfo.styles}
+            style={[fixedInfo.styles, tableProps.headerRowStyle || {}]}
           >
             <Checkbox
               indeterminate={indeterminate.value}
@@ -44,7 +45,7 @@ export default defineComponent({
     }
     return () => (
       <thead class={classes.value}>
-        <tr ref={rowRef}>
+        <tr class={[ns.e('cell'), tableProps.headerRowClassName]} style={tableProps.headerRowStyle}>
           {/* render checkbox */}
           {renderSelection()}
           {_columns.value.map((col, index) => {

@@ -29,7 +29,8 @@ export default defineComponent({
     const classes = computed(() => ({
       [ns.b()]: true,
       [ns.m('border')]: props.border,
-      [ns.m('stripe')]: props.stripe
+      [ns.m('stripe')]: props.stripe,
+      [ns.m(props.size)]: true
     }))
     // bodyCell
 
@@ -57,7 +58,7 @@ export default defineComponent({
     const baseTable = () => (
       <div class={classes.value} ref={tableRef}>
         <table class={ns.e('table')}>
-          <TableHeader renderColgroup={renderColgroup} />
+          {props.showHeader && <TableHeader renderColgroup={renderColgroup} />}
           <TableBody
             rowProps={props.rowProps}
             renderColgroup={renderColgroup}
@@ -102,7 +103,7 @@ export default defineComponent({
         <div class={classes.value} ref={tableRef}>
           <div class={[ns.e('header-wrap')]} ref={headerRef}>
             <table class={ns.e('table')} style={tableStyles}>
-              <TableHeader />
+              {props.showHeader && <TableHeader />}
               {renderColgroup()}
             </table>
           </div>

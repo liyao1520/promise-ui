@@ -1,4 +1,4 @@
-import { defineComponent, PropType, Slot } from 'vue'
+import { defineComponent, mergeProps, PropType, Slot } from 'vue'
 import { Checkbox } from '../../../checkbox'
 import { useNamespace } from '../../../shared/hooks/use-namespace'
 import getValueByPathArray from '../../../shared/utils/getValueByPathArray'
@@ -6,16 +6,12 @@ import getValueByPathArray from '../../../shared/utils/getValueByPathArray'
 import useCellClass from '../hooks/use-cell-class'
 
 import useTableStore from '../hooks/use-table-store'
-import { ColumnTemplateRender, TableColumnType } from '../table-types'
+import { TableColumnType } from '../table-types'
 import getColKey from '../utils/getColKey'
 import getRowKey from '../utils/getRowKey'
 
 export default defineComponent({
   name: 'PTableBody',
-  props: {
-    rowProps: Function as PropType<(row: any, rowIndex: number) => object>,
-    bodyCellSlot: Function as PropType<Slot>
-  },
 
   setup(props) {
     const ns = useNamespace('table')
@@ -38,6 +34,18 @@ export default defineComponent({
           : undefined
       }
     }
+    const renderCellProps = (
+      row: object,
+      col: TableColumnType,
+      rowIndex: number,
+      celIndex: number
+    ) => {
+      if (typeof tableProps.cellProps === 'function') {
+        return tableProps.cellProps(row, col, rowIndex, celIndex)
+      } else {
+        return tableProps.cellProps || {}
+      }
+    }
     const renderHeaderTd = (
       row: Record<string | symbol, any>,
       col: TableColumnType,
@@ -47,21 +55,23 @@ export default defineComponent({
       const fixedInfo = getFixedInfo('cell', colIndex)
       return (
         <td
-          class={[useCellClass(col), fixedInfo.class]}
           key={getColKey(col)}
+          class={[useCellClass(col), fixedInfo.class]}
           style={fixedInfo.styles}
+          {...renderCellProps(row, col, rowIndex, colIndex)}
         >
           {renderBodyCell(row, col, rowIndex)}
         </td>
       )
     }
-    const renderRowProps = (item: any, index: number) => {
-      if (props.rowProps) {
-        return props.rowProps(item, index)
+    const renderRowProps = (row: any, index: number) => {
+      if (typeof tableProps.rowProps === 'function') {
+        return tableProps.rowProps(row, index)
       } else {
-        return {}
+        return tableProps.rowProps || {}
       }
     }
+
     const renderSelection = (rowkey: any, row: any) => {
       const fixedInfo = getFixedInfo('selection', 0)
 
@@ -90,7 +100,7 @@ export default defineComponent({
           {filterTableData.value.map((row, rowIndex) => {
             const rowkey = getRowKey(row)
             return (
-              <tr key={rowkey} class={ns.e('row')} {...renderRowProps(row, rowIndex)}>
+              <tr key={rowkey} class={[ns.e('row')]} {...renderRowProps(row, rowIndex)}>
                 {/* render checkbox */}
                 {renderSelection(rowkey, row)}
                 {_columns.value.map((col, colIndex) =>

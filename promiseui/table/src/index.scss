@@ -5,7 +5,21 @@
   text-align: left;
   border-radius: $border-radius;
   color: $text;
-
+  &--md {
+    .#{$prefix}-table__cell {
+      padding: 16px;
+    }
+  }
+  &--sm {
+    .#{$prefix}-table__cell {
+      padding: 12px;
+    }
+  }
+  &--lg {
+    .#{$prefix}-table__cell {
+      padding: 20px;
+    }
+  }
   &__table {
     width: 100%;
     border-spacing: 0;
@@ -148,7 +162,6 @@
     }
   }
   &__cell {
-    padding: 16px;
     overflow-wrap: break-word;
     border-bottom: 1px solid $border-color;
     background-color: inherit;

@@ -31,7 +31,10 @@ export const tableProps = {
       return []
     }
   },
-  rowProps: Function as PropType<(row: any, rowIndex: number) => object>,
+  rowProps: [Function, Object] as PropType<((row: any, rowIndex: number) => object) | object>,
+  cellProps: [Function, Object] as PropType<
+    ((row: any, col: TableColumnType, rowIndex: number, colIndex: number) => object) | object
+  >,
   rowKey: {
     type: [String, Function] as PropType<string | ((item: any) => string | number)>,
     default: 'key'
@@ -46,12 +49,8 @@ export const tableProps = {
     type: Boolean,
     default: true
   },
-  rowClassName: Function as PropType<() => string>,
-  rowStyle: Function as PropType<() => CSSProperties>,
-  cellClassName: Function as PropType<() => string>,
-  cellStyle: Function as PropType<() => CSSProperties>,
-  headerRowClassName: Function as PropType<() => string>,
-  headerRowStyle: Function as PropType<() => CSSProperties>,
+  headerRowClassName: String,
+  headerRowStyle: [Object, String] as PropType<string | CSSProperties>,
   rowSelection: {
     type: Object as PropType<RowSelection>
   }
