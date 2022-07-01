@@ -1,4 +1,4 @@
-import { defineComponent, nextTick, ref, SetupContext, watch, shallowRef } from 'vue'
+import { defineComponent, nextTick, ref, SetupContext, watch, shallowRef, computed } from 'vue'
 import { selectProps, SelectProps, ISelectOption } from './select-types'
 
 import './index.scss'
@@ -12,7 +12,6 @@ import { Tag } from '../../tag'
 import useInput from './hooks/use-input'
 import useDefaultValue from './hooks/use-defaultValue'
 
-import { computed } from '@vue/reactivity'
 import { Icon } from '../../icon'
 import { ChevronDownSharp, CloseCircleOutline } from '@vicons/ionicons5'
 import { Dropdown } from '../../dropdown'

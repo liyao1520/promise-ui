@@ -1,4 +1,4 @@
-import { computed } from '@vue/reactivity'
+import { computed } from 'vue'
 import { useThrottleFn } from '@vueuse/shared'
 
 import { defineComponent, ref, Transition } from 'vue'

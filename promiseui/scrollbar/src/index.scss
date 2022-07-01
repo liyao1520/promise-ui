@@ -34,7 +34,7 @@
   border-radius: $border-radius;
   user-select: none;
   cursor: pointer;
-  z-index: 1000;
+  z-index: 1;
 }
 .#{$prefix}-scrollbar__bar_x {
   position: absolute;

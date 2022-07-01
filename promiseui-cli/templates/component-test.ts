@@ -1,6 +1,6 @@
 import { coreName } from './utils'
 
-export default function genTestTemplate(name) {
+export default function genTestTemplate(name: string) {
   return `\
 import { mount } from '@vue/test-utils'
 import { ${coreName(name)} } from '../index'

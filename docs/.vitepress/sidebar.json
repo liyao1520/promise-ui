@@ -11,6 +11,13 @@
       ]
     },
     {
+      "text": "数据展示",
+      "children": [
+        { "text": "Tag 标签", "link": "/components/tag/" },
+        { "text": "Table 表格", "link": "/components/table/" }
+      ]
+    },
+    {
       "text": "导航",
       "children": [
         { "text": "Dropdown 下拉菜单", "link": "/components/dropdown/" },
@@ -39,13 +46,7 @@
         { "text": "Switch 开关", "link": "/components/switch/" }
       ]
     },
-    {
-      "text": "数据展示",
-      "children": [
-        { "text": "Tag 标签", "link": "/components/tag/" },
-        { "text": "Table 表格", "link": "/components/table/" }
-      ]
-    },
+
     { "text": "布局" }
   ]
 }

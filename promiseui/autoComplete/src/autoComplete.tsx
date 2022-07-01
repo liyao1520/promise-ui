@@ -1,5 +1,4 @@
-import { computed } from '@vue/reactivity'
-import { defineComponent, nextTick, ref, shallowRef } from 'vue'
+import { defineComponent, nextTick, ref, shallowRef, computed } from 'vue'
 import useFormItem from '../../form/src/hooks/use-form-item'
 import useFormSize from '../../form/src/hooks/use-form-size'
 import { Input } from '../../input'
