@@ -6,8 +6,8 @@
     <p-table-column title="作品">
       <template #default="{ row }">{{ row.title }}</template>
     </p-table-column>
-    <p-table-column title="作者" dataIndex="author"></p-table-column>
-    <p-table-column title="出版单位" dataIndex="press"></p-table-column>
+    <p-table-column title="作者" data-index="author"></p-table-column>
+    <p-table-column title="出版单位" data-index="press"></p-table-column>
     <p-table-column title="操作">
       <template #default="{ index }">
         <p-button size="sm" type="danger" @click="deleteItem(index)">删除</p-button>

@@ -1,26 +1,26 @@
-const path = require("path");
+const path = require('path')
 
-const { defineConfig, build } = require("vite");
-const vue = require("@vitejs/plugin-vue");
-const vueJsx = require("@vitejs/plugin-vue-jsx");
+const { defineConfig, build } = require('vite')
+const vue = require('@vitejs/plugin-vue')
+const vueJsx = require('@vitejs/plugin-vue-jsx')
 
-const entryDir = path.resolve(__dirname, "devui-vue/devui");
-const outputDir = path.resolve(__dirname, "devui-vue/build");
+const entryDir = path.resolve(__dirname, 'promiseui')
+const outputDir = path.resolve(__dirname, 'build')
 
 const baseConfig = defineConfig({
   configFile: false,
   publicDir: false,
-  plugins: [vue(), vueJsx()],
-});
+  plugins: [vue(), vueJsx()]
+})
 
 const rollupOptions = {
-  external: ["vue", "vue-router"],
+  external: ['vue', 'vue-router'],
   output: {
     globals: {
-      vue: "Vue",
-    },
-  },
-};
+      vue: 'Vue'
+    }
+  }
+}
 
 //全量构建
 const buildAll = async () => {
@@ -30,19 +30,17 @@ const buildAll = async () => {
       build: {
         rollupOptions,
         lib: {
-          entry: path.resolve(entryDir, "vue-devui.ts"),
-          name: "vue-devui",
-          fileName: "vue-devui",
-          formats: ["es", "umd"],
+          entry: path.resolve(entryDir, 'index.ts'),
+          name: 'promiseui',
+          fileName: 'promiseui',
+          formats: ['es', 'umd']
         },
-        outDir: outputDir,
-      },
+        outDir: outputDir
+      }
     })
-  );
-};
+  )
+}
 
-const buildLib = async () => {
-  await buildAll();
-};
-
-buildLib();
+export const buildLib = async () => {
+  await buildAll()
+}

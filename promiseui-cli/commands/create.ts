@@ -1,9 +1,9 @@
 import inquirer from 'inquirer'
 import { red } from 'kolorist'
 import generatorComponent from '../generator/generatorComponent'
-
+import { buildLib } from './build'
 // create type 支持项
-const CREATE_TYPES = ['component', 'lib-entry']
+const CREATE_TYPES = ['component', 'build']
 // 文档分类
 const DOCS_CATEGORIES = ['通用', '导航', '反馈', '数据录入', '数据展示', '布局']
 
@@ -82,7 +82,7 @@ export async function onCreate(cmd: ICMD = {}): Promise<void> {
 
         createComponent(info)
         break
-      case 'lib-entry':
+      case 'build':
         createLibEntry()
         break
       default:
@@ -100,5 +100,7 @@ function createComponent(info: { name: string; title: string; category: string }
 }
 
 function createLibEntry() {
-  console.log('create lib-entry file.')
+  console.log('1')
+
+  buildLib()
 }

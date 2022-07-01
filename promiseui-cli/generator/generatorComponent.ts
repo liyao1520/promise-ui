@@ -8,7 +8,7 @@ import genTypesTemplate from '../templates/types'
 import genIndexTemplate from '../templates'
 import genTestTemplate from '../templates/component-test'
 import { coreName } from '../templates/utils'
-import { string } from 'yargs'
+
 interface IWriteFileOptions {
   encoding: 'utf-8'
 }
