@@ -56,7 +56,9 @@ export default defineComponent({
                 <IconContent />
               </Icon>
             )}
-            <span class={ns.e('content')}>{this.message}</span>
+            <span class={ns.e('content')}>
+              {typeof this.message === 'object' ? JSON.stringify(this.message) : this.message}
+            </span>
             {showClose && (
               <Icon class={ns.e('close')} onClick={closeClick}>
                 <CloseSharp />

@@ -1,4 +1,5 @@
-import { defineComponent, mergeProps, PropType, Slot } from 'vue'
+import { defineComponent } from 'vue'
+
 import { Checkbox } from '../../../checkbox'
 import { useNamespace } from '../../../shared/hooks/use-namespace'
 import getValueByPathArray from '../../../shared/utils/getValueByPathArray'
@@ -27,6 +28,8 @@ export default defineComponent({
       if (typeof col.render === 'function') {
         return col.render(row, index)
       } else {
+        // 兼容 短横线写法
+        col.dataIndex = col.dataIndex || (col as any)['data-index']
         return typeof col.dataIndex === 'string'
           ? row[col.dataIndex]
           : Array.isArray(col.dataIndex)
@@ -53,14 +56,16 @@ export default defineComponent({
       rowIndex: number
     ) => {
       const fixedInfo = getFixedInfo('cell', colIndex)
+      const content = renderBodyCell(row, col, rowIndex)
       return (
         <td
           key={getColKey(col)}
           class={[useCellClass(col), fixedInfo.class]}
-          style={fixedInfo.styles}
+          style={[{ textAlign: col.align }, fixedInfo.styles]}
           {...renderCellProps(row, col, rowIndex, colIndex)}
+          title={col.ellipsis && content}
         >
-          {renderBodyCell(row, col, rowIndex)}
+          {content}
         </td>
       )
     }

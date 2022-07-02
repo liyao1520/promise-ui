@@ -1,4 +1,4 @@
-import { computed, Ref, render, renderSlot, Slots } from 'vue'
+import { computed, Ref, renderSlot, Slots } from 'vue'
 import { __TABLE_COLUMN } from '../table-column'
 import { TableColumnType } from '../table-types'
 
@@ -12,7 +12,6 @@ export default function (columns: Ref<TableColumnType[]>, slots: Slots) {
       const columns = []
       for (const vnode of children) {
         const columnProps = (vnode.props as TableColumnType) || {}
-
         if (vnode.type && (vnode.type as any)[__TABLE_COLUMN]) {
           const children = vnode.children as any
           if (children) {
@@ -28,12 +27,13 @@ export default function (columns: Ref<TableColumnType[]>, slots: Slots) {
               columnProps.title = children.title
             }
           }
+          // 兼容 template写法 , template 传 ellipsis 得到 ''
+          if (columnProps.ellipsis === '') columnProps.ellipsis = true
           columns.push(columnProps)
         } else {
           console.warn('Table 组件里只能是TableColumn组件')
         }
       }
-
       return columns
     }
   })

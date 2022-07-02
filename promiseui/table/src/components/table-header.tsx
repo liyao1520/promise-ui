@@ -56,15 +56,13 @@ export default defineComponent({
               <th
                 key={colKey}
                 class={[useCellClass(col), fixedInfo.class]}
-                style={fixedInfo.styles}
+                style={[{ textAlign: col.align }, fixedInfo.styles]}
               >
-                <div>
-                  {typeof col.title === 'function' ? col.title() : col.title}
-                  {typeof col.sorter === 'function' && <TableSorter sortMethod={col.sorter} />}
-                  {typeof col.filter === 'function' && (
-                    <TableFilter filterOptions={col.filterOptions} filterMethod={col.filter} />
-                  )}
-                </div>
+                {typeof col.title === 'function' ? col.title() : col.title}
+                {typeof col.sorter === 'function' && <TableSorter sortMethod={col.sorter} />}
+                {typeof col.filter === 'function' && (
+                  <TableFilter filterOptions={col.filterOptions} filterMethod={col.filter} />
+                )}
               </th>
             )
           })}

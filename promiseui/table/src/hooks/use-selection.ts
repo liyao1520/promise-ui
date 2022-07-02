@@ -1,4 +1,4 @@
-import { computed, Ref, watch } from 'vue'
+import { computed, Ref } from 'vue'
 import { RowSelection } from '../table-types'
 
 export default function useSelection(
@@ -36,24 +36,29 @@ export default function useSelection(
 
   const selectionAll = () => {
     const cloneSet = new Set(selectionSet.value)
+
     let isFunction = false
     let isString = false
-    let key
+
     if (typeof rowKey === 'string') isString = true
     if (typeof rowKey === 'function') isFunction = true
+
     for (let i = 0; i < dataSource.value.length; i++) {
       const item = dataSource.value[i]
+      let key
       if (isString) {
         key = item[rowKey as string]
       } else if (isFunction) {
-        key = item[(rowKey as (item: any) => string | number)(dataSource.value[i])]
+        key = (rowKey as (item: any) => string | number)(dataSource.value[i])
       } else {
         key = i
       }
+
       cloneSet.add(key)
     }
     if (rowSelection.value?.onChange) {
       const keys = [...cloneSet]
+
       handleChange(keys)
     }
   }

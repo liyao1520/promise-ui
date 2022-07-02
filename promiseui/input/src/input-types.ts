@@ -1,4 +1,4 @@
-import type { PropType, ExtractPropTypes } from 'vue'
+import type { PropType, ExtractPropTypes, CSSProperties } from 'vue'
 import { ICommonSize } from '../../types'
 
 export const inputProps = {
@@ -20,6 +20,10 @@ export const inputProps = {
   showPassword: {
     type: Boolean,
     default: false
+  },
+  class: {},
+  style: {
+    type: [String, Object] as PropType<string | CSSProperties>
   }
 } as const
 

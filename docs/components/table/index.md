@@ -163,6 +163,69 @@
 
 :::
 
+### 对齐方式
+
+设置 `colum` 的 `align` 属性,可选 `'left' | 'center' | 'right'`
+
+:::demo column
+
+```vue
+<template>
+  <p-table :data-source="dataSource" :columns="columns" border striped />
+</template>
+
+<script setup>
+  import { reactive } from 'vue'
+  const dataSource = reactive([
+    {
+      title: '《人世间》',
+      author: '梁晓声',
+      press: '中国青年出版社'
+    },
+    {
+      title: '《牵风记》',
+      author: '徐怀中',
+      press: '人民文学出版社'
+    },
+    {
+      title: '《北上》',
+      author: '徐则臣',
+      press: '北京十月文艺出版社'
+    },
+    {
+      title: '《主角》',
+      author: '陈　彦',
+      press: '作家出版社'
+    }
+  ])
+  const columns = [
+    {
+      dataIndex: 'title',
+      title: '作品',
+      align: 'left'
+    },
+    {
+      dataIndex: 'author',
+      title: '作者',
+      align: 'center'
+    },
+    {
+      dataIndex: 'press',
+      title: '出版单位',
+      align: 'right'
+    },
+    {
+      title: '更多',
+      render() {
+        return '...'
+      }
+    }
+  ]
+</script>
+```
+
+:::
+
 ### 自定义行属性
 
 如果你想给行增加一些属性或者事件处理器，使用 `row-props `属性。
@@ -328,6 +391,249 @@
 
 :::
 
+### 选中行
+
+可以通过把第一列的类型设为 `rowSelection` 来让行变成可选的。
+
+注意: 必须传入`rowKey`或者`dataSource`对象中提供`key`属性
+
+:::demo column
+
+```vue
+<template>
+  <p-table
+    :data-source="dataSource"
+    :columns="columns"
+    :row-key="(row) => row.id"
+    :rowSelection="rowSelection"
+  />
+</template>
+
+<script setup>
+  import { reactive } from 'vue'
+  import { Message } from 'promiseui'
+  const rowSelection = reactive({
+    selectedRowKeys: [],
+    onChange(rowKeys, row) {
+      Message.info(`selected: ${JSON.stringify(rowKeys)}`)
+      rowSelection.selectedRowKeys = rowKeys
+    }
+  })
+  const dataSource = reactive([
+    {
+      id: 10000,
+      song: 'All Too Well',
+      singer: 'Taylor Swift',
+      album: '《Red》',
+      duration: 329752
+    },
+    {
+      id: 100001,
+      song: 'Back To December',
+      singer: 'Taylor Swift',
+      album: '《Back to December》',
+      duration: 363859
+    },
+    {
+      id: 100002,
+      song: 'New RomanticsSQ',
+      singer: 'Taylor Swift',
+      album: '《1989 (Deluxe)》',
+      duration: 230466
+    },
+    {
+      id: 100003,
+      song: 'Blueming',
+      singer: 'IU',
+      album: '《Love poem》',
+      duration: 217053
+    },
+    {
+      id: 100004,
+      song: 'Celebrity',
+      singer: 'IU',
+      album: '《Celebrity》',
+      duration: 195546
+    }
+  ])
+  const columns = [
+    {
+      title: '',
+      width: 50,
+      render(row, index) {
+        return index + 1
+      }
+    },
+    {
+      dataIndex: 'song',
+      title: '歌曲'
+    },
+    {
+      dataIndex: 'singer',
+      title: '歌手',
+      filter(value, row) {
+        return row.singer === value
+      },
+      filterOptions: [
+        {
+          label: 'IU',
+          value: 'IU'
+        },
+        {
+          label: 'Taylor Swift',
+          value: 'Taylor Swift'
+        }
+      ]
+    },
+    {
+      dataIndex: 'album',
+      title: '专辑'
+    },
+    {
+      dataIndex: 'duration',
+      title: '时长',
+      render(row) {
+        const t = row.duration / 1000
+        const s = parseInt(t % 60)
+        return `${parseInt(t / 60)}:${s >= 10 ? s : '0' + s}`
+      },
+      sorter(row1, row2) {
+        return row1.duration - row2.duration
+      }
+    }
+  ]
+</script>
+```
+
+:::
+
+### 受控选中行
+
+:::demo column
+
+```vue
+<template>
+  <p-space>
+    <p-button @click="handleSelect('IU')">只选择歌手IU</p-button>
+    <p-button @click="handleSelect('Taylor Swift')">只选择歌手Taylor Swift</p-button>
+  </p-space>
+  <p-table
+    :data-source="dataSource"
+    :columns="columns"
+    :row-key="(row) => row.id"
+    :rowSelection="rowSelection"
+  />
+</template>
+
+<script setup>
+  import { reactive, watch } from 'vue'
+  import { Message } from 'promiseui'
+  const rowSelection = reactive({
+    selectedRowKeys: [],
+    onChange(rowKeys, row) {
+      rowSelection.selectedRowKeys = rowKeys
+    }
+  })
+  watch(
+    () => rowSelection.selectedRowKeys,
+    () => {
+      const rowKeys = rowSelection.selectedRowKeys
+      Message.info(`selected: ${JSON.stringify(rowKeys)}`)
+    }
+  )
+  const handleSelect = (singer) => {
+    rowSelection.selectedRowKeys = dataSource
+      .filter((item) => item.singer === singer)
+      .map((item) => item.id)
+  }
+  const dataSource = reactive([
+    {
+      id: 10000,
+      song: 'All Too Well',
+      singer: 'Taylor Swift',
+      album: '《Red》',
+      duration: 329752
+    },
+    {
+      id: 100001,
+      song: 'Back To December',
+      singer: 'Taylor Swift',
+      album: '《Back to December》',
+      duration: 363859
+    },
+    {
+      id: 100002,
+      song: 'New RomanticsSQ',
+      singer: 'Taylor Swift',
+      album: '《1989 (Deluxe)》',
+      duration: 230466
+    },
+    {
+      id: 100003,
+      song: 'Blueming',
+      singer: 'IU',
+      album: '《Love poem》',
+      duration: 217053
+    },
+    {
+      id: 100004,
+      song: 'Celebrity',
+      singer: 'IU',
+      album: '《Celebrity》',
+      duration: 195546
+    }
+  ])
+  const columns = [
+    {
+      title: '',
+      width: 50,
+      render(row, index) {
+        return index + 1
+      }
+    },
+    {
+      dataIndex: 'song',
+      title: '歌曲'
+    },
+    {
+      dataIndex: 'singer',
+      title: '歌手',
+      filter(value, row) {
+        return row.singer === value
+      },
+      filterOptions: [
+        {
+          label: 'IU',
+          value: 'IU'
+        },
+        {
+          label: 'Taylor Swift',
+          value: 'Taylor Swift'
+        }
+      ]
+    },
+    {
+      dataIndex: 'album',
+      title: '专辑'
+    },
+    {
+      dataIndex: 'duration',
+      title: '时长',
+      render(row) {
+        const t = row.duration / 1000
+        const s = parseInt(t % 60)
+        return `${parseInt(t / 60)}:${s >= 10 ? s : '0' + s}`
+      },
+      sorter(row1, row2) {
+        return row1.duration - row2.duration
+      }
+    }
+  ]
+</script>
+```
+
+:::
+
 ### 固定头部
 
 在展示大量数据的时候通过设定 max-height 来固定头部、滚动数据。
@@ -376,7 +682,7 @@
 
 ```vue
 <template>
-  <p-table :data-source="dataSource" :columns="columns" :max-height="250" :scroll-x="2000" />
+  <p-table :data-source="dataSource" :columns="columns" :max-height="250" :scroll-x="1500" />
 </template>
 
 <script setup>
@@ -393,12 +699,14 @@
     {
       title: 'Name',
       dataIndex: 'name',
-      fixed: 'left'
+      fixed: 'left',
+      width: 100
     },
     {
       title: 'Age',
       dataIndex: 'age',
-      fixed: 'left'
+      fixed: 'left',
+      width: 100
     },
     {
       title: 'Row1',
@@ -507,6 +815,145 @@
       }
     }
   }
+</script>
+```
+
+:::
+
+### 自定义内容
+
+:::demo column
+
+```vue
+<template>
+  <p-table :data-source="dataSource" :columns="columns" />
+</template>
+
+<script setup>
+  import { reactive, h } from 'vue'
+  import { Tag, Button, Message } from 'promiseui'
+  const dataSource = reactive([
+    {
+      title: '《人世间》',
+      author: '梁晓声',
+      press: '中国青年出版社'
+    },
+    {
+      title: '《牵风记》',
+      author: '徐怀中',
+      press: '人民文学出版社'
+    },
+    {
+      title: '《北上》',
+      author: '徐则臣',
+      press: '北京十月文艺出版社'
+    },
+    {
+      title: '《主角》',
+      author: '陈　彦',
+      press: '作家出版社'
+    }
+  ])
+  const columns = [
+    {
+      dataIndex: 'title',
+      title: '作品'
+    },
+    {
+      dataIndex: 'author',
+      title: '作者'
+    },
+    {
+      title: '出版单位',
+      render(row) {
+        return h(
+          Tag,
+          { type: 'primary' },
+          {
+            default: () => row.press
+          }
+        )
+      }
+    },
+    {
+      title: '操作',
+      render(row) {
+        return h(
+          Button,
+          {
+            type: 'primary',
+            size: 'sm',
+            onClick: () => handleClick(row)
+          },
+          {
+            default: () => '阅读'
+          }
+        )
+      }
+    }
+  ]
+  const handleClick = (row) => {
+    Message.info(row)
+  }
+</script>
+```
+
+:::
+
+### 自定义头部
+
+`title` 可以是 `string` 或者 `()=>VNodeChild`
+
+:::demo column
+
+```vue
+<template>
+  <p-table :data-source="dataSource">
+    <p-table-column title="索引" width="200px">
+      <template #default="{ index }">{{ index + 1 }}</template>
+      <template #title>
+        <p-input v-model="search" placeholder="模糊搜索" clearable />
+      </template>
+    </p-table-column>
+    <p-table-column title="作品">
+      <template #default="{ row }">{{ row.title }}</template>
+    </p-table-column>
+    <p-table-column title="作者" data-index="author"></p-table-column>
+    <p-table-column title="出版单位" data-index="press"></p-table-column>
+  </p-table>
+</template>
+
+<script setup>
+  import { ref, watch } from 'vue'
+  const search = ref('')
+  watch(search, (val) => {
+    dataSource.value = data.filter((item) => {
+      return [item.author, item.press, item.title].some((i) => i.includes(val))
+    })
+  })
+  const data = [
+    {
+      title: '《人世间》',
+      author: '梁晓声',
+      press: '中国青年出版社'
+    },
+    {
+      title: '《牵风记》',
+      author: '徐怀中',
+      press: '人民文学出版社'
+    },
+    {
+      title: '《北上》',
+      author: '徐则臣',
+      press: '北京十月文艺出版社'
+    },
+    {
+      title: '《主角》',
+      author: '陈　彦',
+      press: '作家出版社'
+    }
+  ]
+  const dataSource = ref(data)
 </script>
 ```
 
@@ -718,6 +1165,82 @@
   const deleteItem = (index) => {
     dataSource.splice(index, 1)
   }
+</script>
+```
+
+:::
+
+### 省略
+
+省略的前提是要 `table-layout` 为 ` fixed`,
+
+`table-layout` 在 设置 `max-height` 或者 `scroll-x` 属性时,自动会为 `true`
+
+:::demo column
+
+```vue
+<template>
+  <p-table :dataSource="dataSource" :columns="columns" table-layout="fixed" />
+</template>
+<script setup>
+  const columns = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name'
+    },
+    {
+      title: 'Age',
+      dataIndex: 'age',
+      key: 'age',
+      width: 80
+    },
+    {
+      title: 'Address',
+      dataIndex: 'address',
+      key: 'address 1',
+      ellipsis: true
+    },
+    {
+      title: 'Long Column Long Column Long Column',
+      dataIndex: 'address',
+      key: 'address 2',
+      ellipsis: true
+    },
+    {
+      title: 'Long Column Long Column',
+      dataIndex: 'address',
+      key: 'address 3',
+      ellipsis: true
+    },
+    {
+      title: 'Long Column',
+      dataIndex: 'address',
+      key: 'address 4',
+      ellipsis: true
+    }
+  ]
+
+  const dataSource = [
+    {
+      key: '1',
+      name: 'John Brown',
+      age: 32,
+      address: 'New York No. 1 Lake Park, New York No. 1 Lake Park'
+    },
+    {
+      key: '2',
+      name: 'Jim Green',
+      age: 42,
+      address: 'London No. 2 Lake Park, London No. 2 Lake Park'
+    },
+    {
+      key: '3',
+      name: 'Joe Black',
+      age: 32,
+      address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park'
+    }
+  ]
 </script>
 ```
 

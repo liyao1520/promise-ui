@@ -1,46 +1,63 @@
 <template>
-  <p-table :data-source="dataSource">
-    <p-table-column title="索引">
-      <template #default="{ index }">{{ index + 1 }}</template>
-    </p-table-column>
-    <p-table-column title="作品">
-      <template #default="{ row }">{{ row.title }}</template>
-    </p-table-column>
-    <p-table-column title="作者" data-index="author"></p-table-column>
-    <p-table-column title="出版单位" data-index="press"></p-table-column>
-    <p-table-column title="操作">
-      <template #default="{ index }">
-        <p-button size="sm" type="danger" @click="deleteItem(index)">删除</p-button>
-      </template>
-    </p-table-column>
-  </p-table>
+  <p-table :dataSource="dataSource" :columns="columns" />
 </template>
-
 <script setup>
-  import { reactive } from 'vue'
-  const dataSource = reactive([
+  const columns = [
     {
-      title: '《人世间》',
-      author: '梁晓声',
-      press: '中国青年出版社'
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name'
     },
     {
-      title: '《牵风记》',
-      author: '徐怀中',
-      press: '人民文学出版社'
+      title: 'Age',
+      dataIndex: 'age',
+      key: 'age',
+      width: 80
     },
     {
-      title: '《北上》',
-      author: '徐则臣',
-      press: '北京十月文艺出版社'
+      title: 'Address',
+      dataIndex: 'address',
+      key: 'address 1',
+      ellipsis: true
     },
     {
-      title: '《主角》',
-      author: '陈　彦',
-      press: '作家出版社'
+      title: 'Long Column Long Column Long Column',
+      dataIndex: 'address',
+      key: 'address 2',
+      ellipsis: true
+    },
+    {
+      title: 'Long Column Long Column',
+      dataIndex: 'address',
+      key: 'address 3',
+      ellipsis: true
+    },
+    {
+      title: 'Long Column',
+      dataIndex: 'address',
+      key: 'address 4',
+      ellipsis: true
     }
-  ])
-  const deleteItem = (index) => {
-    dataSource.splice(index, 1)
-  }
+  ]
+
+  const dataSource = [
+    {
+      key: '1',
+      name: 'John Brown',
+      age: 32,
+      address: 'New York No. 1 Lake Park, New York No. 1 Lake Park'
+    },
+    {
+      key: '2',
+      name: 'Jim Green',
+      age: 42,
+      address: 'London No. 2 Lake Park, London No. 2 Lake Park'
+    },
+    {
+      key: '3',
+      name: 'Joe Black',
+      age: 32,
+      address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park'
+    }
+  ]
 </script>

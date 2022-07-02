@@ -47,7 +47,7 @@ export default defineComponent({
           ></Icon>
         )
       }
-      if (clearable.value) {
+      if (clearable.value && props.modelValue.length) {
         return (
           <Icon
             class={ns.e('icon')}
@@ -78,7 +78,7 @@ export default defineComponent({
     return () => {
       return (
         <Wave>
-          <div class={classes.value} ref={wapperRef}>
+          <div ref={wapperRef} class={[classes.value, props.class]} style={props.style}>
             {slots.prepend && <span class={ns.e('prepend')}>{slots.prepend()}</span>}
 
             <span class={ns.e('prefix')}>{renderPrefix()}</span>

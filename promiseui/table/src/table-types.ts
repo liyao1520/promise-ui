@@ -75,13 +75,13 @@ interface Column<T> {
   width: number | string
   maxWidth: number | string
   minWidth: number | string
-  resizable: boolean
   fixed: 'left' | 'right'
   rowSpan: RowFn<T, number>
   colSpan: RowFn<T, number>
   sorter: Sorter
   filter: Filter
   filterOptions: FilterOption[]
+  ellipsis: boolean | {showTitle?:boolean}
   render: (rowData: T, rowIndex: number) => VNodeChild
 }
 

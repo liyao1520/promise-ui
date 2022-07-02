@@ -151,6 +151,12 @@
       color: $brand-active !important;
     }
   }
+  &__cell--ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: keep-all;
+  }
   &__row:last-child > td {
     border-bottom: none;
   }
@@ -180,6 +186,12 @@
 .#{$prefix}-table {
   &--border {
     border: 1px solid $border-color;
+    .#{$prefix}-table__cell {
+      border-right: 1px solid $border-color;
+      &:last-child {
+        border-right: none;
+      }
+    }
   }
   &--stripe {
     .#{$prefix}-table__row {

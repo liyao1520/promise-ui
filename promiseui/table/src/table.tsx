@@ -25,6 +25,7 @@ export default defineComponent({
       slots
     )
     provide(TableStoreKey, store)
+
     const ns = useNamespace('table')
     const classes = computed(() => ({
       [ns.b()]: true,
@@ -69,7 +70,7 @@ export default defineComponent({
         maxHeight: styleStringOrNumber(props.maxHeight),
         minHeight: styleStringOrNumber(props.minHeight)
       }
-      const tableStyles: CSSProperties = {
+      const fixedTableStyles: CSSProperties = {
         tableLayout: 'fixed',
         width: styleStringOrNumber(props.scrollX),
         minWidth: '100%'
@@ -94,13 +95,13 @@ export default defineComponent({
       return (
         <div class={classes.value} ref={tableRef}>
           <div class={[ns.e('header-wrap')]} ref={headerRef}>
-            <table class={ns.e('table')} style={tableStyles}>
+            <table class={ns.e('table')} style={fixedTableStyles}>
               {props.showHeader && <TableHeader />}
               {renderColgroup()}
             </table>
           </div>
           <Scrollbar onScroll={bodyScroll} viewStyle={bodyStyles}>
-            <table class={ns.e('table')} style={tableStyles}>
+            <table class={ns.e('table')} style={fixedTableStyles}>
               <TableBody />
               {renderColgroup()}
             </table>
@@ -111,9 +112,7 @@ export default defineComponent({
         </div>
       )
     }
-
     const isFixed = props.maxHeight || props.scrollX
-
     return () => {
       nextTick(() => {
         const fixeds = Array.from(headerRef.value?.querySelectorAll('th') || []).map(
