@@ -1,7 +1,8 @@
 import { createApp } from 'vue'
 
 import App from './App.vue'
-import PromiseUI from '../promiseui/vue-promiseui'
+import PromiseUI from '../promiseui'
+
 import theme from '../promiseui/theme'
 theme.use('light')
 const div = document.createElement('div')

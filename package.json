@@ -1,19 +1,42 @@
 {
-  "name": "promise-ui",
-  "private": true,
-  "version": "0.0.1",
+  "name": "promiseui-vue",
+  "license": "MIT",
+  "version": "0.0.12",
   "description": "vue3 UI组件库",
+  "keywords": [
+    "frontend",
+    "typescript",
+    "ui-component",
+    "components",
+    "vue-components",
+    "vue",
+    "vue3",
+    "vite",
+    "jsx",
+    "promiseui"
+  ],
+  "files": [
+    "dist"
+  ],
+  "homepage": "http://ui.coderly.top/",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:liyao1520/promise-ui.git"
+  },
+  "module": "dist/promiseui.es.js",
+  "main": "dist/promiseui.cjs.js",
+  "typings": "dist/promiseui/index.d.ts",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs",
     "register:components": "vitepress-rc",
-    "cli:dev": "esbuild --bundle ./promiseui-cli/index.js --format=cjs --platform=node --outdir=./lib --watch",
-    "cli:build": "esbuild --bundle ./promiseui-cli/index.js --format=cjs --platform=node --outdir=./lib",
-    "cli": "node ./lib/index.js create",
+    "cli:dev": "esbuild --bundle ./promiseui-cli/index.js --format=cjs --platform=node --outdir=./promiseui-cli/lib --watch",
+    "cli:build": "esbuild --bundle ./promiseui-cli/index.js --format=cjs --platform=node --outdir=./promiseui-cli/lib",
+    "cli": "node ./promiseui-cli/lib/index.js create",
     "test": "jest promiseui",
     "lint": "eslint . --ext .ts,.tsx,.js,.vue --fix",
     "prettier": "prettier --write",
@@ -61,9 +84,13 @@
     "monaco-editor": "^0.33.0",
     "monaco-themes": "^0.4.2",
     "prettier": "^2.6.2",
+    "rollup-plugin-css-only": "^3.1.0",
     "sass": "^1.51.0",
     "typescript": "^4.5.4",
+    "unplugin-vue-components": "^0.21.0",
     "vite": "^2.9.9",
+    "vite-plugin-dts": "^1.2.0",
+    "vite-plugin-libcss": "^1.0.5",
     "vitepress": "^0.22.4",
     "vue-tsc": "^0.34.7"
   }

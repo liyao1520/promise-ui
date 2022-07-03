@@ -1,46 +1,38 @@
+import { build } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
+import dts from 'vite-plugin-dts'
 const path = require('path')
+// https://vitejs.dev/config/
+const basePath = path.resolve(__dirname, '../../promiseui')
+const outputDir = path.resolve(__dirname, '../../dist')
 
-const { defineConfig, build } = require('vite')
-const vue = require('@vitejs/plugin-vue')
-const vueJsx = require('@vitejs/plugin-vue-jsx')
-
-const entryDir = path.resolve(__dirname, 'promiseui')
-const outputDir = path.resolve(__dirname, 'build')
-
-const baseConfig = defineConfig({
-  configFile: false,
-  publicDir: false,
-  plugins: [vue(), vueJsx()]
-})
-
-const rollupOptions = {
-  external: ['vue', 'vue-router'],
-  output: {
-    globals: {
-      vue: 'Vue'
-    }
-  }
-}
-
-//全量构建
-const buildAll = async () => {
-  await build(
-    defineConfig({
-      ...baseConfig,
-      build: {
-        rollupOptions,
-        lib: {
-          entry: path.resolve(entryDir, 'index.ts'),
-          name: 'promiseui',
-          fileName: 'promiseui',
-          formats: ['es', 'umd']
-        },
-        outDir: outputDir
+export const buildLib = async () =>
+  await build({
+    plugins: [
+      vue(),
+      vueJsx(),
+      dts({
+        include: [basePath]
+      })
+    ],
+    build: {
+      cssCodeSplit: true,
+      lib: {
+        entry: path.resolve(basePath, 'index.ts'),
+        fileName: (format) => `promiseui.${format}.js`,
+        name: 'promiseui',
+        formats: ['cjs', 'es']
+      },
+      rollupOptions: {
+        external: ['vue'],
+        output: {
+          globals: {
+            vue: 'Vue'
+          },
+          dir: outputDir
+        }
       }
-    })
-  )
-}
-
-export const buildLib = async () => {
-  await buildAll()
-}
+    }
+  })
+console.log('ok')

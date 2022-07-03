@@ -99,8 +99,6 @@ function createComponent(info: { name: string; title: string; category: string }
   generatorComponent(info)
 }
 
-function createLibEntry() {
-  console.log('1')
-
-  buildLib()
+async function createLibEntry() {
+  await buildLib()
 }
