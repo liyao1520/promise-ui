@@ -55,7 +55,7 @@
   &--default {
     color: $text;
     border-color: $border-color;
-    background-color: $block;
+    background-color: $base-bg;
     &:hover:not(&:disabled),
     &:active:not(&:disabled),
     &:focus:not(&:disabled) {
