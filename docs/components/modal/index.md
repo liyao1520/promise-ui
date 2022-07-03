@@ -15,7 +15,7 @@
 </template>
 <script setup>
   import { ref } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const isShow = ref(false)
   const onAfterLeave = () => {
     Message.info('modal hide')
@@ -40,7 +40,7 @@
 </template>
 <script setup>
   import { ref } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const isShow = ref(false)
   const timeout = ref(4000)
   const countdown = () => {
@@ -100,7 +100,7 @@
 </template>
 <script setup>
   import { ref } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const isShow = ref(false)
 </script>
 ```

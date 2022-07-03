@@ -160,7 +160,7 @@
 </template>
 <script setup>
   import { ref } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const scrollTop = ref(0)
   const onScroll = (e) => (scrollTop.value = e.target.scrollTop)
 </script>

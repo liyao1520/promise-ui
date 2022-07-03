@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-  import { useLoadingBar } from 'promiseui'
+  import { useLoadingBar } from 'promiseui-vue'
   import { ref } from 'vue'
   const disabled = ref(true)
   const loadingbar = useLoadingBar()

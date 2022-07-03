@@ -71,7 +71,7 @@
 </template>
 <script setup>
   import { ref } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const active = ref(false)
   const onBeforeChange = (value) => {
     return new Promise((resolve, reject) => {
@@ -153,7 +153,7 @@
 </template>
 <script setup>
   import { ref } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const checked = ref(1)
   const handleChange = (value) => {
     Message.success(`change value : ${value}`)

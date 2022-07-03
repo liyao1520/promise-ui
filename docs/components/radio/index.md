@@ -40,7 +40,7 @@
 
 <script setup>
   import { ref } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const fruits = ref([
     { label: 'Apple', value: 'Apple' },
     { label: 'Pear', value: 'Pear' },
@@ -82,7 +82,7 @@
 
 <script setup>
   import { ref } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const fruits = ref([
     { label: 'Apple', value: 'Apple' },
     { label: 'Pear', value: 'Pear' },
@@ -127,7 +127,7 @@
 
 <script setup>
   import { ref } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const fruits = ref([
     { label: 'Apple', value: 'Apple' },
     { label: 'Pear', value: 'Pear' },

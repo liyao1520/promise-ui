@@ -13,7 +13,7 @@
 </template>
 <script setup>
   import { ref } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const selected = ref('1')
   const options = [
     {
@@ -469,7 +469,7 @@
 </template>
 <script setup>
   import { ref, watch, h } from 'vue'
-  import { Icon } from 'promiseui'
+  import { Icon } from 'promiseui-vue'
   import { MusicalNotesSharp, FlameSharp } from '@vicons/ionicons5'
 
   const list = [

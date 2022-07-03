@@ -15,7 +15,7 @@
 >
 <script>
   import { defineComponent } from 'vue'
-  import { MessageBox } from 'promiseui'
+  import { MessageBox } from 'promiseui-vue'
   export default defineComponent({
     setup() {
       const click1 = () => {
@@ -62,7 +62,7 @@
 </template>
 <script setup>
   import { defineComponent } from 'vue'
-  import { MessageBox, Message } from 'promiseui'
+  import { MessageBox, Message } from 'promiseui-vue'
   const MessageBoxOpen = (type) => {
     MessageBox[type]({
       title: '操作',
@@ -102,7 +102,7 @@
   <p-button @click="handleClick">异步</p-button>
 </template>
 <script setup>
-  import { MessageBox, Message } from 'promiseui'
+  import { MessageBox, Message } from 'promiseui-vue'
 
   const handleClick = () => {
     MessageBox.warning({

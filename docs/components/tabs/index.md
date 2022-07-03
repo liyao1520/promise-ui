@@ -17,7 +17,7 @@
 </template>
 <script setup>
   import { ref } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const activeName = ref('first')
   const handleChange = (name) => {
     Message.success(`${name} click`)
@@ -44,7 +44,7 @@
 </template>
 <script setup>
   import { ref } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const activeName = ref('first')
 </script>
 ```
@@ -67,7 +67,7 @@
 </template>
 <script setup>
   import { ref } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const panels = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
   const current = ref(1)
 
@@ -115,7 +115,7 @@
 </template>
 <script setup>
   import { ref } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const panels = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
   const current = ref(1)
 
@@ -179,7 +179,7 @@
 </template>
 <script setup>
   import { ref } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const activeName = ref('first')
 </script>
 ```
@@ -204,7 +204,7 @@
 </template>
 <script setup>
   import { ref } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const tabPane = ref('two')
   const BeforeLeave = (name, oldName) => {
     switch (name) {

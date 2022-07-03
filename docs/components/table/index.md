@@ -239,7 +239,7 @@
 
 <script setup>
   import { reactive } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const dataSource = reactive([
     {
       title: '《人世间》',
@@ -411,7 +411,7 @@
 
 <script setup>
   import { reactive } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const rowSelection = reactive({
     selectedRowKeys: [],
     onChange(rowKeys, row) {
@@ -527,7 +527,7 @@
 
 <script setup>
   import { reactive, watch } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const rowSelection = reactive({
     selectedRowKeys: [],
     onChange(rowKeys, row) {
@@ -831,7 +831,7 @@
 
 <script setup>
   import { reactive, h } from 'vue'
-  import { Tag, Button, Message } from 'promiseui'
+  import { Tag, Button, Message } from 'promiseui-vue'
   const dataSource = reactive([
     {
       title: '《人世间》',
@@ -972,7 +972,7 @@
 
 <script setup>
   import { defineComponent, h, nextTick, reactive, ref } from 'vue'
-  import { Input } from 'promiseui'
+  import { Input } from 'promiseui-vue'
   const ShowOrEdit = defineComponent({
     props: {
       value: [String, Number],

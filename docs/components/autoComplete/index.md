@@ -103,7 +103,7 @@ renderLabel 接收一个函数需要返回 vnode
 </template>
 <script setup>
   import { ref, computed, h } from 'vue'
-  import { Tag } from 'promiseui'
+  import { Tag } from 'promiseui-vue'
   const inputValue = ref('')
   const options = computed(() =>
     ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {

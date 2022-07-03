@@ -14,7 +14,7 @@
   </PSpace>
 </template>
 <script>
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   export default {
     setup() {
       const click1 = () => {
@@ -52,7 +52,7 @@
   </PSpace>
 </template>
 <script setup>
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const click1 = () =>
     Message({
       message: '成功信息',
@@ -100,7 +100,7 @@
   </PSpace>
 </template>
 <script setup>
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const click1 = () =>
     Message({
       message: '成功信息',
@@ -150,7 +150,7 @@
   </PSpace>
 </template>
 <script setup>
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const click1 = () =>
     Message({
       message: '10s后关闭',
@@ -182,7 +182,7 @@
   </PSpace>
 </template>
 <script setup>
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const click1 = () =>
     Message.success('success', {
       duration: 5000,

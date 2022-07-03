@@ -82,7 +82,7 @@
   </p-space>
 </template>
 <script setup>
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const handleClose = () => {
     Message.info('tag close')
   }

@@ -154,7 +154,7 @@
 </template>
 <script>
   import { ref } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   import { AirplaneSharp } from '@vicons/ionicons5'
 
   export default {

@@ -1,3 +1,6 @@
+
+
+
 # Form 表单
 
 ### 典型表单
@@ -29,7 +32,7 @@
 </template>
 <script setup>
   import { reactive } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const formData = reactive({
     username: '',
     password: '',
@@ -247,7 +250,7 @@
 
 <script setup>
   import { reactive, ref, watchEffect } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const formRef = ref()
   const formData = reactive({
     user: {

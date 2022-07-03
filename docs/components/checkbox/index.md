@@ -16,7 +16,7 @@
 </template>
 <script setup>
   import { ref } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const checked = ref(true)
   const disabled = ref(true)
   const onChange = (value) => {
@@ -43,7 +43,7 @@
 </template>
 <script setup>
   import { ref } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const checked = ref(['Apple'])
   const onChange = (values) => {
     Message.success(`change value: ${JSON.stringify(values)}`)
@@ -126,7 +126,7 @@
 </template>
 <script setup>
   import { ref } from 'vue'
-  import { Message } from 'promiseui'
+  import { Message } from 'promiseui-vue'
   const checkedList = ref(['Apple'])
 </script>
 ```
