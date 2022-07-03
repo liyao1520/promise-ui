@@ -1,5 +1,5 @@
 <template>
-  <p-table :dataSource="dataSource" :columns="columns" />
+  <p-table :data-source="dataSource" :columns="columns" />
 </template>
 <script setup>
   const columns = [
