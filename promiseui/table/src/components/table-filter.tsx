@@ -1,5 +1,5 @@
 import { FunnelSharp } from '@vicons/ionicons5'
-import { defineComponent, PropType, ref, watchEffect } from 'vue'
+import { computed, defineComponent, PropType, ref, watchEffect } from 'vue'
 
 import { Button } from '../../../button'
 import { Checkbox } from '../../../checkbox'
@@ -25,6 +25,7 @@ export default defineComponent({
     const ns = useNamespace('table')
     const { filterData } = useTableStore()
     const checkeds = ref<boolean[]>([])
+    const isFilterActive = ref(false)
     const initial = () => Array.from<boolean>({ length: props.filterOptions.length }).fill(false)
     const dropdownRef = ref()
     watchEffect(() => {
@@ -43,6 +44,7 @@ export default defineComponent({
       // 没选择
       if (noSelect) {
         filterData(() => true)
+        isFilterActive.value = false
       } else {
         const filterMethod: filterMethod = (item: any, index: number, arr: any[]) => {
           for (const value of checkedValues) {
@@ -53,18 +55,20 @@ export default defineComponent({
           return false
         }
         filterData(filterMethod)
+        isFilterActive.value = true
       }
       dropdownRef.value.hide?.()
     }
     const reset = () => {
       checkeds.value = initial()
     }
+
     return () => {
       return (
         <Dropdown hideOnClick={false} trigger="click" ref={dropdownRef}>
           {{
             default: () => (
-              <div class={ns.e('filter')}>
+              <div class={[ns.e('filter'), isFilterActive.value && ns.em('filter', 'active')]}>
                 <Icon component={FunnelSharp} />
               </div>
             ),

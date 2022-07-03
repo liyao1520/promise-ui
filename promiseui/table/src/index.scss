@@ -117,6 +117,14 @@
     vertical-align: middle;
     cursor: pointer;
     padding-left: 2px;
+    &--active {
+      .#{$prefix}-icon {
+        svg {
+          fill: $brand !important;
+          color: $brand !important;
+        }
+      }
+    }
     svg {
       fill: $line !important;
       color: $line !important;

@@ -105,13 +105,13 @@
 
 ### 边框和斑马线条纹
 
-设置`border` 和 `striped` 开启 边框和斑马线条纹
+设置`border` 和 `stripe` 开启 边框和斑马线条纹
 
 :::demo column
 
 ```vue
 <template>
-  <p-table :data-source="dataSource" :columns="columns" border striped />
+  <p-table :data-source="dataSource" :columns="columns" border stripe />
 </template>
 
 <script setup>
