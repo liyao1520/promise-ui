@@ -14,7 +14,7 @@ const transformScss = (filePath: string) => {
   return postcss([autoprefixer]).process(css, { from: undefined }).css
 }
 
-const excludes = ['styles', 'styles-var']
+const excludes = ['styles', 'styles-var', 'theme']
 const readComponentScssFileRec = (path: string) => {
   for (const file of readdirSync(path)) {
     const filePath = resolve(path, file)
@@ -50,13 +50,13 @@ const readSharedCompoentScssFileRec = (path: string) => {
 }
 const autoGeneratorVolarDts = () => {
   // 生成 volar 提示
-  const excludes = ['loadingBar', 'shared']
+  const excludes = ['loadingBar', 'shared', 'theme']
   const filenames = readdirSync(resolve(distPath, 'promiseui')).filter((file) => {
     return !excludes.includes(file) && statSync(resolve(distPath, 'promiseui', file)).isDirectory()
   })
   const dts = `
 // Auto generated component declarations
-declare module 'vue' {
+declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ${filenames
       .map((name) => {

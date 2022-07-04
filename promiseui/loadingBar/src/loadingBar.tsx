@@ -1,7 +1,7 @@
 import { defineComponent, Teleport, Transition } from 'vue'
 import { loadingBarProps, LoadingBarProps } from './loadingBar-types'
 
-import('./index.scss') //特殊组件
+import './index.scss' //特殊组件
 import { useNamespace } from '../../shared/hooks/use-namespace'
 
 export default defineComponent({

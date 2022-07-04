@@ -14,6 +14,7 @@ const config: UserConfig = {
     search: true,
     logo: '/logo.svg'
   },
+
   title: 'PromiseUI',
   lang: 'zh-CN',
   description: '一个vue3组件库',
