@@ -1,9 +1,9 @@
 @import '../../../styles/prefix';
 
 .#{$prefix}-loading-icon {
-  animation: laoding 1s infinite;
+  animation: loading 1s infinite;
 }
-@keyframes laoding {
+@keyframes loading {
   0% {
     transform: rotate(0);
   }

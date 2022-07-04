@@ -16,7 +16,8 @@
     "promiseui"
   ],
   "files": [
-    "dist"
+    "dist",
+    "volar.d.ts"
   ],
   "homepage": "http://ui.coderly.top/",
   "repository": {
@@ -36,7 +37,7 @@
     "register:components": "vitepress-rc",
     "cli:dev": "esbuild --bundle ./promiseui-cli/index.js --format=cjs --platform=node --outdir=./promiseui-cli/lib --watch",
     "cli:build": "esbuild --bundle ./promiseui-cli/index.js --format=cjs --platform=node --outdir=./promiseui-cli/lib",
-    "cli": "node ./promiseui-cli/lib/index.js create",
+    "cli": "node ./promiseui-cli/lib/index.js",
     "test": "jest promiseui",
     "lint": "eslint . --ext .ts,.tsx,.js,.vue --fix",
     "prettier": "prettier --write",

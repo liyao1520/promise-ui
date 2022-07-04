@@ -1,7 +1,7 @@
-import { defineComponent, nextTick, ref, Teleport, Transition } from 'vue'
+import { defineComponent, Teleport, Transition } from 'vue'
 import { loadingBarProps, LoadingBarProps } from './loadingBar-types'
 
-import './index.scss'
+import('./index.scss') //特殊组件
 import { useNamespace } from '../../shared/hooks/use-namespace'
 
 export default defineComponent({

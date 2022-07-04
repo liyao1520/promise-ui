@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander'
+import { buildLib } from './commands/build'
 import { onCreate } from './commands/create'
 
 // 创建命令对象
@@ -15,6 +16,8 @@ program
   .option('-t --type <type>', `创建类型，可选值：component, scss-var`)
   // 注册命令回调
   .action(onCreate)
+
+program.command('build').action(buildLib)
 
 // 执行命令行参数解析
 program.parse()
