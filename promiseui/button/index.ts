@@ -1,6 +1,5 @@
 import type { App } from 'vue'
 import Button from './src/button'
-
 export * from './src/button-types'
 
 export { Button }

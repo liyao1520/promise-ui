@@ -74,7 +74,7 @@
   .title {
     margin-top: 1.5rem;
     font-size: 2rem;
-    background: linear-gradient(180deg, #15bcc8 10%, #5e7ce0);
+    background: var(--promiseui-brand);
     -webkit-background-clip: text;
     color: transparent;
   }

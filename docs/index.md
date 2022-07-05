@@ -7,9 +7,9 @@ actionLink: /quick-start/
 altActionText: Github
 altActionLink: https://github.com/liyao1520/promise-ui
 features:
-  - title: ⚡️使用 Typescript
+  - title: 🔑使用 Typescript
     details: 更好的代码提示
-  - title: 🖖轻量级
+  - title: ⚡轻量级
     details: 支持按需引入
   - title: 🎁组件精美
     details: 还算好看

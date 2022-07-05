@@ -2,6 +2,7 @@
   import NavBarTitle from './NavBarTitle.vue'
   import NavLinks from './NavLinks.vue'
   import ToggleSideBarButton from './ToggleSideBarButton.vue'
+  import ThemeColor from './ThemeColor.vue'
 
   defineEmits(['toggle'])
 </script>
@@ -17,7 +18,7 @@
     <div class="nav">
       <NavLinks />
     </div>
-
+    <ThemeColor />
     <slot name="search" />
   </header>
 </template>
