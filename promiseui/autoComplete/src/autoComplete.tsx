@@ -1,4 +1,4 @@
-import { defineComponent, nextTick, ref, shallowRef, computed } from 'vue'
+import { defineComponent, nextTick, ref, shallowRef, computed, watchEffect } from 'vue'
 import useFormItem from '../../form/src/hooks/use-form-item'
 import useFormSize from '../../form/src/hooks/use-form-size'
 import { Input } from '../../input'
@@ -32,7 +32,7 @@ export default defineComponent({
 
     const { triggerValidate } = useFormItem()
 
-    const handleOptionClick = (e: Event, { row }: RenderItemProps<IAutoCompleteOption>) => {
+    const handleOptionClick = (row: IAutoCompleteOption) => {
       ctx.emit('update:modelValue', row.value)
       optionListShow.value = false
       nextTick(() => triggerValidate('blur'))
@@ -47,6 +47,57 @@ export default defineComponent({
       )
     }
 
+    const hoverIndex = ref<number>(0)
+
+    const handleKeydown = (e: KeyboardEvent) => {
+      e.preventDefault()
+      const keyCode = e.key || e.code
+      const len = props.options.length
+      const [startIndex, endIndex] = virtualListRef.value?.getVisibleRange() || []
+
+      switch (keyCode) {
+        case 'ArrowDown':
+          if (++hoverIndex.value >= len) {
+            hoverIndex.value = 0
+            virtualListRef.value?.scrollToStart()
+          } else {
+            if (endIndex <= hoverIndex.value) {
+              virtualListRef.value?.scrollToIndex(hoverIndex.value, {
+                offset: 'bottom'
+              })
+            }
+          }
+          break
+        case 'ArrowUp':
+          if (--hoverIndex.value < 0) {
+            hoverIndex.value = len - 1
+            virtualListRef.value?.scrollToEnd()
+          } else {
+            if (startIndex >= hoverIndex.value) {
+              virtualListRef.value?.scrollToIndex(hoverIndex.value)
+            }
+          }
+
+          break
+        case 'Enter':
+          handleOptionClick(props.options[hoverIndex.value])
+          break
+        default:
+          break
+      }
+    }
+    watchEffect(() => {
+      if (optionListShow.value) {
+        window.addEventListener('keydown', handleKeydown)
+        hoverIndex.value = 0
+      } else {
+        window.removeEventListener('keydown', handleKeydown)
+      }
+    })
+    const handleItemClass = (props: RenderItemProps<unknown>) => ({
+      [ns.e('option')]: true,
+      [ns.m('hover')]: hoverIndex.value === props.index
+    })
     return () => (
       <>
         <Wave disabled>
@@ -85,8 +136,10 @@ export default defineComponent({
               itemKey="value"
               itemHeight={32}
               listData={props.options}
-              itemClass={ns.e('option')}
-              onItemClick={handleOptionClick}
+              itemClass={handleItemClass}
+              onItemClick={(_: Event, { row }: RenderItemProps<IAutoCompleteOption>) =>
+                handleOptionClick(row)
+              }
               wrapHeight={Math.min(
                 props.maxOptionCount * ITEM_HEIGHT,
                 props.options.length * ITEM_HEIGHT

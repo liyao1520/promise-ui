@@ -27,7 +27,7 @@ export default defineComponent({
   emits: ['update:modelValue', 'change', 'inputChange'],
   setup(props: SelectProps, ctx) {
     const ns = useNamespace('select')
-    const selectRef = ref<HTMLDivElement | null>(null)
+    const selectRef = ref<HTMLDivElement>()
     const overlayRef = ref()
     const virtualListRef = ref()
     const selectInputRef = ref<HTMLInputElement>()
@@ -41,18 +41,20 @@ export default defineComponent({
     }
     useFormValidate(props, optionListShow)
     useMemoScrollTop(optionListShow, virtualListRef)
+
     const { defaultSingleActiveItem, defaultMultipleActiveItems } = useDefaultValue(props)
     const singleActiveItem = ref<ISelectOption>(defaultSingleActiveItem)
     const multipleActiveItems = ref<ISelectOption[]>(defaultMultipleActiveItems)
 
-    const { selectOptionClick, selectOptionClass, options, onClearOpiton } = useOption(
+    const { selectOptionClick, selectOptionClass, options, onClearOpiton, hoverIndex } = useOption(
       props,
       ctx as SetupContext,
       singleActiveItem,
       multipleActiveItems,
       optionListShow,
       inputValue,
-      ns
+      ns,
+      virtualListRef
     )
 
     const { onAddTag, onTagClose } = useInput(
@@ -64,7 +66,7 @@ export default defineComponent({
     )
 
     const handleSelectOptionClick = (e: Event, itemProps: RenderItemProps<ISelectOption>) => {
-      selectOptionClick(e, itemProps)
+      selectOptionClick(itemProps.row)
       const needScroll = inputValue.value.length !== 0
       inputValue.value = ''
       if (needScroll) {
@@ -72,6 +74,9 @@ export default defineComponent({
           virtualListRef.value?.setScrollTop(0)
         })
       }
+    }
+    const handleSelectOptionMouseenter = (e: Event, { index }: RenderItemProps<ISelectOption>) => {
+      hoverIndex.value = index
     }
     const selectClick = () => {
       if (props.disabled) return
@@ -114,7 +119,7 @@ export default defineComponent({
       return props.renderLabel ? (
         props.renderLabel(itemProps)
       ) : (
-        <div class={ns.e('option_content')}>{row.label}</div>
+        <div class={[ns.e('option_content')]}>{row.label}</div>
       )
     }
     const renderNoMatch = () => {
@@ -247,6 +252,7 @@ export default defineComponent({
                   listData={options.value}
                   itemClass={selectOptionClass}
                   onItemClick={handleSelectOptionClick}
+                  onItemMouseenter={handleSelectOptionMouseenter}
                   wrapHeight={Math.min(
                     props.maxOptionCount * ITEM_HEIGHT,
                     options.value.length * ITEM_HEIGHT

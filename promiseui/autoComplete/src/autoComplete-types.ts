@@ -1,8 +1,6 @@
 import { RenderItemProps } from './../../virtualScroll/src/virtualScroll-types'
 import type { PropType, ExtractPropTypes, VNodeChild } from 'vue'
-import { boolean } from 'yargs'
 
-import { ISelectOption } from '../../select'
 import { ICommonSize } from '../../types'
 export interface IAutoCompleteOption {
   value: string | number
@@ -10,7 +8,7 @@ export interface IAutoCompleteOption {
 }
 export const autoCompleteProps = {
   options: {
-    type: Array as PropType<ISelectOption[]>,
+    type: Array as PropType<IAutoCompleteOption[]>,
     default() {
       return []
     }

@@ -1,7 +1,8 @@
 import { UseNamespace } from './../../../shared/hooks/use-namespace'
-import { ref, Ref, SetupContext, watch } from 'vue'
+import { ref, Ref, SetupContext, toRef, watch } from 'vue'
 import { RenderItemProps } from '../../../virtualScroll'
 import { ISelectOption, selectActiveKey, SelectProps } from '../select-types'
+import useKeyboardSelect from './use-keyboard-select'
 
 export default function (
   props: SelectProps,
@@ -10,24 +11,12 @@ export default function (
   multipleActiveItems: Ref<ISelectOption[]>,
   optionListShow: Ref<boolean>,
   inputValue: Ref<string>,
-  ns: UseNamespace
+  ns: UseNamespace,
+  virtualListRef: Ref
 ) {
   const options = ref<ISelectOption[]>(props.options || [])
-  watch(
-    () => props.options,
-    () => {
-      options.value = props.options || []
-    }
-  )
-  const isActive = (row: ISelectOption) => {
-    if (props.multiple) {
-      return !!row[selectActiveKey]
-    } else {
-      return singleActiveItem.value !== undefined && singleActiveItem.value.value === row.value
-    }
-  }
 
-  const selectOptionClick = (e: Event, { row }: RenderItemProps<ISelectOption>) => {
+  const selectOptionClick = (row: ISelectOption) => {
     if (row.disabled) return
     if (props.multiple) {
       if (row[selectActiveKey]) {
@@ -46,11 +35,29 @@ export default function (
       ctx.emit('update:modelValue', singleActiveItem.value.value)
     }
   }
-  const selectOptionClass = ({ row }: RenderItemProps<ISelectOption>) => {
+
+  const hoverIndex = useKeyboardSelect(optionListShow, options, virtualListRef, selectOptionClick)
+
+  watch(
+    () => props.options,
+    () => {
+      options.value = props.options || []
+    }
+  )
+  const isActive = (row: ISelectOption) => {
+    if (props.multiple) {
+      return !!row[selectActiveKey]
+    } else {
+      return singleActiveItem.value !== undefined && singleActiveItem.value.value === row.value
+    }
+  }
+
+  const selectOptionClass = ({ row, index }: RenderItemProps<ISelectOption>) => {
     return {
       [ns.e('option')]: true,
       [ns.em('option', 'active')]: isActive(row),
-      [ns.em('option', 'disabled')]: row.disabled
+      [ns.em('option', 'disabled')]: row.disabled,
+      [ns.em('option', 'hover')]: hoverIndex.value === index
     }
   }
 
@@ -65,10 +72,12 @@ export default function (
     optionListShow.value = false
     inputValue.value = ''
   }
+
   return {
     selectOptionClick,
     selectOptionClass,
     options,
-    onClearOpiton
+    onClearOpiton,
+    hoverIndex
   }
 }

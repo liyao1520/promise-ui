@@ -2,9 +2,7 @@ import {
   computed,
   CSSProperties,
   defineComponent,
-  KeepAlive,
-  onActivated,
-  onDeactivated,
+  mergeProps,
   onMounted,
   onUnmounted,
   ref
@@ -20,7 +18,7 @@ import { Scrollbar } from '../../scrollbar'
 export default defineComponent({
   name: 'PVirtualScroll',
   props: virtualScrollProps,
-  emits: ['item-click'],
+  emits: ['item-click', 'item-mouseenter', 'item-mouseleave'],
   setup(props: VirtualScrollProps, { expose, slots, emit }) {
     const scrollContainer = ref<HTMLDivElement | null>(null)
     const scrollbar$ = ref()
@@ -50,9 +48,15 @@ export default defineComponent({
       return visibleEndIndex.value + containSize.value
     })
     const isLoadMore = ref(false)
+    // (props.listData.length - visibleEndIndex.value + containSize.value) * props.itemHeight +
+    // 'px'
+    // bug 1. 滚动不到底部,原因padding bottom
     const containerStyles = computed<CSSProperties>(() => ({
       paddingTop: realStartIndex.value * props.itemHeight + 'px',
-      paddingBottom: (props.listData.length - realEndIndex.value) * props.itemHeight + 'px',
+      paddingBottom:
+        (props.listData.length - visibleEndIndex.value + containSize.value) * props.itemHeight +
+        'px',
+
       height: '100%'
     }))
 
@@ -61,8 +65,8 @@ export default defineComponent({
     })
     const getContainSize = () => {
       if (!scrollContainer.value) return (containSize.value = 0)
-
-      containSize.value = Math.floor(scrollContainer.value.offsetHeight / props.itemHeight) + 2
+      containSize.value = Math.floor(scrollContainer.value.offsetHeight / props.itemHeight)
+      //+ 2
     }
     let timer: number | null = null
     const handleScroll = async (e: Event) => {
@@ -72,7 +76,6 @@ export default defineComponent({
       visibleStartIndex.value = Math.floor(scrollContainer.value.scrollTop / props.itemHeight)
       if (props.onLoadMore && !isLoadMore.value) {
         const target = e.target as HTMLElement
-        console.log(target.scrollHeight, target.clientHeight + target.scrollTop)
 
         if (target.scrollHeight <= target.clientHeight + target.scrollTop + props.loadMoreOffset) {
           handleLoadMore()
@@ -110,19 +113,33 @@ export default defineComponent({
 
     interface IScrollToIndexOption {
       behavior: 'auto' | 'smooth'
-      offset: number
+      offset: number | 'bottom'
     }
     const scrollToIndex = (index: number, option?: IScrollToIndexOption) => {
       const { behavior, offset } = option || { behavior: 'smooth', offset: 0 }
-      scrollContainer.value?.scrollTo({
-        top: index * props.itemHeight + offset,
-        behavior
-      })
+
+      if (offset === 'bottom') {
+        scrollContainer.value?.scrollTo({
+          top: index * props.itemHeight - props.itemHeight * (containSize.value - 1),
+          behavior
+        })
+      } else {
+        scrollContainer.value?.scrollTo({
+          top: index * props.itemHeight + offset,
+          behavior
+        })
+      }
     }
     expose({
-      scrollTo: scrollContainer.value?.scrollTo || (() => {}),
-      scrollBy: scrollContainer.value?.scrollBy || (() => {}),
+      scrollTo: (option?: IScrollToIndexOption) => scrollContainer.value?.scrollTo(option),
+      scrollBy: (option?: IScrollToIndexOption) => scrollContainer.value?.scrollBy(option),
       scrollToIndex,
+      scrollToEnd(option?: IScrollToIndexOption) {
+        scrollToIndex(props.listData.length - 1, option)
+      },
+      scrollToStart(option?: IScrollToIndexOption) {
+        scrollToIndex(0, option)
+      },
       scrollToItem(
         findItemFn: (value: any, index: number, obj: any[]) => unknown,
         option?: IScrollToIndexOption
@@ -136,6 +153,9 @@ export default defineComponent({
       },
       getScrollTop() {
         return scrollContainer.value?.scrollTop || 0
+      },
+      getVisibleRange() {
+        return [visibleStartIndex.value, visibleEndIndex.value]
       }
     })
     const handleItemStyle = (renderItemProps: RenderItemProps<unknown>) => {
@@ -153,7 +173,8 @@ export default defineComponent({
       }
     }
     const renderList = () => {
-      return showList.value.map((row, index, rows) => {
+      return showList.value.map((row, i, rows) => {
+        const index = realStartIndex.value + i
         return (
           <li
             key={props.itemKey ? (row as any)[props.itemKey] : index}
@@ -163,6 +184,8 @@ export default defineComponent({
             ]}
             class={handleItemClass({ row, index, rows })}
             onClick={(e) => emit('item-click', e, { row, index, rows })}
+            onMouseenter={(e) => emit('item-mouseenter', e, { row, index, rows })}
+            onMouseleave={(e) => emit('item-mouseleave', e, { row, index, rows })}
           >
             {slots.item?.({
               row,

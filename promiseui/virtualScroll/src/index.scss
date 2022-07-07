@@ -8,6 +8,7 @@
     margin: 0;
     list-style: none;
     will-change: padding-top, padding-bottom;
+    transform: translate3d(0, 0, 0);
   }
   &__load-more {
     position: absolute;

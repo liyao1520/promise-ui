@@ -18,7 +18,7 @@
     <div class="nav">
       <NavLinks />
     </div>
-    <ThemeColor />
+    <!-- <ThemeColor /> -->
     <slot name="search" />
   </header>
 </template>
