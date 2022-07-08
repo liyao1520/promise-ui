@@ -5,7 +5,8 @@ import {
   mergeProps,
   onMounted,
   onUnmounted,
-  ref
+  ref,
+  watch
 } from 'vue'
 import { RenderItemProps, virtualScrollProps, VirtualScrollProps } from './virtualScroll-types'
 
@@ -25,6 +26,12 @@ export default defineComponent({
     const ns = useNamespace('virtualScroll')
     const containSize = ref(0)
     const visibleStartIndex = ref(0)
+    watch(
+      () => props.listData,
+      () => {
+        getContainSize()
+      }
+    )
     const visibleEndIndex = computed(() => {
       const _endIndex = visibleStartIndex.value + containSize.value
       const allLen = props.listData.length
@@ -42,6 +49,7 @@ export default defineComponent({
     })
     const realEndIndex = computed(() => {
       const allLen = props.listData.length
+
       if (visibleEndIndex.value + containSize.value > allLen) {
         return allLen
       }
@@ -64,9 +72,7 @@ export default defineComponent({
       return props.listData.slice(realStartIndex.value, realEndIndex.value)
     })
     const getContainSize = () => {
-      if (!scrollContainer.value) return (containSize.value = 0)
-      containSize.value = Math.floor(scrollContainer.value.offsetHeight / props.itemHeight)
-      //+ 2
+      containSize.value = Math.floor((props.wrapHeight || 0) / props.itemHeight)
     }
     let timer: number | null = null
     const handleScroll = async (e: Event) => {

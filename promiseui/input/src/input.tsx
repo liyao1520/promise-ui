@@ -86,8 +86,8 @@ export default defineComponent({
               type={isPasswordType.value ? 'password' : 'text'}
               class={ns.e('inner')}
               value={modelValue.value}
-              {...attrs}
               disabled={disabled.value}
+              {...attrs}
               onInput={onInput}
               onFocus={onFocus}
               onBlur={onBlur}

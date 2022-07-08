@@ -54,7 +54,8 @@ export default defineComponent({
       optionListShow,
       inputValue,
       ns,
-      virtualListRef
+      virtualListRef,
+      selectInputRef
     )
 
     const { onAddTag, onTagClose } = useInput(
@@ -80,7 +81,6 @@ export default defineComponent({
     }
     const selectClick = () => {
       if (props.disabled) return
-
       optionListShow.value = !optionListShow.value
       if (optionListShow.value) {
         nextTick(() => {

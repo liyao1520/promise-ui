@@ -1,5 +1,5 @@
 import { UseNamespace } from './../../../shared/hooks/use-namespace'
-import { ref, Ref, SetupContext, toRef, watch } from 'vue'
+import { ref, Ref, SetupContext,  watch } from 'vue'
 import { RenderItemProps } from '../../../virtualScroll'
 import { ISelectOption, selectActiveKey, SelectProps } from '../select-types'
 import useKeyboardSelect from './use-keyboard-select'
@@ -12,7 +12,8 @@ export default function (
   optionListShow: Ref<boolean>,
   inputValue: Ref<string>,
   ns: UseNamespace,
-  virtualListRef: Ref
+  virtualListRef: Ref,
+  selectInputRef: Ref
 ) {
   const options = ref<ISelectOption[]>(props.options || [])
 
@@ -34,6 +35,10 @@ export default function (
       optionListShow.value = false
       ctx.emit('update:modelValue', singleActiveItem.value.value)
     }
+    if (!props.multiple) {
+      selectInputRef.value?.blur()
+    }
+    inputValue.value = ''
   }
 
   const hoverIndex = useKeyboardSelect(optionListShow, options, virtualListRef, selectOptionClick)

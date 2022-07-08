@@ -1,12 +1,12 @@
 <template>
-  <Select v-model="selected" :options="options" @change="onChange" />
+  <AutoComplete v-model="selected" :options="options" />
 </template>
 
 <script setup lang="ts">
-  import { Select, Message } from '../promiseui'
+  import { Select, AutoComplete, Input, Message } from '../promiseui'
   import { ref } from 'vue'
 
-  const selected = ref('1')
+  const selected = ref('11111')
   const options = Array.from({ length: 20 })
     .fill(0)
     .map((item, index) => ({

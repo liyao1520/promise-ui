@@ -13,6 +13,7 @@ export default function (
     if (!props.addible) return
     if (e.key != 'Enter') return
     const val = inputValue.value.trim()
+    if (val.length === 0) return
     multipleActiveItems.value.push({
       value: val,
       label: val
@@ -47,9 +48,7 @@ export default function (
       const newOptions = props.options
         ? props.options.filter((item) => filterMethod(inputValue.value, item))
         : []
-      if (props.addible) {
-        newOptions.push({ value: inputValue.value, label: inputValue.value })
-      }
+
       options.value = newOptions
     }
   })

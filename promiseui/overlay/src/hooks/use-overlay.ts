@@ -98,6 +98,9 @@ const useOverlay = (overlayEl: Ref<HTMLDivElement | null>, props: OverlayProps) 
   useResizeObserver(toRef(props, 'origin'), () => {
     updatePosition()
   })
+  useResizeObserver(overlayEl, () => {
+    updatePosition()
+  })
   const isVisible = computed(() => modelValue.value && shouldShow.value)
 
   return {

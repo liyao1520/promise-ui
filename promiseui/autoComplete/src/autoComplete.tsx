@@ -50,7 +50,6 @@ export default defineComponent({
     const hoverIndex = ref<number>(0)
 
     const handleKeydown = (e: KeyboardEvent) => {
-      e.preventDefault()
       const keyCode = e.key || e.code
       const len = props.options.length
       const [startIndex, endIndex] = virtualListRef.value?.getVisibleRange() || []
