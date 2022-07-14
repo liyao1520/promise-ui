@@ -46,7 +46,8 @@
   },
   "dependencies": {
     "@vueuse/core": "^8.6.0",
-    "async-validator": "^4.2.5"
+    "async-validator": "^4.2.5",
+    "dayjs": "^1.11.3"
   },
   "peerDependencies": {
     "vue": "^3.2.00"

@@ -21,6 +21,7 @@ import ModalInstall, { Modal } from './modal'
 import MessageBoxInstall, { MessageBox } from './messageBox'
 import LoadingBarInstall, { useLoadingBar } from './loadingBar'
 import TableInstall, { Table } from './table'
+import DatePickerInstall, { DatePicker } from './datePicker'
 
 const installs = [
   ButtonInstall,
@@ -44,7 +45,8 @@ const installs = [
   ModalInstall,
   MessageBoxInstall,
   LoadingBarInstall,
-  TableInstall
+  TableInstall,
+  DatePickerInstall
 ]
 
 export {
@@ -74,7 +76,8 @@ export {
   Modal,
   MessageBox,
   useLoadingBar,
-  Table
+  Table,
+  DatePicker
 }
 
 export default {

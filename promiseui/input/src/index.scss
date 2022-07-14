@@ -13,7 +13,7 @@
   transition: all 0.2s, box-shadow 0.4s;
   box-shadow: 0 0 4px 2px transparent;
   padding: 0 10px;
-
+  background-color: $base-bg;
   &__icon {
     cursor: pointer;
   }

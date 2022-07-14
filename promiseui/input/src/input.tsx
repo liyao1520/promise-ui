@@ -14,9 +14,9 @@ export default defineComponent({
   name: 'PInput',
   inheritAttrs: false,
   props: inputProps,
-  emits: ['update:modelValue', 'input', 'blur', 'focus'],
-  setup(props: InputProps, ctx: SetupContext) {
-    const { attrs, slots, emit } = ctx
+  emits: ['input', 'blur', 'focus', 'update:modelValue'],
+  setup(props: InputProps, ctx) {
+    const { attrs, slots, emit } = ctx as SetupContext
     const inputRef = ref<HTMLInputElement | null>(null)
     const wapperRef = ref<HTMLInputElement | null>(null)
     const { disabled, modelValue, clearable, showPassword } = toRefs(props)
@@ -34,7 +34,7 @@ export default defineComponent({
       [ns.m('focus')]: focused.value
     }))
 
-    const { onInput, onFocus, onBlur } = useEvent(props, ctx, focused)
+    const { onInput, onFocus, onBlur } = useEvent(props, ctx as SetupContext, focused)
 
     const renderSuffix = () => {
       if (showPassword.value) {
@@ -77,7 +77,7 @@ export default defineComponent({
 
     return () => {
       return (
-        <Wave>
+        <Wave disabled={!props.wave}>
           <div ref={wapperRef} class={[classes.value, props.class]} style={props.style}>
             {slots.prepend && <span class={ns.e('prepend')}>{slots.prepend()}</span>}
 

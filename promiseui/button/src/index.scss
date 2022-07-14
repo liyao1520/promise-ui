@@ -2,7 +2,9 @@
 
 .#{$prefix}-button {
   /*yourstyle*/
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: $light-text;
   outline: none;
   border: none;
@@ -45,17 +47,12 @@
     padding: 0 28px;
     height: 36px;
   }
-  &--success {
-    background-color: $success;
-    border-color: $success;
-    &:active {
-      background-color: $success-active;
-    }
-  }
+
   &--default {
     color: $text;
     border-color: $border-color;
     background-color: $base-bg;
+
     &:hover:not(&:disabled),
     &:active:not(&:disabled),
     &:focus:not(&:disabled) {
@@ -91,6 +88,13 @@
     border-color: $danger;
     &:active {
       background-color: $danger-active;
+    }
+  }
+  &--success {
+    background-color: $success;
+    border-color: $success;
+    &:active {
+      background-color: $success-active;
     }
   }
   &--default,
@@ -130,7 +134,38 @@
   &--none {
     background-color: transparent;
     border-color: transparent;
+
+    &.#{$prefix}-button {
+      &:hover:not(&:disabled),
+      &:active:not(&:disabled),
+      &:focus:not(&:disabled) {
+        border-color: transparent;
+      }
+      &:hover {
+        &.#{$prefix}-button {
+          &--default {
+            background-color: $brand-bg;
+          }
+          &--primary {
+            background-color: $brand-bg;
+          }
+          &--info {
+            background-color: $info-bg;
+          }
+          &--warning {
+            background-color: $warning-bg;
+          }
+          &--danger {
+            background-color: $danger-bg;
+          }
+          &--success {
+            background-color: $success-bg;
+          }
+        }
+      }
+    }
   }
+
   &--dashed {
     border-style: dashed;
   }

@@ -24,6 +24,10 @@ export const inputProps = {
   class: {},
   style: {
     type: [String, Object] as PropType<string | CSSProperties>
+  },
+  wave: {
+    type: Boolean,
+    default: true
   }
 } as const
 

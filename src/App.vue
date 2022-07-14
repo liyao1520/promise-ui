@@ -1,21 +1,18 @@
 <template>
-  <AutoComplete v-model="selected" :options="options" />
+  <div><DatePicker v-model="date" /> </div>
 </template>
 
 <script setup lang="ts">
-  import { Select, AutoComplete, Input, Message } from '../promiseui'
-  import { ref } from 'vue'
-
-  const selected = ref('11111')
-  const options = Array.from({ length: 20 })
-    .fill(0)
-    .map((item, index) => ({
-      label: 'label' + index,
-      value: 'value' + index
-    }))
-  const onChange = (item: any) => {
-    Message.success(` label: ${item.label}  value :${item.value} `)
-  }
+  import { ref, watchEffect } from 'vue'
+  import { DatePicker } from '../promiseui/datePicker'
+  const date = ref(0)
+  watchEffect(() => {
+    console.log(date.value)
+  })
 </script>
 
-<style></style>
+<style>
+  body {
+    background-color: aliceblue;
+  }
+</style>

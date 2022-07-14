@@ -1,0 +1,44 @@
+@import '../../styles-var';
+
+.#{$prefix}-date-picker {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 3px;
+  background-color: $base-bg;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $title-text;
+    font-size: $font-size-md;
+    font-weight: $font-title-weight;
+  }
+  &__navigation-month {
+    cursor: pointer;
+  }
+  &__cell {
+    color: $text;
+    cursor: pointer;
+    &:hover {
+      background-color: $item-bg-hover;
+    }
+    &--weak {
+      color: $placeholder;
+    }
+    &--active {
+      color: $light-text;
+      background-color: $brand-active;
+      border-radius: $border-radius;
+      &:hover {
+        background-color: $brand-active;
+      }
+    }
+  }
+  &__cell-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 32px;
+    min-height: 32px;
+  }
+}
