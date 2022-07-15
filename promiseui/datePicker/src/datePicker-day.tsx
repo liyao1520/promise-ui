@@ -81,7 +81,7 @@ export default defineComponent({
     }
     const showSelectMonth = ref(false)
     const showSelectYear = ref(false)
-    watchEffect(() => console.log(currentYear))
+
     return () => (
       <>
         <DatePickerYear
