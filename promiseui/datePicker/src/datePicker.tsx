@@ -1,6 +1,8 @@
+import { CalendarClearOutline } from '@vicons/ionicons5'
 import dayjs from 'dayjs'
 
-import { computed, defineComponent, KeepAlive, nextTick, onMounted, ref } from 'vue'
+import { computed, defineComponent, KeepAlive, ref } from 'vue'
+import { Icon } from '../../icon'
 import { Input } from '../../input'
 import { Overlay } from '../../overlay'
 
@@ -41,11 +43,16 @@ export default defineComponent({
       <div>
         <Input
           wave={false}
+          placeholder={props.placeholder}
           ref={(el) => (inputWapperRef.value = (el as any).wapper)}
           onFocus={() => (showOverlay.value = true)}
           modelValue={inputValue.value}
           onInput={onInput}
-        />
+        >
+          {{
+            suffix: () => <Icon component={CalendarClearOutline} />
+          }}
+        </Input>
         <KeepAlive>
           <Overlay
             origin={inputWapperRef.value}

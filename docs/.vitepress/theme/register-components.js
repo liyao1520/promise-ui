@@ -32,6 +32,7 @@ let first = true
 export function registerComponents(app) {
   addImportMap('@vicons/ionicons5', icons)
   app.use(vuePlugin)
+
   app.mixin({
     async mounted() {
       if (!first) return

@@ -47,9 +47,7 @@ export default defineComponent({
         return days.value.slice(i * 7, i * 7 + 7)
       })
     })
-    onDeactivated(() => {
-      console.log('onDeactivated')
-    })
+
     // 默认星期日在前面,需要把星期日换到最后
     const weaks = dayjs.weekdaysMin()
     weaks.push(weaks.shift() as string)
@@ -108,7 +106,7 @@ export default defineComponent({
             showSelectMonth.value = false
           }}
         />
-        ;
+
         <div class={classes.value} v-show={!showSelectMonth.value && !showSelectYear.value}>
           <div class={ns.e('header')}>
             <div class={ns.e('btns')}>

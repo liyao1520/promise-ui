@@ -87,6 +87,7 @@ export default defineComponent({
               class={ns.e('inner')}
               value={modelValue.value}
               disabled={disabled.value}
+              placeholder={props.placeholder}
               {...attrs}
               onInput={onInput}
               onFocus={onFocus}

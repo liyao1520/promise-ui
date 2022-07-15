@@ -1,4 +1,4 @@
-import type { PropType, ExtractPropTypes, CSSProperties } from 'vue'
+import type { PropType, ExtractPropTypes, CSSProperties, HTMLAttributes } from 'vue'
 import { ICommonSize } from '../../types'
 
 export const inputProps = {
@@ -28,6 +28,10 @@ export const inputProps = {
   wave: {
     type: Boolean,
     default: true
+  },
+  placeholder: {
+    type: String,
+    default: ''
   }
 } as const
 

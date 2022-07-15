@@ -3,7 +3,7 @@
 .#{$prefix}-date-picker {
   display: inline-flex;
   flex-direction: column;
-
+  border: 1px solid $border-color;
   background-color: $base-bg;
   &__header {
     display: flex;
