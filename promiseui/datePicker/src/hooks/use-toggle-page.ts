@@ -23,10 +23,18 @@ export default function (currentMonth: Ref<number>, currentYear: Ref<number>) {
   const toggleNextYear = () => {
     currentYear.value++
   }
+  const setYear = (year: number) => {
+    currentYear.value = year
+  }
+  const setMonth = (month: number) => {
+    currentMonth.value = month
+  }
   return {
     togglePrevYear,
     toggleNextYear,
     toggleNextMonth,
-    togglePrevMonth
+    togglePrevMonth,
+    setYear,
+    setMonth
   }
 }

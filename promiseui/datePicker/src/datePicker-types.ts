@@ -16,10 +16,10 @@ export const datePickerProps = {
   size: String as PropType<ICommonSize>,
   valueFormat: String,
   modelValue: {
-    type: [Number, Array] as PropType<number | number[]>
+    type: [Object, Array, undefined] as PropType<Dayjs | Dayjs[] | undefined>
   }
 } as const
-export type IDayjs = Dayjs & { timestamp: number }
+
 export type DatePickerProps = ExtractPropTypes<typeof datePickerProps>
 export interface DatePickerContext {
   toggleNextMonth: () => void

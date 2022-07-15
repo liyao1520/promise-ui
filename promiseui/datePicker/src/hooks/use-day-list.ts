@@ -2,7 +2,9 @@ import { computed, Ref } from 'vue'
 import { getLastMonthRestDays, getNextMonthRestDays, getCurrentMonthDays } from '../utils/date'
 
 export default function (currentYear: Ref<number>, currentMonth: Ref<number>) {
-  const days = computed(() => getDays(currentYear.value, currentMonth.value))
+  const days = computed(() => {
+    return getDays(currentYear.value, currentMonth.value)
+  })
   return days
 }
 

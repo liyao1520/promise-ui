@@ -63,7 +63,8 @@ export const overlayProps = {
   clickOutsideIgnore: {
     type: Array as PropType<MaybeElementRef<MaybeElement>[]>,
     default: []
-  }
+  },
+  memo: Boolean
 } as const
 
 export type OverlayProps = ExtractPropTypes<typeof overlayProps>

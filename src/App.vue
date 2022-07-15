@@ -3,9 +3,10 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, watchEffect } from 'vue'
+  import dayjs from 'dayjs';
+import { ref, watchEffect } from 'vue'
   import { DatePicker } from '../promiseui/datePicker'
-  const date = ref(0)
+  const date = ref(dayjs())
   watchEffect(() => {
     console.log(date.value)
   })

@@ -5,8 +5,6 @@ import { InputProps } from '../input-types'
 const useEvent = (props: InputProps, ctx: SetupContext, focused: Ref<boolean>) => {
   const { triggerValidate } = useFormItem()
   const onInput = (e: Event) => {
-    console.log('1')
-
     ctx.emit('input', e)
     ctx.emit('update:modelValue', (e.target as HTMLInputElement).value)
   }

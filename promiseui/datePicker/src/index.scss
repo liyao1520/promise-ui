@@ -3,21 +3,68 @@
 .#{$prefix}-date-picker {
   display: inline-flex;
   flex-direction: column;
-  padding: 3px;
+
   background-color: $base-bg;
   &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: $title-text;
+    height: 40px;
+    padding: 0 8px;
     font-size: $font-size-md;
     font-weight: $font-title-weight;
+    border-bottom: 1px solid $border-color;
+  }
+  &__body {
+    padding: 8px 12px;
   }
   &__navigation-month {
     cursor: pointer;
+    > span {
+      margin: 0 3px;
+      &:hover {
+        color: $brand;
+      }
+    }
   }
-  &__cell {
+  &__month-year-cell {
+    &--active {
+      .#{$prefix}-date-picker__month-year-cell-inner {
+        > span {
+          color: $light-text;
+          background-color: $brand-active;
+          border-radius: $border-radius;
+          &:hover {
+            background-color: $brand-active;
+          }
+        }
+      }
+    }
+  }
+  &__month-year-cell-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 77px;
+    min-height: 53.5px;
+    padding: 0;
+
+    > span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 60px;
+      height: 24px;
+      cursor: pointer;
+      &:hover {
+        background-color: $item-bg-hover;
+      }
+    }
+  }
+  &__day-cell {
     color: $text;
+    padding: 0;
     cursor: pointer;
     &:hover {
       background-color: $item-bg-hover;
@@ -34,11 +81,21 @@
       }
     }
   }
-  &__cell-inner {
+  &__day-cell-inner {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 32px;
-    min-height: 32px;
+    min-width: 33px;
+    min-height: 33px;
+  }
+  &__year-row:first-child {
+    .#{$prefix}-date-picker__month-year-cell:first-child {
+      color: $placeholder;
+    }
+  }
+  &__year-row:last-child {
+    .#{$prefix}-date-picker__month-year-cell:last-child {
+      color: $placeholder;
+    }
   }
 }

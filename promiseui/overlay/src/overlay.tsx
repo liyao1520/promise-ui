@@ -5,7 +5,7 @@ import './index.scss'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import useOverlay from './hooks/use-overlay'
 
-import { onClickOutside } from '@vueuse/core'
+import { MaybeElement, MaybeElementRef, onClickOutside } from '@vueuse/core'
 
 export default defineComponent({
   name: 'POverlay',
@@ -15,7 +15,7 @@ export default defineComponent({
     const { showArrow, class: className, style, origin } = toRefs(props)
 
     const ns = useNamespace('overlay')
-    const overlayEl = ref<HTMLDivElement | null>(null)
+    const overlayEl = ref()
     const { x, y, isVisible, realPosition } = useOverlay(overlayEl, props)
 
     onClickOutside(
@@ -46,6 +46,22 @@ export default defineComponent({
     expose({
       el: overlayEl
     })
+    const renderShow = () => (
+      <div v-show={isVisible.value} style={styles.value} class={classes.value} ref={overlayEl}>
+        {slots.default && slots.default()}
+        {showArrow.value && <span class={ns.e('arrow')}></span>}
+      </div>
+    )
+    const renderIf = () => {
+      return (
+        isVisible.value && (
+          <div style={styles.value} class={classes.value} ref={overlayEl}>
+            {slots.default && slots.default()}
+            {showArrow.value && <span class={ns.e('arrow')}></span>}
+          </div>
+        )
+      )
+    }
     return () => {
       return (
         <Teleport to={'body'}>
@@ -54,12 +70,7 @@ export default defineComponent({
             onBeforeEnter={(e) => emit('open')}
             onAfterLeave={(e) => emit('close')}
           >
-            {isVisible.value && (
-              <div style={styles.value} class={classes.value} ref={overlayEl}>
-                {slots.default && slots.default()}
-                {showArrow.value && <span class={ns.e('arrow')}></span>}
-              </div>
-            )}
+            {props.memo ? renderShow() : renderIf()}
           </Transition>
         </Teleport>
       )
