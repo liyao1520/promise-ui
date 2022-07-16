@@ -3,7 +3,7 @@
 
 # Form 表单
 
-### 典型表单
+## 典型表单
 
 最基础的表单包括各种输入表单项，比如 `input`、`select`、`radio`、`checkbox`等。
 
@@ -46,7 +46,7 @@
 
 :::
 
-### 表单样式
+## 表单样式
 
 :::demo column
 
@@ -162,7 +162,7 @@
 
 :::
 
-### 行内表单
+## 行内表单
 
 设置 `inline` , 当垂直方向空间受限且表单较简单时，可以在一行内放置表单。
 
@@ -197,7 +197,7 @@
 
 :::
 
-### 表单验证
+## 表单验证
 
 :::demo
 
@@ -322,7 +322,7 @@
 
 :::
 
-### 只执行部分规则
+## 只执行部分规则
 
 执行部分规则可以使用 `form.validateFields`, 传入 `fields` 指定部分字段进行验证,
 
@@ -381,7 +381,7 @@
 
 :::
 
-### 必填项
+## 必填项
 
 除了设置 `form rules`,也可以设置`form-item` 的 `required` 属性,如果为 `truly` 则为 必填项, 当 `required` 为 `string`类型时,为作为 `rule` 的 `message`
 
@@ -413,7 +413,7 @@
 
 :::
 
-### 自定义 labelWidth
+## 自定义 labelWidth
 
 `labelWidth` 默认为`auto`,会根据所有的 `form-item` 的 `label` 宽度计算出最大值,作为`labelWidth` 的宽度, 若不想这样,可以传固定值
 
@@ -443,7 +443,7 @@
 
 :::
 
-### 展示 label
+## 展示 label
 
 设置 `showLabel` 确定是否展示 label
 

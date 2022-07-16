@@ -94,7 +94,8 @@
     "unplugin-vue-components": "^0.21.0",
     "vite": "^2.9.9",
     "vite-plugin-dts": "^1.2.0",
-    "vitepress": "^0.22.4",
+    "vitepress": "^1.0.0-alpha.4",
+    "vitepress-demo-editor": "^1.0.5",
     "vue-tsc": "^0.34.7"
   }
 }

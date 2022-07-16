@@ -1,4 +1,5 @@
-import markDownPlugin from './plugins/vitepress-demo-editor/markdownPlugin'
+import markDownPlugin from 'vitepress-demo-editor/dist/markdownPlugin.cjs'
+
 import { UserConfig } from 'vitepress'
 import sidebar from './sidebar.json'
 
@@ -20,7 +21,6 @@ const config: UserConfig = {
   description: '一个vue3组件库',
   markdown: {
     config: (md) => {
-      // md.use(demoBlockPlugin, {})
       md.use(markDownPlugin, {})
     }
   }

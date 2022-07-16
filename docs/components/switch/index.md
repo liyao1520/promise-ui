@@ -1,6 +1,6 @@
 # Switch 开关
 
-### 基本用法
+## 基本用法
 
 最简单的用法。
 
@@ -23,7 +23,7 @@
 
 :::
 
-### 内容
+## 内容
 
 向开关中加入内容。 `props` 和 `slots` 两种方式 , 支持 `icon`
 
@@ -57,7 +57,7 @@
 
 :::
 
-### beforeChange 和 loading
+## beforeChange 和 loading
 
 通过`@beforeChange` 可以拦截`switch` 值的改变, 返回 `false` 则`switch`值不会改变
 
@@ -86,7 +86,7 @@
 
 :::
 
-### 尺寸
+## 尺寸
 
 三种尺寸 `sm`,`md`,`lg`
 
@@ -108,7 +108,7 @@
 
 :::
 
-### 颜色
+## 颜色
 
 设置 `activeCoactiveColor`颜色
 
@@ -141,7 +141,7 @@
 
 :::
 
-### 对应值
+## 对应值
 
 `activeValue` 和 `inactiveValue` 分别对应 选中时的值 和 非选中时的值
 

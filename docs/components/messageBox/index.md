@@ -1,6 +1,6 @@
 # MessageBox 消息弹出框
 
-### 基础用法
+## 基础用法
 
 两种用法,函数式 `MessageBox` 和 `this.$messageBox`
 
@@ -44,7 +44,7 @@
 
 :::
 
-### 确认消息
+## 确认消息
 
 返回一个 `Promise` 处理任务
 
@@ -87,7 +87,7 @@
 
 :::
 
-### 异步
+## 异步
 
 `beforeClose` 可以在关闭前执行异步操作,可以返回 `boolean` 类型 或者 `Promise<boolean>` 类型
 

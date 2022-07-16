@@ -1,6 +1,6 @@
 # DatePicker 日期选择器 <ClientOnly><p-tag type='warning' size='lg'>Beta</p-tag> </ClientOnly>
 
-### 基本使用
+## 基本使用
 
 :::demo
 

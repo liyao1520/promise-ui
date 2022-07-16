@@ -17,8 +17,8 @@
 
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/main.js",
-    "promiseui/**/*.ts", "promiseui/**/*.d.ts", "promiseui/**/*.tsx", "promiseui/**/*.vue", 
+    "promiseui/**/*.ts","promiseui/**/*.tsx","promiseui/**/*.d.ts", 
   "promiseui-cli/**/*.ts"
-, "promiseui/loadingBar/src/loadingBarServicetsx"  ],
+, "promiseui/loadingBar/src/loadingBarServicetsx" ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
