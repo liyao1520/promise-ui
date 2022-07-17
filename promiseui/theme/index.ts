@@ -6,5 +6,5 @@ const theme = new Theme()
 
 theme.register('light', light)
 theme.register('dark', dark)
-
+theme.use('light')
 export default theme

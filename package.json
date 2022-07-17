@@ -47,7 +47,8 @@
   "dependencies": {
     "@vueuse/core": "^8.6.0",
     "async-validator": "^4.2.5",
-    "dayjs": "^1.11.3"
+    "dayjs": "^1.11.3",
+    "vue": "^3.2.00"
   },
   "peerDependencies": {
     "vue": "^3.2.00"
@@ -92,7 +93,6 @@
     "vite": "^2.9.9",
     "vite-plugin-dts": "^1.2.0",
     "vitepress": "^1.0.0-alpha.4",
-    "vitepress-demo-editor": "^1.0.7",
     "vue-tsc": "^0.34.7"
   }
 }

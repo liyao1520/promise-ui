@@ -1,10 +1,11 @@
 
 // Auto generated component declarations
-declare module 'vue' {
+declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     PAutoComplete: typeof import('./dist/promiseui')['AutoComplete'];
 		PButton: typeof import('./dist/promiseui')['Button'];
 		PCheckbox: typeof import('./dist/promiseui')['Checkbox'];
+		PDatePicker: typeof import('./dist/promiseui')['DatePicker'];
 		PDropdown: typeof import('./dist/promiseui')['Dropdown'];
 		PForm: typeof import('./dist/promiseui')['Form'];
 		PIcon: typeof import('./dist/promiseui')['Icon'];
@@ -22,7 +23,6 @@ declare module 'vue' {
 		PTable: typeof import('./dist/promiseui')['Table'];
 		PTabs: typeof import('./dist/promiseui')['Tabs'];
 		PTag: typeof import('./dist/promiseui')['Tag'];
-		PTheme: typeof import('./dist/promiseui')['Theme'];
 		PVirtualScroll: typeof import('./dist/promiseui')['VirtualScroll'];
   }
 }

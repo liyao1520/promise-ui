@@ -1,12 +1,12 @@
-import { defineComponent, h, } from 'vue'
+import { defineComponent, h } from 'vue'
 import DefaultTheme from './theme-default'
 
-import theme from '../../../promiseui/theme'
 import './custom.css'
 const { Layout } = DefaultTheme
 export default defineComponent({
-  mounted() {
+  async mounted() {
     // 黑暗模式设配
+    const { default: theme } = await import('../../../promiseui/theme')
     const toggleTheme = (isDark: boolean) => {
       if (!isDark) {
         theme.use('light')
