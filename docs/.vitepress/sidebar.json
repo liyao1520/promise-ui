@@ -1,11 +1,15 @@
 {
   "/": [
     {
-      "text": "快速开始",
+      "text": "开始",
       "items": [
         {
           "text": "安装使用",
           "link": "/quick-start/"
+        },
+        {
+          "text": "变更日志",
+          "link": "/change-log/"
         }
       ]
     },

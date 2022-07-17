@@ -3459,11 +3459,6 @@ fast-levenshtein@^2.0.6, fast-levenshtein@~2.0.6:
   resolved "https://registry.npmmirror.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz"
   integrity sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==
 
-fast-plist@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.npmmirror.com/fast-plist/-/fast-plist-0.1.2.tgz"
-  integrity sha512-2HxzrqJhmMoxVzARjYFvkzkL2dCBB8sogU5sD8gqcZWv5UCivK9/cXM9KIPDRwU+eD3mbRDN/GhW8bO/4dtMfg==
-
 fastq@^1.6.0:
   version "1.13.0"
   resolved "https://registry.npmmirror.com/fastq/-/fastq-1.13.0.tgz"
@@ -4661,7 +4656,7 @@ map-obj@^4.0.0:
 
 markdown-it-container@^3.0.0:
   version "3.0.0"
-  resolved "https://registry.npmmirror.com/markdown-it-container/-/markdown-it-container-3.0.0.tgz"
+  resolved "https://registry.npmjs.org/markdown-it-container/-/markdown-it-container-3.0.0.tgz#1d19b06040a020f9a827577bb7dbf67aa5de9a5b"
   integrity sha512-y6oKTq4BB9OQuY/KLfk/O3ysFhB3IMYoIWhGJEidXt1NQFocFK2sA2t0NYZAMyMShAGL6x5OPIbrmXPIqaN9rw==
 
 meow@^8.0.0:
@@ -4751,15 +4746,8 @@ mkdirp@^1.0.4:
 
 monaco-editor@^0.33.0:
   version "0.33.0"
-  resolved "https://registry.npmmirror.com/monaco-editor/-/monaco-editor-0.33.0.tgz"
+  resolved "https://registry.npmjs.org/monaco-editor/-/monaco-editor-0.33.0.tgz#842e244f3750a2482f8a29c676b5684e75ff34af"
   integrity sha512-VcRWPSLIUEgQJQIE0pVT8FcGBIgFoxz7jtqctE+IiCxWugD0DwgyQBcZBhdSrdMC84eumoqMZsGl2GTreOzwqw==
-
-monaco-themes@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.npmmirror.com/monaco-themes/-/monaco-themes-0.4.2.tgz"
-  integrity sha512-T3kp6SC5MPJvwYGXZENCd0UOIKVgUVV5SjsiXLBhgEZBnScY+6gEbwNRK1oYmfwbf+dGVqF1bSLN5YcrFu3HmA==
-  dependencies:
-    fast-plist "^0.1.2"
 
 ms@2.1.2:
   version "2.1.2"
@@ -5931,10 +5919,10 @@ vite@^2.9.9:
   optionalDependencies:
     fsevents "~2.3.2"
 
-vitepress-demo-editor@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.npmjs.org/vitepress-demo-editor/-/vitepress-demo-editor-1.0.5.tgz#b5ef012c0ef4d8560249156ca9ae17d0d8190e73"
-  integrity sha512-/QIhakatZW/uJ2BLQ5eU8VLrb8aatyTF04Po3rZ4//FRzfF/lKotQDqATJ9nNYUOW9vDxQhP3jkDyvyyyqDgyg==
+vitepress-demo-editor@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.npmjs.org/vitepress-demo-editor/-/vitepress-demo-editor-1.0.7.tgz#90566393a31b743e9f95a227a47f735a0c2d232f"
+  integrity sha512-jBf8izYm8SwjvR6OliZ82fB67c1MZE6E3qPooZc1lFvCx6wgqZjSypIGhxCM0Bv7BKuMe9N9nNkZjLTvF2cWwg==
   dependencies:
     "@types/node" "^18.0.5"
     markdown-it-container "^3.0.0"

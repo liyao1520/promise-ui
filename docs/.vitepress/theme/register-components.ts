@@ -1,4 +1,5 @@
 import { vuePlugin, addImportMap } from 'vitepress-demo-editor'
+import 'vitepress-demo-editor/dist/style.css'
 
 import {
   AirplaneSharp,
@@ -16,7 +17,6 @@ import {
 // 引入scss
 import '../../../promiseui/styles/index.scss'
 
-import promiseui from '../../../promiseui/vue-promiseui'
 import { App } from 'vue'
 const icons = {
   AirplaneSharp,
@@ -34,17 +34,13 @@ const icons = {
 let first = true
 export function registerComponents(app: App) {
   addImportMap('@vicons/ionicons5', icons)
-  app.use(vuePlugin, {
-    defaultDirection: 'column'
-  })
-  addImportMap('promiseui-vue', promiseui)
-  app.use(promiseui)
+  app.use(vuePlugin)
 
   app.mixin({
     async mounted() {
       if (!first) return
       first = false
-      await import('../../../promiseui/vue-promiseui').then((promiseUI) => {
+      await import('../../../promiseui').then((promiseUI) => {
         addImportMap('promiseui-vue', promiseUI)
         app.use(promiseUI.default)
       })

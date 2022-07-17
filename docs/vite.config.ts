@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import { resolve } from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -8,5 +9,8 @@ export default defineConfig({
     fs: {
       strict: false
     }
+  },
+  optimizeDeps: {
+    include: [resolve(__dirname, '../promiseui')]
   }
 })

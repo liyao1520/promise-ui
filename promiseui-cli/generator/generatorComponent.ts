@@ -63,15 +63,15 @@ export default async function generatorComponent(info: {
   }
   interface ISidebarItem {
     text: string
-    children?: ISidebarItem[]
+    items?: ISidebarItem[]
   }
   json['/'].forEach((item: ISidebarItem) => {
-    if (Array.isArray(item.children)) {
-      item.children.sort((a, b) => (a.text < b.text ? -1 : 1))
+    if (Array.isArray(item.items)) {
+      item.items.sort((a, b) => (a.text < b.text ? -1 : 1))
     }
   })
 
-  sidebarItem.children = sidebarItem.children ? [...sidebarItem.children, config] : [config]
+  sidebarItem.items = sidebarItem.items ? [...sidebarItem.items, config] : [config]
   await fs.writeFile(
     resolve(rootDir, 'docs/.vitepress/sidebar.json'),
     JSON.stringify(json),
