@@ -1815,6 +1815,11 @@
   resolved "https://registry.npmjs.org/@types/node/-/node-12.20.24.tgz"
   integrity sha512-yxDeaQIAJlMav7fH5AQqPH1u8YIuhYJXYBzxaQ4PifsU0GDO38MSdmEDeRlIxrKbC6NbEaaEHDanWb+y30U8SQ==
 
+"@types/node@^18.0.5":
+  version "18.0.5"
+  resolved "https://registry.npmjs.org/@types/node/-/node-18.0.5.tgz#96be8113b014e9e7f0c3609c4a25afadd85ff659"
+  integrity sha512-En7tneq+j0qAiVwysBD79y86MT3ModuoIJbe7JXp+sb5UAjInSShmK3nXXMioBzfF7rXC12hv12d4IyCVwN4dA==
+
 "@types/node@~14.14.31":
   version "14.14.45"
   resolved "https://registry.npmmirror.com/@types/node/-/node-14.14.45.tgz"
@@ -4649,6 +4654,11 @@ map-obj@^4.0.0:
   resolved "https://registry.npmmirror.com/map-obj/-/map-obj-4.3.0.tgz"
   integrity sha512-hdN1wVrZbb29eBGiGjJbeP8JbKjq1urkHJ/LIP/NY48MZ1QVXUsQBV1G1zvYFHn1XE06cwjBsOI2K3Ulnj1YXQ==
 
+markdown-it-container@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/markdown-it-container/-/markdown-it-container-3.0.0.tgz#1d19b06040a020f9a827577bb7dbf67aa5de9a5b"
+  integrity sha512-y6oKTq4BB9OQuY/KLfk/O3ysFhB3IMYoIWhGJEidXt1NQFocFK2sA2t0NYZAMyMShAGL6x5OPIbrmXPIqaN9rw==
+
 meow@^8.0.0:
   version "8.1.2"
   resolved "https://registry.npmmirror.com/meow/-/meow-8.1.2.tgz"
@@ -4733,6 +4743,11 @@ mkdirp@^1.0.4:
   version "1.0.4"
   resolved "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
+
+monaco-editor@^0.33.0:
+  version "0.33.0"
+  resolved "https://registry.npmjs.org/monaco-editor/-/monaco-editor-0.33.0.tgz#842e244f3750a2482f8a29c676b5684e75ff34af"
+  integrity sha512-VcRWPSLIUEgQJQIE0pVT8FcGBIgFoxz7jtqctE+IiCxWugD0DwgyQBcZBhdSrdMC84eumoqMZsGl2GTreOzwqw==
 
 ms@2.1.2:
   version "2.1.2"
@@ -5904,6 +5919,15 @@ vite@^2.9.9:
   optionalDependencies:
     fsevents "~2.3.2"
 
+vitepress-demo-editor@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.npmjs.org/vitepress-demo-editor/-/vitepress-demo-editor-1.2.0.tgz#be15f27931078957cfec045a5cf9283dba007e58"
+  integrity sha512-KJiwEtB+D66OHDmONcU+FbUfTsEv3cYvoUtym0j8M1c/JFyPMTl6eiDLZcRgS5cptBZzXyvZg0DVP76fP/lFAg==
+  dependencies:
+    "@types/node" "^18.0.5"
+    markdown-it-container "^3.0.0"
+    monaco-editor "^0.33.0"
+
 vitepress@^1.0.0-alpha.4:
   version "1.0.0-alpha.4"
   resolved "https://registry.npmjs.org/vitepress/-/vitepress-1.0.0-alpha.4.tgz#2d9929e2cade3d98f57f61848c01968fb386cee0"
@@ -5954,9 +5978,9 @@ vue-tsc@^0.34.7:
   dependencies:
     "@volar/vue-typescript" "0.34.15"
 
-vue@^3.2.33:
+vue@^3.2.00, vue@^3.2.33:
   version "3.2.37"
-  resolved "https://registry.npmmirror.com/vue/-/vue-3.2.37.tgz"
+  resolved "https://registry.npmjs.org/vue/-/vue-3.2.37.tgz#da220ccb618d78579d25b06c7c21498ca4e5452e"
   integrity sha512-bOKEZxrm8Eh+fveCqS1/NkG/n6aMidsI6hahas7pa0w/l7jkbssJVsRhVDs07IdDq7h9KHswZOgItnwJAgtVtQ==
   dependencies:
     "@vue/compiler-dom" "3.2.37"
