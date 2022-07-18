@@ -1,4 +1,12 @@
-import { computed, defineComponent, ref, StyleValue, Teleport, toRefs, Transition } from 'vue'
+import {
+  computed,
+  defineComponent,
+  ref,
+  StyleValue,
+  Teleport,
+  toRefs,
+  Transition
+} from 'vue'
 import { overlayProps, OverlayProps } from './overlay-types'
 
 import './index.scss'
@@ -40,14 +48,21 @@ export default defineComponent({
     const animationName = computed(
       () =>
         'pui-' +
-        ['bottom', 'top', 'left', 'right'].find((item) => realPosition.value.includes(item))
+        ['bottom', 'top', 'left', 'right'].find((item) =>
+          realPosition.value.includes(item)
+        )
     )
 
     expose({
       el: overlayEl
     })
     const renderShow = () => (
-      <div v-show={isVisible.value} style={styles.value} class={classes.value} ref={overlayEl}>
+      <div
+        v-show={isVisible.value}
+        style={styles.value}
+        class={classes.value}
+        ref={overlayEl}
+      >
         {slots.default && slots.default()}
         {showArrow.value && <span class={ns.e('arrow')}></span>}
       </div>

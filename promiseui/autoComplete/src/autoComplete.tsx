@@ -1,4 +1,11 @@
-import { defineComponent, nextTick, ref, shallowRef, computed, watchEffect } from 'vue'
+import {
+  defineComponent,
+  nextTick,
+  ref,
+  shallowRef,
+  computed,
+  watchEffect
+} from 'vue'
 import useFormItem from '../../form/src/hooks/use-form-item'
 import useFormSize from '../../form/src/hooks/use-form-size'
 import { Input } from '../../input'
@@ -7,7 +14,11 @@ import { Overlay } from '../../overlay'
 import Wave from '../../shared/components/wave'
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import { RenderItemProps, VirtualScroll } from '../../virtualScroll'
-import { autoCompleteProps, AutoCompleteProps, IAutoCompleteOption } from './autoComplete-types'
+import {
+  autoCompleteProps,
+  AutoCompleteProps,
+  IAutoCompleteOption
+} from './autoComplete-types'
 
 import './index.scss'
 const ITEM_HEIGHT = 32
@@ -38,7 +49,9 @@ export default defineComponent({
       nextTick(() => triggerValidate('blur'))
     }
 
-    const renderOptionItem = (itemProps: RenderItemProps<IAutoCompleteOption>) => {
+    const renderOptionItem = (
+      itemProps: RenderItemProps<IAutoCompleteOption>
+    ) => {
       const { row } = itemProps
       return props.renderLabel ? (
         props.renderLabel(itemProps)
@@ -52,7 +65,8 @@ export default defineComponent({
     const handleKeydown = (e: KeyboardEvent) => {
       const keyCode = e.key || e.code
       const len = props.options.length
-      const [startIndex, endIndex] = virtualListRef.value?.getVisibleRange() || []
+      const [startIndex, endIndex] =
+        virtualListRef.value?.getVisibleRange() || []
 
       switch (keyCode) {
         case 'ArrowDown':
@@ -110,7 +124,10 @@ export default defineComponent({
             placeholder={props.placeholder}
             size={inputSize.value}
             onInput={(e: Event) => {
-              ctx.emit('update:modelValue', (e.target as HTMLInputElement).value)
+              ctx.emit(
+                'update:modelValue',
+                (e.target as HTMLInputElement).value
+              )
             }}
             disabled={!!props.disabled}
             onFocus={() => {
@@ -123,7 +140,10 @@ export default defineComponent({
           position="bottom-start"
           origin={inputRef.value}
           offset={2}
-          style={{ width: inputRef.value?.clientWidth + 'px' || 'unset', padding: '0' }}
+          style={{
+            width: inputRef.value?.clientWidth + 'px' || 'unset',
+            padding: '0'
+          }}
           ref={overlayRef}
           onOutsideClick={onOutsideClick}
           flip
@@ -136,9 +156,10 @@ export default defineComponent({
               itemHeight={32}
               listData={props.options}
               itemClass={handleItemClass}
-              onItemClick={(_: Event, { row }: RenderItemProps<IAutoCompleteOption>) =>
-                handleOptionClick(row)
-              }
+              onItemClick={(
+                _: Event,
+                { row }: RenderItemProps<IAutoCompleteOption>
+              ) => handleOptionClick(row)}
               wrapHeight={Math.min(
                 props.maxOptionCount * ITEM_HEIGHT,
                 props.options.length * ITEM_HEIGHT

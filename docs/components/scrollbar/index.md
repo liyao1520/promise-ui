@@ -9,7 +9,9 @@
 ```vue
 <template>
   <p-scrollbar height="300px">
-    <p v-for="item in 20" :key="item" class="scrollbar-demo-item"> {{ item }}</p>
+    <p v-for="item in 20" :key="item" class="scrollbar-demo-item">
+      {{ item }}</p
+    >
   </p-scrollbar>
 </template>
 <style>
@@ -37,7 +39,9 @@
   <div class="demo">
     <p-scrollbar>
       <div class="scrollbar-demo-wrap">
-        <p v-for="item in 20" :key="item" class="scrollbar-demo-item"> {{ item }}</p>
+        <p v-for="item in 20" :key="item" class="scrollbar-demo-item">
+          {{ item }}</p
+        >
       </div>
     </p-scrollbar>
   </div>
@@ -75,7 +79,9 @@
   <p-button @click="add">Add Item</p-button>
   <p-button @click="onDelete">Delete Item</p-button>
   <p-scrollbar max-height="300px" always>
-    <p v-for="item in count" :key="item" class="scrollbar-demo-item"> {{ item }}</p>
+    <p v-for="item in count" :key="item" class="scrollbar-demo-item">
+      {{ item }}</p
+    >
   </p-scrollbar>
 </template>
 
@@ -118,7 +124,9 @@
   <p-button @click="scrollBy(-200)">+200px</p-button>
   <br />
   <p-scrollbar height="300px" always ref="scrollbar">
-    <p v-for="item in 20" :key="item" class="scrollbar-demo-item"> {{ item }}</p>
+    <p v-for="item in 20" :key="item" class="scrollbar-demo-item">
+      {{ item }}</p
+    >
   </p-scrollbar>
 </template>
 <script setup>
@@ -155,7 +163,9 @@
 <template>
   <h3> scrollTop: {{ scrollTop }} </h3>
   <p-scrollbar height="300px" always @scroll="onScroll">
-    <p v-for="item in 20" :key="item" class="scrollbar-demo-item"> {{ item }}</p>
+    <p v-for="item in 20" :key="item" class="scrollbar-demo-item">
+      {{ item }}</p
+    >
   </p-scrollbar>
 </template>
 <script setup>

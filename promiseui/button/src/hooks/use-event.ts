@@ -1,7 +1,10 @@
 import { toRefs, ref } from 'vue'
 import { ButtonProps } from '../button-types'
 
-const useEvent = (props: ButtonProps, emit: (event: 'click', ...args: any[]) => void) => {
+const useEvent = (
+  props: ButtonProps,
+  emit: (event: 'click', ...args: any[]) => void
+) => {
   const { loading } = toRefs(props)
   const isMouseDown = ref(false)
   const onClick = (e: MouseEvent) => {

@@ -10,7 +10,9 @@ export default function (props: CheckboxProps, ctx: SetupContext) {
     }
     if (CheckboxContext) {
       const modelValue = CheckboxContext.props.modelValue
-      return Array.isArray(modelValue) ? modelValue.includes(props.value) : false
+      return Array.isArray(modelValue)
+        ? modelValue.includes(props.value)
+        : false
     }
     return props.modelValue === true
   }

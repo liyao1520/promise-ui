@@ -15,7 +15,10 @@ export default defineComponent({
   setup(props: CheckboxProps, ctx) {
     const ns = useNamespace('checkbox')
 
-    const { handleClick, checked, disabled, size } = useCheckbox(props, ctx as SetupContext)
+    const { handleClick, checked, disabled, size } = useCheckbox(
+      props,
+      ctx as SetupContext
+    )
     const formSize = useFormSize()
 
     const checkBox = computed(() => size.value || formSize.value || 'md')
@@ -29,7 +32,10 @@ export default defineComponent({
     const renderIcon = () => {
       if (props.indeterminate || checked.value) {
         return (
-          <Icon component={props.indeterminate ? RemoveSharp : CheckmarkSharp} color="#ffffff" />
+          <Icon
+            component={props.indeterminate ? RemoveSharp : CheckmarkSharp}
+            color="#ffffff"
+          />
         )
       }
 

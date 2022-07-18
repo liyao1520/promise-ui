@@ -3,7 +3,8 @@ import { TabsKey, TabsProps } from '../tabs-types'
 
 export default function (props: TabsProps, ctx: SetupContext) {
   const { renderContent, contentVnode } = useRenderContent(props)
-  const { getPaneIndex, updateTranstionName, transitionName } = useTransitionName()
+  const { getPaneIndex, updateTranstionName, transitionName } =
+    useTransitionName()
   const activeBarStyles = reactive({
     left: 'unset',
     width: 'unset'
@@ -30,7 +31,10 @@ export default function (props: TabsProps, ctx: SetupContext) {
     updateTranstionName(paneIndex)
   }
 
-  const handleClose = (name: string | number, defaultSlot: Slot | undefined) => {
+  const handleClose = (
+    name: string | number,
+    defaultSlot: Slot | undefined
+  ) => {
     ctx.emit('close', name)
   }
   provide(TabsKey, {

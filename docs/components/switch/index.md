@@ -11,7 +11,9 @@
   <p-space>
     <p-switch v-model="checked" @change="handleChange" />
     <p-switch v-model="checked" :disabled="disabled" />
-    <p-button @click="disabled = !disabled" size="sm" type="primary">toggle disabled</p-button>
+    <p-button @click="disabled = !disabled" size="sm" type="primary"
+      >toggle disabled</p-button
+    >
   </p-space>
 </template>
 <script setup>
@@ -34,7 +36,11 @@
   <h4>props</h4>
   <p-space>
     <p-switch v-model="checked" activeText="开" inactiveText="关" />
-    <p-switch v-model="checked" activeText="长内容也可以!" inactiveText="长内容可以吗?" />
+    <p-switch
+      v-model="checked"
+      activeText="长内容也可以!"
+      inactiveText="长内容可以吗?"
+    />
   </p-space>
   <h4>slots</h4>
   <p-space>
@@ -149,7 +155,12 @@
 
 ```vue
 <template>
-  <p-switch v-model="checked" :activeValue="1" :inactiveValue="0" @change="handleChange" />
+  <p-switch
+    v-model="checked"
+    :activeValue="1"
+    :inactiveValue="0"
+    @change="handleChange"
+  />
 </template>
 <script setup>
   import { ref } from 'vue'

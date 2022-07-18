@@ -1,6 +1,10 @@
 import { defineComponent, provide, watch } from 'vue'
 import { useNamespace } from '../../shared/hooks/use-namespace'
-import { checkboxGroupProps, CheckboxGroupProps, checkBoxKey } from './checkbox-types'
+import {
+  checkboxGroupProps,
+  CheckboxGroupProps,
+  checkBoxKey
+} from './checkbox-types'
 
 export default defineComponent({
   name: 'PCheckboxGroup',

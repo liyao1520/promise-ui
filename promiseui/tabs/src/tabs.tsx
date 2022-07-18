@@ -29,7 +29,7 @@ export default defineComponent({
       transitionName,
       activeBarStyles,
       contentVnode,
-      changeActiveBarPosition,
+      changeActiveBarPosition
     } = useTabs(props, ctx as SetupContext)
 
     const handleAddPane = () => {
@@ -63,7 +63,10 @@ export default defineComponent({
       return (
         <div class={[ns.b(), ns.m(type.value)]}>
           <div class={ns.e('header-wrapper')} ref={tabsHeaderEl}>
-            <div class={ns.e('header')} style={{ justifyContent: justifyContent.value }}>
+            <div
+              class={ns.e('header')}
+              style={{ justifyContent: justifyContent.value }}
+            >
               {slots.default && slots.default()}
               {type.value === 'editable-card' && (
                 <div class={[ns.e('pane-add')]} onClick={handleAddPane}>
@@ -73,7 +76,10 @@ export default defineComponent({
               <div class={ns.e('active-bar')} style={activeBarStyles}></div>
             </div>
           </div>
-          <Transition name={animated.value ? transitionName.value : ''} mode="out-in">
+          <Transition
+            name={animated.value ? transitionName.value : ''}
+            mode="out-in"
+          >
             <div class={ns.e('content-wrapper')} key={modelValue.value}>
               <div class={ns.e('content')}>{contentVnode.value}</div>
             </div>

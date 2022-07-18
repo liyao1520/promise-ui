@@ -5,7 +5,12 @@ import sidebar from './sidebar.json'
 
 const nav = [
   { text: '组件文档', link: '/quick-start/', target: '_self' },
-  { text: 'Github', link: 'https://github.com/liyao1520/promise-ui', target: '_blank', rel: '' }
+  {
+    text: 'Github',
+    link: 'https://github.com/liyao1520/promise-ui',
+    target: '_blank',
+    rel: ''
+  }
 ]
 
 const config: UserConfig = {

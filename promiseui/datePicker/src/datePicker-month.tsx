@@ -30,7 +30,10 @@ export default defineComponent({
     const isActive = (day: Dayjs) => {
       if (props.activeDay === undefined) return false
 
-      return day.month() === props.activeDay?.month?.() && day.year() === props.activeDay?.year?.()
+      return (
+        day.month() === props.activeDay?.month?.() &&
+        day.year() === props.activeDay?.year?.()
+      )
     }
     const handleMonthClick = (day: Dayjs) => {
       emit('change', day)
@@ -45,13 +48,23 @@ export default defineComponent({
       <div class={ns.b()}>
         <div class={ns.e('header')}>
           <div class={ns.e('btns')}>
-            <Button size={'xs'} shake={false} fillMode="none" onClick={togglePrevYear}>
+            <Button
+              size={'xs'}
+              shake={false}
+              fillMode="none"
+              onClick={togglePrevYear}
+            >
               <IconDoubleChevronLeft />
             </Button>
           </div>
           <div class={ns.e('navigation-year')}>{currentYear.value + '年'}</div>
           <div class={ns.e('btns')}>
-            <Button size={'xs'} shake={false} fillMode="none" onClick={toggleNextYear}>
+            <Button
+              size={'xs'}
+              shake={false}
+              fillMode="none"
+              onClick={toggleNextYear}
+            >
               <IconDoubleChevronRight />
             </Button>
           </div>
@@ -66,7 +79,9 @@ export default defineComponent({
                       key={month.dayjs.unix()}
                       class={{
                         [ns.e('month-year-cell')]: true,
-                        [ns.em('month-year-cell', 'active')]: isActive(month.dayjs)
+                        [ns.em('month-year-cell', 'active')]: isActive(
+                          month.dayjs
+                        )
                       }}
                       onClick={() => handleMonthClick(month.dayjs)}
                     >

@@ -21,8 +21,7 @@ export const scrollbarProps = {
   minSize: {
     type: Number,
     default: 20
-  },
-  
+  }
 } as const
 
 export type ScrollbarProps = ExtractPropTypes<typeof scrollbarProps>

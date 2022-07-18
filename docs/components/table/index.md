@@ -515,7 +515,9 @@
 <template>
   <p-space>
     <p-button @click="handleSelect('IU')">只选择歌手IU</p-button>
-    <p-button @click="handleSelect('Taylor Swift')">只选择歌手Taylor Swift</p-button>
+    <p-button @click="handleSelect('Taylor Swift')"
+      >只选择歌手Taylor Swift</p-button
+    >
   </p-space>
   <p-table
     :data-source="dataSource"
@@ -682,7 +684,12 @@
 
 ```vue
 <template>
-  <p-table :data-source="dataSource" :columns="columns" :max-height="250" :scroll-x="1500" />
+  <p-table
+    :data-source="dataSource"
+    :columns="columns"
+    :max-height="250"
+    :scroll-x="1500"
+  />
 </template>
 
 <script setup>
@@ -1132,7 +1139,9 @@
     <p-table-column title="出版单位" dataIndex="press"></p-table-column>
     <p-table-column title="操作">
       <template #default="{ index }">
-        <p-button size="sm" type="danger" @click="deleteItem(index)">删除</p-button>
+        <p-button size="sm" type="danger" @click="deleteItem(index)"
+          >删除</p-button
+        >
       </template>
     </p-table-column>
   </p-table>

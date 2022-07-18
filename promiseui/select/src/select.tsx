@@ -1,4 +1,12 @@
-import { defineComponent, nextTick, ref, SetupContext, watch, shallowRef, computed } from 'vue'
+import {
+  defineComponent,
+  nextTick,
+  ref,
+  SetupContext,
+  watch,
+  shallowRef,
+  computed
+} from 'vue'
 import { selectProps, SelectProps, ISelectOption } from './select-types'
 
 import './index.scss'
@@ -42,11 +50,18 @@ export default defineComponent({
     useFormValidate(props, optionListShow)
     useMemoScrollTop(optionListShow, virtualListRef)
 
-    const { defaultSingleActiveItem, defaultMultipleActiveItems } = useDefaultValue(props)
+    const { defaultSingleActiveItem, defaultMultipleActiveItems } =
+      useDefaultValue(props)
     const singleActiveItem = ref<ISelectOption>(defaultSingleActiveItem)
     const multipleActiveItems = ref<ISelectOption[]>(defaultMultipleActiveItems)
 
-    const { selectOptionClick, selectOptionClass, options, onClearOpiton, hoverIndex } = useOption(
+    const {
+      selectOptionClick,
+      selectOptionClass,
+      options,
+      onClearOpiton,
+      hoverIndex
+    } = useOption(
       props,
       ctx as SetupContext,
       singleActiveItem,
@@ -66,7 +81,10 @@ export default defineComponent({
       optionListShow
     )
 
-    const handleSelectOptionClick = (e: Event, itemProps: RenderItemProps<ISelectOption>) => {
+    const handleSelectOptionClick = (
+      e: Event,
+      itemProps: RenderItemProps<ISelectOption>
+    ) => {
       selectOptionClick(itemProps.row)
       const needScroll = inputValue.value.length !== 0
       inputValue.value = ''
@@ -76,7 +94,10 @@ export default defineComponent({
         })
       }
     }
-    const handleSelectOptionMouseenter = (e: Event, { index }: RenderItemProps<ISelectOption>) => {
+    const handleSelectOptionMouseenter = (
+      e: Event,
+      { index }: RenderItemProps<ISelectOption>
+    ) => {
       hoverIndex.value = index
     }
     const selectClick = () => {
@@ -130,7 +151,8 @@ export default defineComponent({
       )
     }
     const renderTags = () => {
-      const remainingCount = multipleActiveItems.value.length - props.maxTagCount
+      const remainingCount =
+        multipleActiveItems.value.length - props.maxTagCount
       const sliceTags = (start: number, end?: number) =>
         multipleActiveItems.value.slice(start, end).map((item) => (
           <Tag
@@ -171,11 +193,18 @@ export default defineComponent({
             ref={selectInputRef}
             disabled={props.disabled}
             style={{
-              width: Math.max(inputValue.value.length, props.placeholder.length) * 14 + 'px'
+              width:
+                Math.max(inputValue.value.length, props.placeholder.length) *
+                  14 +
+                'px'
             }}
-            placeholder={multipleActiveItems.value.length === 0 ? props.placeholder : ''}
+            placeholder={
+              multipleActiveItems.value.length === 0 ? props.placeholder : ''
+            }
             onKeyup={onAddTag}
-            onChange={(e) => ctx.emit('inputChange', (e.target as HTMLInputElement).value)}
+            onChange={(e) =>
+              ctx.emit('inputChange', (e.target as HTMLInputElement).value)
+            }
           ></input>
         ) : (
           multipleActiveItems.value.length === 0 && (
@@ -189,7 +218,10 @@ export default defineComponent({
 
       return props.filterable ? (
         <input
-          class={[ns.e('input'), !props.modelValue && ns.em('input', 'placeholder')]}
+          class={[
+            ns.e('input'),
+            !props.modelValue && ns.em('input', 'placeholder')
+          ]}
           ref={selectInputRef}
           v-model={inputValue.value}
           disabled={props.disabled}
@@ -197,7 +229,9 @@ export default defineComponent({
             width: '100%'
           }}
           placeholder={label}
-          onChange={(e) => ctx.emit('inputChange', (e.target as HTMLInputElement).value)}
+          onChange={(e) =>
+            ctx.emit('inputChange', (e.target as HTMLInputElement).value)
+          }
         ></input>
       ) : (
         <span
@@ -237,7 +271,10 @@ export default defineComponent({
               position="bottom-start"
               origin={selectRef.value}
               offset={2}
-              style={{ width: selectRef.value?.clientWidth + 'px' || 'unset', padding: '0' }}
+              style={{
+                width: selectRef.value?.clientWidth + 'px' || 'unset',
+                padding: '0'
+              }}
               ref={overlayRef}
               onOutsideClick={onOutsideClick}
               clickOutsideIgnore={[tagDropdownRef]}

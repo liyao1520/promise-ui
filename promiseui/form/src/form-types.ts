@@ -1,5 +1,12 @@
 import { ICommonSize } from './../../types'
-import { PropType, ExtractPropTypes, CSSProperties, provide, InjectionKey, Ref } from 'vue'
+import {
+  PropType,
+  ExtractPropTypes,
+  CSSProperties,
+  provide,
+  InjectionKey,
+  Ref
+} from 'vue'
 import { Rules, Rule, Values } from 'async-validator'
 export type triggerType = 'blur' | 'change'
 export const formProps = {
@@ -100,8 +107,10 @@ export interface IFormItemContext {
   validate: () => Promise<Values>
   triggers: Ref<string[]>
 }
-export const formContextKey: InjectionKey<IFormContext> = Symbol('formContextKey')
-export const formItemContextKey: InjectionKey<IFormItemContext> = Symbol('formItemContextKey')
+export const formContextKey: InjectionKey<IFormContext> =
+  Symbol('formContextKey')
+export const formItemContextKey: InjectionKey<IFormItemContext> =
+  Symbol('formItemContextKey')
 
 export type FormProps = ExtractPropTypes<typeof formProps>
 export type FormItemProps = ExtractPropTypes<typeof formItemProps>

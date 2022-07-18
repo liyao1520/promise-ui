@@ -18,14 +18,18 @@ export const selectProps = {
     type: Array as PropType<any[]>
   },
   renderLabel: {
-    type: Function as PropType<(itemProps: RenderItemProps<ISelectOption>) => VNodeChild>
+    type: Function as PropType<
+      (itemProps: RenderItemProps<ISelectOption>) => VNodeChild
+    >
   },
   disabled: {
     type: Boolean,
     default: false
   },
   modelValue: {
-    type: [String, Number, Array] as PropType<string | number | string[] | number[]>
+    type: [String, Number, Array] as PropType<
+      string | number | string[] | number[]
+    >
   },
   clearable: {
     type: Boolean,

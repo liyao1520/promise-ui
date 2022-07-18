@@ -7,8 +7,11 @@ export default function useSelection(
   rowKey: string | ((item: any) => string | number),
   dataSourceMap: Map<string | number, object>
 ) {
-  const selectionSet = computed(() => new Set(rowSelection.value?.selectedRowKeys || []))
-  const getRows = (keys: (string | number)[]) => keys.map((key) => dataSourceMap.get(key))
+  const selectionSet = computed(
+    () => new Set(rowSelection.value?.selectedRowKeys || [])
+  )
+  const getRows = (keys: (string | number)[]) =>
+    keys.map((key) => dataSourceMap.get(key))
   const handleChange = (keys: (string | number)[]) => {
     if (!rowSelection.value?.onChange) return
     if (rowSelection.value.onChange.length < 2) {

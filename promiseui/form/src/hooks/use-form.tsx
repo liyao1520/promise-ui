@@ -8,7 +8,10 @@ import getValueByPathname from '../../../shared/utils/getValueByPathname'
 const findRequiredRule = (rules: RuleItem[]) => {
   return !!rules.find((rule) => rule.required)
 }
-export default function (props: FormItemProps, labelRef: Ref<HTMLLabelElement | undefined>) {
+export default function (
+  props: FormItemProps,
+  labelRef: Ref<HTMLLabelElement | undefined>
+) {
   const FormContext = inject(formContextKey, undefined)
   const validateError = ref<null | ValidateError>()
   const childLabelWidthRace = () => {
@@ -35,23 +38,33 @@ export default function (props: FormItemProps, labelRef: Ref<HTMLLabelElement | 
     if (props.labelWidth === 'auto') {
       return maxChildLabelWidth + 'px'
     } else if (props.labelWidth) {
-      return typeof props.labelWidth === 'number' ? props.labelWidth + 'px' : props.labelWidth
+      return typeof props.labelWidth === 'number'
+        ? props.labelWidth + 'px'
+        : props.labelWidth
     } else {
       // props.label 没有值,继承form的label
       const FormLabelWidth = FormContext?.props.labelWidth
 
       if (FormLabelWidth === 'auto') {
-        return maxChildLabelWidth ? maxChildLabelWidth + 'px' : maxChildLabelWidth
+        return maxChildLabelWidth
+          ? maxChildLabelWidth + 'px'
+          : maxChildLabelWidth
       } else {
-        return typeof FormLabelWidth === 'number' ? FormLabelWidth + 'px' : FormLabelWidth
+        return typeof FormLabelWidth === 'number'
+          ? FormLabelWidth + 'px'
+          : FormLabelWidth
       }
     }
   })
 
   const labelPosition = computed(() =>
-    props.labelPosition ? props.labelPosition : FormContext?.props.labelPosition || 'right'
+    props.labelPosition
+      ? props.labelPosition
+      : FormContext?.props.labelPosition || 'right'
   )
-  const formItemSize = computed(() => (props.size ? props.size : FormContext?.props.size || 'md'))
+  const formItemSize = computed(() =>
+    props.size ? props.size : FormContext?.props.size || 'md'
+  )
 
   const showLabel = computed(() =>
     props.showLabel ? props.showLabel : !!FormContext?.props.showLabel
@@ -59,7 +72,9 @@ export default function (props: FormItemProps, labelRef: Ref<HTMLLabelElement | 
   const showRequireMark = computed(() => {
     if (props.showRequireMark !== undefined) return props.showRequireMark
 
-    return !!FormContext?.props.showRequireMark && findRequiredRule(getMergeRules())
+    return (
+      !!FormContext?.props.showRequireMark && findRequiredRule(getMergeRules())
+    )
   })
   const getMergeRules = () => {
     const propsRules = toArray(props.rules)

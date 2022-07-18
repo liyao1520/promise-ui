@@ -149,7 +149,9 @@
       </template>
       点我
     </PButton>
-    <PButton size="lg" :loading="isLoading" @click="handleClick"> 点我 </PButton>
+    <PButton size="lg" :loading="isLoading" @click="handleClick">
+      点我
+    </PButton>
   </PSpace>
 </template>
 <script>

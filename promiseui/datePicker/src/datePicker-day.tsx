@@ -55,8 +55,14 @@ export default defineComponent({
     const tdClasses = computed(() => ({
       [ns.e('day-cell')]: true
     }))
-    const { toggleNextMonth, togglePrevMonth, toggleNextYear, togglePrevYear, setMonth, setYear } =
-      useTogglePage(currentMonth, currentYear)
+    const {
+      toggleNextMonth,
+      togglePrevMonth,
+      toggleNextYear,
+      togglePrevYear,
+      setMonth,
+      setYear
+    } = useTogglePage(currentMonth, currentYear)
     const handleDayClick = (day: Dayjs) => {
       // dayjs month 需要加 1
       const month = day.month() + 1
@@ -86,7 +92,9 @@ export default defineComponent({
       <>
         <DatePickerYear
           v-show={showSelectYear.value}
-          activeDay={Array.isArray(props.activeDay) ? undefined : props.activeDay}
+          activeDay={
+            Array.isArray(props.activeDay) ? undefined : props.activeDay
+          }
           currentYear={currentYear.value}
           onChange={(day) => {
             setMonth(day.month() + 1)
@@ -97,7 +105,9 @@ export default defineComponent({
         />
         <DatePickerMonth
           v-show={showSelectMonth.value}
-          activeDay={Array.isArray(props.activeDay) ? undefined : props.activeDay}
+          activeDay={
+            Array.isArray(props.activeDay) ? undefined : props.activeDay
+          }
           currentYear={currentYear.value}
           onYearChange={(year) => setYear(year)}
           onChange={(day) => {
@@ -107,27 +117,52 @@ export default defineComponent({
           }}
         />
 
-        <div class={classes.value} v-show={!showSelectMonth.value && !showSelectYear.value}>
+        <div
+          class={classes.value}
+          v-show={!showSelectMonth.value && !showSelectYear.value}
+        >
           <div class={ns.e('header')}>
             <div class={ns.e('btns')}>
-              <Button size={'xs'} shake={false} fillMode="none" onClick={togglePrevYear}>
+              <Button
+                size={'xs'}
+                shake={false}
+                fillMode="none"
+                onClick={togglePrevYear}
+              >
                 <IconDoubleChevronLeft />
               </Button>
-              <Button size={'xs'} shake={false} fillMode="none" onClick={togglePrevMonth}>
+              <Button
+                size={'xs'}
+                shake={false}
+                fillMode="none"
+                onClick={togglePrevMonth}
+              >
                 <IconChevronLeft />
               </Button>
             </div>
             <div class={ns.e('navigation-month')}>
-              <span onClick={() => (showSelectYear.value = true)}>{currentYear.value + '年'}</span>
+              <span onClick={() => (showSelectYear.value = true)}>
+                {currentYear.value + '年'}
+              </span>
               <span onClick={() => (showSelectMonth.value = true)}>
                 {currentMonth.value + '月'}
               </span>
             </div>
             <div class={ns.e('btns')}>
-              <Button size={'xs'} shake={false} fillMode="none" onClick={toggleNextMonth}>
+              <Button
+                size={'xs'}
+                shake={false}
+                fillMode="none"
+                onClick={toggleNextMonth}
+              >
                 <IconChevronRight />
               </Button>
-              <Button size={'xs'} shake={false} fillMode="none" onClick={toggleNextYear}>
+              <Button
+                size={'xs'}
+                shake={false}
+                fillMode="none"
+                onClick={toggleNextYear}
+              >
                 <IconDoubleChevronRight />
               </Button>
             </div>

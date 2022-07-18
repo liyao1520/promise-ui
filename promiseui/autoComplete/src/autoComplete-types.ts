@@ -24,7 +24,9 @@ export const autoCompleteProps = {
   },
   disabled: Boolean,
   renderLabel: {
-    type: Function as PropType<(itemProps: RenderItemProps<IAutoCompleteOption>) => VNodeChild>
+    type: Function as PropType<
+      (itemProps: RenderItemProps<IAutoCompleteOption>) => VNodeChild
+    >
   }
 } as const
 

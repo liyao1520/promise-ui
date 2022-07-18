@@ -1,5 +1,18 @@
-import { computed, CSSProperties, defineComponent, nextTick, provide, ref, toRef } from 'vue'
-import { TableColumnType, tableProps, TableProps, TableStoreKey } from './table-types'
+import {
+  computed,
+  CSSProperties,
+  defineComponent,
+  nextTick,
+  provide,
+  ref,
+  toRef
+} from 'vue'
+import {
+  TableColumnType,
+  tableProps,
+  TableProps,
+  TableStoreKey
+} from './table-types'
 
 import './index.scss'
 import { useNamespace } from '../../shared/hooks/use-namespace'
@@ -61,7 +74,9 @@ export default defineComponent({
           {props.showHeader && <TableHeader />}
           <TableBody />
         </table>
-        {filterTableData.value.length === 0 && <Empty class={ns.e('empty')} description="无数据" />}
+        {filterTableData.value.length === 0 && (
+          <Empty class={ns.e('empty')} description="无数据" />
+        )}
       </div>
     )
     const headerRef = ref<HTMLElement>()
@@ -115,9 +130,9 @@ export default defineComponent({
     const isFixed = props.maxHeight || props.scrollX
     return () => {
       nextTick(() => {
-        const fixeds = Array.from(headerRef.value?.querySelectorAll('th') || []).map(
-          (item) => item.offsetLeft
-        )
+        const fixeds = Array.from(
+          headerRef.value?.querySelectorAll('th') || []
+        ).map((item) => item.offsetLeft)
         store.setFixedStyle(fixeds)
       })
       return isFixed ? fixedTable() : baseTable()

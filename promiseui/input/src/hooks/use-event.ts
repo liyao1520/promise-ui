@@ -2,7 +2,11 @@ import { Ref, SetupContext, watch } from 'vue'
 import useFormItem from '../../../form/src/hooks/use-form-item'
 import { InputProps } from '../input-types'
 
-const useEvent = (props: InputProps, ctx: SetupContext, focused: Ref<boolean>) => {
+const useEvent = (
+  props: InputProps,
+  ctx: SetupContext,
+  focused: Ref<boolean>
+) => {
   const { triggerValidate } = useFormItem()
   const onInput = (e: Event) => {
     ctx.emit('input', e)

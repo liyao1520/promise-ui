@@ -18,7 +18,9 @@ export default defineComponent({
     })
     const loading = ref(false)
 
-    const isCustomActiveColor = computed(() => !commonType.includes(props.activeColor))
+    const isCustomActiveColor = computed(
+      () => !commonType.includes(props.activeColor)
+    )
 
     const formSize = useFormSize()
     const selectSize = computed(() => props.size || formSize.value || 'md')

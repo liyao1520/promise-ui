@@ -8,7 +8,11 @@ import {
   ref,
   watch
 } from 'vue'
-import { RenderItemProps, virtualScrollProps, VirtualScrollProps } from './virtualScroll-types'
+import {
+  RenderItemProps,
+  virtualScrollProps,
+  VirtualScrollProps
+} from './virtualScroll-types'
 
 import './index.scss'
 import { useNamespace } from '../../shared/hooks/use-namespace'
@@ -62,7 +66,8 @@ export default defineComponent({
     const containerStyles = computed<CSSProperties>(() => ({
       paddingTop: realStartIndex.value * props.itemHeight + 'px',
       paddingBottom:
-        (props.listData.length - visibleEndIndex.value + containSize.value) * props.itemHeight +
+        (props.listData.length - visibleEndIndex.value + containSize.value) *
+          props.itemHeight +
         'px',
 
       height: '100%'
@@ -79,11 +84,16 @@ export default defineComponent({
       if (!scrollContainer.value) return
       if (timer) return
       timer = requestAnimationFrame(() => (timer = null))
-      visibleStartIndex.value = Math.floor(scrollContainer.value.scrollTop / props.itemHeight)
+      visibleStartIndex.value = Math.floor(
+        scrollContainer.value.scrollTop / props.itemHeight
+      )
       if (props.onLoadMore && !isLoadMore.value) {
         const target = e.target as HTMLElement
 
-        if (target.scrollHeight <= target.clientHeight + target.scrollTop + props.loadMoreOffset) {
+        if (
+          target.scrollHeight <=
+          target.clientHeight + target.scrollTop + props.loadMoreOffset
+        ) {
           handleLoadMore()
         }
       }
@@ -126,7 +136,9 @@ export default defineComponent({
 
       if (offset === 'bottom') {
         scrollContainer.value?.scrollTo({
-          top: index * props.itemHeight - props.itemHeight * (containSize.value - 1),
+          top:
+            index * props.itemHeight -
+            props.itemHeight * (containSize.value - 1),
           behavior
         })
       } else {
@@ -137,8 +149,10 @@ export default defineComponent({
       }
     }
     expose({
-      scrollTo: (option?: IScrollToIndexOption) => scrollContainer.value?.scrollTo(option),
-      scrollBy: (option?: IScrollToIndexOption) => scrollContainer.value?.scrollBy(option),
+      scrollTo: (option?: IScrollToIndexOption) =>
+        scrollContainer.value?.scrollTo(option),
+      scrollBy: (option?: IScrollToIndexOption) =>
+        scrollContainer.value?.scrollBy(option),
       scrollToIndex,
       scrollToEnd(option?: IScrollToIndexOption) {
         scrollToIndex(props.listData.length - 1, option)
@@ -186,12 +200,19 @@ export default defineComponent({
             key={props.itemKey ? (row as any)[props.itemKey] : index}
             style={[
               handleItemStyle({ row, index, rows }),
-              { height: props.itemHeight + 'px !important', overflow: 'hidden !important' }
+              {
+                height: props.itemHeight + 'px !important',
+                overflow: 'hidden !important'
+              }
             ]}
             class={handleItemClass({ row, index, rows })}
             onClick={(e) => emit('item-click', e, { row, index, rows })}
-            onMouseenter={(e) => emit('item-mouseenter', e, { row, index, rows })}
-            onMouseleave={(e) => emit('item-mouseleave', e, { row, index, rows })}
+            onMouseenter={(e) =>
+              emit('item-mouseenter', e, { row, index, rows })
+            }
+            onMouseleave={(e) =>
+              emit('item-mouseleave', e, { row, index, rows })
+            }
           >
             {slots.item?.({
               row,

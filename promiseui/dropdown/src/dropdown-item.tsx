@@ -1,6 +1,10 @@
 import { useNamespace } from '../../shared/hooks/use-namespace'
 import { computed, defineComponent, inject, ref, toRefs } from 'vue'
-import { dropdownItemProps, DropdownItemProps, DropDownKey } from './dropdown-types'
+import {
+  dropdownItemProps,
+  DropdownItemProps,
+  DropDownKey
+} from './dropdown-types'
 
 export default defineComponent({
   name: 'PDropdownItem',

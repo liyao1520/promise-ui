@@ -46,9 +46,22 @@ export default defineComponent({
     }
   },
   render() {
-    const { isShow, $emit, top, type, IconContent, closeClick, showClose, customClass } = this
+    const {
+      isShow,
+      $emit,
+      top,
+      type,
+      IconContent,
+      closeClick,
+      showClose,
+      customClass
+    } = this
     return (
-      <Transition name="message-fade" onAfterLeave={(_) => $emit('destory')} appear>
+      <Transition
+        name="message-fade"
+        onAfterLeave={(_) => $emit('destory')}
+        appear
+      >
         {isShow && (
           <div class={[ns.b(), customClass]} style={{ top: top + 'px' }}>
             {IconContent && (
@@ -57,7 +70,9 @@ export default defineComponent({
               </Icon>
             )}
             <span class={ns.e('content')}>
-              {typeof this.message === 'object' ? JSON.stringify(this.message) : this.message}
+              {typeof this.message === 'object'
+                ? JSON.stringify(this.message)
+                : this.message}
             </span>
             {showClose && (
               <Icon class={ns.e('close')} onClick={closeClick}>

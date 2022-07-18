@@ -105,7 +105,11 @@ export default defineComponent({
           {filterTableData.value.map((row, rowIndex) => {
             const rowkey = getRowKey(row)
             return (
-              <tr key={rowkey} class={[ns.e('row')]} {...renderRowProps(row, rowIndex)}>
+              <tr
+                key={rowkey}
+                class={[ns.e('row')]}
+                {...renderRowProps(row, rowIndex)}
+              >
                 {/* render checkbox */}
                 {renderSelection(rowkey, row)}
                 {_columns.value.map((col, colIndex) =>

@@ -33,5 +33,4 @@ describe('message test', () => {
     const el = document.querySelector('.pui-message--success')
     expect(el).toBeTruthy()
   })
-
 })

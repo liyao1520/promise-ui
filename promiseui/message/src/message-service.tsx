@@ -56,7 +56,9 @@ function destoryMessage(
   app.unmount()
 
   resolve(undefined) //通过.then可以处理 onclose 事件
-  const index = messageList.findIndex((item) => item._messageId === _vm._messageId)
+  const index = messageList.findIndex(
+    (item) => item._messageId === _vm._messageId
+  )
 
   messageList.splice(index, 1)
   // 需要去掉的高度

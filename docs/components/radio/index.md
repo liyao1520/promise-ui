@@ -10,7 +10,12 @@
 <template>
   <p-space>
     <p-radio v-model="value" label="Option1" value="Option1" />
-    <p-radio v-model="value" label="Option2" value="Option2" :disabled="disabled" />
+    <p-radio
+      v-model="value"
+      label="Option2"
+      value="Option2"
+      :disabled="disabled"
+    />
     <p-switch v-model="disabled" />
   </p-space>
 </template>
@@ -104,21 +109,33 @@
 <template>
   <div>
     <p-radio-group v-model="value" name="fruits" size="sm">
-      <p-radio-button v-for="item in fruits" :key="item.value" :value="item.value">
+      <p-radio-button
+        v-for="item in fruits"
+        :key="item.value"
+        :value="item.value"
+      >
         {{ item.label }}</p-radio-button
       >
     </p-radio-group>
     <br />
     <br />
     <p-radio-group v-model="value" name="fruits" size="md" @change="onChange">
-      <p-radio-button v-for="item in fruits" :key="item.value" :value="item.value">
+      <p-radio-button
+        v-for="item in fruits"
+        :key="item.value"
+        :value="item.value"
+      >
         {{ item.label }}</p-radio-button
       >
     </p-radio-group>
     <br />
     <br />
     <p-radio-group v-model="value" name="fruits" size="lg">
-      <p-radio-button v-for="item in fruits" :key="item.value" :value="item.value">
+      <p-radio-button
+        v-for="item in fruits"
+        :key="item.value"
+        :value="item.value"
+      >
         {{ item.label }}</p-radio-button
       >
     </p-radio-group>

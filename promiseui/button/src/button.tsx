@@ -27,7 +27,10 @@ export default defineComponent({
       class: className
     } = toRefs(props)
     const ns = useNamespace('button')
-    const { onClick, onMousedown, onMouseup, isMouseDown } = useEvent(props, emit)
+    const { onClick, onMousedown, onMouseup, isMouseDown } = useEvent(
+      props,
+      emit
+    )
 
     const formSize = useFormSize()
     const buttonSize = computed(() => props.size || formSize.value || 'md')

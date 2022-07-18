@@ -26,7 +26,8 @@ export default defineComponent({
     const { filterData } = useTableStore()
     const checkeds = ref<boolean[]>([])
     const isFilterActive = ref(false)
-    const initial = () => Array.from<boolean>({ length: props.filterOptions.length }).fill(false)
+    const initial = () =>
+      Array.from<boolean>({ length: props.filterOptions.length }).fill(false)
     const dropdownRef = ref()
     watchEffect(() => {
       checkeds.value = initial()
@@ -46,7 +47,11 @@ export default defineComponent({
         filterData(() => true)
         isFilterActive.value = false
       } else {
-        const filterMethod: filterMethod = (item: any, index: number, arr: any[]) => {
+        const filterMethod: filterMethod = (
+          item: any,
+          index: number,
+          arr: any[]
+        ) => {
           for (const value of checkedValues) {
             if (props.filterMethod(value, item, index, arr)) {
               return true
@@ -68,7 +73,12 @@ export default defineComponent({
         <Dropdown hideOnClick={false} trigger="click" ref={dropdownRef}>
           {{
             default: () => (
-              <div class={[ns.e('filter'), isFilterActive.value && ns.em('filter', 'active')]}>
+              <div
+                class={[
+                  ns.e('filter'),
+                  isFilterActive.value && ns.em('filter', 'active')
+                ]}
+              >
                 <Icon component={FunnelSharp} />
               </div>
             ),

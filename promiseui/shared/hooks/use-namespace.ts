@@ -5,7 +5,11 @@ export type UseNamespace = {
   em: (el: string, mo: string) => string
 }
 
-function createBem(namespace: string, element?: string, modifier?: string): string {
+function createBem(
+  namespace: string,
+  element?: string,
+  modifier?: string
+): string {
   let cls = namespace
   if (element) {
     cls += `__${element}`
@@ -20,7 +24,8 @@ export function useNamespace(block: string): UseNamespace {
   const namespace = `pui-${block}`
   const b = () => createBem(namespace)
   const e = (element: string) => (element ? createBem(namespace, element) : '')
-  const m = (modifier: string) => (modifier ? createBem(namespace, '', modifier) : '')
+  const m = (modifier: string) =>
+    modifier ? createBem(namespace, '', modifier) : ''
   const em = (element: string, modifier: string) =>
     element && modifier ? createBem(namespace, element, modifier) : ''
   return {

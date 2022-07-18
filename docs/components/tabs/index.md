@@ -59,8 +59,18 @@
 
 ```vue
 <template>
-  <p-tabs v-model="current" type="editable-card" @close="close" @add-tab-pane="addTabPane">
-    <p-tab-pane v-for="item in panels" :key="item" :label="'Tab' + item" :name="item">
+  <p-tabs
+    v-model="current"
+    type="editable-card"
+    @close="close"
+    @add-tab-pane="addTabPane"
+  >
+    <p-tab-pane
+      v-for="item in panels"
+      :key="item"
+      :label="'Tab' + item"
+      :name="item"
+    >
       {{ 'content' + item }}
     </p-tab-pane>
   </p-tabs>
@@ -101,7 +111,12 @@
 
 ```vue
 <template>
-  <p-tabs v-model="current" type="editable-card" @close="close" @add-tab-pane="addTabPane">
+  <p-tabs
+    v-model="current"
+    type="editable-card"
+    @close="close"
+    @add-tab-pane="addTabPane"
+  >
     <p-tab-pane
       v-for="item in panels"
       :key="item"

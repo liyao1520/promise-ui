@@ -1,9 +1,21 @@
 import { useResizeObserver } from '@vueuse/core'
 import { Placement } from './../overlay-types'
-import { ComponentPublicInstance, computed, ref, Ref, toRef, toRefs, watch, watchEffect } from 'vue'
+import {
+  ComponentPublicInstance,
+  computed,
+  ref,
+  Ref,
+  toRef,
+  toRefs,
+  watch,
+  watchEffect
+} from 'vue'
 import { OverlayProps } from '../overlay-types'
 
-const useOverlay = (overlayEl: Ref<HTMLDivElement | null>, props: OverlayProps) => {
+const useOverlay = (
+  overlayEl: Ref<HTMLDivElement | null>,
+  props: OverlayProps
+) => {
   const x = ref(0)
   const y = ref(0)
   const shouldShow = ref(true)
@@ -28,7 +40,8 @@ const useOverlay = (overlayEl: Ref<HTMLDivElement | null>, props: OverlayProps) 
       el = el.nextSibling
     }
 
-    const { top, left, bottom, right, width, height } = el!.getBoundingClientRect()
+    const { top, left, bottom, right, width, height } =
+      el!.getBoundingClientRect()
 
     // 原生不存在? 那就 隐藏
     if (width === 0 && height === 0) {
@@ -53,9 +66,11 @@ const useOverlay = (overlayEl: Ref<HTMLDivElement | null>, props: OverlayProps) 
       const windowHeight = document.documentElement.clientHeight
       const windowWidth = document.documentElement.clientWidth
       if (top < clientHeight) pos = pos.replace('top', 'bottom') as Placement
-      if (windowHeight - bottom < clientHeight) pos = pos.replace('bottom', 'top') as Placement
+      if (windowHeight - bottom < clientHeight)
+        pos = pos.replace('bottom', 'top') as Placement
       if (left < clientWidth) pos = pos.replace('left', 'right') as Placement
-      if (windowWidth - right < clientWidth) pos = pos.replace('right', 'left') as Placement
+      if (windowWidth - right < clientWidth)
+        pos = pos.replace('right', 'left') as Placement
     }
 
     realPosition.value = pos

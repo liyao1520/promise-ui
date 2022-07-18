@@ -129,7 +129,12 @@
     <h4>默认</h4>
     <p-select v-model="active" :options="options" filterable />
     <h4>自定义 filter-method</h4>
-    <p-select v-model="active" :options="options" filterable :filter-method="filterMethod" />
+    <p-select
+      v-model="active"
+      :options="options"
+      filterable
+      :filter-method="filterMethod"
+    />
   </p-space>
 </template>
 <script setup>
@@ -241,7 +246,13 @@
 ```vue
 <template>
   <h4>先来个 10 万条数据</h4>
-  <p-select v-model="actives" clearable :options="options" multiple filterable></p-select>
+  <p-select
+    v-model="actives"
+    clearable
+    :options="options"
+    multiple
+    filterable
+  ></p-select>
   <h4>actives value :{{ actives }}</h4>
 </template>
 
@@ -270,7 +281,12 @@
 ```vue
 <template>
   <h4>最多选三个</h4>
-  <p-select v-model="actives" :options="options" multiple :multipleLimit="3"></p-select>
+  <p-select
+    v-model="actives"
+    :options="options"
+    multiple
+    :multipleLimit="3"
+  ></p-select>
   <h4>actives value :{{ actives }}</h4>
 </template>
 
@@ -299,7 +315,12 @@
 ```vue
 <template>
   <h4>两个以上折叠标签, hover 可显示隐藏掉的标签</h4>
-  <p-select v-model="actives" :options="options" multiple :maxTagCount="2"></p-select>
+  <p-select
+    v-model="actives"
+    :options="options"
+    multiple
+    :maxTagCount="2"
+  ></p-select>
   <h4>actives value :{{ actives }}</h4>
 </template>
 
@@ -328,7 +349,12 @@
 ```vue
 <template>
   <h4>options一页最多显示5个</h4>
-  <p-select v-model="actives" :options="options" multiple :maxOptionCount="5"></p-select>
+  <p-select
+    v-model="actives"
+    :options="options"
+    multiple
+    :maxOptionCount="5"
+  ></p-select>
   <h4>actives value :{{ actives }}</h4>
 </template>
 
@@ -357,7 +383,12 @@
 ```vue
 <template>
   <h4>设置标签类型</h4>
-  <p-select v-model="actives1" :options="options1" multiple tagType="success"></p-select>
+  <p-select
+    v-model="actives1"
+    :options="options1"
+    multiple
+    tagType="success"
+  ></p-select>
   <h4>单独选项标签类型</h4>
   <p-select v-model="actives2" :options="options2" multiple></p-select>
 </template>
@@ -366,7 +397,14 @@
   import { ref } from 'vue'
   const list1 = []
   const list2 = []
-  const tagTypes = ['primary', 'success', 'danger', 'warning', 'info', 'default']
+  const tagTypes = [
+    'primary',
+    'success',
+    'danger',
+    'warning',
+    'info',
+    'default'
+  ]
 
   for (let i = 0; i < 10; i++) {
     list1[i] = {
@@ -397,7 +435,12 @@
 ```vue
 <template>
   <h4>placeholder="请选择"</h4>
-  <p-select v-model="actives" :options="options" placeholder="请选择" clearable></p-select>
+  <p-select
+    v-model="actives"
+    :options="options"
+    placeholder="请选择"
+    clearable
+  ></p-select>
 </template>
 
 <script setup>

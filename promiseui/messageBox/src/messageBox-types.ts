@@ -22,7 +22,9 @@ export const messageBoxProps = {
   },
   customClass: String,
   customStyle: [String, Object] as PropType<string | CSSProperties>,
-  beforeClose: Function as PropType<(type: 'close' | 'confirm' | 'cancel') => Promise<boolean>>
+  beforeClose: Function as PropType<
+    (type: 'close' | 'confirm' | 'cancel') => Promise<boolean>
+  >
 } as const
 
 export type MessageBoxProps = ExtractPropTypes<typeof messageBoxProps>

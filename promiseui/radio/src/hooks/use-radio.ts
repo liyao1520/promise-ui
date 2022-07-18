@@ -1,12 +1,16 @@
 import { computed, inject, SetupContext } from 'vue'
 
 import { RadioButtonProps, RadioKey, RadioProps } from '../radio-types'
-export default function (props: RadioProps | RadioButtonProps, { emit }: SetupContext) {
+export default function (
+  props: RadioProps | RadioButtonProps,
+  { emit }: SetupContext
+) {
   const RadioContext = inject(RadioKey, undefined)
 
   const checked = computed(() => {
     const contextModelValue = RadioContext?.props.modelValue
-    const value = contextModelValue == null ? props.modelValue : contextModelValue
+    const value =
+      contextModelValue == null ? props.modelValue : contextModelValue
 
     return value === props.value
   })

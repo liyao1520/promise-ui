@@ -25,7 +25,9 @@ export const virtualScrollProps = {
   },
   itemStyle: {
     type: [String, Object, Function] as PropType<
-      string | CSSProperties | ((props: RenderItemProps<unknown>) => string | CSSProperties)
+      | string
+      | CSSProperties
+      | ((props: RenderItemProps<unknown>) => string | CSSProperties)
     >
   },
   onLoadMore: {

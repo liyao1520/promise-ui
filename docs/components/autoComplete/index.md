@@ -6,7 +6,11 @@
 
 ```vue
 <template>
-  <p-auto-complete v-model="inputValue" placeholder="请输入邮箱" :options="options" />
+  <p-auto-complete
+    v-model="inputValue"
+    placeholder="请输入邮箱"
+    :options="options"
+  />
 </template>
 <script setup>
   import { ref, computed } from 'vue'
@@ -32,9 +36,24 @@
 ```vue
 <template>
   <p-space>
-    <p-auto-complete v-model="inputValue" placeholder="请输入邮箱" :options="options" size="sm" />
-    <p-auto-complete v-model="inputValue" placeholder="请输入邮箱" :options="options" size="md" />
-    <p-auto-complete v-model="inputValue" placeholder="请输入邮箱" :options="options" size="lg" />
+    <p-auto-complete
+      v-model="inputValue"
+      placeholder="请输入邮箱"
+      :options="options"
+      size="sm"
+    />
+    <p-auto-complete
+      v-model="inputValue"
+      placeholder="请输入邮箱"
+      :options="options"
+      size="md"
+    />
+    <p-auto-complete
+      v-model="inputValue"
+      placeholder="请输入邮箱"
+      :options="options"
+      size="lg"
+    />
   </p-space>
 </template>
 <script setup>
@@ -61,8 +80,17 @@
 ```vue
 <template>
   <p-space>
-    <p-auto-complete v-model="inputValue" placeholder="请输入邮箱" :options="options" />
-    <p-auto-complete v-model="inputValue" placeholder="请输入邮箱" :options="options" disabled />
+    <p-auto-complete
+      v-model="inputValue"
+      placeholder="请输入邮箱"
+      :options="options"
+    />
+    <p-auto-complete
+      v-model="inputValue"
+      placeholder="请输入邮箱"
+      :options="options"
+      disabled
+    />
   </p-space>
 </template>
 <script setup>

@@ -16,6 +16,16 @@
   margin-right: 0;
   max-width:100%;
 }
+.VPContent .VPDoc .container .aside {
+  max-width: 120px;
+  padding-left:10px;
+}
+@media (min-width: 960px) {
+  .VPContent .VPDoc .container .content {
+  padding: 0 20px 128px;
+  }
+}
+
 #app .content-container {
   max-width:100%;
 }
@@ -26,7 +36,6 @@
   #app .VPNavBarTitle.has-sidebar {
   width:  calc(var(--vp-sidebar-width) - 24px);
   }
- 
 }
 @media (min-width: 1440px) {
   #app .VPContent.has-sidebar {

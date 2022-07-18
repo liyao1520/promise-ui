@@ -1,7 +1,10 @@
 import { CSSProperties } from 'vue'
 
 export const getRowStyles = (
-  styles: string | CSSProperties | ((row: object, index: number) => string | CSSProperties),
+  styles:
+    | string
+    | CSSProperties
+    | ((row: object, index: number) => string | CSSProperties),
   row: object,
   index: number
 ) => {
@@ -24,7 +27,12 @@ export const getRowClassName = (
 }
 
 export const getColStyles = (
-  styles: (row: object, col: object, rowIndex: number, colIndex: number) => string | CSSProperties,
+  styles: (
+    row: object,
+    col: object,
+    rowIndex: number,
+    colIndex: number
+  ) => string | CSSProperties,
   row: object,
   col: object,
   rowIndex: number,
@@ -37,7 +45,14 @@ export const getColStyles = (
   }
 }
 export const getColClassName = (
-  className: string | ((row: object, col: object, rowIndex: number, colIndex: number) => string),
+  className:
+    | string
+    | ((
+        row: object,
+        col: object,
+        rowIndex: number,
+        colIndex: number
+      ) => string),
   row: object,
   col: object,
   rowIndex: number,

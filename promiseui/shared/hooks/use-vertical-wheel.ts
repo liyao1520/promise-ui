@@ -3,7 +3,10 @@ interface Ioptions {
   step?: number
   smooth?: boolean
 }
-const useVerticalWheel = (target: Ref<HTMLElement | null | undefined>, options?: Ioptions) => {
+const useVerticalWheel = (
+  target: Ref<HTMLElement | null | undefined>,
+  options?: Ioptions
+) => {
   const { step = 50, smooth = false } = options || {}
   function onWheelHandle(event: WheelEvent) {
     if (!target.value) return

@@ -1,5 +1,5 @@
 import { UseNamespace } from './../../../shared/hooks/use-namespace'
-import { ref, Ref, SetupContext,  watch } from 'vue'
+import { ref, Ref, SetupContext, watch } from 'vue'
 import { RenderItemProps } from '../../../virtualScroll'
 import { ISelectOption, selectActiveKey, SelectProps } from '../select-types'
 import useKeyboardSelect from './use-keyboard-select'
@@ -22,7 +22,9 @@ export default function (
     if (props.multiple) {
       if (row[selectActiveKey]) {
         row[selectActiveKey] = false
-        const index = multipleActiveItems.value.findIndex((item) => item === row)
+        const index = multipleActiveItems.value.findIndex(
+          (item) => item === row
+        )
         multipleActiveItems.value.splice(index, 1)
       } else {
         // 最大选择数量
@@ -41,7 +43,12 @@ export default function (
     inputValue.value = ''
   }
 
-  const hoverIndex = useKeyboardSelect(optionListShow, options, virtualListRef, selectOptionClick)
+  const hoverIndex = useKeyboardSelect(
+    optionListShow,
+    options,
+    virtualListRef,
+    selectOptionClick
+  )
 
   watch(
     () => props.options,
@@ -53,11 +60,17 @@ export default function (
     if (props.multiple) {
       return !!row[selectActiveKey]
     } else {
-      return singleActiveItem.value !== undefined && singleActiveItem.value.value === row.value
+      return (
+        singleActiveItem.value !== undefined &&
+        singleActiveItem.value.value === row.value
+      )
     }
   }
 
-  const selectOptionClass = ({ row, index }: RenderItemProps<ISelectOption>) => {
+  const selectOptionClass = ({
+    row,
+    index
+  }: RenderItemProps<ISelectOption>) => {
     return {
       [ns.e('option')]: true,
       [ns.em('option', 'active')]: isActive(row),
@@ -69,7 +82,9 @@ export default function (
   const onClearOpiton = (e: Event) => {
     e.stopPropagation()
     if (props.multiple) {
-      multipleActiveItems.value.forEach((item) => (item[selectActiveKey] = false))
+      multipleActiveItems.value.forEach(
+        (item) => (item[selectActiveKey] = false)
+      )
       multipleActiveItems.value = []
     } else {
       singleActiveItem.value = undefined

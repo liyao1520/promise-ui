@@ -48,7 +48,10 @@ export default defineComponent({
     }
     onMounted(handleHeightAndWidthRatio)
     useResizeObserver(viewEl, handleHeightAndWidthRatio)
-    useMutationObserver(viewEl, handleHeightAndWidthRatio, { subtree: true, childList: true })
+    useMutationObserver(viewEl, handleHeightAndWidthRatio, {
+      subtree: true,
+      childList: true
+    })
 
     let prev = 0
 

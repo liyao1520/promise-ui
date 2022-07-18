@@ -34,7 +34,13 @@ export const messageProps = {
 
 export type MessageProps = ExtractPropTypes<typeof messageProps>
 export type IMEssageType = 'success' | 'warning' | 'info' | 'error' | 'none'
-export const messageTypes = ['success', 'info', 'warning', 'error', 'none'] as const
+export const messageTypes = [
+  'success',
+  'info',
+  'warning',
+  'error',
+  'none'
+] as const
 export type IMessageConfig = Partial<MessageProps>
 type IMessageStaticFn = (
   message: string,

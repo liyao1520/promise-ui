@@ -35,7 +35,10 @@ export const modalProps = {
   },
   draggable: Boolean,
   title: String,
-  width: { type: [String, Number] as PropType<number | string>, default: '30%' },
+  width: {
+    type: [String, Number] as PropType<number | string>,
+    default: '30%'
+  },
   top: String,
   onAfterEnter: {
     type: Function as PropType<() => void>

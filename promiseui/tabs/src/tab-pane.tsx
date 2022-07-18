@@ -1,4 +1,13 @@
-import { computed, defineComponent, inject, nextTick, ref, toRefs, Transition, watch } from 'vue'
+import {
+  computed,
+  defineComponent,
+  inject,
+  nextTick,
+  ref,
+  toRefs,
+  Transition,
+  watch
+} from 'vue'
 import { tabPaneProps, TabPaneProps, TabsKey } from './tabs-types'
 
 import './index.scss'
@@ -68,7 +77,12 @@ export default defineComponent({
     }
 
     return () => (
-      <div class={classes.value} data-name={name.value} onClick={onClick} ref={tabPaneEl}>
+      <div
+        class={classes.value}
+        data-name={name.value}
+        onClick={onClick}
+        ref={tabPaneEl}
+      >
         {label.value}
         {TabsProps && TabsProps.type === 'editable-card' && closable.value && (
           <Icon

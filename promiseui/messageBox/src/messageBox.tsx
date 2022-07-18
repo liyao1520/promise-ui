@@ -99,7 +99,12 @@ export default defineComponent({
             header: () => (
               <>
                 {props.confirmButtonType !== 'primary' && (
-                  <Icon class={[ns.e('icon'), ns.em('icon', props.confirmButtonType)]}>
+                  <Icon
+                    class={[
+                      ns.e('icon'),
+                      ns.em('icon', props.confirmButtonType)
+                    ]}
+                  >
                     <IconComponent />
                   </Icon>
                 )}

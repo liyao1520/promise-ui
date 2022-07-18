@@ -22,7 +22,9 @@ export default function (
   }
   const onTagClose = (e: Event, optionItem: ISelectOption) => {
     e.stopPropagation()
-    const index = multipleActiveItems.value.findIndex((item) => item === optionItem)
+    const index = multipleActiveItems.value.findIndex(
+      (item) => item === optionItem
+    )
     if (index !== -1) {
       multipleActiveItems.value[index][selectActiveKey] = false
       multipleActiveItems.value.splice(index, 1)

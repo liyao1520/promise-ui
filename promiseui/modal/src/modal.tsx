@@ -45,7 +45,11 @@ export default defineComponent({
       marginTop: props.top || undefined
     }))
     const renderHeaderContet = () => {
-      return slots.header ? slots.header() : <div class={ns.e('title')}>{props.title}</div>
+      return slots.header ? (
+        slots.header()
+      ) : (
+        <div class={ns.e('title')}>{props.title}</div>
+      )
     }
     const keyupHandle = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && props.closeOnEsc) {
@@ -112,7 +116,11 @@ export default defineComponent({
             onAfterLeave={props.onAfterLeave}
           >
             {props.displayDirective === 'if' ? (
-              <div v-show={props.modelValue} class={ns.e('mask')} style={{ zIndex: props.zIndex }}>
+              <div
+                v-show={props.modelValue}
+                class={ns.e('mask')}
+                style={{ zIndex: props.zIndex }}
+              >
                 {renderModalContent()}
               </div>
             ) : (

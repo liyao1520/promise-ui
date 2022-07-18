@@ -1,7 +1,12 @@
 import { ValidateFieldsError, Values } from 'async-validator'
 import { defineComponent, provide, computed, ref, watch } from 'vue'
 import { useNamespace } from '../../shared/hooks/use-namespace'
-import { formContextKey, formProps, FormProps, IValidateInfo } from './form-types'
+import {
+  formContextKey,
+  formProps,
+  FormProps,
+  IValidateInfo
+} from './form-types'
 
 import './index.scss'
 
@@ -18,7 +23,10 @@ export default defineComponent({
     }))
 
     const childLabelWidthRace = (width: number) => {
-      if (maxChildLabelWidth.value === undefined || width > maxChildLabelWidth.value) {
+      if (
+        maxChildLabelWidth.value === undefined ||
+        width > maxChildLabelWidth.value
+      ) {
         maxChildLabelWidth.value = width
       }
     }
@@ -52,7 +60,10 @@ export default defineComponent({
       validateCallback?.(isValid)
       return isValid
     }
-    const formValidateFields = async (fields: string[], validateCallback?: callback) => {
+    const formValidateFields = async (
+      fields: string[],
+      validateCallback?: callback
+    ) => {
       let isValid = true
       for (const fieldName of fields) {
         const res = validateFns.find((item) => item.prop === fieldName)

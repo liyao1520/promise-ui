@@ -1,4 +1,11 @@
-import { computed, defineComponent, ref, SetupContext, toRefs, withModifiers } from 'vue'
+import {
+  computed,
+  defineComponent,
+  ref,
+  SetupContext,
+  toRefs,
+  withModifiers
+} from 'vue'
 import { CloseSharp, EyeOffSharp, EyeSharp } from '@vicons/ionicons5'
 import { Icon } from '../../icon'
 import { inputProps, InputProps } from './input-types'
@@ -34,7 +41,11 @@ export default defineComponent({
       [ns.m('focus')]: focused.value
     }))
 
-    const { onInput, onFocus, onBlur } = useEvent(props, ctx as SetupContext, focused)
+    const { onInput, onFocus, onBlur } = useEvent(
+      props,
+      ctx as SetupContext,
+      focused
+    )
 
     const renderSuffix = () => {
       if (showPassword.value) {
@@ -43,7 +54,9 @@ export default defineComponent({
             size={16}
             class={ns.e('icon')}
             component={isPasswordType.value ? EyeOffSharp : EyeSharp}
-            onClick={nativeClick(() => (isPasswordType.value = !isPasswordType.value))}
+            onClick={nativeClick(
+              () => (isPasswordType.value = !isPasswordType.value)
+            )}
           ></Icon>
         )
       }
@@ -78,8 +91,14 @@ export default defineComponent({
     return () => {
       return (
         <Wave disabled={!props.wave}>
-          <div ref={wapperRef} class={[classes.value, props.class]} style={props.style}>
-            {slots.prepend && <span class={ns.e('prepend')}>{slots.prepend()}</span>}
+          <div
+            ref={wapperRef}
+            class={[classes.value, props.class]}
+            style={props.style}
+          >
+            {slots.prepend && (
+              <span class={ns.e('prepend')}>{slots.prepend()}</span>
+            )}
 
             <span class={ns.e('prefix')}>{renderPrefix()}</span>
             <input
@@ -96,7 +115,9 @@ export default defineComponent({
             />
 
             <span class={ns.e('suffix')}>{renderSuffix()}</span>
-            {slots.append && <span class={ns.e('append')}>{slots.append()}</span>}
+            {slots.append && (
+              <span class={ns.e('append')}>{slots.append()}</span>
+            )}
           </div>
         </Wave>
       )

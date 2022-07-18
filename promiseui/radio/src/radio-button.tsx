@@ -16,7 +16,10 @@ export default defineComponent({
     const ns = useNamespace('radio-button')
     const wareRef = ref<any>()
 
-    const { checked, inputName, handleChange, size } = useRadio(props, ctx as SetupContext)
+    const { checked, inputName, handleChange, size } = useRadio(
+      props,
+      ctx as SetupContext
+    )
     const formSize = useFormSize()
     const radioSize = computed(() => size.value || formSize.value || 'md')
 
@@ -48,7 +51,9 @@ export default defineComponent({
               checked={checked.value}
             />
 
-            <span class={ns.e('label')}>{slots.default?.() || props.label}</span>
+            <span class={ns.e('label')}>
+              {slots.default?.() || props.label}
+            </span>
           </label>
         </Wave>
       )

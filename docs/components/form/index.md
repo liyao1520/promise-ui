@@ -1,6 +1,3 @@
-
-
-
 # Form 表单
 
 ## 典型表单
@@ -39,7 +36,9 @@
     rememberMe: true
   })
   const submit = () => {
-    Message.info(`username: "${formData.username}" , password: "${formData.password}"`)
+    Message.info(
+      `username: "${formData.username}" , password: "${formData.password}"`
+    )
   }
 </script>
 ```
@@ -72,10 +71,18 @@
         <p-input v-model="formData.textInput" placeholder="请输入" />
       </p-form-item>
       <p-form-item label="numberInput">
-        <p-input v-model="formData.numberInput" type="number" placeholder="请输入" />
+        <p-input
+          v-model="formData.numberInput"
+          type="number"
+          placeholder="请输入"
+        />
       </p-form-item>
       <p-form-item label="select">
-        <p-select v-model="formData.select" placeholder="请选择" :options="selectOptions" />
+        <p-select
+          v-model="formData.select"
+          placeholder="请选择"
+          :options="selectOptions"
+        />
       </p-form-item>
       <p-form-item label="autoComplete">
         <p-auto-complete
@@ -144,13 +151,15 @@
   const autoCompleteOptions = ref([])
   watchEffect(() => {
     const autoCompleteValue = formData.autoComplete
-    autoCompleteOptions.value = ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
-      const prefix = autoCompleteValue.split('@')[0]
-      return {
-        label: prefix + suffix,
-        value: prefix + suffix
+    autoCompleteOptions.value = ['@gmail.com', '@163.com', '@qq.com'].map(
+      (suffix) => {
+        const prefix = autoCompleteValue.split('@')[0]
+        return {
+          label: prefix + suffix,
+          value: prefix + suffix
+        }
       }
-    })
+    )
   })
 </script>
 <style>
@@ -209,7 +218,11 @@
         <p-input v-model="formData.user.name" placeholder="请输入用户名" />
       </p-form-item>
       <p-form-item label="年龄" prop="user.age">
-        <p-input v-model="formData.user.age" type="number" placeholder="请输入年龄" />
+        <p-input
+          v-model="formData.user.age"
+          type="number"
+          placeholder="请输入年龄"
+        />
       </p-form-item>
       <p-form-item label="学历" prop="education">
         <p-select
@@ -295,13 +308,15 @@
   const autoCompleteOptions = ref([])
   watchEffect(() => {
     const email = formData.email
-    autoCompleteOptions.value = ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
-      const prefix = email.split('@')[0]
-      return {
-        label: prefix + suffix,
-        value: prefix + suffix
+    autoCompleteOptions.value = ['@gmail.com', '@163.com', '@qq.com'].map(
+      (suffix) => {
+        const prefix = email.split('@')[0]
+        return {
+          label: prefix + suffix,
+          value: prefix + suffix
+        }
       }
-    })
+    )
   })
   const submit = () => {
     formRef.value?.validate((valid) => {
@@ -395,7 +410,12 @@
     <p-form-item label="名字" prop="name" required="名字不能为空">
       <p-input v-model="formData.name" />
     </p-form-item>
-    <p-form-item label="年龄" prop="age" required="年龄不能为空" :showRequireMark="false">
+    <p-form-item
+      label="年龄"
+      prop="age"
+      required="年龄不能为空"
+      :showRequireMark="false"
+    >
       <p-input v-model="formData.age" />
     </p-form-item>
   </p-form>

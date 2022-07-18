@@ -31,12 +31,22 @@ export const tableProps = {
       return []
     }
   },
-  rowProps: [Function, Object] as PropType<((row: any, rowIndex: number) => object) | object>,
+  rowProps: [Function, Object] as PropType<
+    ((row: any, rowIndex: number) => object) | object
+  >,
   cellProps: [Function, Object] as PropType<
-    ((row: any, col: TableColumnType, rowIndex: number, colIndex: number) => object) | object
+    | ((
+        row: any,
+        col: TableColumnType,
+        rowIndex: number,
+        colIndex: number
+      ) => object)
+    | object
   >,
   rowKey: {
-    type: [String, Function] as PropType<string | ((item: any) => string | number)>,
+    type: [String, Function] as PropType<
+      string | ((item: any) => string | number)
+    >,
     default: 'key'
   },
   stripe: Boolean,
@@ -63,7 +73,12 @@ export type RowSelection = {
 }
 export type TableProps = ExtractPropTypes<typeof tableProps>
 export type Sorter = (row1: any, row2: any) => number
-export type Filter = (value: string | number, item: any, index: number, array: any[]) => boolean
+export type Filter = (
+  value: string | number,
+  item: any,
+  index: number,
+  array: any[]
+) => boolean
 export type FilterOption = { label: string; value: string | number }
 export type ColumnType = 'selection' | string
 
@@ -81,7 +96,7 @@ interface Column<T> {
   sorter: Sorter
   filter: Filter
   filterOptions: FilterOption[]
-  ellipsis: boolean | {showTitle?:boolean}
+  ellipsis: boolean | { showTitle?: boolean }
   render: (rowData: T, rowIndex: number) => VNodeChild
 }
 
@@ -106,7 +121,9 @@ export interface TableStore<T = any> {
   }
   tableProps: TableProps
   sortData: (direction: SortDirection, sortMethod: Sorter) => void
-  filterData: (filterMethod: (value: any, index: number, array: any[]) => boolean) => void
+  filterData: (
+    filterMethod: (value: any, index: number, array: any[]) => boolean
+  ) => void
   selectionClear: () => void
   selectionAll: () => void
   toggleSelection: (checked: boolean, row: any) => void

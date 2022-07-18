@@ -1,5 +1,10 @@
 import { MaybeElement, MaybeElementRef } from '@vueuse/core'
-import type { PropType, ExtractPropTypes, ComponentPublicInstance, CSSProperties } from 'vue'
+import type {
+  PropType,
+  ExtractPropTypes,
+  ComponentPublicInstance,
+  CSSProperties
+} from 'vue'
 export type Placement =
   | 'top'
   | 'right'

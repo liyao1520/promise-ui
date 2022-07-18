@@ -48,8 +48,14 @@ export default defineComponent({
       return (
         <div class={classes.value}>
           {showLabel.value && (
-            <label ref={labelRef} class={[ns.e('label')]} style={labelStyles.value}>
-              <span class={ns.e('require-mark')}>{showRequireMark.value ? '*' : ''}</span>
+            <label
+              ref={labelRef}
+              class={[ns.e('label')]}
+              style={labelStyles.value}
+            >
+              <span class={ns.e('require-mark')}>
+                {showRequireMark.value ? '*' : ''}
+              </span>
               {props.label}
               {props.helpTips && (
                 <Popover content={props.helpTips}>

@@ -12,12 +12,15 @@ export default defineComponent({
 
   setup(props) {
     const ns = useNamespace('table')
-    const { state, tableProps, selectionAll, selectionClear, getFixedInfo } = useTableStore()
+    const { state, tableProps, selectionAll, selectionClear, getFixedInfo } =
+      useTableStore()
     const { _columns, isSelectionAll, selectionSet } = state
     const classes = computed(() => ({
       [ns.e('header')]: true
     }))
-    const indeterminate = computed(() => !isSelectionAll.value && !!selectionSet.value.size)
+    const indeterminate = computed(
+      () => !isSelectionAll.value && !!selectionSet.value.size
+    )
 
     const renderSelection = () => {
       const fixedInfo = getFixedInfo('selection', 0)
@@ -36,7 +39,9 @@ export default defineComponent({
             <Checkbox
               indeterminate={indeterminate.value}
               onChange={(checked) =>
-                checked || indeterminate.value ? selectionAll() : selectionClear()
+                checked || indeterminate.value
+                  ? selectionAll()
+                  : selectionClear()
               }
               modelValue={isSelectionAll.value}
             />
@@ -46,7 +51,10 @@ export default defineComponent({
     }
     return () => (
       <thead class={classes.value}>
-        <tr class={[ns.e('cell'), tableProps.headerRowClassName]} style={tableProps.headerRowStyle}>
+        <tr
+          class={[ns.e('cell'), tableProps.headerRowClassName]}
+          style={tableProps.headerRowStyle}
+        >
           {/* render checkbox */}
           {renderSelection()}
           {_columns.value.map((col, index) => {
@@ -59,9 +67,14 @@ export default defineComponent({
                 style={[{ textAlign: col.align }, fixedInfo.styles]}
               >
                 {typeof col.title === 'function' ? col.title() : col.title}
-                {typeof col.sorter === 'function' && <TableSorter sortMethod={col.sorter} />}
+                {typeof col.sorter === 'function' && (
+                  <TableSorter sortMethod={col.sorter} />
+                )}
                 {typeof col.filter === 'function' && (
-                  <TableFilter filterOptions={col.filterOptions} filterMethod={col.filter} />
+                  <TableFilter
+                    filterOptions={col.filterOptions}
+                    filterMethod={col.filter}
+                  />
                 )}
               </th>
             )

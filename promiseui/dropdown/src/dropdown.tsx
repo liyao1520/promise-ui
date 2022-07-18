@@ -15,7 +15,8 @@ export default defineComponent({
   props: dropdownProps,
   emits: ['click'],
   setup(props: DropdownProps, { slots, emit, expose }) {
-    const { type, trigger, offset, position, showArrow, size, btnType, dark } = toRefs(props)
+    const { type, trigger, offset, position, showArrow, size, btnType, dark } =
+      toRefs(props)
     const origin = ref<any>(null)
     const visible = ref(false)
     const overlayEl = ref<any>()
@@ -29,7 +30,12 @@ export default defineComponent({
 
     const onOutsideClick = () => (visible.value = false)
 
-    const { onClick, onMouseenter, onMouseleave } = useEvent(trigger, origin, overlayEl, visible)
+    const { onClick, onMouseenter, onMouseleave } = useEvent(
+      trigger,
+      origin,
+      overlayEl,
+      visible
+    )
 
     const commonProps = { onMouseenter, onMouseleave, onClick, ref: origin }
 
@@ -51,7 +57,12 @@ export default defineComponent({
         >
           {slots.default?.()}
         </Button>
-        <Button type={btnType.value} shake={false} size={size.value} {...commonProps}>
+        <Button
+          type={btnType.value}
+          shake={false}
+          size={size.value}
+          {...commonProps}
+        >
           <Icon>
             <ChevronDownOutline />
           </Icon>

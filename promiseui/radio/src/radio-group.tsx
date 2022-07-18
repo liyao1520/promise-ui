@@ -1,6 +1,11 @@
 import { defineComponent, provide, watch } from 'vue'
 import { useNamespace } from '../../shared/hooks/use-namespace'
-import { RadioGroupProps, radioGroupProps, RadioKey, ValueType } from './radio-types'
+import {
+  RadioGroupProps,
+  radioGroupProps,
+  RadioKey,
+  ValueType
+} from './radio-types'
 
 export default defineComponent({
   name: 'PRadioGroup',

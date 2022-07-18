@@ -1,4 +1,9 @@
-import type { PropType, ExtractPropTypes, CSSProperties, HTMLAttributes } from 'vue'
+import type {
+  PropType,
+  ExtractPropTypes,
+  CSSProperties,
+  HTMLAttributes
+} from 'vue'
 import { ICommonSize } from '../../types'
 
 export const inputProps = {

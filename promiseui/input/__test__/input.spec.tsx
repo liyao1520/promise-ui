@@ -51,7 +51,9 @@ describe('input test', () => {
         return () => <Input disabled />
       }
     })
-    expect(wrapper.find('.pui-input').classes()).toContain('pui-input--disabled')
+    expect(wrapper.find('.pui-input').classes()).toContain(
+      'pui-input--disabled'
+    )
     expect(wrapper.find('input').attributes('disabled')).toBe('')
     await wrapper.setProps({
       disabled: false

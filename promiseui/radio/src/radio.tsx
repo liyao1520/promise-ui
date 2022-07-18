@@ -16,7 +16,10 @@ export default defineComponent({
     const ns = useNamespace('radio')
     const wareRef = ref<any>()
 
-    const { checked, inputName, handleChange, size } = useRadio(props, ctx as SetupContext)
+    const { checked, inputName, handleChange, size } = useRadio(
+      props,
+      ctx as SetupContext
+    )
 
     const formSize = useFormSize()
     const radioSize = computed(() => size.value || formSize.value || 'md')
