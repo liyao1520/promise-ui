@@ -1,5 +1,5 @@
 import { vuePlugin, addImportMap } from 'vitepress-demo-editor'
-import 'vitepress-demo-editor/dist/style.css'
+import 'vitepress-demo-editor/es/style.css'
 
 import {
   AirplaneSharp,

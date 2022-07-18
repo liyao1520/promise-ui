@@ -2,7 +2,7 @@
 
 ## 不同颜色
 
-设置属性`type` , 可选 `primary` `success` `info` `wraning` `danger`
+设置属性`type` , 可选 `primary` `success` `info` `warning` `danger`
 
 :::demo
 

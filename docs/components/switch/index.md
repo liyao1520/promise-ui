@@ -112,7 +112,7 @@
 
 设置 `activeCoactiveColor`颜色
 
-可以是 `primary` `success` `info` `wraning` `danger` , 也可以是`自定义颜色`
+可以是 `primary` `success` `info` `warning` `danger` , 也可以是`自定义颜色`
 
 :::demo
 
@@ -123,7 +123,7 @@
     <p-switch v-model="checked" activeColor="primary" />
     <p-switch v-model="checked" activeColor="success" />
     <p-switch v-model="checked" activeColor="info" />
-    <p-switch v-model="checked" activeColor="wraning" />
+    <p-switch v-model="checked" activeColor="warning" />
     <p-switch v-model="checked" activeColor="danger" />
   </p-space>
   <h4>自定义颜色</h4>
