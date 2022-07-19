@@ -5914,10 +5914,10 @@ vite@^2.9.9:
   optionalDependencies:
     fsevents "~2.3.2"
 
-vitepress-demo-editor@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/vitepress-demo-editor/-/vitepress-demo-editor-2.0.0.tgz#836c986845d52df14c01166e8b76a77647bdb3df"
-  integrity sha512-El+n7rrCgBoq4wo34ZJtj91spCx028cMiHsVNQq0XeD3z4GSOGo5HuoJPDdWNY2LV6WRy1m/29AheDi9eeRiUQ==
+vitepress-demo-editor@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.npmjs.org/vitepress-demo-editor/-/vitepress-demo-editor-2.0.1.tgz#348b34a2786a33b9163b7a224b972c8c56376446"
+  integrity sha512-I2sdONbxDtUzt8KXrPzEA/larz8ESvD8Z9BlC63xQ4h+W4fOUgr+RrgeTP6Iou3O8R1kBQuxyz8tzwFcvWtEQg==
   dependencies:
     markdown-it-container "^3.0.0"
     monaco-editor "^0.33.0"

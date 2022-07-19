@@ -36,8 +36,8 @@
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs",
     "register:components": "vitepress-rc",
-    "cli:dev": "esbuild --bundle ./promiseui-cli/index.js --format=cjs --platform=node --outdir=./promiseui-cli/lib --watch",
-    "cli:build": "esbuild --bundle ./promiseui-cli/index.js --format=cjs --platform=node --outdir=./promiseui-cli/lib",
+    "cli:dev": "esbuild --bundle ./promiseui-cli/index.ts --format=cjs --platform=node --outdir=./promiseui-cli/lib --watch",
+    "cli:build": "esbuild --bundle ./promiseui-cli/index.ts --format=cjs --platform=node --outdir=./promiseui-cli/lib",
     "cli": "node ./promiseui-cli/lib/index.js",
     "test": "jest promiseui",
     "lint": "eslint . --ext .ts,.tsx,.js,.vue --fix",
@@ -92,7 +92,7 @@
     "vite": "^2.9.9",
     "vite-plugin-dts": "^1.2.0",
     "vitepress": "^1.0.0-alpha.4",
-    "vitepress-demo-editor": "2.0.0",
+    "vitepress-demo-editor": "^2.0.1",
     "vue": "^3.2.00",
     "vue-tsc": "^0.34.7"
   }
