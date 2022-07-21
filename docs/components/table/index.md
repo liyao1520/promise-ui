@@ -1120,6 +1120,85 @@
 
 :::
 
+## jsx 写法
+
+如果你使用 `jsx` ,将获得更加灵活的书写体验,可以不用写繁琐的 `h` 函数
+
+:::demo column
+
+```jsx
+import { defineComponent, reactive } from 'vue'
+import { Table, Button } from 'promiseui-vue'
+export default defineComponent({
+  setup() {
+    const dataSource = reactive([
+      {
+        title: '《人世间》',
+        author: '梁晓声',
+        press: '中国青年出版社'
+      },
+      {
+        title: '《牵风记》',
+        author: '徐怀中',
+        press: '人民文学出版社'
+      },
+      {
+        title: '《北上》',
+        author: '徐则臣',
+        press: '北京十月文艺出版社'
+      },
+      {
+        title: '《主角》',
+        author: '陈 彦',
+        press: '作家出版社'
+      }
+    ])
+    const columns = [
+      {
+        title: '索引',
+        render(row, index) {
+          return index + 1
+        }
+      },
+      {
+        title: '作品',
+        dataIndex: 'title'
+      },
+      {
+        title: '作者',
+        dataIndex: 'author'
+      },
+      {
+        title: '出版单位',
+        dataIndex: 'press'
+      },
+      {
+        title: '操作',
+        render(row, index) {
+          return (
+            <Button size="sm" type="danger" onClick={() => deleteItem(index)}>
+              删除
+            </Button>
+          )
+        }
+      }
+    ]
+    const deleteItem = (index) => {
+      dataSource.splice(index, 1)
+    }
+    return () => (
+      <Table
+        dataSource={dataSource}
+        columns={columns}
+        table-layout="fixed"
+      ></Table>
+    )
+  }
+})
+```
+
+:::
+
 ## template 写法
 
 这个只是一个描述 `columns` 的语法糖，所以你不能用其他组件去包裹 `Column`
@@ -1128,7 +1207,7 @@
 
 ```vue
 <template>
-  <p-table :data-source="dataSource">
+  <p-table :data-source="dataSource" table-layout="fixed">
     <p-table-column title="索引">
       <template #default="{ index }">{{ index + 1 }}</template>
     </p-table-column>

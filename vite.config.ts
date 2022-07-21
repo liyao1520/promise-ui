@@ -27,6 +27,7 @@ export default defineConfig({
       name: 'promiseui',
       formats: ['cjs', 'es']
     },
+
     rollupOptions: {
       external: ['vue'],
       output: {

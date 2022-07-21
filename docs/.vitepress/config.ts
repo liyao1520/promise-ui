@@ -1,4 +1,4 @@
-import markDownPlugin from 'vitepress-demo-editor/cjs/markdownPlugin'
+import markDownPlugin from 'vitepress-demo-editor/markdownPlugin'
 
 import { UserConfig } from 'vitepress'
 import sidebar from './sidebar.json'
