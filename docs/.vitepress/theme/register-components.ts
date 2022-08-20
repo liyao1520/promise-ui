@@ -1,5 +1,6 @@
 import { vuePlugin, addImportMap } from 'vitepress-demo-editor'
 import 'vitepress-demo-editor/dist/style.css'
+import Playground from './playground/index.vue'
 import promiseuiType from '../../../dist/promiseui/vue-promiseui.d.ts?raw'
 import {
   AirplaneSharp,
@@ -18,6 +19,7 @@ import {
 import '../../../promiseui/styles/index.scss'
 
 import { App } from 'vue'
+import { emitUILoaded } from './promiseui-utils'
 const icons = {
   AirplaneSharp,
   AccessibilitySharp,
@@ -34,7 +36,7 @@ const icons = {
 let first = true
 export function registerComponents(app: App) {
   addImportMap('@vicons/ionicons5', icons)
-
+  app.component('Playground', Playground)
   app.use(vuePlugin, {
     onMonacoCreated(monaco) {
       monaco.languages.typescript.typescriptDefaults.addExtraLib(
@@ -53,6 +55,7 @@ export function registerComponents(app: App) {
       await import('../../../promiseui').then((promiseUI) => {
         addImportMap('promiseui-vue', promiseUI)
         app.use(promiseUI.default)
+        emitUILoaded()
       })
     }
   })

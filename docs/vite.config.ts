@@ -1,11 +1,17 @@
 import { defineConfig } from 'vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import gzip from 'rollup-plugin-gzip'
 import { resolve } from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/',
   plugins: [vueJsx()],
+  build: {
+    rollupOptions: {
+      plugins: [gzip()]
+    }
+  },
   resolve: {
     alias: {
       assert: 'browser-assert',
