@@ -92,7 +92,7 @@
     "unplugin-vue-components": "^0.21.0",
     "vite": "3",
     "vite-plugin-dts": "^1.2.0",
-    "vitepress": "^1.0.0-alpha.4",
+    "vitepress": "^1.0.0-alpha.20",
     "vitepress-demo-editor": "^3.0.2",
     "vue": "^3.2.00",
     "vue-tsc": "^0.34.7"
