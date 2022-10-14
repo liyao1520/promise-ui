@@ -1,8 +1,14 @@
-import { defineComponent, ref } from "vue";
-import { Button } from 'promiseui-vue'
+import { defineComponent} from "vue";
+import { Button, Space } from 'promiseui-vue'
 export default defineComponent({
   setup() {
-    const msg = ref('hello jsx!')
-    return () => <Button>{msg.value}</Button>
+    return () => <Space>
+      <Button>默认</Button>
+      <Button type="primary">Primary</Button>
+      <Button type="danger">Danger</Button>
+      <Button type="info">Info</Button>
+      <Button type="warning">Warning</Button>
+      <Button type="success">Success</Button>
+    </Space>
   }
 })

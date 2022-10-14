@@ -28,7 +28,7 @@ export default defineComponent({
   name: 'PTable',
   props: tableProps,
   emits: [],
-  setup(props: TableProps, { slots, expose, attrs }) {
+  setup(props: TableProps, { slots }) {
     const tableRef = ref<HTMLElement>()
     const store = createStore(
       toRef(props, 'dataSource'),
@@ -37,6 +37,7 @@ export default defineComponent({
       tableRef,
       slots
     )
+    // 提供子组件使用
     provide(TableStoreKey, store)
 
     const ns = useNamespace('table')
@@ -60,7 +61,9 @@ export default defineComponent({
 
     const renderColgroup = () => (
       <colgroup>
+        {/* 选择框 */}
         {props.rowSelection && <col style={props.rowSelection.style}></col>}
+        {/* 普通列 */}
         {store.state._columns.value.map((col, index) => (
           <col style={columnStyles(col)} key={index}></col>
         ))}

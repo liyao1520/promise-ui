@@ -1,12 +1,10 @@
 <template>
-  <PButton type="primary" size="xs" @click="count--">-1</PButton>
-  <span style="padding: 0 10px">{{ count }}</span>
-  <PButton type="primary" size="xs" @click="count++">+1</PButton>
+  <PSpace>
+    <PButton>默认</PButton>
+    <PButton type="primary">Primary</PButton>
+    <PButton type="danger">Danger</PButton>
+    <PButton type="info">Info</PButton>
+    <PButton type="warning">Warning</PButton>
+    <PButton type="success">Success</PButton>
+  </PSpace>
 </template>
-
-<script setup>
-  import { ref } from 'vue'
-  const count = ref(0)
-</script>
-
-<style></style>

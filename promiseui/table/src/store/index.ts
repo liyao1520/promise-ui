@@ -12,7 +12,7 @@ import {
 import useSelection from '../hooks/use-selection'
 import { useNamespace } from '../../../shared/hooks/use-namespace'
 import { __TABLE_COLUMN } from '../table-column'
-import useColums from '../hooks/use-columns'
+import useColumns from '../hooks/use-columns'
 export function createStore<T>(
   dataSource: Ref<any[]>,
   columns: Ref<TableColumnType[]>,
@@ -23,7 +23,7 @@ export function createStore<T>(
   // 内部使用的data
   const tableData: Ref<T[]> = ref([])
   // 列数据,如果没传props.columns 则找template
-  const _columns = useColums(columns, slots)
+  const _columns = useColumns(columns, slots)
   // 外部传来的data
   // filterMethod
   const filterMethod = shallowRef<filterMethod>(() => true)
