@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import dts from 'vite-plugin-dts'
+import { resolve } from 'path'
 
 // import libCss from 'vite-plugin-libcss'
 const path = require('path')
@@ -11,7 +12,8 @@ export default defineConfig({
     vue(),
     vueJsx(),
     dts({
-      include: ['promiseui']
+      include: ['promiseui'],
+      outputDir: [resolve(__dirname, './dist/promiseui')]
     })
   ],
   resolve: {
