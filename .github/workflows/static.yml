@@ -30,18 +30,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v3.6.0
+      - name: Yarn Setup
+        # You may pin to the exact commit or the version.
+        # uses: DerYeger/yarn-setup-action@f55be5383ea94f5eb25b20aee609af4603a68dde
+        uses: DerYeger/yarn-setup-action@v1.0.1
         with:
-          node-version: "15.X"
-      - name: node version
-        run: node -v
+          # The version of Node.js that will be used
+          node-version: "16.X"
       - name: install deps
-        run: npm install
+        run: yarn install
       - name: build cli
-        run: npm run cli:build
+        run: yarn cli:build
       - name: build docs
-        run: npm run cli build
+        run: yarn cli build
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
