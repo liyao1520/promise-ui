@@ -36,6 +36,8 @@ jobs:
           node-version: "14.X"
       - name: install deps
         run: npm install
+      - name: build promiseui
+        run: npm run build
       - name: build docs
         run: npm run docs:build
       - name: Setup Pages
