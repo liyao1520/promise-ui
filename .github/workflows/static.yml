@@ -34,8 +34,8 @@ jobs:
         uses: actions/setup-node@v3.6.0
         with:
           node-version: "16.X"
-      - name: npm version
-        run: npm -V
+      - name: node version
+        run: node -v
       - name: install deps
         run: npm install
       - name: build cli
