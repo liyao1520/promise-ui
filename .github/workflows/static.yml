@@ -33,7 +33,9 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v3.6.0
         with:
-          node-version: "16.13.2"
+          node-version: "16.X"
+      - name: npm version
+        run: npm -V
       - name: install deps
         run: npm install
       - name: build cli
