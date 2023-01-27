@@ -4,6 +4,7 @@ import { Button } from '../index'
 describe('button test', () => {
   it('button init render', () => {
     // todo
+
     const wrapper = mount({
       setup() {
         return () => <Button>foo</Button>
