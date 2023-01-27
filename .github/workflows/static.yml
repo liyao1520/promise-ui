@@ -49,3 +49,4 @@ jobs:
         uses: peaceiris/actions-github-pages@v3.1.12
         with:
           publish_dir: "./docs/.vitepress/dist"
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
