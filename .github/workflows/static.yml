@@ -11,7 +11,7 @@ on:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -41,12 +41,14 @@ jobs:
         run: yarn install
       - name: build cli
         run: yarn cli:build
-      - name: build docs
+      - name: build promiseui
         run: yarn cli build
+      - name: build docs
+        run: yarn docs:build
       - name: GitHub Pages v3
         # You may pin to the exact commit or the version.
         # uses: peaceiris/actions-github-pages@b80a30e9bf3c1ec596532c3813f0aff094f555e2
         uses: peaceiris/actions-github-pages@v3.1.12
         with:
-          publish_dir: "./docs/.vitepress/dist"
+          publish_dir: ./docs/.vitepress/dist
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
