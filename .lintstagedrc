@@ -1,9 +1,0 @@
-{
-  "*.{js,ts,tsx,vue}": [
-    "yarn prettier",
-    "yarn lint"
-  ],
-  "*.{html,vue,css,scss,sass,less}": [
-    "stylelint --fix"
-  ]
-}
