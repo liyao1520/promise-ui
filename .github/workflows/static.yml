@@ -41,13 +41,13 @@ jobs:
       - name: install deps
         run: yarn install
       - name: build cli
-        run: yarn cli:build --base=/promise-ui
+        run: yarn cli:build 
       - name: build promiseui
         run: yarn cli build
       - name: build docs
         run: |
             export NODE_OPTIONS="--max_old_space_size=4096"
-            yarn docs:build
+            yarn docs:build --base=/promise-ui
       - name: GitHub Pages v3
         # You may pin to the exact commit or the version.
         # uses: peaceiris/actions-github-pages@b80a30e9bf3c1ec596532c3813f0aff094f555e2
