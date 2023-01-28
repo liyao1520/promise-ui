@@ -41,7 +41,7 @@ jobs:
       - name: install deps
         run: yarn install
       - name: build cli
-        run: yarn cli:build
+        run: yarn cli:build --base=/promise-ui
       - name: build promiseui
         run: yarn cli build
       - name: build docs
