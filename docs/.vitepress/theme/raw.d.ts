@@ -1,1 +1,3 @@
-declare module '*?raw'
+declare module '*?raw' {
+  export default ''
+}

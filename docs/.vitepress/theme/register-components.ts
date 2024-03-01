@@ -54,6 +54,7 @@ export function registerComponents(app: App) {
       first = false
       await import('../../../promiseui').then((promiseUI) => {
         addImportMap('promiseui-vue', promiseUI)
+
         app.use(promiseUI.default)
         emitUILoaded()
       })

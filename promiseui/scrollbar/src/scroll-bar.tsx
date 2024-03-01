@@ -1,5 +1,5 @@
 import { computed } from 'vue'
-import { useThrottleFn } from '@vueuse/shared'
+import { useThrottleFn } from '@vueuse/core'
 
 import { defineComponent, ref, Transition } from 'vue'
 import { useNamespace } from '../../shared/hooks/use-namespace'
