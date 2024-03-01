@@ -5,7 +5,7 @@ export default class Compiler {
   private scriptEl: HTMLScriptElement | null = null
   private templateUrl = ''
   private scriptUrl = ''
-  private onError: ErrorFn = () => {}
+  private onError: ErrorFn = () => { }
   constructor(selector: string, onError?: ErrorFn) {
     this.selector = selector
     if (onError) this.onError = onError
