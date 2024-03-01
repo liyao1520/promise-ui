@@ -4,7 +4,7 @@
     "useDefineForClassFields": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "strict": true,
+    "strict": false,
     "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
@@ -12,13 +12,21 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "skipLibCheck": true,
- 
-    "allowJs": true ,
-
+    "types": ["./docs/.vitepress/theme/raw.d.ts"],
+    "allowJs": true
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/main.js",
-    "promiseui/**/*.ts","promiseui/**/*.tsx","promiseui/**/*.d.ts", 
-  "promiseui-cli/**/*.ts"
-, "promiseui/loadingBar/src/loadingBarServicetsx" ,"docs/**/*.vue"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/main.js",
+    "promiseui/**/*.ts",
+    "promiseui/**/*.tsx",
+    "promiseui/**/*.d.ts",
+    "promiseui-cli/**/*.ts",
+    "promiseui/loadingBar/src/loadingBarServicetsx",
+    "docs/**/*.vue"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
